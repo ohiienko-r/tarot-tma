@@ -5,11 +5,13 @@ import WebApp from "@twa-dev/sdk";
 import "./index.css";
 
 WebApp.ready();
-
 WebApp.enableClosingConfirmation();
+
+const queryParams = new URLSearchParams(window.location.search);
+const lang = queryParams.get("lang");
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <App />
+    <App lang={lang} />
   </React.StrictMode>
 );
