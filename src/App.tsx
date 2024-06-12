@@ -23,12 +23,17 @@ function App() {
           count is {count}
         </button>
       </div>
-      {/* Here we add our button with alert callback */}
       <div className="card">
         <button
-          onClick={() => WebApp.openTelegramLink("https://localhost:5173/")}
+          onClick={() =>
+            WebApp.showPopup({
+              title: "Do you want to?",
+              message: "Loooser!",
+              buttons: [{ type: "close" }],
+            })
+          }
         >
-          Show Alert
+          Show Popup
         </button>
       </div>
     </>

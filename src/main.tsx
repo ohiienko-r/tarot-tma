@@ -6,6 +6,8 @@ import "./index.css";
 
 WebApp.ready();
 
+WebApp.enableClosingConfirmation();
+
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <App />
