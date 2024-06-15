@@ -9,11 +9,8 @@ WebApp.ready();
 WebApp.expand();
 WebApp.enableClosingConfirmation();
 
-const queryParams = new URLSearchParams(window.location.search);
-const lang = queryParams.get("lang");
-
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <App lang={lang} />
+    <App />
   </React.StrictMode>
 );
