@@ -1,16 +1,20 @@
-import { FC } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { FC, useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
 import { ROUTES_NAMES } from "@/Router/routes-names";
 import { useTranslation } from "react-i18next";
 import classes from "./root.module.scss";
 
 const Root: FC = () => {
   const { i18n, t } = useTranslation();
-  const [searchParams] = useSearchParams();
+  const { lang } = useParams();
 
-  const language = searchParams.get("lang");
-
-  i18n.changeLanguage(language ?? "english");
+  useEffect(() => {
+    if (lang) {
+      i18n.changeLanguage(lang);
+    } else {
+      i18n.changeLanguage("english");
+    }
+  }, [lang, i18n]);
 
   return (
     <>
