@@ -1,3 +1,8 @@
 {
-    "hello": "Hello World!"
+    "greeting": "Hello,",
+    "spreads": "Spreads",
+    "card of the day": "My card of the day",
+    "yes/no": "Yes/No",
+    "ask the cards a question": "Ask the cards a question",
+    "how does it work": "How does it work"
 }
