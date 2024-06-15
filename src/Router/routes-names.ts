@@ -1,5 +1,5 @@
 export const ROUTES_NAMES = {
-  ROOT: "/:lang",
+  ROOT: ":lang",
   ASK_QUESTION: "/ask-question",
   CARD_OF_THE_DAY: "/card-of-the-day",
   YES_NO: "/yes-no",
