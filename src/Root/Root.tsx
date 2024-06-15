@@ -1,14 +1,15 @@
 import { FC } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { ROUTES_NAMES } from "@/Router/routes-names";
 import { useTranslation } from "react-i18next";
 import classes from "./root.module.scss";
 
-const queryParams = new URLSearchParams(window.location.search);
-const language = queryParams.get("lang");
-
 const Root: FC = () => {
   const { i18n, t } = useTranslation();
+  const [searchParams] = useSearchParams();
+
+  const language = searchParams.get("lang");
+
   i18n.changeLanguage(language ?? "english");
 
   return (
