@@ -12,6 +12,7 @@ const Root: FC = () => {
   const { i18n, t } = useTranslation();
   const query = useQuery();
   const lang = query.get("lang");
+  const firstName = query.get("first_name");
 
   useEffect(() => {
     if (lang) {
@@ -23,7 +24,7 @@ const Root: FC = () => {
 
   return (
     <>
-      <header>{t("greeting")}</header>
+      <header>{t("greeting") + firstName}</header>
       <main className={classes.mainSection}>
         <h2>{t("spreads")}</h2>
         <Link to={ROUTES_NAMES.CARD_OF_THE_DAY}>{t("card of the day")}</Link>
