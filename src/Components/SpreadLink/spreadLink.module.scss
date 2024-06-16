@@ -1,0 +1,14 @@
+.spreadLink {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0.5em;
+  border: 1px solid white;
+  border-radius: 8px;
+}
+
+.spreadPricing {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.25em;
+}

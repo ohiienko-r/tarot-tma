@@ -1,8 +1,8 @@
 {
     "greeting": "Привіт,",
-    "spreads": "Розклади",
+    "spreads": "Розклади:",
     "/card-of-the-day": "Моя карта дня",
     "/yes-no": "Так/Ні",
     "/ask-question": "Задати питання картам",
-    "how does it work": "Як це працює"
+    "how does it work": "Як це працює?"
 }
