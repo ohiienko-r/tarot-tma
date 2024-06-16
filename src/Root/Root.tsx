@@ -3,7 +3,6 @@ import { Link, useLocation } from "react-router-dom";
 import { ROUTES_NAMES } from "@/Router/routes-names";
 import { useTranslation } from "react-i18next";
 import classes from "./root.module.scss";
-import { URLSearchParams } from "url";
 
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);
