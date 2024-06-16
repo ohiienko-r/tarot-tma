@@ -1,39 +1,19 @@
-import { FC, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { ROUTES_NAMES } from "@/Router/routes-names";
+import { FC } from "react";
+import { Header, Main } from "@/Components";
 import { useTranslation } from "react-i18next";
-import classes from "./root.module.scss";
-
-const useQuery = () => {
-  return new URLSearchParams(useLocation().search);
-};
+import { useQuery } from "@/Hooks";
 
 const Root: FC = () => {
-  const { i18n, t } = useTranslation();
+  const { i18n } = useTranslation();
   const query = useQuery();
   const lang = query.get("lang");
-  const firstName = query.get("first_name");
 
-  useEffect(() => {
-    if (lang) {
-      i18n.changeLanguage(lang);
-    } else {
-      i18n.changeLanguage("english");
-    }
-  }, [lang, i18n]);
+  i18n.changeLanguage(lang ?? "english");
 
   return (
     <>
-      <header>{t("greeting") + firstName}</header>
-      <main className={classes.mainSection}>
-        <h2>{t("spreads")}</h2>
-        <Link to={ROUTES_NAMES.CARD_OF_THE_DAY}>{t("card of the day")}</Link>
-        <Link to={ROUTES_NAMES.YES_NO}>{t("yes/no")}</Link>
-        <Link to={ROUTES_NAMES.ASK_QUESTION}>
-          {t("ask the cards a question")}
-        </Link>
-        <Link to={ROUTES_NAMES.HOW_IT_WORKS}>{t("how does it work")}</Link>
-      </main>
+      <Header />
+      <Main />
     </>
   );
 };

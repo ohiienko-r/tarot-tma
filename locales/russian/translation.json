@@ -1,8 +1,8 @@
 {
     "greeting": "Привет,",
-    "spreads": "Расклады",
-    "card of the day": "Моя карта дня",
-    "yes/no": "Да/Нет",
-    "ask the cards a question": "Задать вопрос картам",
-    "how does it work": "Как это работает"
+    "spreads": "Расклады:",
+    "/card-of-the-day": "Моя карта дня",
+    "/yes-no": "Да/Нет",
+    "/ask-question": "Задать вопрос картам",
+    "how does it work": "Как это работает?"
 }
