@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import WebApp from "@twa-dev/sdk";
 import "../i18n.ts";
+import "./reset.scss";
 import "./index.scss";
 
 WebApp.ready();
