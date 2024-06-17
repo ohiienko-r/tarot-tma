@@ -1,10 +1,11 @@
 import { FC } from "react";
 import { Outlet } from "react-router-dom";
 import { Header } from "@/Components";
-import { useLanguage } from "@/Hooks";
+import { useLanguage, useAutoAuth } from "@/Hooks";
 
 const Root: FC = () => {
   useLanguage();
+  useAutoAuth();
 
   return (
     <>
