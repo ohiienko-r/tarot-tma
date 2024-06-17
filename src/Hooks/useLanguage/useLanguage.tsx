@@ -8,9 +8,12 @@ const useLanguage = () => {
   const lang = query.get("lang");
 
   useEffect(() => {
+    const storedLang = localStorage.getItem("language");
     if (lang) {
       localStorage.setItem("language", lang);
       i18n.changeLanguage(lang);
+    } else if (storedLang) {
+      i18n.changeLanguage(storedLang);
     } else {
       i18n.changeLanguage("english");
       localStorage.setItem("language", "english");

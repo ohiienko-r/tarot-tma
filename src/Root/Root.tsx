@@ -1,5 +1,6 @@
 import { FC } from "react";
-import { Header, Main } from "@/Components";
+import { Outlet } from "react-router-dom";
+import { Header } from "@/Components";
 import { useLanguage } from "@/Hooks";
 
 const Root: FC = () => {
@@ -8,7 +9,7 @@ const Root: FC = () => {
   return (
     <>
       <Header />
-      <Main />
+      <Outlet />
     </>
   );
 };
