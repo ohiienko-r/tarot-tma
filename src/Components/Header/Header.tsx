@@ -1,13 +1,13 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
-import { useQuery } from "@/Hooks";
+import { useInitData } from "@/Contexts";
 import classes from "./header.module.scss";
 
 const Header: FC = () => {
   const { t } = useTranslation();
-  const query = useQuery();
+  const user = useInitData();
 
-  const displayName = query.get("first_name") ?? "User Name";
+  const displayName = user?.first_name ?? "User Name";
 
   return (
     <header className={classes.heading}>
