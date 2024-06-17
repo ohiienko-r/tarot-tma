@@ -2,6 +2,7 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { useInitData } from "@/Contexts";
 import classes from "./header.module.scss";
+import WebApp from "@twa-dev/sdk";
 
 const Header: FC = () => {
   const { t } = useTranslation();
