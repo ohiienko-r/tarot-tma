@@ -13,6 +13,7 @@
     "@twa-dev/sdk": "^7.0.0",
     "@types/node": "^20.14.2",
     "@vitejs/plugin-basic-ssl": "^1.1.0",
+    "firebase": "^10.12.2",
     "i18next": "^23.11.5",
     "ngrok": "^5.0.0-beta.2",
     "react": "^18.2.0",
