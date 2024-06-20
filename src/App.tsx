@@ -1,13 +1,8 @@
 import { FC } from "react";
 import { Router } from "./Router";
-import { InitDataProvider } from "./Contexts";
 
 const App: FC = () => {
-  return (
-    <InitDataProvider>
-      <Router />
-    </InitDataProvider>
-  );
+  return <Router />;
 };
 
 export default App;
