@@ -11,7 +11,7 @@ const Header: FC = () => {
 
   return (
     <header className={classes.heading}>
-      {t("greeting") + " " + displayName}
+      {`${t("greeting")} ${displayName}`}
     </header>
   );
 };

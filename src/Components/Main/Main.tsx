@@ -1,7 +1,7 @@
 import { FC } from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { SpreadLink } from "@/Components";
-import { useTranslation } from "react-i18next";
 import { ROUTES_NAMES } from "@/Router/routes-names";
 import { spreadsList } from "./helpers";
 import classes from "./main.module.scss";
