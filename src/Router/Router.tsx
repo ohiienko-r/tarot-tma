@@ -18,7 +18,7 @@ const AppRouter = () => {
     <Router location={location} navigator={reactNaviator}>
       <Routes>
         {routes.map((route) => (
-          <Route path={route.path} element={route.element} />
+          <Route key={route.path} path={route.path} element={route.element} />
         ))}
         <Route path={"*"} element={<Navigate to={ROUTES_NAMES.HOME} />} />
       </Routes>
