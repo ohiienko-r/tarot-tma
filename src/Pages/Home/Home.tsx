@@ -2,7 +2,7 @@ import { FC } from "react";
 import { Header, Main } from "@/Components";
 import { useLanguage } from "@/Hooks";
 
-const Root: FC = () => {
+const Home: FC = () => {
   useLanguage();
 
   return (
@@ -13,4 +13,4 @@ const Root: FC = () => {
   );
 };
 
-export default Root;
+export default Home;
