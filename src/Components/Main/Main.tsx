@@ -1,7 +1,6 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
-import { SpreadLink } from "@/Components";
+import { RouterLink } from "@/Components";
 import { ROUTES_NAMES } from "@/Router/routes-names";
 import { spreadsList } from "./helpers";
 import classes from "./main.module.scss";
@@ -14,12 +13,15 @@ const Main: FC = () => {
       <h2>{t("spreads")}</h2>
       <div className={classes.sreadsList}>
         {spreadsList.map((spread) => (
-          <SpreadLink key={spread.id} to={spread.name} price={spread.price} />
+          <RouterLink
+            key={spread.id}
+            to={spread.name}
+            price={spread.price}
+            icon
+          />
         ))}
       </div>
-      <Link to={ROUTES_NAMES.HOW_IT_WORKS} className="faq-link">
-        {t("how does it work")}
-      </Link>
+      <RouterLink to={ROUTES_NAMES.HOW_IT_WORKS} className="faq-link" />
     </main>
   );
 };
