@@ -1,6 +1,5 @@
 import { FC } from "react";
 import { useLaunchParams } from "@tma.js/sdk-react";
-
 import classes from "./header.module.scss";
 
 const Header: FC = () => {
