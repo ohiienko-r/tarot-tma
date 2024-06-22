@@ -5,7 +5,7 @@ import { UseBalance } from "./types";
 const cloudStorage = initCloudStorage();
 
 const useBalance = (): UseBalance => {
-  const [currentBalance, setCurrentBalance] = useState<number>(0);
+  const [currentBalance, setCurrentBalance] = useState<number | null>(null);
   const [isEnough, setIsEnough] = useState<boolean>(true);
 
   useEffect(() => {
@@ -22,13 +22,15 @@ const useBalance = (): UseBalance => {
   };
 
   const updateBalance = async (updateValue: number) => {
-    if (currentBalance + updateValue < 0) {
-      setIsEnough(false);
-    } else {
-      setIsEnough(true);
-      const newBalance = currentBalance + updateValue;
-      setCurrentBalance(newBalance);
-      await cloudStorage.set("balance", JSON.stringify(newBalance));
+    if (currentBalance) {
+      if (currentBalance + updateValue < 0) {
+        setIsEnough(false);
+      } else {
+        setIsEnough(true);
+        const newBalance = currentBalance + updateValue;
+        setCurrentBalance(newBalance);
+        await cloudStorage.set("balance", JSON.stringify(newBalance));
+      }
     }
   };
 

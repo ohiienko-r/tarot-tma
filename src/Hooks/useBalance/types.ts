@@ -1,5 +1,5 @@
 export type UseBalance = [
-  number,
+  number | null,
   boolean,
   (updateValue: number) => Promise<void>
 ];
