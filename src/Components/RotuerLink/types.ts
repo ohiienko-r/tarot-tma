@@ -4,5 +4,5 @@ export type RouterLinkPropTypes = {
   to: RouteName;
   className?: string;
   price?: number;
-  icon?: boolean;
+  icon?: string;
 };

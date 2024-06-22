@@ -1,8 +1,11 @@
 {
     "greeting": "Hello,",
+    "username": "Username",
     "spreads": "Spreads:",
     "/card-of-the-day": "My card of the day",
-    "/yes-no": "Yes/No",
+    "/yes-no": "Yes / No",
     "/ask-question": "Ask the cards a question",
-    "/how-does-it-work": "How does it work?"
+    "/how-does-it-work": "Learn more about tarot?",
+    "magic coins": "Magic coins",
+    "buy": "Buy"
 }

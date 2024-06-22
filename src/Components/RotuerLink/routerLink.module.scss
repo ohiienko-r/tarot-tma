@@ -1,14 +1,11 @@
 .spreadLink {
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
-  padding: 0.5em;
-  border: 1px solid white;
+  align-items: center;
+  padding: 0.5em 1em;
+  color: #fff;
+  background: linear-gradient(#06080d, #06080d) padding-box,
+    linear-gradient(rgba(234, 133, 15, 50%), rgba(255, 199, 0, 50%)) border-box;
+  border: 3px solid transparent;
   border-radius: 8px;
-}
-
-.spreadPricing {
-  display: flex;
-  justify-content: flex-end;
-  gap: 0.25em;
 }
