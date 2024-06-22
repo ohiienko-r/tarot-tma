@@ -1,11 +1,12 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Montserrat Alternates", Inter, system-ui, Avenir, Helvetica,
+    Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #151517;
+  background: linear-gradient(#10032a 60%, #1a1e26);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -16,11 +17,13 @@
 #root {
   width: 100svw;
   height: 100svh;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 a {
   font-weight: 500;
-  color: #60667b;
+  color: #fff;
   text-decoration: inherit;
 }
 
@@ -42,8 +45,13 @@ button {
 }
 
 .faq-link {
-  padding: 0.25em;
-  border: 1px solid white;
+  padding: 8px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(#06080d, #06080d) padding-box,
+    linear-gradient(rgba(234, 133, 15, 50%), rgba(255, 199, 0, 50%)) border-box;
+  border: 2px solid transparent;
   border-radius: 8px;
-  background-color: rgba(255, 255, 255, 0.87);
+  font-weight: 200;
 }

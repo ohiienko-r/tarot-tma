@@ -39,7 +39,7 @@ const useBalance = (): UseBalance => {
     setCurrentBalance(3);
   };
 
-  return [currentBalance, isEnough, updateBalance];
+  return { balance: currentBalance, isEnough, updateBalance };
 };
 
 export default useBalance;

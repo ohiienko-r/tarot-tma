@@ -1,6 +1,6 @@
 .mainSection {
   box-sizing: border-box;
-  padding: 0.5em;
+  padding: 1em 2em;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -8,11 +8,7 @@
 }
 
 .sreadsList {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  flex-direction: column;
   gap: 0.5em;
-}
-
-.sreadsList > :last-child {
-  grid-column: span 2;
 }
