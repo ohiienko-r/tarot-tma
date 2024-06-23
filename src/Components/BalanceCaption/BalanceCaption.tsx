@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Modal } from "@telegram-apps/telegram-ui";
+import { Modal, Button } from "@telegram-apps/telegram-ui";
 import { useTranslation } from "react-i18next";
 import { BalanceCaptionPropTypes } from "./types";
 import questionMark from "@/assets/plain_question_mark.svg";
@@ -26,6 +26,11 @@ const BalanceCaption: FC<BalanceCaptionPropTypes> = ({ balance }) => {
       >
         <p className="balance-caption__modal-text">{modalTextPtOne}</p>
         <p className="balance-caption__modal-text">{modalTextPtTwo}</p>
+        <Modal.Close>
+          <Button mode="bezeled" size="m" stretched>
+            Got it!
+          </Button>
+        </Modal.Close>
       </Modal>
     </div>
   );

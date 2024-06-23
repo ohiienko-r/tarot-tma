@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
-import { initCloudStorage } from "@tma.js/sdk-react";
+import { cloudStorage } from "@/helpers";
 import { UseBalance } from "./types";
-
-const cloudStorage = initCloudStorage();
 
 const useBalance = (): UseBalance => {
   const [currentBalance, setCurrentBalance] = useState<number | null>(null);
