@@ -1,7 +1,8 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
-import { Header, Main, Balance, SubmitButton } from "@/Components";
+import { Header, Main, Balance, SubmitButton, BalancePad } from "@/Components";
 import { useLanguage } from "@/Hooks";
+import "./styles.scss";
 
 const Home: FC = () => {
   const { t } = useTranslation();
@@ -12,9 +13,9 @@ const Home: FC = () => {
       <Header />
       <div className="home__balance-section">
         <div>
-          <div className="home__balance-wrapper">
+          <BalancePad>
             <Balance />
-          </div>
+          </BalancePad>
           <SubmitButton title={t("buy")} onPress={() => {}} />
         </div>
       </div>

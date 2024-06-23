@@ -3,7 +3,7 @@
   flex-direction: column;
   gap: 1em;
 
-  &__caption {
+  &__value {
     font-size: 46px;
     font-weight: 700;
     display: flex;
@@ -12,22 +12,5 @@
     span {
       font-size: 21px;
     }
-  }
-
-  &__currency-caption {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  &__currency-name {
-    width: min-content;
-    font-size: 14px;
-    word-wrap: normal;
-  }
-
-  &__hint-button {
-    padding: 0;
-    background-color: transparent;
   }
 }

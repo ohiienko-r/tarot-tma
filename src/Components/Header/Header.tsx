@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { useLaunchParams } from "@tma.js/sdk-react";
 import { useTranslation } from "react-i18next";
+import "./styles.scss";
 
 const Header: FC = () => {
   const initData = useLaunchParams().initData;

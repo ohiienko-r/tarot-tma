@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { useHapticFeedback } from "@tma.js/sdk-react";
 import { SubmitButtonPropTypes } from "./types";
+import "./styles.scss";
 
 const Submitbutton: FC<SubmitButtonPropTypes> = ({ title, onPress }) => {
   const haptic = useHapticFeedback();

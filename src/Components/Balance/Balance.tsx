@@ -1,15 +1,16 @@
 import { FC } from "react";
-import { useTranslation } from "react-i18next";
 import { useBalance } from "@/Hooks";
-import questionMark from "@/assets/plain_question_mark.svg";
+import { BalanceCaption } from "@/Components";
+import "./styles.scss";
+
+//TODO: implement skeleton instead of loader
 
 const Balance: FC = () => {
-  const { t } = useTranslation();
   const { balance } = useBalance();
 
   return (
     <div className="balance">
-      <p className="balance__caption">
+      <p className="balance__value">
         {balance ? (
           balance
         ) : (
@@ -49,12 +50,7 @@ const Balance: FC = () => {
         )}
         <span>🌕</span>
       </p>
-      <div className="balance__currency-caption">
-        <p className="balance__currency-name">{t("magic coins")}</p>
-        <button className="balance__hint-button">
-          <img src={questionMark} />
-        </button>
-      </div>
+      <BalanceCaption />
     </div>
   );
 };

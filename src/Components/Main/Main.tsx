@@ -4,6 +4,7 @@ import { RouterLink } from "@/Components";
 import { ROUTES_NAMES } from "@/Router/routes-names";
 import { spreadsList } from "./helpers";
 import questionMark from "@/assets/question_mark.svg";
+import "./styles.scss";
 
 const Main: FC = () => {
   const { t } = useTranslation();
