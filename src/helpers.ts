@@ -1,3 +1,4 @@
+import { initCloudStorage } from "@tma.js/sdk-react";
 import { retrieveLaunchParams } from "@tma.js/sdk-react";
 import { ValidationResponse } from "./types";
 
@@ -16,3 +17,5 @@ export const validateInitData = async (): Promise<boolean> => {
 
   return data.success;
 };
+
+export const cloudStorage = initCloudStorage();
