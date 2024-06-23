@@ -43,15 +43,3 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
-
-.faq-link {
-  padding: 8px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: linear-gradient(#06080d, #06080d) padding-box,
-    linear-gradient(rgba(234, 133, 15, 50%), rgba(255, 199, 0, 50%)) border-box;
-  border: 2px solid transparent;
-  border-radius: 8px;
-  font-weight: 200;
-}
