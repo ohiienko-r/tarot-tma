@@ -3,7 +3,11 @@ import { useHapticFeedback } from "@tma.js/sdk-react";
 import { SubmitButtonPropTypes } from "./types";
 import "./styles.scss";
 
-const Submitbutton: FC<SubmitButtonPropTypes> = ({ title, onPress }) => {
+const Submitbutton: FC<SubmitButtonPropTypes> = ({
+  title,
+  onPress,
+  disabled,
+}) => {
   const haptic = useHapticFeedback();
 
   const handlePress = () => {
@@ -12,7 +16,7 @@ const Submitbutton: FC<SubmitButtonPropTypes> = ({ title, onPress }) => {
   };
 
   return (
-    <button onClick={handlePress} className="submit-button">
+    <button onClick={handlePress} className="submit-button" disabled={disabled}>
       {title}
     </button>
   );

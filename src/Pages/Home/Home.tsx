@@ -1,12 +1,10 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { Header, Main, Balance, SubmitButton, BalancePad } from "@/Components";
-import { useLanguage } from "@/Hooks";
 import "./styles.scss";
 
 const Home: FC = () => {
   const { t } = useTranslation();
-  useLanguage();
 
   return (
     <section className="home">
@@ -16,7 +14,7 @@ const Home: FC = () => {
           <BalancePad>
             <Balance />
           </BalancePad>
-          <SubmitButton title={t("buy")} onPress={() => {}} />
+          <SubmitButton title={t("buy")} onPress={() => {}} disabled={true} />
         </div>
       </div>
       <Main />
