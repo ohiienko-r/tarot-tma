@@ -4,22 +4,21 @@ import { RouterLink } from "@/Components";
 import { ROUTES_NAMES } from "@/Router/routes-names";
 import { spreadsList } from "./helpers";
 import questionMark from "@/assets/question_mark.svg";
-import classes from "./main.module.scss";
 
 const Main: FC = () => {
   const { t } = useTranslation();
 
   return (
-    <main className={classes.mainSection}>
+    <main className="main-section">
       <h2>{t("spreads")}</h2>
-      <div className={classes.sreadsList}>
+      <ul className="main-section__spreads-list">
         {spreadsList.map((spread) => (
           <RouterLink key={spread.id} to={spread.name} icon={spread.icon} />
         ))}
-      </div>
+      </ul>
       <RouterLink
         to={ROUTES_NAMES.HOW_IT_WORKS}
-        className="faq-link"
+        className="main-section__faq-link"
         icon={questionMark}
       />
     </main>

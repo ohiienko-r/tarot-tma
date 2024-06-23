@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { initHapticFeedback } from "@tma.js/sdk-react";
 import { useTranslation } from "react-i18next";
 import { RouterLinkPropTypes } from "./types";
-import classes from "./routerLink.module.scss";
 
 const RouterLink: FC<RouterLinkPropTypes> = ({ to, icon, className }) => {
   const hapticFeedback = initHapticFeedback();
@@ -16,7 +15,7 @@ const RouterLink: FC<RouterLinkPropTypes> = ({ to, icon, className }) => {
   return (
     <Link
       to={to}
-      className={className ?? classes.spreadLink}
+      className={["router-link", className && className].join(" ")}
       onClick={handleHapticFeedback}
     >
       <p>{t(to)}</p>

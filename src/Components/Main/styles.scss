@@ -1,0 +1,20 @@
+.main-section {
+  box-sizing: border-box;
+  padding: 1em 2em;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+
+  &__spreads-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+  }
+
+  &__faq-link {
+    padding: 8px 20px;
+    border-width: 2px;
+    font-weight: 200;
+  }
+}

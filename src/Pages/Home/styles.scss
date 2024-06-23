@@ -7,7 +7,7 @@
   background-size: contain;
   background-position: 0 -100px;
 
-  &BalanceSection {
+  &__balance-section {
     box-sizing: border-box;
     padding: 1em 2em;
     display: flex;
@@ -15,7 +15,7 @@
     align-items: end;
   }
 
-  &BalanceWrapper {
+  &__balance-wrapper {
     max-width: 150px;
     box-sizing: border-box;
     margin-bottom: 10px;
