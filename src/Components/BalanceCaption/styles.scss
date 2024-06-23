@@ -9,8 +9,13 @@
     word-wrap: normal;
   }
 
-  &__hint-button {
-    padding: 0;
-    background-color: transparent;
+  &__question-mark {
+    cursor: pointer;
+  }
+
+  &__modal-text {
+    padding: 0.5em;
+    text-align: center;
+    word-wrap: break-word;
   }
 }
