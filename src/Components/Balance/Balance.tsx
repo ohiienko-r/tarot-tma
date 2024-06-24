@@ -1,10 +1,10 @@
 import { FC } from "react";
 import {
-  Skeleton,
   Modal,
   Headline,
   Text,
   Button,
+  Spinner,
 } from "@telegram-apps/telegram-ui";
 import { useBalance } from "@/Contexts";
 import { useEverydayBonus } from "@/Hooks";
@@ -22,9 +22,7 @@ const Balance: FC = () => {
   return (
     <div className="balance">
       <p className="balance__value">
-        <Skeleton visible={!balance} className="balance__skeleton">
-          {balance}
-        </Skeleton>
+        {balance ?? <Spinner size="m" />}
         <span>🌕</span>
       </p>
       <BalanceCaption balance={balance} />

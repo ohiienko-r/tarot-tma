@@ -1,7 +1,7 @@
 import { ROUTES_NAMES } from "@/Router/routes-names";
-import cardOfTheDay from "@/assets/card_of_the_day.svg";
-import yesNo from "@/assets/yes_no.svg";
-import question from "@/assets/question.png";
+import cardOfTheDay from "@/assets/one_card.png";
+import yesNo from "@/assets/two_cards.png";
+import question from "@/assets/three_cards.png";
 
 export const spreadsList = [
   { id: 0, name: ROUTES_NAMES.CARD_OF_THE_DAY, icon: cardOfTheDay },

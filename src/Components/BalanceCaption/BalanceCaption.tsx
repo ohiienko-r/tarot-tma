@@ -1,5 +1,6 @@
 import { FC } from "react";
-import { Modal, Button } from "@telegram-apps/telegram-ui";
+import { useHapticFeedback } from "@tma.js/sdk-react";
+import { Modal, Button, IconButton } from "@telegram-apps/telegram-ui";
 import { useTranslation } from "react-i18next";
 import { BalanceCaptionPropTypes } from "./types";
 import questionMark from "@/assets/plain_question_mark.svg";
@@ -7,6 +8,11 @@ import "./styles.scss";
 
 const BalanceCaption: FC<BalanceCaptionPropTypes> = ({ balance }) => {
   const { t } = useTranslation();
+  const haptic = useHapticFeedback();
+
+  const handleInfoPress = () => {
+    haptic.impactOccurred("medium");
+  };
 
   const modalTextPtOne = `${t("balance description pt1")} ${balance} ${t(
     "magic coins"
@@ -20,7 +26,12 @@ const BalanceCaption: FC<BalanceCaptionPropTypes> = ({ balance }) => {
       <Modal
         header={<Modal.Header />}
         trigger={
-          <img src={questionMark} className="balance-caption__question-mark" />
+          <IconButton size="s" mode="plain" onClick={handleInfoPress}>
+            <img
+              src={questionMark}
+              className="balance-caption__question-mark"
+            />
+          </IconButton>
         }
         className="drawer-modal"
       >
