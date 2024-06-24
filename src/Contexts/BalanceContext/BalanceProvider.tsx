@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import { FC, PropsWithChildren, useState, useEffect } from "react";
+import { BalanceContext } from "./BalanceContext";
 import { cloudStorage } from "@/helpers";
-import { UseBalance } from "./types";
 
-const useBalance = (): UseBalance => {
+const BalanceProvider: FC<PropsWithChildren> = ({ children }) => {
   const [currentBalance, setCurrentBalance] = useState<number | null>(null);
   const [isEnough, setIsEnough] = useState<boolean>(true);
 
@@ -36,8 +36,13 @@ const useBalance = (): UseBalance => {
     await cloudStorage.set("balance", JSON.stringify(3));
     setCurrentBalance(3);
   };
-
-  return { balance: currentBalance, isEnough, updateBalance };
+  return (
+    <BalanceContext.Provider
+      value={{ balance: currentBalance, isEnough, updateBalance }}
+    >
+      {children}
+    </BalanceContext.Provider>
+  );
 };
 
-export default useBalance;
+export default BalanceProvider;

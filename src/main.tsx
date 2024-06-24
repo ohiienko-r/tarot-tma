@@ -1,4 +1,5 @@
 import React from "react";
+import { BalanceProvider } from "./Contexts/index.ts";
 import ReactDOM from "react-dom/client";
 import {
   SDKProvider,
@@ -23,7 +24,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <AppRoot>
       <SDKProvider>
-        <App />
+        <BalanceProvider>
+          <App />
+        </BalanceProvider>
       </SDKProvider>
     </AppRoot>
   </React.StrictMode>

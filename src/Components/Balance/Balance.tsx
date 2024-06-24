@@ -6,7 +6,8 @@ import {
   Text,
   Button,
 } from "@telegram-apps/telegram-ui";
-import { useBalance, useEverydayBonus } from "@/Hooks";
+import { useBalance } from "@/Contexts";
+import { useEverydayBonus } from "@/Hooks";
 import { BalanceCaption } from "@/Components";
 import "./styles.scss";
 
