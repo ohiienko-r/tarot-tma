@@ -14,9 +14,9 @@ const BalanceCaption: FC<BalanceCaptionPropTypes> = ({ balance }) => {
     haptic.impactOccurred("medium");
   };
 
-  const modalTextPtOne = `${t("balance description pt1")} ${balance} ${t(
+  const modalTextPtOne = `${t("balance description pt1")} ${balance} 🌕 ${t(
     "magic coins"
-  )} 🌕.`;
+  )}.`;
 
   const modalTextPtTwo = t("balance description pt2");
 

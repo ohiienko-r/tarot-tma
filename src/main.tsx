@@ -22,7 +22,7 @@ closingBehaviour.enableConfirmation();
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <AppRoot>
+    <AppRoot appearance="dark">
       <SDKProvider>
         <BalanceProvider>
           <App />
