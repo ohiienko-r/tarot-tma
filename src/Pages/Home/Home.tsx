@@ -1,13 +1,20 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
-import { Header, Main, Balance, SubmitButton, BalancePad } from "@/Components";
+import {
+  Header,
+  Main,
+  Balance,
+  SubmitButton,
+  BalancePad,
+  Page,
+} from "@/Components";
 import "./styles.scss";
 
 const Home: FC = () => {
   const { t } = useTranslation();
 
   return (
-    <section className="home">
+    <Page className="home">
       <Header />
       <div className="home__balance-section">
         <div>
@@ -18,7 +25,7 @@ const Home: FC = () => {
         </div>
       </div>
       <Main />
-    </section>
+    </Page>
   );
 };
 

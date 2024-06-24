@@ -1,0 +1,14 @@
+.how-it-works {
+  padding: 1em;
+
+  &__list {
+    max-width: 80%;
+    margin: 5% auto;
+    list-style-type: disc;
+    word-wrap: break-word;
+
+    li:not(:first-child) {
+      margin-top: 16px;
+    }
+  }
+}
