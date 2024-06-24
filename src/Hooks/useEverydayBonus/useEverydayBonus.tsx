@@ -17,7 +17,7 @@ const useEverydayBonus = () => {
     }
   };
 
-  const compareDates = () => {
+  const compareDates = async () => {
     if (lastLogIn) {
       const lastLoginDate = new Date(lastLogIn);
       const lastLoginYear = lastLoginDate.getFullYear();
@@ -38,7 +38,7 @@ const useEverydayBonus = () => {
       if (isDifferentDay) {
         setBonusAvailable(true);
         setLastLogIn(today);
-        cloudStorage.set("last_login", today.toISOString());
+        await cloudStorage.set("last_login", today.toISOString());
       } else {
         setBonusAvailable(false);
       }
