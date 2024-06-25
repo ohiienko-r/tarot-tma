@@ -46,7 +46,7 @@ const useEverydayBonus = () => {
     fetchLastLogIn();
   }, []);
 
-  return { bonusAvailable };
+  return { bonusAvailable, setBonusAvailable };
 };
 
 export default useEverydayBonus;
