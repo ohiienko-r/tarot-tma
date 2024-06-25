@@ -12,7 +12,6 @@ import "../i18n.ts";
 import "./reset.scss";
 import "./index.scss";
 import "@telegram-apps/telegram-ui/dist/styles.css";
-import "./mockEnv.ts";
 
 const [viewport] = initViewport();
 viewport.then((viewPort) => viewPort.expand());
