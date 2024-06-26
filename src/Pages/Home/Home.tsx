@@ -7,6 +7,7 @@ import {
   SubmitButton,
   BalancePad,
   Page,
+  DailyBonusModal,
 } from "@/Components";
 import "./styles.scss";
 
@@ -34,6 +35,7 @@ const Home: FC = () => {
         </div>
       </div>
       <Main />
+      <DailyBonusModal />
     </Page>
   );
 };
