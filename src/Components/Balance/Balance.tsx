@@ -17,10 +17,10 @@ const Balance: FC = () => {
 
   return (
     <div className="balance">
-      <p className="balance__value">
+      <div className="balance__value">
         {balance ?? <Spinner size="m" />}
         <span>🌕</span>
-      </p>
+      </div>
       <BalanceCaption balance={balance} />
       <Modal
         open={bonusAvailable}
