@@ -36,6 +36,7 @@ const BalanceProvider: FC<PropsWithChildren> = ({ children }) => {
     await cloudStorage.set("balance", JSON.stringify(3));
     setCurrentBalance(3);
   };
+
   return (
     <BalanceContext.Provider
       value={{ balance: currentBalance, isEnough, updateBalance }}

@@ -26,8 +26,8 @@ const useEverydayBonus = () => {
     const isDifferentDay = today.getTime() > lastLoginDate.getTime();
 
     if (isDifferentDay) {
+      await updateBalance(3);
       setBonusAvailable(true);
-      updateBalance(3);
       await cloudStorage.set("last_login", today.toISOString());
     } else {
       setBonusAvailable(false);

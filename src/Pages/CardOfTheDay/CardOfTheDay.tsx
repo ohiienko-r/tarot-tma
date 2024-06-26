@@ -1,20 +1,51 @@
+import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useBalance } from "@/Contexts";
 import { Page } from "@/Components";
+import { useSpreadButton } from "@/Hooks";
+import { Button, Headline } from "@telegram-apps/telegram-ui";
 import { getRandomCards } from "@/Cards/helpers";
-import { SystemLanguage } from "@/types";
+import { SystemLanguage, RandomCards } from "@/types";
+import "./styles.scss";
 
-const CardOfTheDay = () => {
+const CardOfTheDay: FC = () => {
+  const [myCards, setMyCards] = useState<RandomCards>();
+  const { balance, updateBalance } = useBalance();
   const { t, i18n } = useTranslation();
 
-  const currentLanguage = i18n.language;
+  useEffect(() => {
+    const cards = getRandomCards(1, i18n.language as SystemLanguage);
+    setMyCards(cards);
+  }, []);
 
-  const myCardOfTheDay = getRandomCards(1, currentLanguage as SystemLanguage);
+  const handleMainButtonClick = async () => {
+    await updateBalance(-3);
+  };
+
+  useSpreadButton({
+    title: "Get readings",
+    color: "#EA850F",
+    spreadCost: 3,
+    onClick: handleMainButtonClick,
+  });
 
   return (
     <Page>
-      <h2>{t("/card-of-the-day")}</h2>
-      <p>{currentLanguage}</p>
-      <p>{myCardOfTheDay.cardsNames[0]}</p>
+      <Headline weight="1" className="daily-card__heading">
+        {t("/card-of-the-day")}
+      </Headline>
+      <p>{`${balance} 🌕 ${t("available")}`}</p>
+      <p>{myCards?.cardsNames[0]}</p>
+      <Button
+        mode="bezeled"
+        size="m"
+        stretched
+        onClick={async () => {
+          await updateBalance(1);
+        }}
+      >
+        +1
+      </Button>
     </Page>
   );
 };
