@@ -1,8 +1,9 @@
 import { FC, PropsWithChildren, useState, useEffect } from "react";
 import { BalanceContext } from "./BalanceContext";
-import { cloudStorage } from "@/helpers";
+import { useCloudStorage } from "@tma.js/sdk-react";
 
 const BalanceProvider: FC<PropsWithChildren> = ({ children }) => {
+  const cloudStorage = useCloudStorage();
   const [currentBalance, setCurrentBalance] = useState<number | null>(null);
   const [isEnough, setIsEnough] = useState<boolean>(true);
 
@@ -12,7 +13,7 @@ const BalanceProvider: FC<PropsWithChildren> = ({ children }) => {
 
   const getBalance = async () => {
     const cloudBalance = await cloudStorage.get("balance");
-    if (!cloudBalance) {
+    if (cloudBalance === null || cloudBalance === undefined) {
       await setInitialBalance();
     } else {
       setCurrentBalance(JSON.parse(cloudBalance));
@@ -20,7 +21,7 @@ const BalanceProvider: FC<PropsWithChildren> = ({ children }) => {
   };
 
   const updateBalance = async (updateValue: number) => {
-    if (currentBalance) {
+    if (currentBalance || currentBalance === 0) {
       if (currentBalance + updateValue < 0) {
         setIsEnough(false);
       } else {

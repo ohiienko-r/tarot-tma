@@ -18,6 +18,10 @@ const CardOfTheDay: FC = () => {
     setMyCards(cards);
   }, []);
 
+  const handleBalance = async () => {
+    await updateBalance(1);
+  };
+
   const handleMainButtonClick = async () => {
     await updateBalance(-3);
   };
@@ -36,14 +40,7 @@ const CardOfTheDay: FC = () => {
       </Headline>
       <p>{`${balance} 🌕 ${t("available")}`}</p>
       <p>{myCards?.cardsNames[0]}</p>
-      <Button
-        mode="bezeled"
-        size="m"
-        stretched
-        onClick={async () => {
-          await updateBalance(1);
-        }}
-      >
+      <Button mode="bezeled" size="m" stretched onClick={handleBalance}>
         +1
       </Button>
     </Page>
