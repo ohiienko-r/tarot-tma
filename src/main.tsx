@@ -1,4 +1,3 @@
-import React from "react";
 import { BalanceProvider } from "./Contexts/index.ts";
 import ReactDOM from "react-dom/client";
 import {
@@ -20,13 +19,11 @@ const [closingBehaviour] = initClosingBehavior();
 closingBehaviour.enableConfirmation();
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
-    <AppRoot>
-      <SDKProvider>
-        <BalanceProvider>
-          <App />
-        </BalanceProvider>
-      </SDKProvider>
-    </AppRoot>
-  </React.StrictMode>
+  <AppRoot>
+    <SDKProvider>
+      <BalanceProvider>
+        <App />
+      </BalanceProvider>
+    </SDKProvider>
+  </AppRoot>
 );

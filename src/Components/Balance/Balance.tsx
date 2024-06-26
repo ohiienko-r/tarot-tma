@@ -7,13 +7,13 @@ import {
   Button,
 } from "@telegram-apps/telegram-ui";
 import { useBalance } from "@/Contexts";
-import { useEverydayBonus } from "@/Hooks";
+import { useDailyBonus } from "@/Hooks";
 import { BalanceCaption } from "@/Components";
 import "./styles.scss";
 
 const Balance: FC = () => {
   const { balance } = useBalance();
-  const { bonusAvailable, setBonusAvailable } = useEverydayBonus();
+  const { bonusAvailable, setBonusAvailable } = useDailyBonus();
 
   return (
     <div className="balance">

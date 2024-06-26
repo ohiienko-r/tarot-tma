@@ -5,7 +5,7 @@ export const getCardOfTheDayReading = async (
   systemLanguage: SystemLanguage
 ) => {
   try {
-    const response = await fetch(import.meta.env.VITE_TEST_CARD, {
+    const response = await fetch(import.meta.env.VITE_CARD_OF_THE_DAY_SPREAD, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

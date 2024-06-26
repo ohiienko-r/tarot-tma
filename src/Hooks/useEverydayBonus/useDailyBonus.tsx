@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useBalance } from "@/Contexts";
 import { useCloudStorage } from "@tma.js/sdk-react";
 
-const useEverydayBonus = () => {
+const useDailyBonus = () => {
   const cloudStorage = useCloudStorage();
   const { updateBalance } = useBalance();
   const [bonusAvailable, setBonusAvailable] = useState<boolean>(false);
@@ -50,4 +50,4 @@ const useEverydayBonus = () => {
   return { bonusAvailable, setBonusAvailable };
 };
 
-export default useEverydayBonus;
+export default useDailyBonus;

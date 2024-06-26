@@ -5,8 +5,10 @@ import {
   initNavigator,
   useMiniApp,
   useThemeParams,
+  useViewport,
   bindMiniAppCSSVars,
   bindThemeParamsCSSVars,
+  bindViewportCSSVars,
 } from "@tma.js/sdk-react";
 import { useLanguage } from "@/Hooks";
 import { ROUTES_NAMES } from "./routes-names";
@@ -17,6 +19,7 @@ const AppRouter = () => {
   const [location, reactNaviator] = useIntegration(navigator);
   const miniApp = useMiniApp();
   const themeParams = useThemeParams();
+  const viewport = useViewport();
   useLanguage();
 
   useEffect(() => {
@@ -26,6 +29,10 @@ const AppRouter = () => {
   useEffect(() => {
     return bindThemeParamsCSSVars(themeParams);
   }, [themeParams]);
+
+  useEffect(() => {
+    return viewport && bindViewportCSSVars(viewport);
+  }, [viewport]);
 
   useEffect(() => {
     navigator.attach();
