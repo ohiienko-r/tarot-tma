@@ -10,7 +10,6 @@ import {
   DailyBonusModal,
 } from "@/Components";
 import "./styles.scss";
-
 import { useBalance } from "@/Contexts";
 
 const Home: FC = () => {

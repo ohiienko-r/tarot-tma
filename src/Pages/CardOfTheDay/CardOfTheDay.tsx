@@ -1,25 +1,19 @@
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useBalance } from "@/Contexts";
-import { useMainButton } from "@/Hooks";
-import { Page, SpreadBalancePad } from "@/Components";
+import { useMainButton, useRandomCards } from "@/Hooks";
+import { Page, SpreadBalancePad, Card } from "@/Components";
 import { Headline } from "@telegram-apps/telegram-ui";
-import { getRandomCards } from "@/Cards/helpers";
 import { getCardOfTheDayReading } from "@/API/API";
-import { SystemLanguage, RandomCards } from "@/types";
+import { SystemLanguage } from "@/types";
 import "./styles.scss";
 
 const CardOfTheDay: FC = () => {
-  const [myCards, setMyCards] = useState<RandomCards | null>(null);
   const [responseText, setResponseText] = useState<string>("");
   const [buttonDisabled, setButtonDisabled] = useState<boolean>(false);
   const { balance, updateBalance } = useBalance();
+  const { cardsNames, cardsKeys } = useRandomCards(1);
   const { t, i18n } = useTranslation();
-
-  useEffect(() => {
-    const cards = getRandomCards(1, i18n.language as SystemLanguage);
-    setMyCards(cards);
-  }, [i18n]);
 
   useEffect(() => {
     const handleButtonAvailability = () => {
@@ -34,14 +28,14 @@ const CardOfTheDay: FC = () => {
   }, [balance]);
 
   const getReadings = async () => {
-    if (myCards?.cardsNames) {
+    try {
       const response = await getCardOfTheDayReading(
-        myCards?.cardsNames,
+        cardsNames,
         i18n.language as SystemLanguage
       );
       setResponseText(response);
-    } else {
-      setResponseText("Something went wrong.");
+    } catch (error) {
+      setResponseText(`${error}`);
     }
   };
 
@@ -57,9 +51,11 @@ const CardOfTheDay: FC = () => {
       <Headline weight="1" className="daily-card__heading">
         {t("/card-of-the-day")}
       </Headline>
-      <SpreadBalancePad />
-      <p>{myCards?.cardsNames[0]}</p>
-      <p>{responseText}</p>
+      {!responseText && <SpreadBalancePad />}
+      {cardsKeys.map((cardKey) => (
+        <Card cardKey={cardKey} />
+      ))}
+      <p className="daily-card__spread-reading">{responseText}</p>
     </Page>
   );
 };

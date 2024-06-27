@@ -8,3 +8,4 @@ export { default as BalancePad } from "./BalancePad/BalancePad";
 export { default as Page } from "./Page/Page";
 export { default as SpreadBalancePad } from "./SpreadBalancePad/SpreadBalancePad";
 export { default as DailyBonusModal } from "./DailyBonusModal/DailyBonusModal";
+export { default as Card } from "./Card/Card";
