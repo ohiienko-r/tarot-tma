@@ -7,7 +7,7 @@ const haptic = initHapticFeedback();
 const useMainButton = (
   title: string,
   onClick: () => Promise<void>,
-  disabled = false
+  disabled: boolean
 ) => {
   useEffect(() => {
     mainButton.setText(title);

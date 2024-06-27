@@ -1,12 +1,46 @@
 .card {
+  cursor: pointer;
+  position: relative;
   box-sizing: border-box;
-  margin: 5% auto;
+  margin: 0 auto;
   width: 140px;
   height: 240px;
   padding: 1em;
   border: 1px solid white;
   border-radius: 16px;
-  background-color: #123682;
+
+  transform-style: preserve-3d;
+  transform-origin: center right;
+  transition: transform 1s;
 
   word-wrap: break-word;
+
+  &__flipped {
+    transform: translateX(-100%) rotateY(-180deg);
+    cursor: default;
+  }
+
+  &__face {
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 16px;
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    text-align: center;
+    backface-visibility: hidden;
+
+    &--front {
+      background: crimson;
+      text-align: center;
+    }
+
+    &--back {
+      word-wrap: break-word;
+      background: slateblue;
+      transform: rotateY(180deg);
+    }
+  }
 }
