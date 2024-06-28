@@ -13,7 +13,6 @@ import {
 import { useLanguage } from "@/Hooks";
 import { ROUTES_NAMES } from "./routes-names";
 import { routes } from "./routes";
-import { Readings } from "@/Pages";
 
 const AppRouter = () => {
   const navigator = useMemo(() => initNavigator("app-navigation-state"), []);
@@ -48,7 +47,6 @@ const AppRouter = () => {
         {routes.map((route) => (
           <Route key={route.path} path={route.path} element={route.element} />
         ))}
-        <Route path={ROUTES_NAMES.READINGS} element={<Readings />} />
         <Route path={"*"} element={<Navigate to={ROUTES_NAMES.HOME} />} />
       </Routes>
     </Router>

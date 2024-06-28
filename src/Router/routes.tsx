@@ -1,5 +1,12 @@
 import { ROUTES_NAMES } from "./routes-names";
-import { Home, AskCards, CardOfTheDay, HowDoesItWork, YesNo } from "@/Pages";
+import {
+  Home,
+  AskCards,
+  CardOfTheDay,
+  HowDoesItWork,
+  YesNo,
+  Readings,
+} from "@/Pages";
 
 export const routes = [
   {
@@ -23,4 +30,5 @@ export const routes = [
     path: ROUTES_NAMES.HOW_IT_WORKS,
     element: <HowDoesItWork />,
   },
+  { path: ROUTES_NAMES.READINGS, element: <Readings /> },
 ];
