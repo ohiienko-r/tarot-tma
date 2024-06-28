@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useState, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useBalance } from "@/Contexts";
 import {
@@ -7,7 +7,7 @@ import {
   useLowBalancePopup,
   useShareBotUrl,
 } from "@/Hooks";
-import { Page, SpreadBalancePad, CardsGroup } from "@/Components";
+import { Page, SpreadBalancePad, CardsGroup, SubmitButton } from "@/Components";
 import { Headline } from "@telegram-apps/telegram-ui";
 import { getCardOfTheDayReading } from "@/API/API";
 import { SystemLanguage } from "@/types";
@@ -15,9 +15,6 @@ import "./styles.scss";
 
 const CardOfTheDay: FC = () => {
   const { t, i18n } = useTranslation();
-  const [mainButtonText, setMainButtonText] = useState<string>(
-    `${t("get spread")} 3 🌕`
-  );
   const [mainButonHandler, setMainButtonHandler] = useState<
     () => void | Promise<void>
   >(() => {});
@@ -30,33 +27,33 @@ const CardOfTheDay: FC = () => {
   const showPopup = useLowBalancePopup(3);
   const shareBotUrl = useShareBotUrl();
 
+  const mainButtonText = `${t("get spread")} 3 🌕`;
+
+  const handleRequestReadings = useCallback(async () => {
+    await updateBalance(-3);
+    try {
+      const response = await getCardOfTheDayReading(
+        cardsNames,
+        i18n.language as SystemLanguage
+      );
+      setCardsVisible(true);
+      setResponseText(response);
+    } catch (error) {
+      setResponseText(`${error}`);
+    }
+  }, [cardsNames, i18n.language, updateBalance]);
+
+  const handleNoMoney = useCallback(() => {
+    showPopup();
+  }, [showPopup]);
+
   useEffect(() => {
-    const handleRequestReadings = async () => {
-      await updateBalance(-3);
-      try {
-        const response = await getCardOfTheDayReading(
-          cardsNames,
-          i18n.language as SystemLanguage
-        );
-        setCardsVisible(true);
-        setResponseText(response);
-        setMainButtonText(t("share"));
-        setMainButtonHandler(shareBotUrl);
-      } catch (error) {
-        setResponseText(`${error}`);
-      }
-    };
-
-    const handleNoMoney = () => {
-      showPopup();
-    };
-
     if (balance != null && balance < 3) {
       setMainButtonHandler(() => handleNoMoney);
     } else {
       setMainButtonHandler(() => handleRequestReadings);
     }
-  }, [cardsNames, i18n.language, t, updateBalance, showPopup]);
+  }, [handleNoMoney, handleRequestReadings, balance]);
 
   useMainButton(mainButtonText, mainButonHandler, false);
 
@@ -69,6 +66,9 @@ const CardOfTheDay: FC = () => {
       <div className="daily-card__spread">
         {cardsVisible && <CardsGroup cardsKeys={cardsKeys} />}
         <p className="daily-card__spread--text">{responseText}</p>
+        {cardsVisible && (
+          <SubmitButton title={t("share")} onPress={shareBotUrl} />
+        )}
       </div>
     </Page>
   );
