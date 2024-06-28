@@ -6,14 +6,11 @@
   width: 140px;
   height: 240px;
   padding: 1em;
-  border: 1px solid white;
   border-radius: 16px;
 
   transform-style: preserve-3d;
   transform-origin: center right;
-  transition: transform 1s;
-
-  word-wrap: break-word;
+  transition: transform 0.5s;
 
   &__flipped {
     transform: translateX(-100%) rotateY(-180deg);
@@ -34,11 +31,9 @@
 
     &--front {
       background: crimson;
-      text-align: center;
     }
 
     &--back {
-      word-wrap: break-word;
       background: slateblue;
       transform: rotateY(180deg);
     }
