@@ -1,31 +1,25 @@
 import { FC, useEffect, useState, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useBalance } from "@/Contexts";
-import {
-  useMainButton,
-  useRandomCards,
-  useLowBalancePopup,
-  useShareBotUrl,
-} from "@/Hooks";
-import { Page, SpreadBalancePad, CardsGroup, SubmitButton } from "@/Components";
-import { Headline } from "@telegram-apps/telegram-ui";
+import { useMainButton, useRandomCards, useLowBalancePopup } from "@/Hooks";
+import { Page, SpreadBalancePad } from "@/Components";
+import { Headline, Text } from "@telegram-apps/telegram-ui";
 import { getCardOfTheDayReading } from "@/API/API";
 import { SystemLanguage } from "@/types";
 import "./styles.scss";
 
+import { ROUTES_NAMES } from "@/Router";
+import { useNavigate } from "react-router-dom";
+
 const CardOfTheDay: FC = () => {
   const { t, i18n } = useTranslation();
-  const [mainButonHandler, setMainButtonHandler] = useState<
+  const [mainButtonHandler, setMainButtonHandler] = useState<
     () => void | Promise<void>
   >(() => {});
-  const [responseText, setResponseText] = useState<string>(
-    t("card of the day desctiption")
-  );
-  const [cardsVisible, setCardsVisible] = useState<boolean>(false);
   const { balance, updateBalance } = useBalance();
   const { cardsNames, cardsKeys } = useRandomCards(1);
   const showPopup = useLowBalancePopup(3);
-  const shareBotUrl = useShareBotUrl();
+  const navigate = useNavigate();
 
   const mainButtonText = `${t("get spread")} 3 🌕`;
 
@@ -36,12 +30,18 @@ const CardOfTheDay: FC = () => {
         cardsNames,
         i18n.language as SystemLanguage
       );
-      setCardsVisible(true);
-      setResponseText(response);
+      const locState = {
+        title: t("/card-of-the-day"),
+        cardsKeys: cardsKeys,
+        reading: response,
+      };
+      navigate(ROUTES_NAMES.READINGS, {
+        state: locState,
+      });
     } catch (error) {
-      setResponseText(`${error}`);
+      throw new Error(`${error}`);
     }
-  }, [cardsNames, i18n.language, updateBalance]);
+  }, [cardsNames, cardsKeys, t, i18n.language, updateBalance, navigate]);
 
   const handleNoMoney = useCallback(() => {
     showPopup();
@@ -55,7 +55,7 @@ const CardOfTheDay: FC = () => {
     }
   }, [handleNoMoney, handleRequestReadings, balance]);
 
-  useMainButton(mainButtonText, mainButonHandler, false);
+  useMainButton(mainButtonText, mainButtonHandler, false);
 
   return (
     <Page>
@@ -63,13 +63,7 @@ const CardOfTheDay: FC = () => {
         {t("/card-of-the-day")}
       </Headline>
       <SpreadBalancePad />
-      <div className="daily-card__spread">
-        {cardsVisible && <CardsGroup cardsKeys={cardsKeys} />}
-        <p className="daily-card__spread--text">{responseText}</p>
-        {cardsVisible && (
-          <SubmitButton title={t("share")} onPress={shareBotUrl} />
-        )}
-      </div>
+      <Text>{t("card of the day desctiption")}</Text>
     </Page>
   );
 };

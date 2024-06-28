@@ -7,7 +7,7 @@ const CardsGroup: FC<CardsGroupPropTypes> = ({ cardsKeys }) => {
   return (
     <div className="cards-group">
       {cardsKeys.map((cardKey) => (
-        <Card cardKey={cardKey} />
+        <Card key={JSON.stringify(cardKey)} cardKey={cardKey} />
       ))}
     </div>
   );
