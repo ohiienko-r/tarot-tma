@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { useMainButton, useShareBotUrl } from "@/Hooks";
 import { Headline, Text } from "@telegram-apps/telegram-ui";
 import { CardsGroup, Page } from "@/Components";
+import "./styles.scss";
 
 const Readings: FC = () => {
   const { t } = useTranslation();
@@ -12,9 +13,13 @@ const Readings: FC = () => {
   useMainButton(t("share"), shareBotUrl, false);
   return (
     <Page>
-      <Headline weight="1">{location.state.title}</Headline>
+      <Headline weight="1" className="readings__heading">
+        {location.state.title}
+      </Headline>
       <CardsGroup cardsKeys={location.state.cardsKeys} />
-      <Text>{location.state.reading}</Text>
+      <Text Component={"p"} className="readings__reading">
+        {location.state.reading}
+      </Text>
     </Page>
   );
 };

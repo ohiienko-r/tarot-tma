@@ -65,7 +65,9 @@ const CardOfTheDay: FC = () => {
         {t("/card-of-the-day")}
       </Headline>
       <SpreadBalancePad />
-      <Text>{t("card of the day description")}</Text>
+      <Text Component={"p"} className="daily-card__caption">
+        {t("card of the day description")}
+      </Text>
     </Page>
   );
 };

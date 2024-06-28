@@ -4,14 +4,8 @@
     padding: 1em;
   }
 
-  &__spread {
-    padding: 1em 1em calc(var(--tg-viewport-stable-height) * 0.05) 1em;
-    width: 100%;
-    height: 100%;
+  &__caption {
+    padding: 1em;
     box-sizing: border-box;
-
-    &--text {
-      line-height: 20px;
-    }
   }
 }

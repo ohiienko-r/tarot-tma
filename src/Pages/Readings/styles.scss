@@ -1,0 +1,11 @@
+.readings {
+  &__heading {
+    text-align: center;
+    padding: 1em;
+  }
+
+  &__reading {
+    padding: 1em;
+    box-sizing: border-box;
+  }
+}
