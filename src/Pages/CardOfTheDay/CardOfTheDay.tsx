@@ -1,15 +1,14 @@
-import { FC, useEffect, useState, useCallback } from "react";
+import { FC, useEffect, useState, useCallback, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useBalance } from "@/Contexts";
 import { useMainButton, useRandomCards, useLowBalancePopup } from "@/Hooks";
 import { Page, SpreadBalancePad } from "@/Components";
 import { Headline, Text } from "@telegram-apps/telegram-ui";
 import { getCardOfTheDayReading } from "@/API/API";
+import { ROUTES_NAMES } from "@/Router";
 import { SystemLanguage } from "@/types";
 import "./styles.scss";
-
-import { ROUTES_NAMES } from "@/Router";
-import { useNavigate } from "react-router-dom";
 
 const CardOfTheDay: FC = () => {
   const { t, i18n } = useTranslation();
@@ -43,9 +42,12 @@ const CardOfTheDay: FC = () => {
     }
   }, [cardsNames, cardsKeys, t, i18n.language, updateBalance, navigate]);
 
-  const handleNoMoney = useCallback(() => {
-    showPopup();
-  }, [showPopup]);
+  const handleNoMoney = useMemo(
+    () => () => {
+      showPopup();
+    },
+    []
+  );
 
   useEffect(() => {
     if (balance != null && balance < 3) {
@@ -53,7 +55,7 @@ const CardOfTheDay: FC = () => {
     } else {
       setMainButtonHandler(() => handleRequestReadings);
     }
-  }, [handleNoMoney, handleRequestReadings, balance]);
+  }, [handleNoMoney, handleRequestReadings]);
 
   useMainButton(mainButtonText, mainButtonHandler, false);
 
@@ -63,7 +65,7 @@ const CardOfTheDay: FC = () => {
         {t("/card-of-the-day")}
       </Headline>
       <SpreadBalancePad />
-      <Text>{t("card of the day desctiption")}</Text>
+      <Text>{t("card of the day description")}</Text>
     </Page>
   );
 };
