@@ -2,7 +2,7 @@ import { FC, useState, useEffect } from "react";
 import { CardPropTypes } from "./types";
 import "./styles.scss";
 
-const Card: FC<CardPropTypes> = ({ cardKey }) => {
+const Card: FC<CardPropTypes> = ({ cardKey, big }) => {
   const [flipped, setFlipped] = useState<boolean>(false);
 
   useEffect(() => {
@@ -12,7 +12,13 @@ const Card: FC<CardPropTypes> = ({ cardKey }) => {
   }, []);
 
   return (
-    <div className={["card", flipped && "card__flipped"].join(" ")}>
+    <div
+      className={[
+        "card",
+        big ? "card--big" : "card--default",
+        flipped && "card__flipped",
+      ].join(" ")}
+    >
       <div className="card__face card__face--front">RUBASKHA</div>
       <div className="card__face card__face--back">
         {JSON.stringify(cardKey)}
