@@ -5,9 +5,9 @@ import { Modal, Headline, Text, Button } from "@telegram-apps/telegram-ui";
 import "./styles.scss";
 
 const DailyBonusModal: FC = () => {
-  const { updateBalance } = useBalance();
-  const { bonusAvailable, setBonusAvailable } = useDailyBonus();
   const [modalVisible, setModalVisible] = useState<boolean>(false);
+  const { bonusAvailable, setBonusAvailable } = useDailyBonus();
+  const { updateBalance } = useBalance();
 
   useEffect(() => {
     const handleModalVisibility = () => {
