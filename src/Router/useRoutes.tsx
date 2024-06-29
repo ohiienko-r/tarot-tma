@@ -1,7 +1,8 @@
 import { useTranslation } from "react-i18next";
-import { Home, AskCards, HowDoesItWork, Readings, Spread } from "@/Pages";
+import { Navigate } from "react-router-dom";
+import { Home, AskCards, About, Readings, Spread } from "@/Pages";
 import { ROUTES_NAMES } from "./routes-names";
-import { SPREAD } from "@/helpers";
+import { SPREADS } from "@/helpers";
 
 const useRoutes = () => {
   const { t } = useTranslation();
@@ -17,8 +18,8 @@ const useRoutes = () => {
         <Spread
           title={t("/card-of-the-day")}
           spreadDescription={t("card of the day description")}
-          spreadPrice={SPREAD.CARD_OF_THE_DAY.price}
-          cardsQty={SPREAD.CARD_OF_THE_DAY.cardsQty}
+          spreadPrice={SPREADS.CARD_OF_THE_DAY.PRICE}
+          cardsQty={SPREADS.CARD_OF_THE_DAY.CARDS_QTY}
         />
       ),
     },
@@ -28,8 +29,8 @@ const useRoutes = () => {
         <Spread
           title="Так / Ні"
           spreadDescription="Якийсь опис розкладу"
-          spreadPrice={SPREAD.YES_NO.price}
-          cardsQty={SPREAD.YES_NO.cardsQty}
+          spreadPrice={SPREADS.YES_NO.PRICE}
+          cardsQty={SPREADS.YES_NO.CARDS_QTY}
         />
       ),
     },
@@ -40,9 +41,10 @@ const useRoutes = () => {
 
     {
       path: ROUTES_NAMES.HOW_IT_WORKS,
-      element: <HowDoesItWork />,
+      element: <About />,
     },
     { path: ROUTES_NAMES.READINGS, element: <Readings /> },
+    { path: "*", element: <Navigate to={ROUTES_NAMES.HOME} /> },
   ];
 };
 

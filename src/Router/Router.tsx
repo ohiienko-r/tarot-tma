@@ -1,5 +1,5 @@
 import { useEffect, useMemo } from "react";
-import { Navigate, Route, Router, Routes } from "react-router-dom";
+import { Route, Router, Routes } from "react-router-dom";
 import { useIntegration } from "@tma.js/react-router-integration";
 import {
   initNavigator,
@@ -11,7 +11,6 @@ import {
   bindViewportCSSVars,
 } from "@tma.js/sdk-react";
 import { useLanguage } from "@/Hooks";
-import { ROUTES_NAMES } from "./routes-names";
 import useRoutes from "./useRoutes";
 
 const AppRouter = () => {
@@ -49,7 +48,6 @@ const AppRouter = () => {
         {routes.map((route) => (
           <Route key={route.path} path={route.path} element={route.element} />
         ))}
-        <Route path={"*"} element={<Navigate to={ROUTES_NAMES.HOME} />} />
       </Routes>
     </Router>
   );
