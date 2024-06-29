@@ -12,7 +12,7 @@ import {
 } from "@tma.js/sdk-react";
 import { useLanguage } from "@/Hooks";
 import { ROUTES_NAMES } from "./routes-names";
-import { routes } from "./routes";
+import useRoutes from "./useRoutes";
 
 const AppRouter = () => {
   const navigator = useMemo(() => initNavigator("app-navigation-state"), []);
@@ -38,6 +38,8 @@ const AppRouter = () => {
     navigator.attach();
     return () => navigator.detach();
   }, [navigator]);
+
+  const routes = useRoutes();
 
   import("eruda").then((lib) => lib.default.init());
 

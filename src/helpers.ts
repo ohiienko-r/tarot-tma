@@ -16,3 +16,18 @@ export const validateInitData = async (): Promise<boolean> => {
 
   return data.success;
 };
+
+export const SPREAD = {
+  CARD_OF_THE_DAY: {
+    price: 1,
+    cardsQty: 1,
+  },
+  YES_NO: {
+    price: 1,
+    cardsQty: 1,
+  },
+  QUESTION_TO_THE_CARDS: {
+    price: 3,
+    cardsQty: 3,
+  },
+} as const;

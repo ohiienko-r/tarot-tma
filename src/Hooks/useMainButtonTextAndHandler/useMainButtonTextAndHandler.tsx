@@ -18,7 +18,7 @@ const useMainButtonTextAndHandler = (spreadPrice: number, cardsQty: number) => {
   const mainButtonText = `${t("get spread")} ${spreadPrice} 🌕`;
 
   const handleRequestReadings = useCallback(async () => {
-    await updateBalance(-3);
+    await updateBalance(-spreadPrice);
     try {
       const response = await getCardOfTheDayReading(
         cardsNames,
@@ -35,7 +35,15 @@ const useMainButtonTextAndHandler = (spreadPrice: number, cardsQty: number) => {
     } catch (error) {
       throw new Error(`${error}`);
     }
-  }, [cardsNames, cardsKeys, t, i18n.language, updateBalance, navigate]);
+  }, [
+    spreadPrice,
+    cardsNames,
+    cardsKeys,
+    t,
+    i18n.language,
+    updateBalance,
+    navigate,
+  ]);
 
   const handleNoMoney = useMemo(
     () => () => {
@@ -45,7 +53,7 @@ const useMainButtonTextAndHandler = (spreadPrice: number, cardsQty: number) => {
   );
 
   useEffect(() => {
-    if (balance != null && balance < 3) {
+    if (balance != null && balance < spreadPrice) {
       setHandler(() => handleNoMoney);
     } else {
       setHandler(() => handleRequestReadings);
