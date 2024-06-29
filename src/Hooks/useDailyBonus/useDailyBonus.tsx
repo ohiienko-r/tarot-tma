@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
-import { useBalance } from "@/Contexts";
-import { cloudStorage } from "@/helpers";
+import { useCloudStorage } from "@tma.js/sdk-react";
 
-const useEverydayBonus = () => {
-  const { updateBalance } = useBalance();
+const useDailyBonus = () => {
+  const cloudStorage = useCloudStorage();
   const [bonusAvailable, setBonusAvailable] = useState<boolean>(false);
 
   const getLastLogIn = async () => {
@@ -27,7 +26,6 @@ const useEverydayBonus = () => {
 
     if (isDifferentDay) {
       setBonusAvailable(true);
-      updateBalance(3);
       await cloudStorage.set("last_login", today.toISOString());
     } else {
       setBonusAvailable(false);
@@ -46,7 +44,7 @@ const useEverydayBonus = () => {
     fetchLastLogIn();
   }, []);
 
-  return { bonusAvailable };
+  return { bonusAvailable, setBonusAvailable };
 };
 
-export default useEverydayBonus;
+export default useDailyBonus;

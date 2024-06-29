@@ -1,0 +1,49 @@
+.card {
+  cursor: pointer;
+  position: relative;
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 1em;
+  border-radius: 16px;
+
+  transform-style: preserve-3d;
+  transform-origin: center right;
+  transition: transform 0.5s;
+
+  &__flipped {
+    transform: translateX(-100%) rotateY(-180deg);
+    cursor: default;
+  }
+
+  &__face {
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 16px;
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    text-align: center;
+    backface-visibility: hidden;
+
+    &--front {
+      background: crimson;
+    }
+
+    &--back {
+      background: slateblue;
+      transform: rotateY(180deg);
+    }
+  }
+
+  &--default {
+    width: 140px;
+    height: 240px;
+  }
+
+  &--big {
+    width: 210px;
+    height: 360px;
+  }
+}

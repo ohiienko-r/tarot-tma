@@ -5,7 +5,7 @@
     "/card-of-the-day": "My card of the day",
     "/yes-no": "Yes / No",
     "/ask-question": "Ask the cards a question",
-    "/how-does-it-work": "Learn more about tarot?",
+    "/about": "Learn more about tarot?",
     "magic coins": "Magic coins",
     "buy": "Buy",
     "balance description pt1": "You have",
@@ -24,5 +24,14 @@
     "li 6": "Identifying new opportunities and perspectives.",
     "li 7": "Learning from past experiences and pursuing your goals.",
     "li 8": "Finding inspiration and creative ideas.",
-    "paragraph 3": "Our AI Tarot reader is designed to provide you with accurate and unbiased answers, based on deep knowledge and modern technology. Try using the app for just a few days and feel how Tarot becomes your key to understanding yourself and the world."
+    "paragraph 3": "Our AI Tarot reader is designed to provide you with accurate and unbiased answers, based on deep knowledge and modern technology. Try using the app for just a few days and feel how Tarot becomes your key to understanding yourself and the world.",
+    "card of the day description": "'Card of the Day' is a Tarot spread where one card is drawn to provide advice or a prediction for the current day. This method helps focus on the day's energy and offers a hint about what might happen or what to concentrate on.",
+    "available": "available",
+    "get spread": "Get spread for",
+    "not enough": "Not Enough 🌕 magic coins",
+    "spread requires": "This spread requires",
+    "but you have": "but you have",
+    "get more coins": "Get more magic coins!",
+    "get coins": "Get coins",
+    "share": "Share"
 }

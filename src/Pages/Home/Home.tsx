@@ -7,11 +7,14 @@ import {
   SubmitButton,
   BalancePad,
   Page,
+  DailyBonusModal,
 } from "@/Components";
 import "./styles.scss";
+import { useBalance } from "@/Contexts";
 
 const Home: FC = () => {
   const { t } = useTranslation();
+  const { updateBalance } = useBalance();
 
   return (
     <Page className="home">
@@ -21,10 +24,17 @@ const Home: FC = () => {
           <BalancePad>
             <Balance />
           </BalancePad>
-          <SubmitButton title={t("buy")} onPress={() => {}} disabled={true} />
+          <SubmitButton
+            title={t("buy")}
+            onPress={async () => {
+              await updateBalance(1);
+            }}
+            disabled={false}
+          />
         </div>
       </div>
       <Main />
+      <DailyBonusModal />
     </Page>
   );
 };
