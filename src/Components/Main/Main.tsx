@@ -18,7 +18,7 @@ const Main: FC = () => {
         ))}
       </ul>
       <RouterLink
-        to={ROUTES_NAMES.HOW_IT_WORKS}
+        to={ROUTES_NAMES.ABOUT}
         className="main-section__faq-link"
         icon={questionMark}
       />

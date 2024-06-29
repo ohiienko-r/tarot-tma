@@ -1,4 +1,5 @@
 import { cards } from "./Cards/cards.dto";
+import { ROUTES_NAMES } from "./Router";
 
 export type ValidationResponse = {
   success: boolean;
@@ -16,3 +17,5 @@ export type RandomCards = {
   cardsNames: Card[];
   cardsKeys: CardKey[];
 };
+
+export type Path = (typeof ROUTES_NAMES)[keyof typeof ROUTES_NAMES];

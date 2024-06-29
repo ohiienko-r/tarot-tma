@@ -40,7 +40,7 @@ const useRoutes = () => {
     },
 
     {
-      path: ROUTES_NAMES.HOW_IT_WORKS,
+      path: ROUTES_NAMES.ABOUT,
       element: <About />,
     },
     { path: ROUTES_NAMES.READINGS, element: <Readings /> },

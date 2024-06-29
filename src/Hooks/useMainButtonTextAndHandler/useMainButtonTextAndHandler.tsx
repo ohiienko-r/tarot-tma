@@ -3,11 +3,15 @@ import { useNavigate } from "react-router-dom";
 import { useBalance } from "@/Contexts";
 import { useLowBalancePopup, useRandomCards } from "@/Hooks";
 import { useTranslation } from "react-i18next";
-import { getCardOfTheDayReading } from "@/API/API";
+import { getReadings } from "@/API/API";
 import { ROUTES_NAMES } from "@/Router";
-import { SystemLanguage } from "@/types";
+import { Path, SystemLanguage } from "@/types";
 
-const useMainButtonTextAndHandler = (spreadPrice: number, cardsQty: number) => {
+const useMainButtonTextAndHandler = (
+  spreadPrice: number,
+  cardsQty: number,
+  path: Path
+) => {
   const [handler, setHandler] = useState<() => void | Promise<void>>(() => {});
   const { balance, updateBalance } = useBalance();
   const { cardsNames, cardsKeys } = useRandomCards(cardsQty);
@@ -20,12 +24,13 @@ const useMainButtonTextAndHandler = (spreadPrice: number, cardsQty: number) => {
   const handleRequestReadings = useCallback(async () => {
     await updateBalance(-spreadPrice);
     try {
-      const response = await getCardOfTheDayReading(
+      const response = await getReadings(
         cardsNames,
-        i18n.language as SystemLanguage
+        i18n.language as SystemLanguage,
+        path
       );
       const locState = {
-        title: t("/card-of-the-day"),
+        title: t(path),
         cardsKeys: cardsKeys,
         reading: response,
       };
@@ -37,6 +42,7 @@ const useMainButtonTextAndHandler = (spreadPrice: number, cardsQty: number) => {
     }
   }, [
     spreadPrice,
+    path,
     cardsNames,
     cardsKeys,
     t,
