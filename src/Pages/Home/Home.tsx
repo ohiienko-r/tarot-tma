@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { useBalance } from "@/Contexts";
 import { useTranslation } from "react-i18next";
 import {
   Header,
@@ -10,7 +11,6 @@ import {
   DailyBonusModal,
 } from "@/Components";
 import "./styles.scss";
-import { useBalance } from "@/Contexts";
 
 const Home: FC = () => {
   const { t } = useTranslation();

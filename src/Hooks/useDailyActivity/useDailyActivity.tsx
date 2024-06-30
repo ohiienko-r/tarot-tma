@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { useCloudStorage } from "@tma.js/sdk-react";
 
-const useDailyBonus = () => {
+const useDailyActivity = () => {
   const cloudStorage = useCloudStorage();
-  const [bonusAvailable, setBonusAvailable] = useState<boolean>(false);
+  const [activityAvailable, setActivityAvailable] = useState<boolean>(false);
 
   const getLastLogIn = async () => {
     const today = new Date();
@@ -25,10 +25,10 @@ const useDailyBonus = () => {
     const isDifferentDay = today.getTime() > lastLoginDate.getTime();
 
     if (isDifferentDay) {
-      setBonusAvailable(true);
+      setActivityAvailable(true);
       await cloudStorage.set("last_login", today.toISOString());
     } else {
-      setBonusAvailable(false);
+      setActivityAvailable(false);
     }
   };
 
@@ -44,7 +44,7 @@ const useDailyBonus = () => {
     fetchLastLogIn();
   }, []);
 
-  return { bonusAvailable, setBonusAvailable };
+  return { activityAvailable, setActivityAvailable };
 };
 
-export default useDailyBonus;
+export default useDailyActivity;

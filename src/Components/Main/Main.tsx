@@ -1,27 +1,28 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigation } from "@/Hooks";
 import { RouterLink } from "@/Components";
-import { ROUTES_NAMES } from "@/Router/routes-names";
-import { spreadsList } from "./helpers";
-import questionMark from "@/assets/question_mark.svg";
 import "./styles.scss";
 
 const Main: FC = () => {
   const { t } = useTranslation();
+  const navigation = useNavigation();
 
   return (
     <main className="main-section">
       <h2>{t("spreads")}</h2>
-      <ul className="main-section__spreads-list">
-        {spreadsList.map((spread) => (
-          <RouterLink key={spread.id} to={spread.name} icon={spread.icon} />
+      <ul className="main-section__navigation">
+        {navigation.map((spread) => (
+          <RouterLink
+            key={spread.id}
+            to={spread.to}
+            title={spread.title}
+            icon={spread.icon}
+            state={spread.state}
+            className={spread.class}
+          />
         ))}
       </ul>
-      <RouterLink
-        to={ROUTES_NAMES.ABOUT}
-        className="main-section__faq-link"
-        icon={questionMark}
-      />
     </main>
   );
 };

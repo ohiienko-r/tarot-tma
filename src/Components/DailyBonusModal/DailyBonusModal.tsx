@@ -1,17 +1,17 @@
 import { FC, useState, useEffect } from "react";
 import { useBalance } from "@/Contexts";
-import { useDailyBonus } from "@/Hooks";
+import { useDailyActivity } from "@/Hooks";
 import { Modal, Headline, Text, Button } from "@telegram-apps/telegram-ui";
 import "./styles.scss";
 
 const DailyBonusModal: FC = () => {
   const [modalVisible, setModalVisible] = useState<boolean>(false);
-  const { bonusAvailable, setBonusAvailable } = useDailyBonus();
+  const { activityAvailable } = useDailyActivity();
   const { updateBalance } = useBalance();
 
   useEffect(() => {
     const handleModalVisibility = () => {
-      if (bonusAvailable) {
+      if (activityAvailable) {
         setModalVisible(true);
       } else {
         setModalVisible(false);
@@ -19,12 +19,11 @@ const DailyBonusModal: FC = () => {
     };
 
     handleModalVisibility();
-  }, [bonusAvailable]);
+  }, [activityAvailable]);
 
   const handleClaimCoins = async () => {
     await updateBalance(3);
     setModalVisible(false);
-    setBonusAvailable(false);
   };
 
   return (
