@@ -33,6 +33,7 @@ const useMainButtonTextAndHandler = (
         title: t(path),
         cardsKeys: cardsKeys,
         reading: response,
+        fromPath: path,
       };
       navigate(ROUTES_NAMES.READINGS, {
         state: locState,
