@@ -25,6 +25,7 @@ const useNavigation = () => {
         const state = JSON.parse(routeState);
         setLinkState({ to: ROUTES_NAMES.READINGS, state: state });
       } else {
+        await cloudStorage.delete("myCard");
         setLinkState({
           to: ROUTES_NAMES.CARD_OF_THE_DAY,
           state: undefined,
