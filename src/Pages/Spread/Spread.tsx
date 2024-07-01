@@ -13,13 +13,14 @@ const Spread: FC<SpreadPropTypes> = ({
   spreadPrice,
   cardsQty,
 }) => {
-  const location = useLocation();
-  const { mainButtonText, handler } = useMainButtonTextAndHandler(
+  const { pathname } = useLocation();
+  const { mainButtonText, handler, disabled } = useMainButtonTextAndHandler(
     spreadPrice,
     cardsQty,
-    location.pathname as Path
+    pathname as Path
   );
-  useMainButton(mainButtonText, handler, false);
+
+  useMainButton(mainButtonText, handler, disabled);
   return (
     <Page>
       <Headline weight="1" className="spread__heading">

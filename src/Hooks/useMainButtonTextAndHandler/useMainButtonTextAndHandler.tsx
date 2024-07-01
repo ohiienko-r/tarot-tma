@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
+import { useCloudStorage } from "@tma.js/sdk-react";
 import { useBalance } from "@/Contexts";
 import { useLowBalancePopup, useRandomCards } from "@/Hooks";
 import { useTranslation } from "react-i18next";
@@ -13,9 +14,11 @@ const useMainButtonTextAndHandler = (
   path: Path
 ) => {
   const [handler, setHandler] = useState<() => void | Promise<void>>(() => {});
+  const [disabled, setDisabled] = useState<boolean>(false);
   const { balance, updateBalance } = useBalance();
   const { cardsNames, cardsKeys } = useRandomCards(cardsQty);
   const { t, i18n } = useTranslation();
+  const cloudStorage = useCloudStorage();
   const showPopup = useLowBalancePopup(spreadPrice);
   const navigate = useNavigate();
 
@@ -67,7 +70,20 @@ const useMainButtonTextAndHandler = (
     }
   }, [handleNoMoney, handleRequestReadings]);
 
-  return { mainButtonText, handler };
+  useEffect(() => {
+    const handleMainButtonDisabled = async () => {
+      const myCard = await cloudStorage.get("myCard");
+      if (path === ROUTES_NAMES.CARD_OF_THE_DAY && myCard !== "") {
+        setDisabled(true);
+      } else {
+        setDisabled(false);
+      }
+    };
+
+    handleMainButtonDisabled();
+  }, [cloudStorage, path]);
+
+  return { mainButtonText, handler, disabled };
 };
 
 export default useMainButtonTextAndHandler;
