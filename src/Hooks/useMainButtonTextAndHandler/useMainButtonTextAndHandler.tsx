@@ -4,6 +4,7 @@ import { useCloudStorage } from "@tma.js/sdk-react";
 import { useBalance } from "@/Contexts";
 import { useLowBalancePopup, useRandomCards } from "@/Hooks";
 import { useTranslation } from "react-i18next";
+import { validateInitData } from "@/helpers";
 import { getReadings } from "@/API/API";
 import { ROUTES_NAMES } from "@/Router";
 import { Path, SystemLanguage } from "@/types";
@@ -26,21 +27,28 @@ const useMainButtonTextAndHandler = (
 
   const handleRequestReadings = useCallback(async () => {
     await updateBalance(-spreadPrice);
+
     try {
-      const response = await getReadings(
-        cardsNames,
-        i18n.language as SystemLanguage,
-        path
-      );
-      const locState = {
-        title: t(path),
-        cardsKeys: cardsKeys,
-        reading: response,
-        fromPath: path,
-      };
-      navigate(ROUTES_NAMES.READINGS, {
-        state: locState,
-      });
+      if (await validateInitData()) {
+        const response = await getReadings(
+          cardsNames,
+          i18n.language as SystemLanguage,
+          path
+        );
+
+        const locState = {
+          title: t(path),
+          cardsKeys: cardsKeys,
+          reading: response,
+          fromPath: path,
+        };
+
+        navigate(ROUTES_NAMES.READINGS, {
+          state: locState,
+        });
+      } else {
+        console.log("Invalid initData");
+      }
     } catch (error) {
       throw new Error(`${error}`);
     }
