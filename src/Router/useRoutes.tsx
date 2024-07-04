@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { Navigate } from "react-router-dom";
-import { Home, AskCards, About, Readings, Spread } from "@/Pages";
+import { Home, About, Readings, Spread } from "@/Pages";
 import { ROUTES_NAMES } from "./routes-names";
 import { SPREADS } from "@/helpers";
 
@@ -35,10 +35,16 @@ const useRoutes = () => {
       ),
     },
     {
-      path: ROUTES_NAMES.ASK_QUESTION,
-      element: <AskCards />,
+      path: ROUTES_NAMES.QUESTION,
+      element: (
+        <Spread
+          title={t("/question")}
+          spreadDescription="Some description"
+          spreadPrice={SPREADS.QUESTION_TO_THE_CARDS.PRICE}
+          cardsQty={SPREADS.QUESTION_TO_THE_CARDS.CARDS_QTY}
+        />
+      ),
     },
-
     {
       path: ROUTES_NAMES.ABOUT,
       element: <About />,

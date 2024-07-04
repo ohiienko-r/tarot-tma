@@ -30,6 +30,13 @@ const Spread: FC<SpreadPropTypes> = ({
       <Text Component={"p"} className="spread__caption">
         {spreadDescription}
       </Text>
+      {pathname === "/question" && (
+        <input
+          className="spread__input"
+          type="text"
+          placeholder="Type your question here"
+        />
+      )}
     </Page>
   );
 };

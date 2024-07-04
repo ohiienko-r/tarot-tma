@@ -7,4 +7,18 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 0.5em;
+
+  animation: appear 0.4s;
+}
+
+@keyframes appear {
+  0% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(-90%);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
