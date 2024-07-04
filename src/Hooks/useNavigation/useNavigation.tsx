@@ -52,8 +52,8 @@ const useNavigation = () => {
     },
     {
       id: 2,
-      to: ROUTES_NAMES.ASK_QUESTION,
-      title: t(ROUTES_NAMES.ASK_QUESTION),
+      to: ROUTES_NAMES.QUESTION,
+      title: t(ROUTES_NAMES.QUESTION),
       icon: question,
     },
     {

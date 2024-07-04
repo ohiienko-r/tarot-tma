@@ -1,5 +1,6 @@
 import { FC, useState, useEffect } from "react";
 import { CardPropTypes } from "./types";
+import cardReverse from "@/assets/card_reverse.webp";
 import "./styles.scss";
 
 const Card: FC<CardPropTypes> = ({ cardKey, big }) => {
@@ -8,7 +9,7 @@ const Card: FC<CardPropTypes> = ({ cardKey, big }) => {
   useEffect(() => {
     setTimeout(() => {
       setFlipped(true);
-    }, 200);
+    }, 500);
   }, []);
 
   return (
@@ -19,7 +20,12 @@ const Card: FC<CardPropTypes> = ({ cardKey, big }) => {
         flipped && "card__flipped",
       ].join(" ")}
     >
-      <div className="card__face card__face--front">RUBASKHA</div>
+      <img
+        src={cardReverse}
+        alt="Card reverse"
+        className="card__face card__face--front"
+      />
+
       <div className="card__face card__face--back">
         {JSON.stringify(cardKey)}
       </div>
