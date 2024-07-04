@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useMainButton, useMainButtonTextAndHandler } from "@/Hooks";
-import { Page, SpreadBalancePad } from "@/Components";
+import { SpreadBalancePad } from "@/Components";
 import { Headline, Text } from "@telegram-apps/telegram-ui";
 import { useLocation } from "react-router-dom";
 import { SpreadPropTypes } from "./types";
@@ -26,7 +26,7 @@ const Spread: FC<SpreadPropTypes> = ({
 
   useMainButton(mainButtonText, handler, disabled);
   return (
-    <Page className="spread">
+    <>
       <Headline weight="1" className="spread__heading">
         {title}
       </Headline>
@@ -48,7 +48,7 @@ const Spread: FC<SpreadPropTypes> = ({
           />
         </div>
       )}
-    </Page>
+    </>
   );
 };
 
