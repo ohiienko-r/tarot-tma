@@ -66,6 +66,14 @@ const useMainButtonTextAndHandler = (
     navigate,
   ]);
 
+  const handleNaviagteToQuestion = useCallback(() => {
+    const locState = { spreadPrice: spreadPrice, cardsQty: cardsQty };
+
+    navigate(ROUTES_NAMES.QUESTION_INPUT, {
+      state: locState,
+    });
+  }, [spreadPrice, cardsQty, navigate]);
+
   const handleNoMoney = useMemo(
     () => () => {
       showPopup();
@@ -76,6 +84,8 @@ const useMainButtonTextAndHandler = (
   useEffect(() => {
     if (balance != null && balance < spreadPrice) {
       setHandler(() => handleNoMoney);
+    } else if (path === ROUTES_NAMES.QUESTION) {
+      setHandler(() => handleNaviagteToQuestion);
     } else {
       setHandler(() => handleRequestReadings);
     }
@@ -86,13 +96,15 @@ const useMainButtonTextAndHandler = (
       const myCard = await cloudStorage.get("myCard");
       if (path === ROUTES_NAMES.CARD_OF_THE_DAY && myCard !== "") {
         setDisabled(true);
+      } else if (prompt?.length === 0) {
+        setDisabled(true);
       } else {
         setDisabled(false);
       }
     };
 
     handleMainButtonDisabled();
-  }, [cloudStorage, path]);
+  }, [cloudStorage, path, prompt]);
 
   return { mainButtonText, handler, disabled };
 };

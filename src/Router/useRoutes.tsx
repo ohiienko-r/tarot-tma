@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { Navigate } from "react-router-dom";
-import { Home, About, Readings, Spread } from "@/Pages";
+import { Home, About, Readings, Spread, Question } from "@/Pages";
 import { ROUTES_NAMES } from "./routes-names";
 import { SPREADS } from "@/helpers";
 
@@ -44,6 +44,10 @@ const useRoutes = () => {
           cardsQty={SPREADS.QUESTION_TO_THE_CARDS.CARDS_QTY}
         />
       ),
+    },
+    {
+      path: ROUTES_NAMES.QUESTION_INPUT,
+      element: <Question />,
     },
     {
       path: ROUTES_NAMES.ABOUT,
