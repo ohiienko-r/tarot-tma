@@ -20,7 +20,7 @@ const Question: FC = () => {
   return (
     <>
       <Headline weight="1" className="question__heading">
-        {t("/question_input")}
+        {t(pathname)}
       </Headline>
       <div className="question__input-container">
         <label htmlFor="question-input">{t("input label")}</label>

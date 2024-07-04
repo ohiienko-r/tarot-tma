@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { useBalance } from "@/Contexts";
+import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import {
   Header,
@@ -10,11 +10,16 @@ import {
   Page,
   DailyBonusModal,
 } from "@/Components";
+import { ROUTES_NAMES } from "@/Router";
 import "./styles.scss";
 
 const Home: FC = () => {
   const { t } = useTranslation();
-  const { updateBalance } = useBalance();
+  const navigate = useNavigate();
+
+  const handleNavigateToPayment = () => {
+    navigate(ROUTES_NAMES.PAYMENT);
+  };
 
   return (
     <Page className="home">
@@ -26,9 +31,7 @@ const Home: FC = () => {
           </BalancePad>
           <SubmitButton
             title={t("buy")}
-            onPress={async () => {
-              await updateBalance(1);
-            }}
+            onPress={handleNavigateToPayment}
             disabled={false}
           />
         </div>

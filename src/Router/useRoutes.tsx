@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { Navigate } from "react-router-dom";
-import { Home, About, Readings, Spread, Question } from "@/Pages";
+import { Home, About, Readings, Spread, Question, Payment } from "@/Pages";
 import { ROUTES_NAMES } from "./routes-names";
 import { SPREADS } from "@/helpers";
 
@@ -49,6 +49,7 @@ const useRoutes = () => {
       path: ROUTES_NAMES.QUESTION_INPUT,
       element: <Question />,
     },
+    { path: ROUTES_NAMES.PAYMENT, element: <Payment /> },
     {
       path: ROUTES_NAMES.ABOUT,
       element: <About />,
