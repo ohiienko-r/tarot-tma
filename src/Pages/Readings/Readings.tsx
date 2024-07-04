@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useMainButton, useShareBotUrl, useSaveSpreadState } from "@/Hooks";
 import { Headline, Text } from "@telegram-apps/telegram-ui";
-import { CardsGroup, Page } from "@/Components";
+import { CardsGroup } from "@/Components";
 import "./styles.scss";
 
 const Readings: FC = () => {
@@ -19,7 +19,7 @@ const Readings: FC = () => {
   );
 
   return (
-    <Page>
+    <>
       <Headline weight="1" className="readings__heading">
         {state.title}
       </Headline>
@@ -27,7 +27,7 @@ const Readings: FC = () => {
       <Text Component={"p"} className="readings__reading">
         {state.reading}
       </Text>
-    </Page>
+    </>
   );
 };
 

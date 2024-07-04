@@ -1,0 +1,27 @@
+.question {
+  &__heading {
+    text-align: center;
+    padding: 1em;
+  }
+
+  &__input-container {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 1em;
+    label {
+      font-weight: 500;
+    }
+  }
+
+  &__input {
+    margin-top: 0.5em;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 1em;
+    font-size: 16px;
+    border: 1px solid #fff;
+    border-radius: 8px;
+    background-color: transparent;
+    color: #fff;
+  }
+}
