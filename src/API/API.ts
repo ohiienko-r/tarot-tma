@@ -86,7 +86,7 @@ export const getReadings = async (
       return await getCardOfTheDayReading(card, systemLanguage);
     case ROUTES_NAMES.YES_NO:
       return await getYesNoReading(card, systemLanguage);
-    case ROUTES_NAMES.ASK_QUESTION:
+    case ROUTES_NAMES.QUESTION:
       return await getQuestionReading(
         card,
         systemLanguage,

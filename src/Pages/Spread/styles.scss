@@ -9,7 +9,20 @@
     box-sizing: border-box;
   }
 
+  &__input-container {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 1em;
+  }
+
   &__input {
+    box-sizing: border-box;
+    width: 100%;
+    margin-top: 0.5em;
+    padding: 1em;
+    border: 1px solid #fff;
+    border-radius: 8px;
+    color: #fff;
     background: transparent;
   }
 }

@@ -12,7 +12,8 @@ import { Path, SystemLanguage } from "@/types";
 const useMainButtonTextAndHandler = (
   spreadPrice: number,
   cardsQty: number,
-  path: Path
+  path: Path,
+  prompt?: string
 ) => {
   const [handler, setHandler] = useState<() => void | Promise<void>>(() => {});
   const [disabled, setDisabled] = useState<boolean>(false);
@@ -33,7 +34,8 @@ const useMainButtonTextAndHandler = (
         const response = await getReadings(
           cardsNames,
           i18n.language as SystemLanguage,
-          path
+          path,
+          prompt
         );
 
         const locState = {
@@ -55,6 +57,7 @@ const useMainButtonTextAndHandler = (
   }, [
     spreadPrice,
     path,
+    prompt,
     cardsNames,
     cardsKeys,
     t,
