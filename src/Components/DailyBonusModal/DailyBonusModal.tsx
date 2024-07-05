@@ -1,28 +1,29 @@
 import { FC, useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { useBalance } from "@/Contexts";
 import { useDailyActivity } from "@/Hooks";
 import { Modal, Headline, Text, Button } from "@telegram-apps/telegram-ui";
-import "./styles.scss";
 
 const DailyBonusModal: FC = () => {
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const { activityAvailable } = useDailyActivity();
   const { updateBalance } = useBalance();
+  const { t } = useTranslation();
 
   useEffect(() => {
-    const handleModalVisibility = () => {
+    const handleModalVisibility = async () => {
       if (activityAvailable) {
         setModalVisible(true);
+        await updateBalance(3);
       } else {
         setModalVisible(false);
       }
     };
 
     handleModalVisibility();
-  }, [activityAvailable]);
+  }, [activityAvailable, updateBalance]);
 
-  const handleClaimCoins = async () => {
-    await updateBalance(3);
+  const handleModalClose = async () => {
     setModalVisible(false);
   };
 
@@ -30,17 +31,19 @@ const DailyBonusModal: FC = () => {
     <Modal
       open={modalVisible}
       header={<Modal.Header />}
-      className="drawer-modal bouns-modal"
+      className="drawer-modal"
+      dismissible={false}
     >
-      <Headline plain={true} weight="1">
-        Your daily bonus is here!
-      </Headline>
-      <Text>Hey there and welcome back!</Text>
-      <br />
-      <Text>Here are your 3 🌕 magic coins.</Text>
-      <Button mode="bezeled" size="m" stretched onClick={handleClaimCoins}>
-        Got it!
-      </Button>
+      <div>
+        <Headline plain={true} weight="1">
+          {t("daily bonus heading")}
+        </Headline>
+        <Text>{t("dayli bonus greeting")}</Text>
+        <Text>{t("here are your coins")}</Text>
+        <Button mode="gray" size="l" stretched onClick={handleModalClose}>
+          {t("got it")}
+        </Button>
+      </div>
     </Modal>
   );
 };
