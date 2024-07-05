@@ -6,4 +6,5 @@ export const ROUTES_NAMES = {
   YES_NO: "/yes-no",
   ABOUT: "/about",
   READINGS: "/readings",
+  PAYMENT: "/payment",
 } as const;

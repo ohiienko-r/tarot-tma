@@ -1,12 +1,19 @@
 import { FC } from "react";
+import { useBalance } from "@/Contexts";
 import { useHapticFeedback } from "@tma.js/sdk-react";
-import { Modal, Button, IconButton } from "@telegram-apps/telegram-ui";
+import {
+  Modal,
+  Button,
+  IconButton,
+  Text,
+  Headline,
+} from "@telegram-apps/telegram-ui";
 import { useTranslation } from "react-i18next";
-import { BalanceCaptionPropTypes } from "./types";
 import questionMark from "@/assets/plain_question_mark.svg";
 import "./styles.scss";
 
-const BalanceCaption: FC<BalanceCaptionPropTypes> = ({ balance }) => {
+const BalanceCaption: FC = () => {
+  const { balance } = useBalance();
   const { t } = useTranslation();
   const haptic = useHapticFeedback();
 
@@ -30,18 +37,25 @@ const BalanceCaption: FC<BalanceCaptionPropTypes> = ({ balance }) => {
             <img
               src={questionMark}
               className="balance-caption__question-mark"
+              alt="Question mark"
             />
           </IconButton>
         }
         className="drawer-modal"
       >
-        <p className="balance-caption__modal-text">{modalTextPtOne}</p>
-        <p className="balance-caption__modal-text">{modalTextPtTwo}</p>
-        <Modal.Close>
-          <Button mode="bezeled" size="m" stretched>
-            Got it!
-          </Button>
-        </Modal.Close>
+        <div>
+          <Headline weight="2" className="balance-caption__modal-text">
+            {modalTextPtOne}
+          </Headline>
+          <Text Component={"p"} className="balance-caption__modal-text">
+            {modalTextPtTwo}
+          </Text>
+          <Modal.Close>
+            <Button mode="gray" size="l" stretched>
+              {t("got it")}
+            </Button>
+          </Modal.Close>
+        </div>
       </Modal>
     </div>
   );

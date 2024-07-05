@@ -45,5 +45,17 @@ button {
 .drawer-modal {
   box-sizing: border-box;
   padding: 1em;
-  height: 60%;
+  height: 60vh;
+
+  div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3em;
+  }
+
+  button {
+    background: linear-gradient(to right, #ea850f, #ffc700);
+    color: #1a1a1a;
+  }
 }

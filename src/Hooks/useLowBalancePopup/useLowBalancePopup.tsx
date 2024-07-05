@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useBalance } from "@/Contexts";
 import { usePopup } from "@tma.js/sdk-react";
+import { ROUTES_NAMES } from "@/Router";
 
 const useLowBalancePopup = (spreadCost: number) => {
   const { t } = useTranslation();
@@ -30,7 +31,7 @@ const useLowBalancePopup = (spreadCost: number) => {
             navigate(-1);
             break;
           case "submit":
-            console.log("Go home");
+            navigate(ROUTES_NAMES.PAYMENT);
             break;
           default:
             console.log("No button pressed");
