@@ -1,12 +1,13 @@
 import { FC } from "react";
+import { useBalance } from "@/Contexts";
 import { useHapticFeedback } from "@tma.js/sdk-react";
 import { Modal, Button, IconButton } from "@telegram-apps/telegram-ui";
 import { useTranslation } from "react-i18next";
-import { BalanceCaptionPropTypes } from "./types";
 import questionMark from "@/assets/plain_question_mark.svg";
 import "./styles.scss";
 
-const BalanceCaption: FC<BalanceCaptionPropTypes> = ({ balance }) => {
+const BalanceCaption: FC = () => {
+  const { balance } = useBalance();
   const { t } = useTranslation();
   const haptic = useHapticFeedback();
 
@@ -30,6 +31,7 @@ const BalanceCaption: FC<BalanceCaptionPropTypes> = ({ balance }) => {
             <img
               src={questionMark}
               className="balance-caption__question-mark"
+              alt="Question mark"
             />
           </IconButton>
         }

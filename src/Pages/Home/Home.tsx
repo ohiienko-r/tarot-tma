@@ -5,6 +5,7 @@ import {
   Header,
   Main,
   Balance,
+  BalanceCaption,
   SubmitButton,
   BalancePad,
   Page,
@@ -28,6 +29,7 @@ const Home: FC = () => {
         <div>
           <BalancePad>
             <Balance />
+            <BalanceCaption />
           </BalancePad>
           <SubmitButton
             title={t("buy")}
