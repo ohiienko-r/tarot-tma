@@ -14,16 +14,16 @@ const DailyBonusModal: FC = () => {
     const handleModalVisibility = async () => {
       if (activityAvailable) {
         setModalVisible(true);
-        await updateBalance(3);
       } else {
         setModalVisible(false);
       }
     };
 
     handleModalVisibility();
-  }, [activityAvailable, updateBalance]);
+  }, [activityAvailable]);
 
   const handleModalClose = async () => {
+    await updateBalance(3);
     setModalVisible(false);
   };
 
