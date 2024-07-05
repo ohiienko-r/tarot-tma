@@ -1,12 +1,29 @@
 import { FC } from "react";
+import { useBalance } from "@/Contexts";
 import { useTranslation } from "react-i18next";
 import { Button, Headline } from "@telegram-apps/telegram-ui";
 import { Balance } from "@/Components";
+import { AdController } from "@/AdsGram/controller";
+import { validateInitData } from "@/helpers";
 import chevron from "@/assets/chevron_right_16.svg";
 import "./styles.scss";
 
 const Payment: FC = () => {
   const { t } = useTranslation();
+  const { updateBalance } = useBalance();
+
+  const handleShowAd = async () => {
+    if (await validateInitData()) {
+      console.log("Data valid");
+      AdController.show()
+        .then(() => {
+          updateBalance(1);
+        })
+        .catch(() => {
+          console.log("Closed add to early");
+        });
+    }
+  };
 
   const buttons = [
     { id: 0, title: `${t("buy")} 5 🌕 ${t("for")} $1.99`, onPress: () => {} },
@@ -27,7 +44,13 @@ const Payment: FC = () => {
         {t("get for free")}
       </Headline>
       <ul className="payment__buttons-list">
-        <Button mode="gray" size="m" stretched after={<img src={chevron} />}>
+        <Button
+          onClick={handleShowAd}
+          mode="gray"
+          size="m"
+          stretched
+          after={<img src={chevron} />}
+        >
           <p className="payment__buton-title">{`1 🌕 ${t(
             "for watching add"
           )}`}</p>
