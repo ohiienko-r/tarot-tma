@@ -5,7 +5,7 @@
     "/card-of-the-day": "My card of the day",
     "/yes-no": "Yes / No",
     "/question": "Ask the cards a question",
-    "/question_input": "Enter your question",
+    "/question_input": "Ask the cards a question",
     "/about": "Learn more about tarot?",
     "magic coins": "Magic coins",
     "buy": "Buy",
@@ -44,5 +44,7 @@
     "got it": "Got it!",
     "daily bonus heading": "Your daily bonus is here!",
     "dayli bonus greeting": "Hey there and welcome back!",
-    "here are your coins": "Here are your 3 🌕 magic coins"
+    "here are your coins": "Here are your 3 🌕 magic coins",
+    "congratulation": "Congratulation!",
+    "add reward message": "You've just earned 1 🌕 for watching an add!"
 }

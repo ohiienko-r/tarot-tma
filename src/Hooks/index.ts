@@ -8,3 +8,4 @@ export { default as useShareBotUrl } from "./useShareBotUrl/useShareBotUrl";
 export { default as useMainButtonTextAndHandler } from "./useMainButtonTextAndHandler/useMainButtonTextAndHandler";
 export { default as useSaveSpreadState } from "./useSaveSpreadState/useSaveSpreadState";
 export { default as useNavigation } from "./useNavigation/useNavigation";
+export { default as useRewardPopup } from "./useRewardPopup/useRewardPopup";
