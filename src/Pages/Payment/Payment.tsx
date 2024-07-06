@@ -1,5 +1,6 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { useBalance } from "@/Contexts";
+import { useRewardPopup } from "@/Hooks";
 import { useTranslation } from "react-i18next";
 import { Button, Headline } from "@telegram-apps/telegram-ui";
 import { Balance } from "@/Components";
@@ -9,20 +10,25 @@ import chevron from "@/assets/chevron_right_16.svg";
 import "./styles.scss";
 
 const Payment: FC = () => {
+  const [loaderVisible, setLoaderVisible] = useState(false);
   const { t } = useTranslation();
   const { updateBalance } = useBalance();
+  const showRewardPopup = useRewardPopup();
 
   const handleShowAd = async () => {
+    setLoaderVisible(true);
     if (await validateInitData()) {
       console.log("Data valid");
       AdController.show()
         .then(() => {
           updateBalance(1);
+          showRewardPopup();
         })
         .catch(() => {
           console.log("Closed add to early");
         });
     }
+    setLoaderVisible(false);
   };
 
   const buttons = [
@@ -46,10 +52,12 @@ const Payment: FC = () => {
       <ul className="payment__buttons-list">
         <Button
           onClick={handleShowAd}
+          loading={loaderVisible}
+          disabled={loaderVisible}
           mode="gray"
           size="m"
           stretched
-          after={<img src={chevron} />}
+          after={<img src={chevron} alt="Chevron" />}
         >
           <p className="payment__buton-title">{`1 🌕 ${t(
             "for watching add"
@@ -67,7 +75,7 @@ const Payment: FC = () => {
             mode="gray"
             size="m"
             stretched
-            after={<img src={chevron} />}
+            after={<img src={chevron} alt="Chevron" />}
             disabled={true}
           >
             <p className="payment__buton-title">{button.title}</p>
