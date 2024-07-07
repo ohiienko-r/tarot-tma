@@ -1,4 +1,4 @@
-import { retrieveLaunchParams } from "@tma.js/sdk-react";
+import { retrieveLaunchParams } from "@telegram-apps/sdk-react";
 import { ValidationResponse } from "./types";
 
 export const validateInitData = async (): Promise<boolean> => {

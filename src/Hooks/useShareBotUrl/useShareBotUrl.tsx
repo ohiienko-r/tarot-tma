@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { useUtils } from "@tma.js/sdk-react";
+import { useUtils } from "@telegram-apps/sdk-react";
 
 const useShareBotUrl = () => {
   const utils = useUtils();

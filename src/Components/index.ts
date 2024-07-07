@@ -10,3 +10,5 @@ export { default as SpreadBalancePad } from "./SpreadBalancePad/SpreadBalancePad
 export { default as DailyBonusModal } from "./DailyBonusModal/DailyBonusModal";
 export { default as Card } from "./Card/Card";
 export { default as CardsGroup } from "./CardsGroup/CardsGroup";
+export { default as ClaimButton } from "./ClaimButton/ClaimButton";
+export { default as BuyButton } from "./BuyButton/BuyButton";

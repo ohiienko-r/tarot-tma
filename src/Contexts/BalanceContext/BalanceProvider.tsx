@@ -1,6 +1,6 @@
 import { FC, PropsWithChildren, useState, useEffect } from "react";
 import { BalanceContext } from "./BalanceContext";
-import { useCloudStorage } from "@tma.js/sdk-react";
+import { useCloudStorage } from "@telegram-apps/sdk-react";
 
 const BalanceProvider: FC<PropsWithChildren> = ({ children }) => {
   const cloudStorage = useCloudStorage();

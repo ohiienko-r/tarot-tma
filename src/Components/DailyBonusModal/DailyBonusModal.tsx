@@ -1,18 +1,22 @@
 import { FC, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { useBalance } from "@/Contexts";
+import { useCloudStorage } from "@telegram-apps/sdk-react";
 import { useDailyActivity } from "@/Hooks";
 import { Modal, Headline, Text, Button } from "@telegram-apps/telegram-ui";
+import { ROUTES_NAMES } from "@/Router";
 
 const DailyBonusModal: FC = () => {
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const { activityAvailable } = useDailyActivity();
-  const { updateBalance } = useBalance();
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const cloudStorage = useCloudStorage();
 
   useEffect(() => {
     const handleModalVisibility = async () => {
       if (activityAvailable) {
+        await cloudStorage.set("bonusClaimed", JSON.stringify(false));
         setModalVisible(true);
       } else {
         setModalVisible(false);
@@ -23,7 +27,7 @@ const DailyBonusModal: FC = () => {
   }, [activityAvailable]);
 
   const handleModalClose = async () => {
-    await updateBalance(3);
+    navigate(ROUTES_NAMES.PAYMENT);
     setModalVisible(false);
   };
 
@@ -40,7 +44,7 @@ const DailyBonusModal: FC = () => {
         <Text>{t("dayli bonus greeting")}</Text>
         <Text>{t("here are your coins")}</Text>
         <Button mode="gray" size="l" stretched onClick={handleModalClose}>
-          {t("got it")}
+          {t("claim")}
         </Button>
       </div>
     </Modal>

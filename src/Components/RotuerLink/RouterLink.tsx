@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Link } from "react-router-dom";
-import { initHapticFeedback } from "@tma.js/sdk-react";
+import { initHapticFeedback } from "@telegram-apps/sdk-react";
 import { RouterLinkPropTypes } from "./types";
 import "./styles.scss";
 

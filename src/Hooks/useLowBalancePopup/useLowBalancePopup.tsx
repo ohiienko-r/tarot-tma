@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useBalance } from "@/Contexts";
-import { usePopup } from "@tma.js/sdk-react";
+import { usePopup } from "@telegram-apps/sdk-react";
 import { ROUTES_NAMES } from "@/Router";
 
 const useLowBalancePopup = (spreadCost: number) => {
