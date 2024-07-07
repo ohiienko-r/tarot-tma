@@ -1,31 +1,11 @@
 import { FC } from "react";
-import { useBalance } from "@/Contexts";
-import { useRewardPopup } from "@/Hooks";
 import { useTranslation } from "react-i18next";
 import { Headline } from "@telegram-apps/telegram-ui";
 import { Balance, ClaimButton, BuyButton } from "@/Components";
-import { AdController } from "@/AdsGram/controller";
-import { validateInitData } from "@/helpers";
 import "./styles.scss";
 
 const Payment: FC = () => {
   const { t } = useTranslation();
-  const { updateBalance } = useBalance();
-  const showRewardPopup = useRewardPopup();
-
-  const handleShowAd = async () => {
-    if (await validateInitData()) {
-      console.log("Data valid");
-      AdController.show()
-        .then(() => {
-          updateBalance(1);
-          showRewardPopup();
-        })
-        .catch(() => {
-          console.log("Closed add to early");
-        });
-    }
-  };
 
   const buttons = [
     { id: 0, title: `${t("buy")} 5 🌕 ${t("for")} $1.99`, onPress: () => {} },
@@ -47,8 +27,9 @@ const Payment: FC = () => {
       </Headline>
       <ul className="payment__buttons-list">
         <BuyButton
-          title={`1 🌕 ${t("for watching add")}`}
-          onPress={handleShowAd}
+          title={`3 🌕 ${t("for inviting a friend")}`}
+          onPress={() => {}}
+          disabled
         />
         <ClaimButton />
       </ul>

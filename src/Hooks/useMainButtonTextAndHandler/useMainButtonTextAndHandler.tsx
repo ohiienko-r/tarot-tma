@@ -5,6 +5,7 @@ import { useBalance } from "@/Contexts";
 import { useLowBalancePopup, useRandomCards } from "@/Hooks";
 import { useTranslation } from "react-i18next";
 import { validateInitData } from "@/helpers";
+import { showAd } from "@/AdsGram";
 import { getReadings } from "@/API/API";
 import { ROUTES_NAMES } from "@/Router";
 import { Path, SystemLanguage } from "@/types";
@@ -27,10 +28,10 @@ const useMainButtonTextAndHandler = (
   const mainButtonText = `${t("get spread")} ${spreadPrice} 🌕`;
 
   const handleRequestReadings = useCallback(async () => {
-    await updateBalance(-spreadPrice);
-
     try {
       if (await validateInitData()) {
+        showAd();
+
         const response = await getReadings(
           cardsNames,
           i18n.language as SystemLanguage,
@@ -44,6 +45,8 @@ const useMainButtonTextAndHandler = (
           reading: response,
           fromPath: path,
         };
+
+        await updateBalance(-spreadPrice);
 
         navigate(ROUTES_NAMES.READINGS, {
           state: locState,
