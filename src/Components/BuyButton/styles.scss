@@ -1,0 +1,45 @@
+.buy-button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 10px;
+  transition: all 0.2s;
+
+  &:disabled {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.3);
+    animation: none;
+
+    svg {
+      path {
+        stroke: rgba(255, 255, 255, 0.3);
+      }
+    }
+
+    &:hover {
+      backdrop-filter: none;
+    }
+  }
+
+  &:hover {
+    backdrop-filter: grayscale(50%);
+  }
+
+  &__loader {
+    animation: rotation 0.8s linear infinite;
+  }
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
