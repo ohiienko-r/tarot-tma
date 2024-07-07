@@ -28,7 +28,7 @@ const useRoutes = () => {
       element: (
         <Spread
           title={t("/yes-no")}
-          spreadDescription=""
+          spreadDescription={t("yes no description")}
           spreadPrice={SPREADS.YES_NO.PRICE}
           cardsQty={SPREADS.YES_NO.CARDS_QTY}
         />

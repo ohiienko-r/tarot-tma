@@ -4,7 +4,7 @@ import {
   SDKProvider,
   initClosingBehavior,
   initViewport,
-} from "@tma.js/sdk-react";
+} from "@telegram-apps/sdk-react";
 import { AppRoot } from "@telegram-apps/telegram-ui";
 import App from "./App.tsx";
 import "../i18n.ts";

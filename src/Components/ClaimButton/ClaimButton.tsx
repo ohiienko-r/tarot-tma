@@ -1,7 +1,7 @@
 import { FC, useState, useEffect } from "react";
 import { useBalance } from "@/Contexts";
 import { useTranslation } from "react-i18next";
-import { useCloudStorage } from "@tma.js/sdk-react";
+import { useCloudStorage } from "@telegram-apps/sdk-react";
 import { BuyButton } from "@/Components";
 import "./styles.scss";
 

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useCloudStorage } from "@tma.js/sdk-react";
+import { useCloudStorage } from "@telegram-apps/sdk-react";
 import { CardKey, Path } from "@/types";
 import { ROUTES_NAMES } from "@/Router";
 

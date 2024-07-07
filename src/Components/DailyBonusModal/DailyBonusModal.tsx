@@ -1,7 +1,7 @@
 import { FC, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { useCloudStorage } from "@tma.js/sdk-react";
+import { useCloudStorage } from "@telegram-apps/sdk-react";
 import { useDailyActivity } from "@/Hooks";
 import { Modal, Headline, Text, Button } from "@telegram-apps/telegram-ui";
 import { ROUTES_NAMES } from "@/Router";

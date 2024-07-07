@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { useBalance } from "@/Contexts";
-import { useHapticFeedback } from "@tma.js/sdk-react";
+import { useHapticFeedback } from "@telegram-apps/sdk-react";
 import {
   Modal,
   Button,

@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { useHapticFeedback } from "@tma.js/sdk-react";
+import { useHapticFeedback } from "@telegram-apps/sdk-react";
 import { SubmitButtonPropTypes } from "./types";
 import "./styles.scss";
 

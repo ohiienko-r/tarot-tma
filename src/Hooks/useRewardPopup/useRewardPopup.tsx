@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { usePopup } from "@tma.js/sdk-react";
+import { usePopup } from "@telegram-apps/sdk-react";
 
 const useRewardPopup = () => {
   const { t } = useTranslation();

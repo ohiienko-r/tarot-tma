@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { initMainButton, initHapticFeedback } from "@tma.js/sdk-react";
+import { initMainButton, initHapticFeedback } from "@telegram-apps/sdk-react";
 
 const [mainButton] = initMainButton();
 const haptic = initHapticFeedback();

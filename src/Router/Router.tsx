@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from "react";
 import { Route, Router, Routes } from "react-router-dom";
-import { useIntegration } from "@tma.js/react-router-integration";
+import { useIntegration } from "@telegram-apps/react-router-integration";
 import {
   initNavigator,
   useMiniApp,
@@ -9,7 +9,7 @@ import {
   bindMiniAppCSSVars,
   bindThemeParamsCSSVars,
   bindViewportCSSVars,
-} from "@tma.js/sdk-react";
+} from "@telegram-apps/sdk-react";
 import { useLanguage } from "@/Hooks";
 import useRoutes from "./useRoutes";
 
@@ -40,7 +40,7 @@ const AppRouter = () => {
 
   const routes = useRoutes();
 
-  import("eruda").then((lib) => lib.default.init());
+  // import("eruda").then((lib) => lib.default.init());
 
   return (
     <Router location={location} navigator={reactNaviator}>

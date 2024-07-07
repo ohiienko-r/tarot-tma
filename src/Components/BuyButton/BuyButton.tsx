@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { useHapticFeedback } from "@tma.js/sdk-react";
+import { useHapticFeedback } from "@telegram-apps/sdk-react";
 import { BuyButtonPropTypes } from "./types";
 import "./styles.scss";
 

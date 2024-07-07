@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { useLaunchParams } from "@tma.js/sdk-react";
+import { useLaunchParams } from "@telegram-apps/sdk-react";
 import { useTranslation } from "react-i18next";
 import "./styles.scss";
 
