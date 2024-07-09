@@ -1,7 +1,7 @@
 //@ts-expect-error types required;
 const AdController = window.Adsgram.init({
-  blockId: "586",
-  // blockId: "600",
+  // blockId: "586",
+  blockId: "600",
 });
 
 export const showAd = async () => {

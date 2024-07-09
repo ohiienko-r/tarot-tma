@@ -37,12 +37,16 @@
   }
 
   &--default {
-    width: 140px;
-    height: 240px;
+    width: 148px;
+    height: 260px;
   }
 
   &--big {
-    width: 210px;
-    height: 360px;
+    width: 222px;
+    height: 390px;
+  }
+
+  &--reversed {
+    transform: rotate(180deg);
   }
 }
