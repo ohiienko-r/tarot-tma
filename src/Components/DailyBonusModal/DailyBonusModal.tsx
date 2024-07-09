@@ -41,8 +41,7 @@ const DailyBonusModal: FC = () => {
         <Headline plain={true} weight="1">
           {t("daily bonus heading")}
         </Headline>
-        <Text>{t("dayli bonus greeting")}</Text>
-        <Text>{t("here are your coins")}</Text>
+        <Text>{(t("here are your coins"), t("dayli bonus greeting"))}</Text>
         <Button mode="gray" size="l" stretched onClick={handleModalClose}>
           {t("claim")}
         </Button>

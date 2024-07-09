@@ -1,5 +1,5 @@
 import { retrieveLaunchParams } from "@telegram-apps/sdk-react";
-import { ValidationResponse } from "./types";
+import { ValidationResponse, CardKey, ImageModule } from "./types";
 
 export const validateInitData = async (): Promise<boolean> => {
   const { initDataRaw } = retrieveLaunchParams();
@@ -38,3 +38,21 @@ export const SPREADS = {
     CARDS_QTY: 3,
   },
 } as const;
+
+const images = import.meta.glob<ImageModule>(
+  "./Cards/img/*.{png,jpg,jpeg,webp}",
+  {
+    eager: true,
+  }
+);
+
+const formattedImages: Record<CardKey, string> = {} as Record<CardKey, string>;
+
+for (const path in images) {
+  const key = path
+    .replace("./Cards/img/", "")
+    .replace(/\.(png|jpe?g|webp)$/, "") as CardKey;
+  formattedImages[key] = images[path].default;
+}
+
+export default formattedImages;

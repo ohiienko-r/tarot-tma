@@ -19,3 +19,7 @@ export type RandomCards = {
 };
 
 export type Path = (typeof ROUTES_NAMES)[keyof typeof ROUTES_NAMES];
+
+export type ImageModule = {
+  default: string;
+};

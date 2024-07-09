@@ -2,18 +2,34 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { Headline } from "@telegram-apps/telegram-ui";
 import { Balance, ClaimButton, BuyButton } from "@/Components";
+import { useInfoPopup } from "@/Hooks";
 import "./styles.scss";
 
 const Payment: FC = () => {
   const { t } = useTranslation();
+  const showPopup = useInfoPopup();
 
   const buttons = [
-    { id: 0, title: `${t("buy")} 5 🌕 ${t("for")} $1.99`, onPress: () => {} },
-    { id: 1, title: `${t("buy")} 20 🌕 ${t("for")} $4.99`, onPress: () => {} },
+    {
+      id: 0,
+      title: `${t("buy")} 5 🌕 ${t("for")} ⭐100`,
+      onPress: () => {
+        showPopup(t("payment popup text"));
+      },
+    },
+    {
+      id: 1,
+      title: `${t("buy")} 20 🌕 ${t("for")} ⭐250`,
+      onPress: () => {
+        showPopup(t("payment popup text"));
+      },
+    },
     {
       id: 2,
-      title: `${t("buy")} 100 🌕 ${t("for")} $19.99`,
-      onPress: () => {},
+      title: `${t("buy")} 100 🌕 ${t("for")} ⭐1000`,
+      onPress: () => {
+        showPopup(t("payment popup text"));
+      },
     },
   ];
   return (
@@ -28,8 +44,9 @@ const Payment: FC = () => {
       <ul className="payment__buttons-list">
         <BuyButton
           title={`3 🌕 ${t("for inviting a friend")}`}
-          onPress={() => {}}
-          disabled
+          onPress={() => {
+            showPopup(t("payment popup text"));
+          }}
         />
         <ClaimButton />
       </ul>
@@ -42,7 +59,6 @@ const Payment: FC = () => {
             key={button.id}
             title={button.title}
             onPress={button.onPress}
-            disabled={true}
           />
         ))}
       </ul>

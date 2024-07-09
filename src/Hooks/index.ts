@@ -9,3 +9,4 @@ export { default as useMainButtonTextAndHandler } from "./useMainButtonTextAndHa
 export { default as useSaveSpreadState } from "./useSaveSpreadState/useSaveSpreadState";
 export { default as useNavigation } from "./useNavigation/useNavigation";
 export { default as useRewardPopup } from "./useRewardPopup/useRewardPopup";
+export { default as useInfoPopup } from "./useInfoPopup/useInfoPopup";
