@@ -18,15 +18,22 @@ const Readings: FC = () => {
     state.reading
   );
 
+  const formattedReading = state.reading.replace(
+    /\*\*(.*?)\*\*/g,
+    "<br/><strong>$1</strong>"
+  );
+
   return (
     <>
       <Headline weight="1" className="readings__heading">
         {state.title}
       </Headline>
       <CardsGroup cardsKeys={state.cardsKeys} />
-      <Text Component={"p"} className="readings__reading">
-        {state.reading}
-      </Text>
+      <Text
+        Component={"p"}
+        className="readings__reading"
+        dangerouslySetInnerHTML={{ __html: formattedReading }}
+      />
     </>
   );
 };
