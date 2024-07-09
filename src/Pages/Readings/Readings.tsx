@@ -19,8 +19,10 @@ const Readings: FC = () => {
   );
 
   const formattedReading = state.reading.replace(
-    /\*\*(.*?)\*\*/g,
-    "<br/><strong>$1</strong>"
+    /(\d+\.\s*)?\*\*(.*?)\*\*/g,
+    (match: string, p1: string, p2: string) => {
+      return `<br/><strong>${p1 ? p1 : ""}${p2}</strong>`;
+    }
   );
 
   return (
