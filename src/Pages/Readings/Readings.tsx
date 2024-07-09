@@ -20,6 +20,7 @@ const Readings: FC = () => {
 
   const formattedReading = state.reading.replace(
     /(\d+\.\s*)?\*\*(.*?)\*\*/g,
+    //@ts-expect-error checks required
     (match: string, p1: string, p2: string) => {
       return `<br/><strong>${p1 ? p1 : ""}${p2}</strong>`;
     }
