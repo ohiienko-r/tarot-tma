@@ -47,6 +47,8 @@
   }
 
   &--reversed {
-    transform: rotate(180deg);
+    .card__face--back {
+      transform: rotateX(-180deg);
+    }
   }
 }
