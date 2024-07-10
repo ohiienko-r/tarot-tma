@@ -24,7 +24,7 @@ const useMainButton = (
       mainButton.showLoader();
       await onClick();
       mainButton.hideLoader();
-      mainButton.hide();
+      mainButton.enable();
     };
 
     mainButton.on("click", handler);
