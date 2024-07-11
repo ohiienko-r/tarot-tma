@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { useMainButton, useMainButtonTextAndHandler } from "@/Hooks";
-import { SpreadBalancePad } from "@/Components";
+import { Page, SpreadBalancePad } from "@/Components";
 import { Headline, Text } from "@telegram-apps/telegram-ui";
 import { useLocation } from "react-router-dom";
 import { SpreadPropTypes } from "./types";
@@ -15,14 +15,14 @@ const Spread: FC<SpreadPropTypes> = ({
 }) => {
   const { pathname } = useLocation();
   const { mainButtonText, handler, disabled } = useMainButtonTextAndHandler(
-    spreadPrice as number,
-    cardsQty as number,
+    spreadPrice,
+    cardsQty,
     pathname as Path
   );
 
   useMainButton(mainButtonText, handler, disabled);
   return (
-    <>
+    <Page className="spread">
       <Headline weight="1" className="spread__heading">
         {title}
       </Headline>
@@ -30,7 +30,7 @@ const Spread: FC<SpreadPropTypes> = ({
       <Text Component={"p"} className="spread__caption">
         {spreadDescription}
       </Text>
-    </>
+    </Page>
   );
 };
 

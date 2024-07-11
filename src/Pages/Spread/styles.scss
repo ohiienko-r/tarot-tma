@@ -1,4 +1,10 @@
 .spread {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
   &__heading {
     text-align: center;
     padding: 1em;
