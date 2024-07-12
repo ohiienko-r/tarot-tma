@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { cards } from "@/Cards";
+import { shuffle } from "@/helpers";
 import { SystemLanguage, CardKey, Card, RandomCards } from "@/types";
 
 const useRandomCards = (cardsQty: number) => {
@@ -18,7 +19,8 @@ const useRandomCards = (cardsQty: number) => {
 
       for (let i = 0; i < cardsQty; i++) {
         const keys = Object.keys(cards[currentLanguage]);
-        const cardKey = keys[
+        const shuffledKeys = shuffle(keys.slice());
+        const cardKey = shuffledKeys[
           Math.floor(Math.random() * keys.length)
         ] as CardKey;
         randomCardsKeys.push(cardKey);
