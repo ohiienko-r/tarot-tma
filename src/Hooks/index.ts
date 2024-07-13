@@ -10,3 +10,4 @@ export { default as useSaveSpreadState } from "./useSaveSpreadState/useSaveSprea
 export { default as useNavigation } from "./useNavigation/useNavigation";
 export { default as useRewardPopup } from "./useRewardPopup/useRewardPopup";
 export { default as useInfoPopup } from "./useInfoPopup/useInfoPopup";
+export { default as useErrorPopup } from "./useErrorPopup/useErrorPopup";

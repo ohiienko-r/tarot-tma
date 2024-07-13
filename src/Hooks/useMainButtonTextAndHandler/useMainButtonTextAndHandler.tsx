@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCloudStorage } from "@telegram-apps/sdk-react";
 import { useBalance } from "@/Contexts";
-import { useLowBalancePopup, useRandomCards } from "@/Hooks";
+import { useLowBalancePopup, useRandomCards, useErrorPopup } from "@/Hooks";
 import { useTranslation } from "react-i18next";
 import { validateInitData } from "@/helpers";
 import { showAd } from "@/AdsGram";
@@ -23,6 +23,7 @@ const useMainButtonTextAndHandler = (
   const { t, i18n } = useTranslation();
   const cloudStorage = useCloudStorage();
   const showPopup = useLowBalancePopup(spreadPrice);
+  const showErrorPopup = useErrorPopup();
   const navigate = useNavigate();
 
   const mainButtonText = `${t("get spread")} ${spreadPrice} 🌕`;
@@ -55,19 +56,11 @@ const useMainButtonTextAndHandler = (
         console.log("Invalid initData");
       }
     } catch (error) {
-      throw new Error(`${error}`);
+      console.error(`Error occured: ${error}`);
+      showErrorPopup();
+      return;
     }
-  }, [
-    spreadPrice,
-    path,
-    prompt,
-    cardsNames,
-    cardsKeys,
-    t,
-    i18n.language,
-    updateBalance,
-    navigate,
-  ]);
+  }, [spreadPrice, path, prompt, cardsNames, cardsKeys, i18n.language]);
 
   const handleNaviagteToQuestion = useCallback(() => {
     const locState = { spreadPrice: spreadPrice, cardsQty: cardsQty };

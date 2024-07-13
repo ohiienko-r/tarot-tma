@@ -11,5 +11,6 @@ export const showAd = async () => {
     })
     .catch(() => {
       console.log("Closed add to early");
+      return;
     });
 };
