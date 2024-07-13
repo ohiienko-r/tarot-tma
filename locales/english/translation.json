@@ -52,5 +52,7 @@
     "claim daily bonus": "Claim your daily bonus: 3 🌕",
     "for inviting a friend": "for inviting a friend",
     "share bot message text": "🔮Welcome to the World of Tarot Answers🔮Ask any question and get a clear answer in a minute. Open the door to the world of predictions",
-    "payment popup text": "Temporary under development"
+    "payment popup text": "Temporary under development",
+    "error title": "Error!",
+    "error message": "Something went wrong. Please try again later."
 }
