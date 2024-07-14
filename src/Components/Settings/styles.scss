@@ -1,0 +1,10 @@
+.settings {
+  box-sizing: border-box;
+  padding: 1em;
+  height: 60vh;
+
+  &__list {
+    list-style: none;
+    overflow: hidden;
+  }
+}

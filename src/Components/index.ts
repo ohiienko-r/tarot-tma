@@ -12,3 +12,4 @@ export { default as Card } from "./Card/Card";
 export { default as CardsGroup } from "./CardsGroup/CardsGroup";
 export { default as ClaimButton } from "./ClaimButton/ClaimButton";
 export { default as BuyButton } from "./BuyButton/BuyButton";
+export { default as Settings } from "./Settings/Settings";
