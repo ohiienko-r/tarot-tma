@@ -10,6 +10,7 @@ import {
   BalancePad,
   Page,
   DailyBonusModal,
+  Settings,
 } from "@/Components";
 import { ROUTES_NAMES } from "@/Router";
 import "./styles.scss";
@@ -40,6 +41,7 @@ const Home: FC = () => {
       </div>
       <Main />
       <DailyBonusModal />
+      <Settings />
     </Page>
   );
 };

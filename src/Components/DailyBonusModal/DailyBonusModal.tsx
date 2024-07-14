@@ -34,6 +34,7 @@ const DailyBonusModal: FC = () => {
   return (
     <Modal
       open={modalVisible}
+      dismissible={false}
       header={<Modal.Header />}
       className="drawer-modal"
     >
