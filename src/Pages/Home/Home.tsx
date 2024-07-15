@@ -12,12 +12,15 @@ import {
   DailyBonusModal,
   Settings,
 } from "@/Components";
+import { analytics } from "@/Firebase";
+import { logEvent } from "firebase/analytics";
 import { ROUTES_NAMES } from "@/Router";
 import "./styles.scss";
 
 const Home: FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  logEvent(analytics, "page_view");
 
   const handleNavigateToPayment = () => {
     navigate(ROUTES_NAMES.PAYMENT);
