@@ -1,14 +1,16 @@
 import { FC } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useMainButton, useShareBotUrl, useSaveSpreadState } from "@/Hooks";
 import { Headline, Text } from "@telegram-apps/telegram-ui";
-import { CardsGroup } from "@/Components";
+import { SubmitButton, CardsGroup } from "@/Components";
+import { ROUTES_NAMES } from "@/Router";
 import "./styles.scss";
 
 const Readings: FC = () => {
   const { t } = useTranslation();
   const { state } = useLocation();
+  const navigate = useNavigate();
   const shareBotUrl = useShareBotUrl();
   useMainButton(t("share"), shareBotUrl, false);
   useSaveSpreadState(
@@ -17,6 +19,19 @@ const Readings: FC = () => {
     state.cardsKeys,
     state.reading
   );
+
+  const handleNewSpread = () => {
+    switch (state.fromPath) {
+      case ROUTES_NAMES.QUESTION_INPUT:
+        navigate(-3);
+        break;
+      case undefined:
+        navigate(-1);
+        break;
+      default:
+        navigate(-2);
+    }
+  };
 
   const formattedReading = state.reading.replace(
     /(\d+\.\s*)?\*\*(.*?)\*\*/g,
@@ -37,6 +52,9 @@ const Readings: FC = () => {
         className="readings__reading"
         dangerouslySetInnerHTML={{ __html: formattedReading }}
       />
+      <div className="readings__new-spread">
+        <SubmitButton title={t("new spread")} onPress={handleNewSpread} />
+      </div>
     </>
   );
 };
