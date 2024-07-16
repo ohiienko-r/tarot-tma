@@ -19,14 +19,14 @@ const Payment: FC = () => {
     },
     {
       id: 1,
-      title: `${t("buy")} 20 🌕 ${t("for")} ⭐250`,
+      title: `${t("buy")} 20 🌕 ${t("for")} ⭐350`,
       onPress: () => {
         showPopup(t("payment popup text"));
       },
     },
     {
       id: 2,
-      title: `${t("buy")} 100 🌕 ${t("for")} ⭐1000`,
+      title: `${t("buy")} 80 🌕 ${t("for")} ⭐1000`,
       onPress: () => {
         showPopup(t("payment popup text"));
       },

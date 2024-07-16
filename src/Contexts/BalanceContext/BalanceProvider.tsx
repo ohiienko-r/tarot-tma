@@ -10,7 +10,6 @@ const BalanceProvider: FC<PropsWithChildren> = ({ children }) => {
     const setInitialBalance = async () => {
       await cloudStorage.set("balance", JSON.stringify(3));
       setCurrentBalance(3);
-      console.log("balance set");
     };
 
     const getBalance = async () => {
@@ -20,7 +19,6 @@ const BalanceProvider: FC<PropsWithChildren> = ({ children }) => {
       } else {
         setCurrentBalance(JSON.parse(cloudBalance));
       }
-      console.log("got the balance");
     };
 
     getBalance();
