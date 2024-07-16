@@ -40,6 +40,7 @@ const QuestionButtonWithModal: FC = () => {
       </IconButton>
       <Modal
         open={modalVisible}
+        dismissible={false}
         header={<Modal.Header />}
         className="drawer-modal"
       >
