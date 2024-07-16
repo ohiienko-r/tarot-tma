@@ -40,8 +40,6 @@ const AppRouter = () => {
 
   const routes = useRoutes();
 
-  // import("eruda").then((lib) => lib.default.init());
-
   return (
     <Router location={location} navigator={reactNaviator}>
       <Routes>

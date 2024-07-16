@@ -3,12 +3,16 @@ import { useNavigate } from "react-router-dom";
 import { useCloudStorage } from "@telegram-apps/sdk-react";
 import { useBalance } from "@/Contexts";
 import { useLowBalancePopup, useRandomCards, useErrorPopup } from "@/Hooks";
+import { useAdsgram } from "@/AdsGram";
 import { useTranslation } from "react-i18next";
 import { validateInitData } from "@/helpers";
-import { showAd } from "@/AdsGram";
 import { getReadings } from "@/API/API";
 import { ROUTES_NAMES } from "@/Router";
 import { Path, SystemLanguage } from "@/types";
+
+// blockId: "586", //production id
+// blockId: "600", //dev id
+// blockId: "813", //dev 3 id
 
 const useMainButtonTextAndHandler = (
   spreadPrice: number,
@@ -22,6 +26,7 @@ const useMainButtonTextAndHandler = (
   const { cardsNames, cardsKeys } = useRandomCards(cardsQty);
   const { t, i18n } = useTranslation();
   const cloudStorage = useCloudStorage();
+  const showAd = useAdsgram({ blockId: "586" });
   const showPopup = useLowBalancePopup(spreadPrice);
   const showErrorPopup = useErrorPopup();
   const navigate = useNavigate();
@@ -53,7 +58,7 @@ const useMainButtonTextAndHandler = (
           state: locState,
         });
       } else {
-        console.log("Invalid initData");
+        showErrorPopup("InitData is invalid");
       }
     } catch (error) {
       console.error(`Error occured: ${error}`);
@@ -85,7 +90,7 @@ const useMainButtonTextAndHandler = (
     } else {
       setHandler(() => handleRequestReadings);
     }
-  }, [handleNoMoney, handleRequestReadings]);
+  }, [handleNoMoney, handleRequestReadings, path, spreadPrice]);
 
   useEffect(() => {
     const handleMainButtonDisabled = async () => {
