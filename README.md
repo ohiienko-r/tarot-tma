@@ -1,30 +1,20 @@
-# React + TypeScript + Vite
+# Tarot Telegram Mini App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to the AI Powered Tarot App! This application leverages artificial intelligence to provide insightful tarot card readings, 
+combining the ancient art of tarot with modern machine learning techniques. Whether you're seeking guidance, looking to explore tarot, 
+or simply curious, this app offers a unique and engaging experience.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Personalized Readings:** Get customized tarot readings based on your questions and preferences.
+- **Interactive Interface:** User-friendly design with interactive features for an immersive experience.
+- **Daily Tarot:** Receive daily tarot card readings for continuous guidance and inspiration.
+- **AI Insights:** Benefit from AI-generated insights and suggestions to deepen your understanding.
 
-## Expanding the ESLint configuration
+## License
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+This project is licensed under the MIT License. See the LICENSE file for details.
 
-- Configure the top-level `parserOptions` property like this:
+## Contact
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+For any questions or feedback, please reach out to us at hello@mimprover.com.
