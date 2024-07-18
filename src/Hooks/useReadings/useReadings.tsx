@@ -23,7 +23,7 @@ const useReadings = ({
   const { updateBalance } = useBalance();
   const { t, i18n } = useTranslation();
   const { cardsKeys, cardsNames } = useRandomCards(cardsQty);
-  const showAd = useAdsgram({ blockId: "813" });
+  const showAd = useAdsgram({ blockId: "586" });
   const showErrorPopup = useErrorPopup();
   const navigate = useNavigate();
 
