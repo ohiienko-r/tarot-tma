@@ -2,17 +2,10 @@ import { useState, useEffect, useCallback, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCloudStorage } from "@telegram-apps/sdk-react";
 import { useBalance } from "@/Contexts";
-import { useLowBalancePopup, useRandomCards, useErrorPopup } from "@/Hooks";
-import { useAdsgram } from "@/AdsGram";
+import { useLowBalancePopup, useReadings } from "@/Hooks";
 import { useTranslation } from "react-i18next";
-import { validateInitData } from "@/helpers";
-import { getReadings } from "@/API/API";
 import { ROUTES_NAMES } from "@/Router";
-import { Path, SystemLanguage } from "@/types";
-
-// blockId: "586", //production id
-// blockId: "600", //dev id
-// blockId: "813", //dev 3 id
+import { Path } from "@/types";
 
 const useMainButtonTextAndHandler = (
   spreadPrice: number,
@@ -22,50 +15,19 @@ const useMainButtonTextAndHandler = (
 ) => {
   const [handler, setHandler] = useState<() => void | Promise<void>>(() => {});
   const [disabled, setDisabled] = useState<boolean>(false);
-  const { balance, updateBalance } = useBalance();
-  const { cardsNames, cardsKeys } = useRandomCards(cardsQty);
-  const { t, i18n } = useTranslation();
+  const { balance } = useBalance();
+  const { t } = useTranslation();
   const cloudStorage = useCloudStorage();
-  const showAd = useAdsgram({ blockId: "586" });
   const showPopup = useLowBalancePopup(spreadPrice);
-  const showErrorPopup = useErrorPopup();
   const navigate = useNavigate();
+  const handleRequestReadings = useReadings({
+    cardsQty: cardsQty,
+    path: path,
+    prompt,
+    spreadPrice: spreadPrice,
+  });
 
   const mainButtonText = `${t("get spread")} ${spreadPrice} 🌕`;
-
-  const handleRequestReadings = useCallback(async () => {
-    try {
-      if (await validateInitData()) {
-        showAd();
-
-        const response = await getReadings(
-          cardsNames,
-          i18n.language as SystemLanguage,
-          path,
-          prompt
-        );
-
-        const locState = {
-          title: t(path),
-          cardsKeys: cardsKeys,
-          reading: response,
-          fromPath: path,
-        };
-
-        await updateBalance(-spreadPrice);
-
-        navigate(ROUTES_NAMES.READINGS, {
-          state: locState,
-        });
-      } else {
-        showErrorPopup("InitData is invalid");
-      }
-    } catch (error) {
-      console.error(`Error occured: ${error}`);
-      showErrorPopup();
-      return;
-    }
-  }, [spreadPrice, path, prompt, cardsNames, cardsKeys, i18n.language]);
 
   const handleNaviagteToQuestion = useCallback(() => {
     const locState = { spreadPrice: spreadPrice, cardsQty: cardsQty };
