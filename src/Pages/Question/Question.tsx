@@ -1,7 +1,11 @@
 import { FC, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { useMainButtonTextAndHandler, useMainButton } from "@/Hooks";
+import {
+  useMainButtonHandler,
+  useMainButton,
+  useMainButtonState,
+} from "@/Hooks";
 import { Headline } from "@telegram-apps/telegram-ui";
 import { Path } from "@/types";
 import "./styles.scss";
@@ -10,13 +14,19 @@ const Question: FC = () => {
   const [prompt, setPrompt] = useState("");
   const { pathname, state } = useLocation();
   const { t } = useTranslation();
-  const { mainButtonText, handler, disabled } = useMainButtonTextAndHandler(
+  const handler = useMainButtonHandler(
     state.spreadPrice,
     state.cardsQty,
     pathname as Path,
     prompt
   );
-  useMainButton(mainButtonText, handler, disabled);
+  const disabled = useMainButtonState(pathname as Path, prompt);
+  useMainButton(
+    `${t("get spread")} ${state.spreadPrice} 🌕`,
+    handler,
+    disabled
+  );
+
   return (
     <>
       <Headline weight="1" className="question__heading">
