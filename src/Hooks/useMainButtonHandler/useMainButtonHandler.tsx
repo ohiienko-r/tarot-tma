@@ -1,7 +1,10 @@
-import { useState, useEffect, useCallback } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 import { useBalance } from "@/Contexts";
-import { useLowBalancePopup, useReadings } from "@/Hooks";
+import {
+  useLowBalancePopup,
+  useReadings,
+  useNavigateToQuestion,
+} from "@/Hooks";
 import { ROUTES_NAMES } from "@/Router";
 import { Path } from "@/types";
 
@@ -14,21 +17,13 @@ const useMainButtonHandler = (
   const [handler, setHandler] = useState<() => void | Promise<void>>(() => {});
   const { balance } = useBalance();
   const showLowBalancePopup = useLowBalancePopup(spreadPrice);
-  const navigate = useNavigate();
   const handleRequestReadings = useReadings({
     cardsQty: cardsQty,
     path: path,
     prompt,
     spreadPrice: spreadPrice,
   });
-
-  const handleNaviagteToQuestion = useCallback(() => {
-    const locState = { spreadPrice: spreadPrice, cardsQty: cardsQty };
-
-    navigate(ROUTES_NAMES.QUESTION_INPUT, {
-      state: locState,
-    });
-  }, [spreadPrice, cardsQty, navigate]);
+  const handleNaviagteToQuestion = useNavigateToQuestion(spreadPrice, cardsQty);
 
   useEffect(() => {
     if (balance != null && balance < spreadPrice) {
