@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { cards } from "@/Cards";
 import { shuffle } from "@/helpers";
-import { SystemLanguage, CardKey, Card, RandomCards } from "@/types";
+import { SystemLanguage, CardKey, RandomCards } from "@/types";
 
 const useRandomCards = (cardsQty: number) => {
   const [randomCards, setRandomCards] = useState<RandomCards>({
@@ -14,18 +14,20 @@ const useRandomCards = (cardsQty: number) => {
   useEffect(() => {
     const getRandomCards = () => {
       const currentLanguage = i18n.language as SystemLanguage;
-      const randomCardsNames = [] as Card[];
-      const randomCardsKeys = [] as CardKey[];
 
-      for (let i = 0; i < cardsQty; i++) {
-        const keys = Object.keys(cards[currentLanguage]);
-        const shuffledKeys = shuffle(keys.slice());
-        const cardKey = shuffledKeys[
-          Math.floor(Math.random() * keys.length)
-        ] as CardKey;
-        randomCardsKeys.push(cardKey);
-        randomCardsNames.push(cards[currentLanguage][cardKey]);
-      }
+      const keys = Object.keys(cards[currentLanguage]) as CardKey[];
+
+      const shuffledKeys = shuffle(keys);
+      console.log("keys shuffled");
+
+      const selectedKeys = shuffledKeys.slice(0, cardsQty) as CardKey[];
+
+      const randomCardsNames = selectedKeys.map(
+        (key) => cards[currentLanguage][key]
+      );
+
+      const randomCardsKeys = selectedKeys;
+
       setRandomCards({
         cardsNames: randomCardsNames,
         cardsKeys: randomCardsKeys,
@@ -33,7 +35,7 @@ const useRandomCards = (cardsQty: number) => {
     };
 
     getRandomCards();
-  }, [cardsQty, i18n]);
+  }, [cardsQty, i18n.language]);
 
   return {
     cardsNames: randomCards.cardsNames,
