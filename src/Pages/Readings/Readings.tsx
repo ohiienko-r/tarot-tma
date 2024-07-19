@@ -41,7 +41,7 @@ const Readings: FC = () => {
         return `<br><strong>${p1 ?? ""}${p2}</strong>`;
       }
     )
-    .replace(/###\s*(.*?)(?=\n|$)/g, "<br><h3>$1</h3>");
+    .replace(/###\s*(.*?)(?=\n|$)/g, "<br><br><h3>$1</h3>");
 
   return (
     <>
