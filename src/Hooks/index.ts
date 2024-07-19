@@ -9,7 +9,6 @@ export { default as useMainButtonHandler } from "./useMainButtonHandler/useMainB
 export { default as useSaveSpreadState } from "./useSaveSpreadState/useSaveSpreadState";
 export { default as useNavigation } from "./useNavigation/useNavigation";
 export { default as useInfoPopup } from "./useInfoPopup/useInfoPopup";
-export { default as useErrorPopup } from "./useErrorPopup/useErrorPopup";
 export { default as useSettingsButton } from "./useSettingsButton/useSettingsButton";
 export { default as useReadings } from "./useReadings/useReadings";
 export { default as useMainButtonState } from "./useMainButtonState/useMainButtonState";

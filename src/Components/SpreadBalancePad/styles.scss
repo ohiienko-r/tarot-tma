@@ -3,8 +3,18 @@
   margin: 0 auto;
   padding: 1em;
   text-align: center;
-  background-color: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(30px);
+  background-color: rgba(19, 23, 34, 0.8);
   border-radius: 8px;
   color: #fff;
+
+  &__balance {
+    margin-top: 5%;
+    display: flex;
+    align-items: center;
+    font-size: 46px;
+    font-weight: 700;
+    span {
+      font-size: 20px;
+    }
+  }
 }

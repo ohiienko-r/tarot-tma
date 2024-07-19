@@ -14,3 +14,4 @@ export { default as ClaimButton } from "./ClaimButton/ClaimButton";
 export { default as BuyButton } from "./BuyButton/BuyButton";
 export { default as Settings } from "./Settings/Settings";
 export { default as QuestionButtonWithModal } from "./QuestionButtonWithModal/QuestionButtonWithModal";
+export { default as BackgroundLayer } from "./BackgroundLayer/BackgroundLayer";

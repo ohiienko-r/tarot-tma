@@ -5,11 +5,12 @@ import {
   useMainButtonState,
 } from "@/Hooks";
 import { useTranslation } from "react-i18next";
-import { Page, SpreadBalancePad } from "@/Components";
+import { Page, SpreadBalancePad, BackgroundLayer } from "@/Components";
 import { Headline, Text } from "@telegram-apps/telegram-ui";
 import { useLocation } from "react-router-dom";
 import { SpreadPropTypes } from "./types";
 import { Path } from "@/types";
+import backgroundImage from "@/assets/spread_background.jpg";
 import "./styles.scss";
 
 const Spread: FC<SpreadPropTypes> = ({
@@ -25,15 +26,17 @@ const Spread: FC<SpreadPropTypes> = ({
   useMainButton(`${t("get spread")} ${spreadPrice} 🌕`, handler, disabled);
 
   return (
-    <Page className="spread">
-      <Headline weight="1" className="spread__heading">
-        {title}
-      </Headline>
-      <SpreadBalancePad />
-      <Text Component={"p"} className="spread__caption">
-        {spreadDescription}
-      </Text>
-    </Page>
+    <BackgroundLayer image={backgroundImage}>
+      <Page className="spread">
+        <Headline weight="1" className="spread__heading">
+          {title}
+        </Headline>
+        <SpreadBalancePad />
+        <Text Component={"p"} className="spread__caption">
+          {spreadDescription}
+        </Text>
+      </Page>
+    </BackgroundLayer>
   );
 };
 

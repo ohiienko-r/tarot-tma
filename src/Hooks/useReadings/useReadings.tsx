@@ -3,16 +3,12 @@ import { useBalance } from "@/Contexts";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useAdsgram } from "@/AdsGram";
-import { useErrorPopup, useRandomCards } from "@/Hooks";
+import { useRandomCards, useInfoPopup } from "@/Hooks";
 import { validateInitData } from "@/helpers";
 import { getReadings } from "@/API/API";
 import { ROUTES_NAMES } from "@/Router";
 import { SystemLanguage } from "@/types";
 import { UseReadingsPropTypes } from "./types";
-
-// blockId: "586", //production id
-// blockId: "600", //dev id
-// blockId: "813", //dev 3 id
 
 const useReadings = ({
   cardsQty,
@@ -24,13 +20,13 @@ const useReadings = ({
   const { t, i18n } = useTranslation();
   const { cardsKeys, cardsNames } = useRandomCards(cardsQty);
   const showAd = useAdsgram({ blockId: "586" });
-  const showErrorPopup = useErrorPopup();
+  const showInfoPopup = useInfoPopup();
   const navigate = useNavigate();
 
   const requestReadings = useCallback(async () => {
     try {
       if (!(await validateInitData())) {
-        showErrorPopup("InitData is invalid");
+        showInfoPopup("Init data is invalid", t("error title"));
         return;
       }
 
@@ -57,7 +53,7 @@ const useReadings = ({
       });
     } catch (error) {
       console.error(`Error occured: ${error}`);
-      showErrorPopup();
+      showInfoPopup(t("error message"), t("error title"));
       return;
     }
   }, [spreadPrice, path, prompt, cardsNames, cardsKeys, i18n.language]);
