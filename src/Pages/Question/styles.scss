@@ -26,4 +26,11 @@
     background-color: transparent;
     color: #fff;
   }
+
+  &__questions-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    padding: 0 1em;
+  }
 }
