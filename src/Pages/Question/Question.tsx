@@ -9,6 +9,7 @@ import {
 import { Headline } from "@telegram-apps/telegram-ui";
 import { Path } from "@/types";
 import "./styles.scss";
+import { Page } from "@/Components";
 
 const Question: FC = () => {
   const [prompt, setPrompt] = useState("");
@@ -28,7 +29,7 @@ const Question: FC = () => {
   );
 
   return (
-    <>
+    <Page>
       <Headline weight="1" className="question__heading">
         {t(pathname)}
       </Headline>
@@ -43,7 +44,7 @@ const Question: FC = () => {
           className="question__input"
         />
       </div>
-    </>
+    </Page>
   );
 };
 

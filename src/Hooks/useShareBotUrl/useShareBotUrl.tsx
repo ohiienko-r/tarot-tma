@@ -9,7 +9,7 @@ const useShareBotUrl = () => {
 
   const shareBotUrl = useCallback(() => {
     utils.shareURL(
-      "https://t.me/my_ai_tarot_bot",
+      "https://t.me/my_ai_tarot_bot/Tarot",
       shareMessage[i18n.language] ?? shareMessage.english
     );
   }, [utils, i18n]);

@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { Headline } from "@telegram-apps/telegram-ui";
-import { Balance, ClaimButton, BuyButton } from "@/Components";
+import { Balance, ClaimButton, BuyButton, Page } from "@/Components";
 import { useInfoPopup } from "@/Hooks";
 import "./styles.scss";
 
@@ -33,7 +33,7 @@ const Payment: FC = () => {
     },
   ];
   return (
-    <>
+    <Page>
       <div className="payment__balance">
         <Balance />
         <p>{t("magic coins")}</p>
@@ -62,7 +62,7 @@ const Payment: FC = () => {
           />
         ))}
       </ul>
-    </>
+    </Page>
   );
 };
 

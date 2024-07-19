@@ -1,9 +1,9 @@
 import { FC } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { useMainButton, useShareBotUrl, useSaveSpreadState } from "@/Hooks";
+import { useSaveSpreadState } from "@/Hooks";
 import { Headline, Text } from "@telegram-apps/telegram-ui";
-import { SubmitButton, CardsGroup } from "@/Components";
+import { SubmitButton, CardsGroup, Page } from "@/Components";
 import { ROUTES_NAMES } from "@/Router";
 import "./styles.scss";
 
@@ -11,8 +11,6 @@ const Readings: FC = () => {
   const { t } = useTranslation();
   const { state } = useLocation();
   const navigate = useNavigate();
-  const shareBotUrl = useShareBotUrl();
-  useMainButton(t("share"), shareBotUrl, false);
   useSaveSpreadState(
     state.fromPath,
     state.title,
@@ -44,7 +42,7 @@ const Readings: FC = () => {
     .replace(/###\s*(.*?)(?=\n|$)/g, "<br><br><h3>$1</h3>");
 
   return (
-    <>
+    <Page>
       <Headline weight="1" className="readings__heading">
         {state.title}
       </Headline>
@@ -57,7 +55,7 @@ const Readings: FC = () => {
       <div className="readings__new-spread">
         <SubmitButton title={t("new spread")} onPress={handleNewSpread} />
       </div>
-    </>
+    </Page>
   );
 };
 

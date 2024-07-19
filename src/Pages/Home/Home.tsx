@@ -11,8 +11,10 @@ import {
   Page,
   DailyBonusModal,
   Settings,
+  BackgroundLayer,
 } from "@/Components";
 import { ROUTES_NAMES } from "@/Router";
+import backgroundImage from "@/assets/background.jpg";
 import "./styles.scss";
 
 const Home: FC = () => {
@@ -24,25 +26,27 @@ const Home: FC = () => {
   };
 
   return (
-    <Page className="home">
-      <Header />
-      <div className="home__balance-section">
-        <div>
-          <BalancePad>
-            <Balance />
-            <BalanceCaption />
-          </BalancePad>
-          <SubmitButton
-            title={t("buy")}
-            onPress={handleNavigateToPayment}
-            disabled={false}
-          />
+    <BackgroundLayer image={backgroundImage} position={{ x: 0, y: -100 }}>
+      <Page className="home">
+        <Header />
+        <div className="home__balance-section">
+          <div>
+            <BalancePad>
+              <Balance />
+              <BalanceCaption />
+            </BalancePad>
+            <SubmitButton
+              title={t("buy")}
+              onPress={handleNavigateToPayment}
+              disabled={false}
+            />
+          </div>
         </div>
-      </div>
-      <Main />
-      <DailyBonusModal />
-      <Settings />
-    </Page>
+        <Main />
+        <DailyBonusModal />
+        <Settings />
+      </Page>
+    </BackgroundLayer>
   );
 };
 
