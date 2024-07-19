@@ -6,7 +6,7 @@ import {
   useMainButton,
   useMainButtonState,
 } from "@/Hooks";
-import { Headline } from "@telegram-apps/telegram-ui";
+import { Headline, Button } from "@telegram-apps/telegram-ui";
 import { Path } from "@/types";
 import "./styles.scss";
 import { Page } from "@/Components";
@@ -28,6 +28,24 @@ const Question: FC = () => {
     disabled
   );
 
+  const defaultQuestions = [
+    {
+      id: 0,
+      question: t("default question 1"),
+      onClick: () => setPrompt(t("default question 1")),
+    },
+    {
+      id: 1,
+      question: t("default question 2"),
+      onClick: () => setPrompt(t("default question 2")),
+    },
+    {
+      id: 2,
+      question: t("default question 3"),
+      onClick: () => setPrompt(t("default question 3")),
+    },
+  ];
+
   return (
     <Page>
       <Headline weight="1" className="question__heading">
@@ -44,6 +62,18 @@ const Question: FC = () => {
           className="question__input"
         />
       </div>
+      <ul className="question__questions-list">
+        {defaultQuestions.map((question) => (
+          <Button
+            key={question.id}
+            size="s"
+            mode="outline"
+            onClick={question.onClick}
+          >
+            {question.question}
+          </Button>
+        ))}
+      </ul>
     </Page>
   );
 };
