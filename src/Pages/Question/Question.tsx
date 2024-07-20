@@ -1,20 +1,22 @@
 import { FC, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useHapticFeedback } from "@telegram-apps/sdk-react";
 import {
   useMainButtonHandler,
   useMainButton,
   useMainButtonState,
 } from "@/Hooks";
+import { Page } from "@/Components";
 import { Headline, Button } from "@telegram-apps/telegram-ui";
 import { Path } from "@/types";
 import "./styles.scss";
-import { Page } from "@/Components";
 
 const Question: FC = () => {
   const [prompt, setPrompt] = useState("");
   const { pathname, state } = useLocation();
   const { t } = useTranslation();
+  const haptic = useHapticFeedback();
   const handler = useMainButtonHandler(
     state.spreadPrice,
     state.cardsQty,
@@ -28,21 +30,26 @@ const Question: FC = () => {
     disabled
   );
 
+  const defaultQuestionHadler = (index: number) => {
+    haptic.impactOccurred("medium");
+    setPrompt(t(`default question ${index}`));
+  };
+
   const defaultQuestions = [
     {
       id: 0,
       question: t("default question 1"),
-      onClick: () => setPrompt(t("default question 1")),
+      onClick: () => defaultQuestionHadler(1),
     },
     {
       id: 1,
       question: t("default question 2"),
-      onClick: () => setPrompt(t("default question 2")),
+      onClick: () => defaultQuestionHadler(2),
     },
     {
       id: 2,
       question: t("default question 3"),
-      onClick: () => setPrompt(t("default question 3")),
+      onClick: () => defaultQuestionHadler(3),
     },
   ];
 
