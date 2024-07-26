@@ -59,5 +59,8 @@
     "contact us": "Contact us",
     "default question 1": "How can I start earning twice as much money?",
     "default question 2": "What is preventing me from doing what I want?",
-    "default question 3": "What do I need to be happy in a relationship?"
+    "default question 3": "What do I need to be happy in a relationship?",
+    "invoice description": "Magic coins purchase",
+    "purchase success": "You successfully purchased",
+    "purchase fail": "Transaction has failed! Please contact support."
 }
