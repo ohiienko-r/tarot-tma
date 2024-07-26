@@ -1,37 +1,66 @@
 import { FC } from "react";
+import { useBalance } from "@/Contexts";
+import { useInvoice } from "@telegram-apps/sdk-react";
+import { useInfoPopup } from "@/Hooks";
 import { useTranslation } from "react-i18next";
 import { Headline } from "@telegram-apps/telegram-ui";
 import { Balance, ClaimButton, BuyButton, Page } from "@/Components";
-import { useInfoPopup } from "@/Hooks";
+import { getInvoiceLink } from "@/helpers";
 import "./styles.scss";
 
 const Payment: FC = () => {
+  const { updateBalance } = useBalance();
   const { t } = useTranslation();
   const showPopup = useInfoPopup();
+  const invoice = useInvoice();
+
+  const handleMagicCoinsPurchase = async (coinsQty: number, price: number) => {
+    const invoiceLink = await getInvoiceLink(
+      coinsQty,
+      t("magic coins"),
+      t("invoice description"),
+      price
+    );
+
+    if (invoiceLink) {
+      const status = await invoice.open(invoiceLink, "url");
+
+      if (status === "paid") {
+        updateBalance(coinsQty);
+        showPopup(
+          `${t("purchase success")} ${coinsQty} ${t("magic coins")} 🌕`,
+          t("congratulation")
+        );
+      } else if (status === "failed") {
+        showPopup(t("purchase fail"), t("error title"));
+      }
+    }
+  };
 
   const buttons = [
     {
       id: 0,
       title: `${t("buy")} 5 🌕 ${t("for")} ⭐100`,
       onPress: () => {
-        showPopup(t("payment popup text"));
+        handleMagicCoinsPurchase(5, 100);
       },
     },
     {
       id: 1,
       title: `${t("buy")} 20 🌕 ${t("for")} ⭐350`,
       onPress: () => {
-        showPopup(t("payment popup text"));
+        handleMagicCoinsPurchase(20, 350);
       },
     },
     {
       id: 2,
       title: `${t("buy")} 80 🌕 ${t("for")} ⭐1000`,
       onPress: () => {
-        showPopup(t("payment popup text"));
+        handleMagicCoinsPurchase(80, 1000);
       },
     },
   ];
+
   return (
     <Page>
       <div className="payment__balance">

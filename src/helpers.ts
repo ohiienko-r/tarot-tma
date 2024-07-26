@@ -24,6 +24,37 @@ export const validateInitData = async (): Promise<boolean> => {
   }
 };
 
+export const getInvoiceLink = async (
+  coinsQty: number,
+  title: string,
+  description: string,
+  amount: number
+): Promise<string | undefined> => {
+  try {
+    const response = await fetch(
+      "https://tarot-bot-18921c9756be.herokuapp.com/create_invoice",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          title: `${coinsQty} ${title}`,
+          description: description,
+          amount: amount,
+          label: title,
+        }),
+      }
+    );
+
+    const invoiceLink = await response.json();
+
+    return invoiceLink;
+  } catch (error) {
+    console.error(`An error occured: ${error}`);
+  }
+};
+
 export const SPREADS = {
   CARD_OF_THE_DAY: {
     PRICE: 2,
