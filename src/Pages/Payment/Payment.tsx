@@ -1,6 +1,8 @@
 import { FC } from "react";
 import { useBalance } from "@/Contexts";
 import { useInvoice } from "@telegram-apps/sdk-react";
+import { analytics } from "@/Firebase";
+import { logEvent } from "firebase/analytics";
 import { useInfoPopup } from "@/Hooks";
 import { useTranslation } from "react-i18next";
 import { Headline } from "@telegram-apps/telegram-ui";
@@ -13,6 +15,7 @@ const Payment: FC = () => {
   const { t } = useTranslation();
   const showPopup = useInfoPopup();
   const invoice = useInvoice();
+  logEvent(analytics, "page_view", { page_title: "Payment" });
 
   const handleMagicCoinsPurchase = async (coinsQty: number, price: number) => {
     const invoiceLink = await getInvoiceLink(

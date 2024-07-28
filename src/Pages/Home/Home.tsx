@@ -13,6 +13,8 @@ import {
   Settings,
   BackgroundLayer,
 } from "@/Components";
+import { analytics } from "@/Firebase";
+import { logEvent } from "firebase/analytics";
 import { ROUTES_NAMES } from "@/Router";
 import backgroundImage from "@/assets/background.jpg";
 import "./styles.scss";
@@ -24,6 +26,8 @@ const Home: FC = () => {
   const handleNavigateToPayment = () => {
     navigate(ROUTES_NAMES.PAYMENT);
   };
+
+  logEvent(analytics, "page_view", { page_title: "Home" });
 
   return (
     <BackgroundLayer image={backgroundImage} position={{ x: 0, y: -100 }}>

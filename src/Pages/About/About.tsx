@@ -1,11 +1,15 @@
-import { useTranslation } from "react-i18next";
-import { Headline, Text } from "@telegram-apps/telegram-ui";
-import { Page } from "@/Components";
 import { FC } from "react";
+import { useTranslation } from "react-i18next";
+import { Page } from "@/Components";
+import { analytics } from "@/Firebase";
+import { logEvent } from "firebase/analytics";
+import { Headline, Text } from "@telegram-apps/telegram-ui";
 import "./style.scss";
 
 const About: FC = () => {
   const { t } = useTranslation();
+  logEvent(analytics, "page_view", { page_title: "About" });
+
   return (
     <Page className="about">
       <Headline weight="1">{t("how it works header")}</Headline>

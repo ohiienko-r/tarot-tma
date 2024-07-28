@@ -7,6 +7,8 @@ import {
   useMainButton,
   useMainButtonState,
 } from "@/Hooks";
+import { analytics } from "@/Firebase";
+import { logEvent } from "firebase/analytics";
 import { Page } from "@/Components";
 import { Headline, Button } from "@telegram-apps/telegram-ui";
 import { Path } from "@/types";
@@ -29,6 +31,7 @@ const Question: FC = () => {
     handler,
     disabled
   );
+  logEvent(analytics, "page_view", { page_title: "Question to the cards" });
 
   const defaultQuestionHadler = (index: number) => {
     haptic.impactOccurred("medium");
