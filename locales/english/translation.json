@@ -62,5 +62,6 @@
     "default question 3": "What do I need to be happy in a relationship?",
     "invoice description": "Magic coins purchase",
     "purchase success": "You successfully purchased",
-    "purchase fail": "Transaction has failed! Please contact support."
+    "purchase fail": "Transaction has failed! Please contact support.",
+    "to home": "Home"
 }

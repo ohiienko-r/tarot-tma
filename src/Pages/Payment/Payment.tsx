@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { useNavigate } from "react-router-dom";
 import { useBalance } from "@/Contexts";
 import { useInvoice } from "@telegram-apps/sdk-react";
 import { analytics } from "@/Firebase";
@@ -6,7 +7,13 @@ import { logEvent } from "firebase/analytics";
 import { useInfoPopup } from "@/Hooks";
 import { useTranslation } from "react-i18next";
 import { Headline } from "@telegram-apps/telegram-ui";
-import { Balance, ClaimButton, BuyButton, Page } from "@/Components";
+import {
+  Balance,
+  ClaimButton,
+  BuyButton,
+  Page,
+  SubmitButton,
+} from "@/Components";
 import { getInvoiceLink } from "@/helpers";
 import "./styles.scss";
 
@@ -15,7 +22,12 @@ const Payment: FC = () => {
   const { t } = useTranslation();
   const showPopup = useInfoPopup();
   const invoice = useInvoice();
+  const navigate = useNavigate();
   logEvent(analytics, "page_view", { page_title: "Payment" });
+
+  const handleNavigateHome = () => {
+    navigate(-1);
+  };
 
   const handleMagicCoinsPurchase = async (coinsQty: number, price: number) => {
     const invoiceLink = await getInvoiceLink(
@@ -65,7 +77,7 @@ const Payment: FC = () => {
   ];
 
   return (
-    <Page>
+    <Page className="payment">
       <div className="payment__balance">
         <Balance />
         <p>{t("magic coins")}</p>
@@ -94,6 +106,9 @@ const Payment: FC = () => {
           />
         ))}
       </ul>
+      <div className="payment__home">
+        <SubmitButton title={t("to home")} onPress={handleNavigateHome} />
+      </div>
     </Page>
   );
 };

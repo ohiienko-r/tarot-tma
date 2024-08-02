@@ -1,4 +1,8 @@
 .payment {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
   &__balance {
     box-sizing: border-box;
     padding: 2em 1em;
@@ -24,5 +28,15 @@
   &__buton-title {
     width: 100svw;
     text-align: start;
+  }
+
+  &__home {
+    margin-top: auto;
+    padding: 1em 1em 2em 1em;
+    button {
+      color: white;
+      font-weight: 500;
+      padding: 1em 0;
+    }
   }
 }
