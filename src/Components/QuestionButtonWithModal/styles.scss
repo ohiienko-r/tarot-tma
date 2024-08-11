@@ -1,0 +1,31 @@
+.question-button {
+  animation: wiggle 4s infinite;
+}
+
+@keyframes wiggle {
+  5%,
+  50% {
+    transform: scale(1);
+  }
+  10% {
+    transform: scale(0.9);
+  }
+  15% {
+    transform: scale(1.35);
+  }
+  20% {
+    transform: scale(1.35) rotate(-10deg);
+  }
+  25% {
+    transform: scale(1.35) rotate(10deg);
+  }
+  30% {
+    transform: scale(1.35) rotate(-6deg);
+  }
+  35% {
+    transform: scale(1.35) rotate(4deg);
+  }
+  40% {
+    transform: scale(1.35) rotate(0);
+  }
+}

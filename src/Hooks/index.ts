@@ -1,4 +1,3 @@
-export { default as useQuery } from "./useQuery/useQuery";
 export { default as useLanguage } from "./useLanguage/useLanguage";
 export { default as useDailyActivity } from "./useDailyActivity/useDailyActivity";
 export { default as useMainButton } from "./useMainButton/useMainButton";

@@ -63,5 +63,14 @@
     "invoice description": "Покупка Меджик коинс",
     "purchase success": "Вы успешно купили",
     "purchase fail": "Транзакция не удалась! Обратитесь в службу поддержки.",
-    "to home": "На главную"
+    "to home": "На главную",
+    "language": "Язык",
+    "select language": "Выберите язык",
+    "cancel": "Отменить",
+    "for rating us": "за отзыв",
+    "rate us": "Оцените нас",
+    "rating": "Оценка:",
+    "feedback": "Ваш отзыв",
+    "send feedback": "Отправить отзыв",
+    "thank you for your feedback": "Благодарим вас за ваш отзыв!"
 }

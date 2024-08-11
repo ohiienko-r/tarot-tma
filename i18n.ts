@@ -1,22 +1,22 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
-import english from "./locales/english/translation.json";
-import ukrainian from "./locales/ukrainian/transation.json";
-import russian from "./locales/russian/translation.json";
+import en from "./locales/en/translation.json";
+import uk from "./locales/uk/transation.json";
+import ru from "./locales/ru/translation.json";
 
 i18n.use(initReactI18next).init({
   resources: {
-    english: {
-      translation: english,
+    en: {
+      translation: en,
     },
-    ukrainian: {
-      translation: ukrainian,
+    uk: {
+      translation: uk,
     },
-    russian: {
-      translation: russian,
+    ru: {
+      translation: ru,
     },
   },
-  fallbackLng: localStorage.getItem("language") ?? "english",
+  fallbackLng: "en",
   interpolation: {
     escapeValue: false,
   },

@@ -1,15 +1,15 @@
 export const prompts = {
-  english: {
+  en: {
     cardOfTheDay: "My card of the day",
     yesNo: "Yes / No",
     fallBackPrompt: "Give me general reading of these cards",
   },
-  ukrainian: {
+  uk: {
     cardOfTheDay: "Моя карта дня",
     yesNo: "Так / ні",
     fallBackPrompt: "Дай мені загальну трактовку цих карт",
   },
-  russian: {
+  ru: {
     cardOfTheDay: "Моя карта дня",
     yesNo: "Да / нет",
     fallBackPrompt: "Дай мне общую трактовук этих карт",

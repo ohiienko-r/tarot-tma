@@ -1,7 +1,7 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useBalance } from "@/Contexts";
-import { useInvoice } from "@telegram-apps/sdk-react";
+import { useInvoice, useCloudStorage } from "@telegram-apps/sdk-react";
 import { analytics } from "@/Firebase";
 import { logEvent } from "firebase/analytics";
 import { useInfoPopup } from "@/Hooks";
@@ -13,16 +13,21 @@ import {
   BuyButton,
   Page,
   SubmitButton,
+  RatingModal,
 } from "@/Components";
 import { getInvoiceLink } from "@/helpers";
 import "./styles.scss";
 
 const Payment: FC = () => {
+  const [ratingModalVisible, setRatingModalVisible] = useState<boolean>(false);
+  const [ratingButtonAvailable, setRatingButtonAvailable] =
+    useState<boolean>(false);
   const { updateBalance } = useBalance();
   const { t } = useTranslation();
   const showPopup = useInfoPopup();
   const invoice = useInvoice();
   const navigate = useNavigate();
+  const cloudStorage = useCloudStorage();
   logEvent(analytics, "page_view", { page_title: "Payment" });
 
   const handleNavigateHome = () => {
@@ -51,6 +56,28 @@ const Payment: FC = () => {
       }
     }
   };
+
+  const handleRatingModalOpen = () => {
+    setRatingModalVisible(true);
+  };
+
+  const handleRatingModalClose = () => {
+    setRatingModalVisible(false);
+  };
+
+  useEffect(() => {
+    const handleRatingButtonAvailable = async () => {
+      const rated = await cloudStorage.get("rated");
+
+      if (rated == "") {
+        setRatingButtonAvailable(true);
+      } else {
+        setRatingButtonAvailable(false);
+      }
+    };
+
+    handleRatingButtonAvailable();
+  });
 
   const buttons = [
     {
@@ -92,6 +119,12 @@ const Payment: FC = () => {
             showPopup(t("payment popup text"));
           }}
         />
+        {ratingButtonAvailable && (
+          <BuyButton
+            title={`3 🌕 ${t("for rating us")}`}
+            onPress={handleRatingModalOpen}
+          />
+        )}
         <ClaimButton />
       </ul>
       <Headline weight="2" className="payment__heading">
@@ -109,6 +142,7 @@ const Payment: FC = () => {
       <div className="payment__home">
         <SubmitButton title={t("to home")} onPress={handleNavigateHome} />
       </div>
+      <RatingModal open={ratingModalVisible} onClose={handleRatingModalClose} />
     </Page>
   );
 };

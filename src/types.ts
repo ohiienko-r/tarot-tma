@@ -6,7 +6,7 @@ export type ValidationResponse = {
   message?: string;
 };
 
-export type SystemLanguage = "english" | "ukrainian" | "russian";
+export type SystemLanguage = "en" | "uk" | "ru";
 
 export type CardKey = keyof (typeof cards)[SystemLanguage];
 
@@ -22,4 +22,11 @@ export type Path = (typeof ROUTES_NAMES)[keyof typeof ROUTES_NAMES];
 
 export type ImageModule = {
   default: string;
+};
+
+export type FeedbackBody = {
+  uId: number | undefined;
+  name: string | undefined;
+  rating: number;
+  feedback: string;
 };

@@ -10,6 +10,7 @@ import {
   Headline,
 } from "@telegram-apps/telegram-ui";
 import questionMark from "@/assets/plain_question_mark.svg";
+import "./styles.scss";
 
 const QuestionButtonWithModal: FC = () => {
   const [modalVisible, setModalvisible] = useState<boolean>(false);
@@ -35,7 +36,12 @@ const QuestionButtonWithModal: FC = () => {
 
   return (
     <>
-      <IconButton size="s" mode="plain" onClick={handleModalOpen}>
+      <IconButton
+        size="s"
+        mode="plain"
+        onClick={handleModalOpen}
+        className="question-button"
+      >
         <img src={questionMark} alt="Question mark" />
       </IconButton>
       <Modal
