@@ -12,4 +12,5 @@ const config = {
 };
 
 const app = initializeApp(config);
+
 export const analytics = getAnalytics(app);

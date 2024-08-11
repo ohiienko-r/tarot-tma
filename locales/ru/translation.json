@@ -63,5 +63,8 @@
     "invoice description": "Покупка Меджик коинс",
     "purchase success": "Вы успешно купили",
     "purchase fail": "Транзакция не удалась! Обратитесь в службу поддержки.",
-    "to home": "На главную"
+    "to home": "На главную",
+    "language": "Язык",
+    "select language": "Выберите язык",
+    "cancel": "Отменить"
 }

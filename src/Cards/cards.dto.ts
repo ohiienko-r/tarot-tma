@@ -1,4 +1,4 @@
-const english = {
+const en = {
   the_fool: "The Fool",
   the_magician: "The Magician",
   the_high_priestess: "The High Priestess",
@@ -157,7 +157,7 @@ const english = {
   king_of_pentacles_reversed: "King of Pentacles Reversed",
 } as const;
 
-const russian = {
+const ru = {
   the_fool: "Дурак",
   the_magician: "Маг",
   the_high_priestess: "Жрица",
@@ -316,7 +316,7 @@ const russian = {
   king_of_pentacles_reversed: "Король Пентаклей Перевернутый",
 } as const;
 
-const ukrainian = {
+const uk = {
   the_fool: "Дурень",
   the_magician: "Маг",
   the_high_priestess: "Жриця",
@@ -476,7 +476,7 @@ const ukrainian = {
 } as const;
 
 export const cards = {
-  english: english,
-  ukrainian: ukrainian,
-  russian: russian,
+  en: en,
+  uk: uk,
+  ru: ru,
 };

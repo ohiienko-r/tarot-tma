@@ -1,21 +1,30 @@
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSettingsButton } from "@/Hooks";
-import { useUtils, useHapticFeedback } from "@telegram-apps/sdk-react";
+import {
+  useUtils,
+  useHapticFeedback,
+  useCloudStorage,
+} from "@telegram-apps/sdk-react";
 import {
   IconButton,
   Modal,
   List,
   Button,
   Divider,
+  Headline,
 } from "@telegram-apps/telegram-ui";
+import { countriesFlags } from "./Settings.dto";
+import { SystemLanguage } from "@/types";
 import "./styles.scss";
 
 const Settings: FC = () => {
   const [settingsVisible, setSettingsVisible] = useState<boolean>(false);
-  const { t } = useTranslation();
+  const [changeLanguageVisivle, setChangeLanguageVisible] = useState<boolean>();
+  const { t, i18n } = useTranslation();
   const utils = useUtils();
   const haptic = useHapticFeedback();
+  const cloudStorage = useCloudStorage();
 
   const handleSettingsOpen = () => {
     haptic.impactOccurred("medium");
@@ -25,6 +34,23 @@ const Settings: FC = () => {
   const handleSettingsClose = () => {
     haptic.impactOccurred("medium");
     setSettingsVisible(false);
+  };
+
+  const handleChangeLanguageOpen = () => {
+    haptic.impactOccurred("medium");
+    setChangeLanguageVisible(true);
+  };
+
+  const handleChangeLanguageClose = () => {
+    haptic.impactOccurred("medium");
+    setChangeLanguageVisible(false);
+  };
+
+  const handleChangeLanguage = async (language: SystemLanguage) => {
+    haptic.impactOccurred("medium");
+    i18n.changeLanguage(language);
+    setChangeLanguageVisible(false);
+    await cloudStorage.set("preferredLanguage", language);
   };
 
   const handleOpenPrivacyPolicy = () => {
@@ -72,6 +98,33 @@ const Settings: FC = () => {
     >
       <List className="settings__list">
         <Divider />
+        <Button
+          mode="plain"
+          stretched
+          onClick={handleChangeLanguageOpen}
+          after={
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M6 3L11 8L6 13"
+                stroke="var(--tg-theme-link-color)"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          }
+        >
+          {`${t("language")} ${
+            countriesFlags[i18n.language as SystemLanguage]
+          }`}
+        </Button>
+        <Divider />
         <Button mode="plain" stretched onClick={handleOpenPrivacyPolicy}>
           Privacy Policy
         </Button>
@@ -81,6 +134,49 @@ const Settings: FC = () => {
         </Button>
         <Divider />
       </List>
+      <Modal
+        className="settings__language-modal"
+        open={changeLanguageVisivle}
+        dismissible={false}
+      >
+        <List className="settings__list">
+          <Headline className="settings__list--headline">
+            {t("select language")}
+          </Headline>
+          <Button
+            mode="outline"
+            stretched
+            onClick={() => {
+              handleChangeLanguage("en");
+            }}
+          >
+            {`English 🇬🇧`}
+          </Button>
+          <Divider />
+          <Button
+            mode="outline"
+            stretched
+            onClick={() => {
+              handleChangeLanguage("uk");
+            }}
+          >
+            {`Українська 🇺🇦`}
+          </Button>
+          <Divider />
+          <Button
+            mode="outline"
+            stretched
+            onClick={() => {
+              handleChangeLanguage("ru");
+            }}
+          >
+            {`Русский 🇷🇺`}
+          </Button>
+          <Button mode="plain" stretched onClick={handleChangeLanguageClose}>
+            {t("cancel")}
+          </Button>
+        </List>
+      </Modal>
     </Modal>
   );
 };

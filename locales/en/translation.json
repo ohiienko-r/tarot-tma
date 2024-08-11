@@ -63,5 +63,8 @@
     "invoice description": "Magic coins purchase",
     "purchase success": "You successfully purchased",
     "purchase fail": "Transaction has failed! Please contact support.",
-    "to home": "Home"
+    "to home": "Home",
+    "language": "Language",
+    "select language": "Select language",
+    "cancel": "Cancel"
 }

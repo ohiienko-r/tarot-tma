@@ -63,5 +63,8 @@
     "invoice description": "Купівля Меджик коінс",
     "purchase success": "Ви успішно придбали",
     "purchase fail": "Трансакція не вдалася! Зверніться до служби підтримки.",
-    "to home": "На головну"
+    "to home": "На головну",
+    "language": "Мова",
+    "select language": "Виберіть мову",
+    "cancel": "Скасувати"
 }

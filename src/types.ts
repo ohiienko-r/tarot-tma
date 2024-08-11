@@ -6,7 +6,7 @@ export type ValidationResponse = {
   message?: string;
 };
 
-export type SystemLanguage = "english" | "ukrainian" | "russian";
+export type SystemLanguage = "en" | "uk" | "ru";
 
 export type CardKey = keyof (typeof cards)[SystemLanguage];
 

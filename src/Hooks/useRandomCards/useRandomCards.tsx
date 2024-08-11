@@ -18,7 +18,6 @@ const useRandomCards = (cardsQty: number) => {
       const keys = Object.keys(cards[currentLanguage]) as CardKey[];
 
       const shuffledKeys = shuffle(keys);
-      console.log("keys shuffled");
 
       const selectedKeys = shuffledKeys.slice(0, cardsQty) as CardKey[];
 
