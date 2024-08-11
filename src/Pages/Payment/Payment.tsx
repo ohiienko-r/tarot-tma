@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useBalance } from "@/Contexts";
 import { useInvoice } from "@telegram-apps/sdk-react";
@@ -13,11 +13,13 @@ import {
   BuyButton,
   Page,
   SubmitButton,
+  RatingModal,
 } from "@/Components";
 import { getInvoiceLink } from "@/helpers";
 import "./styles.scss";
 
 const Payment: FC = () => {
+  const [ratingModalVisible, setRatingModalVisible] = useState<boolean>(false);
   const { updateBalance } = useBalance();
   const { t } = useTranslation();
   const showPopup = useInfoPopup();
@@ -50,6 +52,14 @@ const Payment: FC = () => {
         showPopup(t("purchase fail"), t("error title"));
       }
     }
+  };
+
+  const handleRatingModalOpen = () => {
+    setRatingModalVisible(true);
+  };
+
+  const handleRatingModalClose = () => {
+    setRatingModalVisible(false);
   };
 
   const buttons = [
@@ -92,6 +102,10 @@ const Payment: FC = () => {
             showPopup(t("payment popup text"));
           }}
         />
+        <BuyButton
+          title={`3 🌕 ${t("for rating us")}`}
+          onPress={handleRatingModalOpen}
+        />
         <ClaimButton />
       </ul>
       <Headline weight="2" className="payment__heading">
@@ -109,6 +123,7 @@ const Payment: FC = () => {
       <div className="payment__home">
         <SubmitButton title={t("to home")} onPress={handleNavigateHome} />
       </div>
+      <RatingModal open={ratingModalVisible} onClose={handleRatingModalClose} />
     </Page>
   );
 };

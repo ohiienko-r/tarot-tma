@@ -66,5 +66,11 @@
     "to home": "Home",
     "language": "Language",
     "select language": "Select language",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "for rating us": "for rating us",
+    "rate us": "Rate us",
+    "rating": "Rating:",
+    "feedback": "Your feedback",
+    "send feedback": "Send feedback",
+    "thank you for your feedback": "Thank you for your feedback!"
 }

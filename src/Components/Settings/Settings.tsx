@@ -140,7 +140,7 @@ const Settings: FC = () => {
         dismissible={false}
       >
         <List className="settings__list">
-          <Headline className="settings__list--headline">
+          <Headline className="settings__list--headline" weight="2">
             {t("select language")}
           </Headline>
           <Button

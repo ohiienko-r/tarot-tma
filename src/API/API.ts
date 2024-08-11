@@ -1,6 +1,6 @@
 import { ROUTES_NAMES } from "@/Router";
 import { prompts } from "./api.dto";
-import { Card, Path, SystemLanguage } from "@/types";
+import { Card, Path, SystemLanguage, FeedbackBody } from "@/types";
 
 const getCardOfTheDayReading = async (
   card: Card[],
@@ -94,5 +94,19 @@ export const getReadings = async (
       );
     default:
       return "Please provide the correct path";
+  }
+};
+
+export const sendFeedback = async (body: FeedbackBody) => {
+  try {
+    await fetch(import.meta.env.VITE_SEND_FEEDBACK_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+  } catch (error) {
+    console.error("Failed to send feedback to server:", error);
   }
 };

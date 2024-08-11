@@ -23,3 +23,10 @@ export type Path = (typeof ROUTES_NAMES)[keyof typeof ROUTES_NAMES];
 export type ImageModule = {
   default: string;
 };
+
+export type FeedbackBody = {
+  uId: number | undefined;
+  name: string | undefined;
+  rating: number;
+  feedback: string;
+};

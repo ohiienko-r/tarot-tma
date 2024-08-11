@@ -66,5 +66,11 @@
     "to home": "На головну",
     "language": "Мова",
     "select language": "Виберіть мову",
-    "cancel": "Скасувати"
+    "cancel": "Скасувати",
+    "for rating us": "за відгук",
+    "rate us": "Оцініть нас",
+    "rating": "Оцінка:",
+    "feedback": "Ваш відгук",
+    "send feedback": "Відправити відгук",
+    "thank you for your feedback": "Дякуємо вам за ваш відгук!"
 }
