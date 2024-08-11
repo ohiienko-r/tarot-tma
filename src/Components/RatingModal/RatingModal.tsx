@@ -5,6 +5,7 @@ import { useInfoPopup } from "@/Hooks";
 import {
   useHapticFeedback,
   retrieveLaunchParams,
+  useCloudStorage,
 } from "@telegram-apps/sdk-react";
 import {
   Modal,
@@ -21,6 +22,7 @@ const RatingModal: FC<RatingModalPropTypes> = ({ open, onClose }) => {
   const [rating, setRating] = useState<number>(0);
   const [feedbackText, setFeedbackText] = useState<string>("");
   const { initData } = retrieveLaunchParams();
+  const cloudStorage = useCloudStorage();
   const { updateBalance } = useBalance();
   const popup = useInfoPopup();
   const { t } = useTranslation();
@@ -46,6 +48,7 @@ const RatingModal: FC<RatingModalPropTypes> = ({ open, onClose }) => {
     };
     console.log(body);
     await updateBalance(3);
+    await cloudStorage.set("rated", "true");
     onClose();
     popup(t("thank you for your feedback"));
     await sendFeedback(body);
