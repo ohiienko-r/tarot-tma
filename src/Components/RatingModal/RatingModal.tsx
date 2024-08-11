@@ -1,59 +1,12 @@
-import { FC, FormEvent, useState } from "react";
-import { useBalance } from "@/Contexts";
+import { FC } from "react";
 import { useTranslation } from "react-i18next";
-import { useInfoPopup } from "@/Hooks";
-import {
-  useHapticFeedback,
-  retrieveLaunchParams,
-  useCloudStorage,
-} from "@telegram-apps/sdk-react";
-import {
-  Modal,
-  IconButton,
-  Headline,
-  Rating,
-} from "@telegram-apps/telegram-ui";
-import { sendFeedback } from "@/API/API";
-import { validateInputs } from "./helpers";
+import { FeedbackForm } from "@/Components";
+import { Modal, IconButton, Headline } from "@telegram-apps/telegram-ui";
 import { RatingModalPropTypes } from "./types";
 import "./styles.scss";
 
 const RatingModal: FC<RatingModalPropTypes> = ({ open, onClose }) => {
-  const [rating, setRating] = useState<number>(0);
-  const [feedbackText, setFeedbackText] = useState<string>("");
-  const { initData } = retrieveLaunchParams();
-  const cloudStorage = useCloudStorage();
-  const { updateBalance } = useBalance();
-  const popup = useInfoPopup();
   const { t } = useTranslation();
-  const haptic = useHapticFeedback();
-
-  const handleValueChange = (value: number) => {
-    haptic.selectionChanged();
-    setRating(value);
-  };
-
-  const handleFeedbackTextChange = (value: string) => {
-    setFeedbackText(value);
-  };
-
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-    haptic.impactOccurred("medium");
-    const body = {
-      uId: initData?.user?.id,
-      name: initData?.user?.firstName,
-      rating: rating,
-      feedback: feedbackText,
-    };
-    console.log(body);
-    await updateBalance(3);
-    await cloudStorage.set("rated", "true");
-    onClose();
-    popup(t("thank you for your feedback"));
-    await sendFeedback(body);
-    setFeedbackText("");
-  };
 
   return (
     <Modal
@@ -86,31 +39,7 @@ const RatingModal: FC<RatingModalPropTypes> = ({ open, onClose }) => {
       <Headline weight="2" className="rating-modal__heading">
         {t("rate us")}
       </Headline>
-      <form className="rating-modal__form" onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="rating">{`${t("rating")} ${rating}/5`}</label>
-          <Rating id="rating" precision={1} onChange={handleValueChange} />
-        </div>
-        <div className="rating-modal__form--section">
-          <label htmlFor="feedback">{`${t("feedback")} (${
-            feedbackText.length
-          }/300):`}</label>
-          <textarea
-            id="feedback"
-            rows={10}
-            maxLength={300}
-            className="rating-modal__form--textarea"
-            value={feedbackText}
-            onChange={(e) => handleFeedbackTextChange(e.currentTarget.value)}
-          />
-        </div>
-        <input
-          type="submit"
-          value={t("send feedback")}
-          className="rating-modal__form--submit"
-          disabled={validateInputs(rating, feedbackText)}
-        />
-      </form>
+      <FeedbackForm onClose={onClose} />
     </Modal>
   );
 };

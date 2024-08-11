@@ -16,3 +16,4 @@ export { default as Settings } from "./Settings/Settings";
 export { default as QuestionButtonWithModal } from "./QuestionButtonWithModal/QuestionButtonWithModal";
 export { default as BackgroundLayer } from "./BackgroundLayer/BackgroundLayer";
 export { default as RatingModal } from "./RatingModal/RatingModal";
+export { default as FeedbackForm } from "./FeedbackForm/FeedbackForm";
