@@ -41,6 +41,7 @@ const useNavigation = () => {
       id: 0,
       to: linkState.to,
       title: t(ROUTES_NAMES.CARD_OF_THE_DAY),
+      price: 2,
       icon: cardOfTheDay,
       state: linkState.state,
     },
@@ -48,12 +49,14 @@ const useNavigation = () => {
       id: 1,
       to: ROUTES_NAMES.YES_NO,
       title: t(ROUTES_NAMES.YES_NO),
+      price: 3,
       icon: yesNo,
     },
     {
       id: 2,
       to: ROUTES_NAMES.QUESTION,
       title: t(ROUTES_NAMES.QUESTION),
+      price: 5,
       icon: question,
     },
     {

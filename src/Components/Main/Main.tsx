@@ -17,6 +17,7 @@ const Main: FC = () => {
             key={spread.id}
             to={spread.to}
             title={spread.title}
+            price={spread.price}
             icon={spread.icon}
             state={spread.state}
             className={spread.class}
