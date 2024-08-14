@@ -4,7 +4,7 @@
     "spreads": "Spreads:",
     "/card-of-the-day": "My card of the day",
     "/yes-no": "Yes / No",
-    "/question": "Ask the cards a question",
+    "/question": "Question for the cards",
     "/question_input": "Ask the cards a question",
     "/about": "Learn more about tarot?",
     "magic coins": "Magic coins",
@@ -72,5 +72,7 @@
     "rating": "Rating:",
     "feedback": "Your feedback",
     "send feedback": "Send feedback",
-    "thank you for your feedback": "Thank you for your feedback!"
+    "thank you for your feedback": "Thank you for your feedback!",
+    "economy 13": "Save 13%",
+    "economy 38": "Save 38%"
 }

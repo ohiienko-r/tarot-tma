@@ -7,6 +7,7 @@ import "./styles.scss";
 const RouterLink: FC<RouterLinkPropTypes> = ({
   to,
   title,
+  price,
   icon,
   className,
   state,
@@ -25,7 +26,10 @@ const RouterLink: FC<RouterLinkPropTypes> = ({
       state={state && state}
     >
       <p>{title}</p>
-      {icon && <img src={icon} />}
+      <div className="router-link__pricing">
+        {price && <p>{`${price} 🌕`}</p>}
+        {icon && <img src={icon} />}
+      </div>
     </Link>
   );
 };

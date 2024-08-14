@@ -90,6 +90,7 @@ const Payment: FC = () => {
     {
       id: 1,
       title: `${t("buy")} 20 🌕 ${t("for")} ⭐350`,
+      caption: t("economy 13"),
       onPress: () => {
         handleMagicCoinsPurchase(20, 350);
       },
@@ -97,6 +98,7 @@ const Payment: FC = () => {
     {
       id: 2,
       title: `${t("buy")} 80 🌕 ${t("for")} ⭐1000`,
+      caption: t("economy 38"),
       onPress: () => {
         handleMagicCoinsPurchase(80, 1000);
       },
@@ -135,6 +137,7 @@ const Payment: FC = () => {
           <BuyButton
             key={button.id}
             title={button.title}
+            caption={button.caption}
             onPress={button.onPress}
           />
         ))}

@@ -4,7 +4,7 @@
     "spreads": "Расклады:",
     "/card-of-the-day": "Моя карта дня",
     "/yes-no": "Да / Нет",
-    "/question": "Задать вопрос картам",
+    "/question": "Вопрос картам",
     "/question_input": "Задать вопрос картам",
     "/about": "Узнать больше о таро?",
     "magic coins": "Меджик коинс",
@@ -72,5 +72,7 @@
     "rating": "Оценка:",
     "feedback": "Ваш отзыв",
     "send feedback": "Отправить отзыв",
-    "thank you for your feedback": "Благодарим вас за ваш отзыв!"
+    "thank you for your feedback": "Благодарим вас за ваш отзыв!",
+    "economy 13": "Экономия 13%",
+    "economy 38": "Экономия 38%"
 }
