@@ -10,6 +10,15 @@
   padding: 10px;
   transition: all 0.2s;
 
+  &__text-container {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    &--caption {
+      font-size: 12px;
+    }
+  }
+
   &:disabled {
     background-color: rgba(255, 255, 255, 0.05);
     color: rgba(255, 255, 255, 0.3);

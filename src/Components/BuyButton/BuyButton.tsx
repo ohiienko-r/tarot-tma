@@ -6,6 +6,7 @@ import "./styles.scss";
 
 const BuyButton: FC<BuyButtonPropTypes> = ({
   title,
+  caption,
   onPress,
   disabled,
   className,
@@ -26,7 +27,12 @@ const BuyButton: FC<BuyButtonPropTypes> = ({
       onClick={handleClick}
       disabled={disabled}
     >
-      <p>{title}</p>
+      <div className="buy-button__text-container">
+        <p>{title}</p>
+        {caption && (
+          <p className="buy-button__text-container--caption">{caption}</p>
+        )}
+      </div>
       {loadervisible ? <LoaderIcon /> : <ChevronIcon stroke="#FFFFFF" />}
     </button>
   );
