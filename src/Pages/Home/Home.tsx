@@ -19,6 +19,8 @@ import { ROUTES_NAMES } from "@/Router";
 import backgroundImage from "@/assets/background.jpg";
 import "./styles.scss";
 
+const searchParams = new URLSearchParams(window.location.search);
+
 const Home: FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -28,6 +30,10 @@ const Home: FC = () => {
   };
 
   logEvent(analytics, "page_view", { page_title: "Home" });
+
+  if (searchParams.has("navigate")) {
+    navigate(`/${searchParams.get("navigate")}`);
+  }
 
   return (
     <BackgroundLayer image={backgroundImage} position={{ x: 0, y: -100 }}>
