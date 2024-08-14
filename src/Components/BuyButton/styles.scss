@@ -29,17 +29,4 @@
   &:hover {
     backdrop-filter: grayscale(50%);
   }
-
-  &__loader {
-    animation: rotation 0.8s linear infinite;
-  }
-}
-
-@keyframes rotation {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
