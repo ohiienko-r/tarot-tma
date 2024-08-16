@@ -80,7 +80,7 @@ const Question: FC = () => {
             size="s"
             mode="outline"
             onClick={question.onClick}
-            className="question__default-question"
+            style={{ color: "#FFFFFF" }}
           >
             {question.question}
           </Button>
