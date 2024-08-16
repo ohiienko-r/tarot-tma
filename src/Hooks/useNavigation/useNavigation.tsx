@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { cloudStorage } from "@/Telegram";
-import { useDailyActivity } from "@/Hooks";
 import { ROUTES_NAMES } from "@/Router";
 import { LinkState } from "./types";
 import cardOfTheDay from "@/assets/one_card.png";
@@ -15,16 +14,15 @@ const useNavigation = () => {
     state: undefined,
   });
   const { t } = useTranslation();
-  const { activityAvailable } = useDailyActivity();
 
   useEffect(() => {
     const handleCardOfTheDayRoute = async () => {
       const routeState = await cloudStorage.get("myCard");
-      if (!activityAvailable && routeState !== "") {
+
+      if (routeState !== "") {
         const state = JSON.parse(routeState);
         setLinkState({ to: ROUTES_NAMES.READINGS, state: state });
       } else {
-        await cloudStorage.delete("myCard");
         setLinkState({
           to: ROUTES_NAMES.CARD_OF_THE_DAY,
           state: undefined,
@@ -33,7 +31,7 @@ const useNavigation = () => {
     };
 
     handleCardOfTheDayRoute();
-  }, [activityAvailable]);
+  }, []);
 
   const navigation = [
     {
