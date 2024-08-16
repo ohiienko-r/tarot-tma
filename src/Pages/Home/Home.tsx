@@ -27,7 +27,7 @@ const Home: FC = () => {
 
   const handleNavigateToPayment = useCallback(() => {
     navigate(ROUTES_NAMES.PAYMENT);
-  }, [navigate]);
+  }, []);
 
   logEvent(analytics, "page_view", { page_title: "Home" });
 
