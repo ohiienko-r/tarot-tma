@@ -25,7 +25,7 @@ const Spread: FC<SpreadPropTypes> = ({
   const handler = useMainButtonHandler(spreadPrice, cardsQty, pathname as Path);
   const disabled = useMainButtonState(pathname as Path);
   useMainButton(`${t("get spread")} ${spreadPrice} 🌕`, handler, disabled);
-  useBackButton(-1);
+  useBackButton();
 
   return (
     <BackgroundLayer image={backgroundImage}>
