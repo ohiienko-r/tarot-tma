@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import { FC } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import {
@@ -29,11 +29,9 @@ const Home: FC = () => {
     navigate(ROUTES_NAMES.PAYMENT);
   };
 
-  useEffect(() => {
-    if (searchParams.has("navigate")) {
-      handleNavigateToPayment();
-    }
-  }, []);
+  if (searchParams.has("navigate")) {
+    handleNavigateToPayment();
+  }
 
   logEvent(analytics, "page_view", { page_title: "Home" });
 
