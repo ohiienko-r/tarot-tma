@@ -1,7 +1,7 @@
 import { FC, useState, useEffect } from "react";
 import { useBalance } from "@/Contexts";
 import { useTranslation } from "react-i18next";
-import { useCloudStorage } from "@telegram-apps/sdk-react";
+import { cloudStorage } from "@/Telegram";
 import { BuyButton } from "@/Components";
 import "./styles.scss";
 
@@ -9,7 +9,6 @@ const ClaimButton: FC = () => {
   const [disabled, setDisabled] = useState(true);
   const { updateBalance } = useBalance();
   const { t } = useTranslation();
-  const cloudStorage = useCloudStorage();
 
   useEffect(() => {
     const handleButtonAvailability = async () => {

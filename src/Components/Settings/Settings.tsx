@@ -1,11 +1,8 @@
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSettingsButton } from "@/Hooks";
-import {
-  useUtils,
-  useHapticFeedback,
-  useCloudStorage,
-} from "@telegram-apps/sdk-react";
+import { useUtils } from "@telegram-apps/sdk-react";
+import { cloudStorage, haptic } from "@/Telegram";
 import { CloseIcon, ChevronIcon } from "@/Components";
 import {
   IconButton,
@@ -24,8 +21,6 @@ const Settings: FC = () => {
   const [changeLanguageVisivle, setChangeLanguageVisible] = useState<boolean>();
   const { t, i18n } = useTranslation();
   const utils = useUtils();
-  const haptic = useHapticFeedback();
-  const cloudStorage = useCloudStorage();
 
   const handleSettingsOpen = () => {
     haptic.impactOccurred("medium");

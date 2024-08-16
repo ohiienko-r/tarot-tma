@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useCloudStorage } from "@telegram-apps/sdk-react";
+import { cloudStorage } from "@/Telegram";
 import { CardKey, Path } from "@/types";
 import { ROUTES_NAMES } from "@/Router";
 
@@ -9,8 +9,6 @@ const useSaveSpreadState = (
   cardsKeys: CardKey[],
   reading: string
 ) => {
-  const cloudStorage = useCloudStorage();
-
   useEffect(() => {
     const saveSpreadState = async () => {
       if (fromPath && fromPath === ROUTES_NAMES.CARD_OF_THE_DAY) {

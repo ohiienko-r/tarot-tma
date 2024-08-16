@@ -1,9 +1,8 @@
 import { FC, PropsWithChildren, useState, useEffect } from "react";
 import { BalanceContext } from "./BalanceContext";
-import { useCloudStorage } from "@telegram-apps/sdk-react";
+import { cloudStorage } from "@/Telegram";
 
 const BalanceProvider: FC<PropsWithChildren> = ({ children }) => {
-  const cloudStorage = useCloudStorage();
   const [currentBalance, setCurrentBalance] = useState<number | null>(null);
 
   useEffect(() => {

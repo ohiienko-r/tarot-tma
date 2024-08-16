@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { useHapticFeedback } from "@telegram-apps/sdk-react";
+import { haptic } from "@/Telegram";
 import { useBalance } from "@/Contexts";
 import { useTranslation } from "react-i18next";
 import {
@@ -16,7 +16,6 @@ const QuestionButtonWithModal: FC = () => {
   const [modalVisible, setModalvisible] = useState<boolean>(false);
   const { balance } = useBalance();
   const { t } = useTranslation();
-  const haptic = useHapticFeedback();
 
   const handleModalOpen = () => {
     haptic.impactOccurred("medium");

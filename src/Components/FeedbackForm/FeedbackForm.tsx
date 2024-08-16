@@ -1,10 +1,7 @@
 import { FC, useState, FormEvent } from "react";
 import { useTranslation } from "react-i18next";
-import {
-  useHapticFeedback,
-  retrieveLaunchParams,
-  useCloudStorage,
-} from "@telegram-apps/sdk-react";
+import { retrieveLaunchParams } from "@telegram-apps/sdk-react";
+import { cloudStorage, haptic } from "@/Telegram";
 import { useBalance } from "@/Contexts";
 import { useInfoPopup } from "@/Hooks";
 import { Rating } from "@telegram-apps/telegram-ui";
@@ -17,11 +14,9 @@ const FeedbackForm: FC<FeedbackFormPropTypes> = ({ onClose }) => {
   const [rating, setRating] = useState<number>(0);
   const [feedbackText, setFeedbackText] = useState<string>("");
   const { initData } = retrieveLaunchParams();
-  const cloudStorage = useCloudStorage();
   const { updateBalance } = useBalance();
   const popup = useInfoPopup();
   const { t } = useTranslation();
-  const haptic = useHapticFeedback();
 
   const handleRatingChange = (value: number) => {
     haptic.selectionChanged();

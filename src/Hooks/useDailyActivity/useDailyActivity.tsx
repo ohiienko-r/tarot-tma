@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
-import { useCloudStorage } from "@telegram-apps/sdk-react";
+import { cloudStorage } from "@/Telegram";
 
 const useDailyActivity = () => {
-  const cloudStorage = useCloudStorage();
   const [activityAvailable, setActivityAvailable] = useState<boolean>(false);
 
   const getLastLogIn = async () => {

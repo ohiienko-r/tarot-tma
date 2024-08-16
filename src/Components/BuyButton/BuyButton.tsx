@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { useHapticFeedback } from "@telegram-apps/sdk-react";
+import { haptic } from "@/Telegram";
 import { ChevronIcon, LoaderIcon } from "@/Components";
 import { BuyButtonPropTypes } from "./types";
 import "./styles.scss";
@@ -12,7 +12,6 @@ const BuyButton: FC<BuyButtonPropTypes> = ({
   className,
 }) => {
   const [loadervisible, setLoadervisible] = useState(false);
-  const haptic = useHapticFeedback();
 
   const handleClick = async () => {
     haptic.impactOccurred("medium");

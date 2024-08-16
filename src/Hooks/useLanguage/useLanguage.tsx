@@ -1,14 +1,11 @@
 import { useEffect } from "react";
-import {
-  retrieveLaunchParams,
-  useCloudStorage,
-} from "@telegram-apps/sdk-react";
+import { retrieveLaunchParams } from "@telegram-apps/sdk-react";
+import { cloudStorage } from "@/Telegram";
 import { useTranslation } from "react-i18next";
 
 const useLanguage = () => {
   const { initData } = retrieveLaunchParams();
   const { i18n } = useTranslation();
-  const cloudStorage = useCloudStorage();
 
   const userLanguage = initData?.user?.languageCode;
 
