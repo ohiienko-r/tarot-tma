@@ -1,7 +1,8 @@
 import { FC, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useBalance } from "@/Contexts";
-import { useInvoice, useCloudStorage } from "@telegram-apps/sdk-react";
+import { useInvoice } from "@telegram-apps/sdk-react";
+import { cloudStorage, haptic } from "@/Telegram";
 import { analytics } from "@/Firebase";
 import { logEvent } from "firebase/analytics";
 import { useInfoPopup } from "@/Hooks";
@@ -27,7 +28,6 @@ const Payment: FC = () => {
   const showPopup = useInfoPopup();
   const invoice = useInvoice();
   const navigate = useNavigate();
-  const cloudStorage = useCloudStorage();
   logEvent(analytics, "page_view", { page_title: "Payment" });
 
   const handleNavigateHome = () => {
@@ -62,6 +62,7 @@ const Payment: FC = () => {
   };
 
   const handleRatingModalClose = () => {
+    haptic.impactOccurred("medium");
     setRatingModalVisible(false);
   };
 

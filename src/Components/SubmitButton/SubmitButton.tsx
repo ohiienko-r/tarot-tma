@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { useHapticFeedback } from "@telegram-apps/sdk-react";
+import { haptic } from "@/Telegram";
 import { SubmitButtonPropTypes } from "./types";
 import "./styles.scss";
 
@@ -8,8 +8,6 @@ const Submitbutton: FC<SubmitButtonPropTypes> = ({
   onPress,
   disabled,
 }) => {
-  const haptic = useHapticFeedback();
-
   const handlePress = () => {
     haptic.impactOccurred("medium");
     onPress();

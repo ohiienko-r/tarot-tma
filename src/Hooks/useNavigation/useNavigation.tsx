@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useCloudStorage } from "@telegram-apps/sdk-react";
+import { cloudStorage } from "@/Telegram";
 import { useDailyActivity } from "@/Hooks";
 import { ROUTES_NAMES } from "@/Router";
 import { LinkState } from "./types";
@@ -16,7 +16,6 @@ const useNavigation = () => {
   });
   const { t } = useTranslation();
   const { activityAvailable } = useDailyActivity();
-  const cloudStorage = useCloudStorage();
 
   useEffect(() => {
     const handleCardOfTheDayRoute = async () => {

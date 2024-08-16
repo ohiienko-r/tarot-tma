@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
-import { useCloudStorage } from "@telegram-apps/sdk-react";
+import { cloudStorage } from "@/Telegram";
 import { ROUTES_NAMES } from "@/Router";
 import { Path } from "@/types";
 
 const useMainButtonState = (path: Path, prompt?: string) => {
   const [disabled, setDisabled] = useState<boolean>(false);
-  const cloudStorage = useCloudStorage();
 
   useEffect(() => {
     const handleMainButtonDisabled = async () => {
@@ -20,7 +19,7 @@ const useMainButtonState = (path: Path, prompt?: string) => {
     };
 
     handleMainButtonDisabled();
-  }, [cloudStorage, path, prompt]);
+  }, [path, prompt]);
 
   return disabled;
 };

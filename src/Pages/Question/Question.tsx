@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { useHapticFeedback } from "@telegram-apps/sdk-react";
+import { haptic } from "@/Telegram";
 import {
   useMainButtonHandler,
   useMainButton,
@@ -18,7 +18,6 @@ const Question: FC = () => {
   const [prompt, setPrompt] = useState("");
   const { pathname, state } = useLocation();
   const { t } = useTranslation();
-  const haptic = useHapticFeedback();
   const handler = useMainButtonHandler(
     state.spreadPrice,
     state.cardsQty,
