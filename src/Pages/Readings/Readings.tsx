@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { useSaveSpreadState, useBackButton } from "@/Hooks";
+import { useSaveSpreadState } from "@/Hooks";
 import { analytics } from "@/Firebase";
 import { logEvent } from "firebase/analytics";
 import { SubmitButton, CardsGroup, Page } from "@/Components";
@@ -19,7 +19,6 @@ const Readings: FC = () => {
     state.cardsKeys,
     state.reading
   );
-  useBackButton();
   logEvent(analytics, "page_view", {
     page_title: "Reading",
     page_path: `Spread reading from ${state.fromPath}`,
