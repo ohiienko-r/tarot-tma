@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import {
@@ -25,15 +25,17 @@ const Home: FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  const handleNavigateToPayment = () => {
+  const handleNavigateToPayment = useCallback(() => {
     navigate(ROUTES_NAMES.PAYMENT);
-  };
+  }, [navigate]);
 
   logEvent(analytics, "page_view", { page_title: "Home" });
 
-  if (searchParams.has("navigate")) {
-    navigate(`/${searchParams.get("navigate")}`);
-  }
+  useEffect(() => {
+    if (searchParams.has("navigate")) {
+      handleNavigateToPayment();
+    }
+  }, [handleNavigateToPayment]);
 
   return (
     <BackgroundLayer image={backgroundImage} position={{ x: 0, y: -100 }}>
