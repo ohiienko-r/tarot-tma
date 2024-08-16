@@ -25,9 +25,9 @@ const Home: FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  const handleNavigateToPayment = useCallback(() => {
+  const handleNavigateToPayment = () => {
     navigate(ROUTES_NAMES.PAYMENT);
-  }, []);
+  };
 
   logEvent(analytics, "page_view", { page_title: "Home" });
 
@@ -35,7 +35,7 @@ const Home: FC = () => {
     if (searchParams.has("navigate")) {
       handleNavigateToPayment();
     }
-  }, [handleNavigateToPayment]);
+  }, []);
 
   return (
     <BackgroundLayer image={backgroundImage} position={{ x: 0, y: -100 }}>
