@@ -3,6 +3,7 @@ import {
   useMainButton,
   useMainButtonHandler,
   useMainButtonState,
+  useBackButton,
 } from "@/Hooks";
 import { useTranslation } from "react-i18next";
 import { Page, SpreadBalancePad, BackgroundLayer } from "@/Components";
@@ -24,6 +25,7 @@ const Spread: FC<SpreadPropTypes> = ({
   const handler = useMainButtonHandler(spreadPrice, cardsQty, pathname as Path);
   const disabled = useMainButtonState(pathname as Path);
   useMainButton(`${t("get spread")} ${spreadPrice} 🌕`, handler, disabled);
+  useBackButton(-1);
 
   return (
     <BackgroundLayer image={backgroundImage}>

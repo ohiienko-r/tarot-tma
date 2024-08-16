@@ -14,3 +14,4 @@ export { default as useReadings } from "./useReadings/useReadings";
 export { default as useMainButtonState } from "./useMainButtonState/useMainButtonState";
 export { default as useNavigateToQuestion } from "./useNavigateToQuestion/useNavigateToQuestion";
 export { default as useMyCard } from "./useMyCard/useMyCard";
+export { default as useBackButton } from "./useBackButton/useBackButton";

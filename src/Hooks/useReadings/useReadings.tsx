@@ -3,6 +3,7 @@ import { useBalance } from "@/Contexts";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useAdsgram } from "@/AdsGram";
+import { backButton } from "@/Telegram";
 import { useRandomCards, useInfoPopup } from "@/Hooks";
 import { validateInitData } from "@/helpers";
 import { getReadings } from "@/API/API";
@@ -32,6 +33,8 @@ const useReadings = ({
 
       showAd();
 
+      backButton.hide();
+
       const response = await getReadings(
         cardsNames,
         i18n.language as SystemLanguage,
@@ -56,7 +59,15 @@ const useReadings = ({
       showInfoPopup(t("error message"), t("error title"));
       return;
     }
-  }, [spreadPrice, path, prompt, cardsNames, cardsKeys, i18n.language]);
+  }, [
+    spreadPrice,
+    path,
+    prompt,
+    cardsNames,
+    cardsKeys,
+    i18n.language,
+    navigate,
+  ]);
 
   return requestReadings;
 };

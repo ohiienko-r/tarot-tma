@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { useSaveSpreadState } from "@/Hooks";
+import { useSaveSpreadState, useBackButton } from "@/Hooks";
 import { analytics } from "@/Firebase";
 import { logEvent } from "firebase/analytics";
 import { SubmitButton, CardsGroup, Page } from "@/Components";
@@ -19,22 +19,14 @@ const Readings: FC = () => {
     state.cardsKeys,
     state.reading
   );
+  useBackButton();
   logEvent(analytics, "page_view", {
     page_title: "Reading",
     page_path: `Spread reading from ${state.fromPath}`,
   });
 
   const handleNewSpread = () => {
-    switch (state.fromPath) {
-      case ROUTES_NAMES.QUESTION_INPUT:
-        navigate(-3);
-        break;
-      case undefined:
-        navigate(-1);
-        break;
-      default:
-        navigate(-2);
-    }
+    navigate(ROUTES_NAMES.HOME);
   };
 
   const formattedReading = state.reading
