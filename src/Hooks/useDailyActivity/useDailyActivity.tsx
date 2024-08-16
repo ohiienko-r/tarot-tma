@@ -43,7 +43,7 @@ const useDailyActivity = () => {
     fetchLastLogIn();
   }, []);
 
-  return { activityAvailable, setActivityAvailable };
+  return { activityAvailable };
 };
 
 export default useDailyActivity;

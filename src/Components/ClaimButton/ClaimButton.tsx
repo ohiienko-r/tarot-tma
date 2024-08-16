@@ -14,11 +14,6 @@ const ClaimButton: FC = () => {
     const handleButtonAvailability = async () => {
       const isBonusClaimed = await cloudStorage.get("bonusClaimed");
 
-      if (isBonusClaimed === "") {
-        await cloudStorage.set("bonusClaimed", JSON.stringify(true));
-        return;
-      }
-
       if (JSON.parse(isBonusClaimed)) {
         setDisabled(true);
       } else {

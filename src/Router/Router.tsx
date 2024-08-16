@@ -10,7 +10,7 @@ import {
   bindThemeParamsCSSVars,
   bindViewportCSSVars,
 } from "@telegram-apps/sdk-react";
-import { useLanguage } from "@/Hooks";
+import { useLanguage, useDailyBonus } from "@/Hooks";
 import useRoutes from "./useRoutes";
 
 const AppRouter = () => {
@@ -20,6 +20,7 @@ const AppRouter = () => {
   const themeParams = useThemeParams();
   const viewport = useViewport();
   useLanguage();
+  useDailyBonus();
 
   useEffect(() => {
     return bindMiniAppCSSVars(miniApp, themeParams);
