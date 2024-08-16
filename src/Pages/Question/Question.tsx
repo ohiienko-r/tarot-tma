@@ -6,6 +6,7 @@ import {
   useMainButtonHandler,
   useMainButton,
   useMainButtonState,
+  useBackButton,
 } from "@/Hooks";
 import { analytics } from "@/Firebase";
 import { logEvent } from "firebase/analytics";
@@ -30,6 +31,7 @@ const Question: FC = () => {
     handler,
     disabled
   );
+  useBackButton();
   logEvent(analytics, "page_view", { page_title: "Question to the cards" });
 
   const defaultQuestionHadler = (index: number) => {

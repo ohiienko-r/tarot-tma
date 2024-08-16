@@ -10,7 +10,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@telegram-apps/react-router-integration": "^1.0.0",
     "@telegram-apps/sdk-react": "^1.1.0",
     "@telegram-apps/telegram-ui": "^2.1.4",
     "@types/node": "^20.14.2",
