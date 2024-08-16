@@ -5,9 +5,13 @@ import { useDailyActivity } from "@/Hooks";
 const useDailyBonus = () => {
   const { activityAvailable } = useDailyActivity();
 
+  console.log(activityAvailable);
+
   useEffect(() => {
     const bonusClaimed = async () => {
       const bonusClaimed = await cloudStorage.get("bonusClaimed");
+
+      console.log(bonusClaimed);
 
       if (bonusClaimed == "") {
         await cloudStorage.set("bonusClaimed", JSON.stringify(true));
