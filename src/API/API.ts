@@ -130,7 +130,7 @@ export const sendSpreadToUser = async ({
         uId: uId,
         cardsKeys: cardsKeys,
         title: title,
-        reding: reading,
+        reading: reading,
       }),
     });
   } catch (error) {
