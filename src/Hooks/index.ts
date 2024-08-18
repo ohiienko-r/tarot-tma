@@ -16,3 +16,4 @@ export { default as useNavigateToQuestion } from "./useNavigateToQuestion/useNav
 export { default as useMyCard } from "./useMyCard/useMyCard";
 export { default as useBackButton } from "./useBackButton/useBackButton";
 export { default as useQuitBehaviour } from "./useQuitBehaviour/useQuitBehaviour";
+export { default as useSendSpread } from "./useSendSpread/useSendSpread";
