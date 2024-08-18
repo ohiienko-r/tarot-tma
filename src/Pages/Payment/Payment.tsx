@@ -5,7 +5,7 @@ import { useInvoice } from "@telegram-apps/sdk-react";
 import { cloudStorage, haptic } from "@/Telegram";
 import { analytics } from "@/Firebase";
 import { logEvent } from "firebase/analytics";
-import { useInfoPopup } from "@/Hooks";
+import { useInfoPopup, useBackButton } from "@/Hooks";
 import { useTranslation } from "react-i18next";
 import { Headline } from "@telegram-apps/telegram-ui";
 import {
@@ -34,6 +34,8 @@ const Payment: FC = () => {
   const handleNavigateHome = () => {
     navigate(ROUTES_NAMES.HOME);
   };
+
+  useBackButton(handleNavigateHome);
 
   const handleMagicCoinsPurchase = async (coinsQty: number, price: number) => {
     const invoiceLink = await getInvoiceLink(

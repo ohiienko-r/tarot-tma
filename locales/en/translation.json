@@ -57,8 +57,8 @@
     "error message": "Something went wrong. Please try again later.",
     "new spread": "New spread",
     "contact us": "Contact us",
-    "default question 1": "How to start earning twice as much money?",
-    "default question 2": "What is preventing me from doing what I want?",
+    "default question 1": "How can I increase my income?",
+    "default question 2": "How can I figure out what I want to do?",
     "default question 3": "What do I need to be happy in a relationship?",
     "invoice description": "Magic coins purchase",
     "purchase success": "You successfully purchased",
@@ -74,5 +74,8 @@
     "send feedback": "Send feedback",
     "thank you for your feedback": "Thank you for your feedback!",
     "economy 13": "Save 13%",
-    "economy 38": "Save 38%"
+    "economy 38": "Save 38%",
+    "warning": "Warning",
+    "quit message": "Changes may be lost. Are you sure you want to quit?",
+    "quit anyway": "Quit anyway"
 }
