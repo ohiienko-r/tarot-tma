@@ -1,7 +1,12 @@
 import { FC } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { useSaveSpreadState, useBackButton, useQuitBehaviour } from "@/Hooks";
+import {
+  useSaveSpreadState,
+  useBackButton,
+  useQuitBehaviour,
+  useSendSpread,
+} from "@/Hooks";
 import { analytics } from "@/Firebase";
 import { logEvent } from "firebase/analytics";
 import { SubmitButton, CardsGroup, Page } from "@/Components";
@@ -20,6 +25,12 @@ const Readings: FC = () => {
     state.cardsKeys,
     state.reading
   );
+  useSendSpread({
+    fromPath: state.fromPath,
+    title: state.title,
+    cardsKeys: state.cardsKeys,
+    reading: state.reading,
+  });
   useBackButton(quitConfirmation);
   logEvent(analytics, "page_view", {
     page_title: "Reading",

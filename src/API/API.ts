@@ -110,3 +110,30 @@ export const sendFeedback = async (body: FeedbackBody) => {
     console.error("Failed to send feedback to server:", error);
   }
 };
+
+export const sendSpreadToUser = async ({
+  uId,
+  cardsKeys,
+  title,
+  reading,
+}: {
+  uId: number;
+  title: string;
+  cardsKeys: Card[];
+  reading: string;
+}) => {
+  try {
+    await fetch(import.meta.env.VITE_SEND_SPREAD_TO_USER_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        uId: uId,
+        cardsKeys: cardsKeys,
+        title: title,
+        reding: reading,
+      }),
+    });
+  } catch (error) {
+    console.error("Failed to send spread to user:", error);
+  }
+};
