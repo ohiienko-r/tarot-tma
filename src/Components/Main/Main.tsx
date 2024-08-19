@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigation } from "@/Hooks";
-import { RouterLink } from "@/Components";
+import { RouterLink, FaqLink } from "@/Components";
 import "./styles.scss";
 
 const Main: FC = () => {
@@ -20,9 +20,9 @@ const Main: FC = () => {
             price={spread.price}
             icon={spread.icon}
             state={spread.state}
-            className={spread.class}
           />
         ))}
+        <FaqLink />
       </ul>
     </main>
   );

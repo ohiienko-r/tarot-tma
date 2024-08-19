@@ -6,6 +6,5 @@ export type RouterLinkPropTypes = {
   title: string;
   price?: number;
   icon?: string;
-  className?: string;
   state?: { title: string; cardsKeys: CardKey[]; reading: string };
 };

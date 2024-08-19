@@ -9,12 +9,6 @@
   &__navigation {
     display: flex;
     flex-direction: column;
-    gap: 0.5em;
-  }
-
-  &__faq-link {
-    padding: 8px 20px;
-    border-width: 2px;
-    font-weight: 200;
+    gap: 14px;
   }
 }

@@ -6,7 +6,6 @@ import { LinkState } from "./types";
 import cardOfTheDay from "@/assets/one_card.png";
 import yesNo from "@/assets/two_cards.png";
 import question from "@/assets/three_cards.png";
-import questionMark from "@/assets/question_mark.svg";
 
 const useNavigation = () => {
   const [linkState, setLinkState] = useState<LinkState>({
@@ -55,13 +54,6 @@ const useNavigation = () => {
       title: t(ROUTES_NAMES.QUESTION),
       price: 5,
       icon: question,
-    },
-    {
-      id: 3,
-      to: ROUTES_NAMES.ABOUT,
-      title: t(ROUTES_NAMES.ABOUT),
-      icon: questionMark,
-      class: "main-section__faq-link",
     },
   ];
 
