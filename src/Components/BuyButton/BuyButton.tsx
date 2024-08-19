@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 import { haptic } from "@/Telegram";
-import { ChevronIcon, LoaderIcon } from "@/Components";
+import { Icons } from "@/Components";
 import { BuyButtonPropTypes } from "./types";
 import "./styles.scss";
 
@@ -32,7 +32,7 @@ const BuyButton: FC<BuyButtonPropTypes> = ({
           <p className="buy-button__text-container--caption">{caption}</p>
         )}
       </div>
-      {loadervisible ? <LoaderIcon /> : <ChevronIcon stroke="#FFFFFF" />}
+      {loadervisible ? <Icons.Loader /> : <Icons.Chevron stroke="#FFFFFF" />}
     </button>
   );
 };

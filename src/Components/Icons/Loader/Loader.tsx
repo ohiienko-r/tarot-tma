@@ -1,6 +1,6 @@
 import "./styles.scss";
 
-const BuyButtonLoaderIcon = () => {
+const Loader = () => {
   return (
     <svg
       className="loader-icon"
@@ -52,4 +52,4 @@ const BuyButtonLoaderIcon = () => {
   );
 };
 
-export default BuyButtonLoaderIcon;
+export default Loader;

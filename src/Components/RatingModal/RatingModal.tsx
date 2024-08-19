@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
-import { FeedbackForm, CloseIcon } from "@/Components";
+import { FeedbackForm, Icons } from "@/Components";
 import { Modal, IconButton, Headline } from "@telegram-apps/telegram-ui";
 import { RatingModalPropTypes } from "./types";
 import "./styles.scss";
@@ -17,7 +17,7 @@ const RatingModal: FC<RatingModalPropTypes> = ({ open, onClose }) => {
         <Modal.Header
           after={
             <IconButton mode="plain" size="m" onClick={onClose}>
-              <CloseIcon />
+              <Icons.Close />
             </IconButton>
           }
         />
