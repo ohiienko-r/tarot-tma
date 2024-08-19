@@ -2,6 +2,7 @@ import { FC, useState } from "react";
 import { haptic } from "@/Telegram";
 import { useBalance } from "@/Contexts";
 import { useTranslation } from "react-i18next";
+import { Icons } from "@/Components";
 import {
   Modal,
   Button,
@@ -9,7 +10,6 @@ import {
   Text,
   Headline,
 } from "@telegram-apps/telegram-ui";
-import questionMark from "@/assets/plain_question_mark.svg";
 import "./styles.scss";
 
 const QuestionButtonWithModal: FC = () => {
@@ -41,7 +41,7 @@ const QuestionButtonWithModal: FC = () => {
         onClick={handleModalOpen}
         className="question-button"
       >
-        <img src={questionMark} alt="Question mark" />
+        <Icons.QuestionMark />
       </IconButton>
       <Modal
         open={modalVisible}

@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useSettingsButton } from "@/Hooks";
 import { useUtils } from "@telegram-apps/sdk-react";
 import { cloudStorage, haptic } from "@/Telegram";
-import { CloseIcon, ChevronIcon } from "@/Components";
+import { Icons } from "@/Components";
 import {
   IconButton,
   Modal,
@@ -73,7 +73,7 @@ const Settings: FC = () => {
         <Modal.Header
           after={
             <IconButton mode="plain" size="m" onClick={handleSettingsClose}>
-              <CloseIcon />
+              <Icons.Close />
             </IconButton>
           }
         />
@@ -85,7 +85,7 @@ const Settings: FC = () => {
           mode="plain"
           stretched
           onClick={handleChangeLanguageOpen}
-          after={<ChevronIcon />}
+          after={<Icons.Chevron />}
         >
           {`${t("language")}: ${
             countriesFlags[i18n.language as SystemLanguage]

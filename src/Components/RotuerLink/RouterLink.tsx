@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Link } from "react-router-dom";
-import { initHapticFeedback } from "@telegram-apps/sdk-react";
+import { haptic } from "@/Telegram";
 import { RouterLinkPropTypes } from "./types";
 import "./styles.scss";
 
@@ -9,27 +9,24 @@ const RouterLink: FC<RouterLinkPropTypes> = ({
   title,
   price,
   icon,
-  className,
   state,
 }) => {
-  const hapticFeedback = initHapticFeedback();
-
   const handleHapticFeedback = () => {
-    hapticFeedback.impactOccurred("medium");
+    haptic.impactOccurred("medium");
   };
 
   return (
     <Link
       to={to}
-      className={["router-link", className].join(" ")}
+      className="router-link"
       onClick={handleHapticFeedback}
       state={state && state}
     >
-      <p>{title}</p>
-      <div className="router-link__pricing">
-        {price && <p>{`${price} 🌕`}</p>}
+      <div className="router-link__title">
         {icon && <img src={icon} />}
+        <p>{title}</p>
       </div>
+      {price && <p>{`${price} 🌕`}</p>}
     </Link>
   );
 };

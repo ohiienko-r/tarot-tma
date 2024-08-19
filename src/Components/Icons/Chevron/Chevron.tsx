@@ -1,7 +1,7 @@
 import { FC } from "react";
-import { ChevronIconPropTypes } from "./types";
+import { ChevronPropTypes } from "./types";
 
-const ChevronIcon: FC<ChevronIconPropTypes> = ({ stroke }) => {
+const Chevron: FC<ChevronPropTypes> = ({ stroke }) => {
   return (
     <svg
       width="16"
@@ -21,4 +21,4 @@ const ChevronIcon: FC<ChevronIconPropTypes> = ({ stroke }) => {
   );
 };
 
-export default ChevronIcon;
+export default Chevron;

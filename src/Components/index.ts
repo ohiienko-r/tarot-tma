@@ -1,6 +1,7 @@
 export { default as Header } from "./Header/Header";
 export { default as Main } from "./Main/Main";
 export { default as RouterLink } from "./RotuerLink/RouterLink";
+export { default as FaqLink } from "./FaqLink/FaqLink";
 export { default as Balance } from "./Balance/Balance";
 export { default as SubmitButton } from "./SubmitButton/SubmitButton";
 export { default as BalanceCaption } from "./BalanceCaption/BalanceCaption";
@@ -17,6 +18,4 @@ export { default as QuestionButtonWithModal } from "./QuestionButtonWithModal/Qu
 export { default as BackgroundLayer } from "./BackgroundLayer/BackgroundLayer";
 export { default as RatingModal } from "./RatingModal/RatingModal";
 export { default as FeedbackForm } from "./FeedbackForm/FeedbackForm";
-export { default as CloseIcon } from "./CloseIcon/CloseIcon";
-export { default as ChevronIcon } from "./ChevronIcon/ChevronIcon";
-export { default as LoaderIcon } from "./LoaderIcon/LoaderIcon";
+export * as Icons from "./Icons";
