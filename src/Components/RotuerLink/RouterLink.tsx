@@ -26,7 +26,7 @@ const RouterLink: FC<RouterLinkPropTypes> = ({
         {icon && <img src={icon} />}
         <p>{title}</p>
       </div>
-      {price && <p>{`${price} 🌕`}</p>}
+      {price && <p className="router-link__pricing">{`${price} 🌕`}</p>}
     </Link>
   );
 };
