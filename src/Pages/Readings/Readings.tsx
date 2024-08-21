@@ -16,7 +16,7 @@ import "./styles.scss";
 const Readings: FC = () => {
   const { t } = useTranslation();
   const { state } = useLocation();
-  const quitConfirmation = useQuitBehaviour();
+  const quitConfirmation = useQuitBehaviour(state.fromPath);
   useSaveSpreadState(
     state.fromPath,
     state.title,

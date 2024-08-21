@@ -1,5 +1,4 @@
 import { BalanceProvider } from "./Contexts/index.ts";
-import { Analytics } from "@vercel/analytics/react";
 import ReactDOM from "react-dom/client";
 import {
   SDKProvider,
@@ -24,7 +23,6 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <SDKProvider>
       <BalanceProvider>
         <App />
-        <Analytics />
       </BalanceProvider>
     </SDKProvider>
   </AppRoot>
