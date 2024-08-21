@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import {
   useSaveSpreadState,
@@ -11,13 +11,11 @@ import { analytics } from "@/Firebase";
 import { logEvent } from "firebase/analytics";
 import { SubmitButton, CardsGroup, Page } from "@/Components";
 import { Headline, Text } from "@telegram-apps/telegram-ui";
-import { ROUTES_NAMES } from "@/Router";
 import "./styles.scss";
 
 const Readings: FC = () => {
   const { t } = useTranslation();
   const { state } = useLocation();
-  const navigate = useNavigate();
   const quitConfirmation = useQuitBehaviour();
   useSaveSpreadState(
     state.fromPath,
@@ -36,10 +34,6 @@ const Readings: FC = () => {
     page_title: "Reading",
     page_path: `Spread reading from ${state.fromPath}`,
   });
-
-  const handleNewSpread = () => {
-    navigate(ROUTES_NAMES.HOME);
-  };
 
   const formattedReading = state.reading
     .replace(
@@ -63,7 +57,7 @@ const Readings: FC = () => {
         dangerouslySetInnerHTML={{ __html: formattedReading }}
       />
       <div className="readings__new-spread">
-        <SubmitButton title={t("new spread")} onPress={handleNewSpread} />
+        <SubmitButton title={t("new spread")} onPress={quitConfirmation} />
       </div>
     </Page>
   );

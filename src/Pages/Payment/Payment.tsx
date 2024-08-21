@@ -32,6 +32,7 @@ const Payment: FC = () => {
   logEvent(analytics, "page_view", { page_title: "Payment" });
 
   const handleNavigateHome = () => {
+    haptic.impactOccurred("medium");
     navigate(ROUTES_NAMES.HOME);
   };
 
