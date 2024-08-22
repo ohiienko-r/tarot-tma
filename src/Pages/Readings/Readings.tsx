@@ -26,6 +26,7 @@ const Readings: FC = () => {
   useSendSpread({
     fromPath: state.fromPath,
     title: state.title,
+    prompt: state.prompt,
     cardsKeys: state.cardsKeys,
     reading: state.reading,
   });

@@ -7,6 +7,7 @@ const useSendSpread = ({
   fromPath,
   title,
   cardsKeys,
+  prompt,
   reading,
 }: UseSendSpreadPropTypes) => {
   const { initData } = retrieveLaunchParams();
@@ -18,13 +19,14 @@ const useSendSpread = ({
           uId: initData?.user?.id as number,
           cardsKeys: cardsKeys,
           title: title,
+          prompt: prompt,
           reading: reading,
         });
       }
     } catch (error) {
       console.error("Failed to send spread to user:", error);
     }
-  }, [cardsKeys, initData?.user?.id, title, reading, fromPath]);
+  }, [cardsKeys, initData?.user?.id, title, reading, fromPath, prompt]);
 
   useEffect(() => {
     sendSpread();

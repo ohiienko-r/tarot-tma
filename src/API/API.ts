@@ -115,10 +115,12 @@ export const sendSpreadToUser = async ({
   uId,
   cardsKeys,
   title,
+  prompt,
   reading,
 }: {
   uId: number;
   title: string;
+  prompt?: string;
   cardsKeys: Card[];
   reading: string;
 }) => {
@@ -129,6 +131,7 @@ export const sendSpreadToUser = async ({
       body: JSON.stringify({
         uId: uId,
         cardsKeys: cardsKeys,
+        prompt: prompt,
         title: title,
         reading: reading,
       }),

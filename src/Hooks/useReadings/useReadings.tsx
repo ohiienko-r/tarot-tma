@@ -47,6 +47,7 @@ const useReadings = ({
         cardsKeys: cardsKeys,
         reading: response,
         fromPath: path,
+        prompt: prompt,
       };
 
       await updateBalance(-spreadPrice);
