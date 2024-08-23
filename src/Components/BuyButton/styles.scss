@@ -10,13 +10,19 @@
   padding: 10px;
   transition: all 0.2s;
 
-  &__text-container {
+  &__text {
     display: flex;
     flex-direction: column;
     text-align: left;
     &--caption {
       font-size: 12px;
     }
+  }
+
+  &__price {
+    display: flex;
+    align-items: center;
+    gap: 4px;
   }
 
   &:disabled {

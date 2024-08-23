@@ -7,6 +7,7 @@ import "./styles.scss";
 const BuyButton: FC<BuyButtonPropTypes> = ({
   title,
   caption,
+  price,
   onPress,
   disabled,
   className,
@@ -22,17 +23,26 @@ const BuyButton: FC<BuyButtonPropTypes> = ({
 
   return (
     <button
-      className={["buy-button", className && className].join(" ")}
+      className={["buy-button", className].join(" ")}
       onClick={handleClick}
       disabled={disabled}
     >
-      <div className="buy-button__text-container">
+      <div className="buy-button__text">
         <p>{title}</p>
-        {caption && (
-          <p className="buy-button__text-container--caption">{caption}</p>
-        )}
+        {caption && <p className="buy-button__text--caption">{caption}</p>}
       </div>
-      {loadervisible ? <Icons.Loader /> : <Icons.Chevron stroke="#FFFFFF" />}
+      {loadervisible ? (
+        <Icons.Loader />
+      ) : price ? (
+        <>
+          <p className="buy-button__price">
+            <Icons.TelegramStar />
+            {price}
+          </p>
+        </>
+      ) : (
+        <Icons.Chevron stroke="#FFFFFF" />
+      )}
     </button>
   );
 };
