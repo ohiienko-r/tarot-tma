@@ -6,7 +6,12 @@ import {
   useBackButton,
 } from "@/Hooks";
 import { useTranslation } from "react-i18next";
-import { Page, SpreadBalancePad, BackgroundLayer } from "@/Components";
+import {
+  Page,
+  SpreadBalancePad,
+  BackgroundLayer,
+  Preloader,
+} from "@/Components";
 import { Headline, Text } from "@telegram-apps/telegram-ui";
 import { useLocation } from "react-router-dom";
 import { SpreadPropTypes } from "./types";
@@ -24,7 +29,11 @@ const Spread: FC<SpreadPropTypes> = ({
   const { pathname } = useLocation();
   const handler = useMainButtonHandler(spreadPrice, cardsQty, pathname as Path);
   const disabled = useMainButtonState(pathname as Path);
-  useMainButton(`${t("get spread")} ${spreadPrice} 🌕`, handler, disabled);
+  const loading = useMainButton(
+    `${t("get spread")} ${spreadPrice} 🌕`,
+    handler,
+    disabled
+  );
   useBackButton();
 
   return (
@@ -38,6 +47,7 @@ const Spread: FC<SpreadPropTypes> = ({
           {spreadDescription}
         </Text>
       </Page>
+      {loading && <Preloader />}
     </BackgroundLayer>
   );
 };

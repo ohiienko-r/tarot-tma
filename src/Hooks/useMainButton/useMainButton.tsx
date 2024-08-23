@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { haptic, mainButton } from "@/Telegram";
 
 const useMainButton = (
@@ -6,6 +6,8 @@ const useMainButton = (
   onClick: () => Promise<void> | void,
   disabled: boolean
 ) => {
+  const [loading, setLoading] = useState<boolean>(false);
+
   useEffect(() => {
     mainButton.setText(title);
     mainButton.show();
@@ -19,7 +21,9 @@ const useMainButton = (
       haptic.impactOccurred("medium");
       mainButton.disable();
       mainButton.showLoader();
+      setLoading(true);
       await onClick();
+      setLoading(false);
       mainButton.hideLoader();
       mainButton.enable();
     };
@@ -40,6 +44,8 @@ const useMainButton = (
       mainButton.setBgColor("#EA850F");
     }
   }, [disabled]);
+
+  return loading;
 };
 
 export default useMainButton;
