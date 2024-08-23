@@ -16,6 +16,7 @@ import { Headline, Text } from "@telegram-apps/telegram-ui";
 import { useLocation } from "react-router-dom";
 import { SpreadPropTypes } from "./types";
 import { Path } from "@/types";
+import { ROUTES_NAMES } from "@/Router";
 import backgroundImage from "@/assets/spread_background.jpg";
 import "./styles.scss";
 
@@ -47,7 +48,7 @@ const Spread: FC<SpreadPropTypes> = ({
           {spreadDescription}
         </Text>
       </Page>
-      {loading && <Preloader />}
+      {pathname != ROUTES_NAMES.QUESTION && loading && <Preloader />}
     </BackgroundLayer>
   );
 };

@@ -10,7 +10,7 @@ import {
 } from "@/Hooks";
 import { analytics } from "@/Firebase";
 import { logEvent } from "firebase/analytics";
-import { Page } from "@/Components";
+import { Page, Preloader } from "@/Components";
 import { Headline, Button } from "@telegram-apps/telegram-ui";
 import { Path } from "@/types";
 import "./styles.scss";
@@ -26,7 +26,7 @@ const Question: FC = () => {
     prompt
   );
   const disabled = useMainButtonState(pathname as Path, prompt);
-  useMainButton(
+  const loading = useMainButton(
     `${t("get spread")} ${state.spreadPrice} 🌕`,
     handler,
     disabled
@@ -86,6 +86,7 @@ const Question: FC = () => {
           </Button>
         ))}
       </ul>
+      {loading && <Preloader />}
     </Page>
   );
 };
