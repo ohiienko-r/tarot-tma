@@ -3,3 +3,4 @@ export { default as Loader } from "./Loader/Loader";
 export { default as Close } from "./Close/Close";
 export { default as QuestionMark } from "./QuestionMark/QuestionMark";
 export { default as CrystalBall } from "./CrystalBall/CrystalBall";
+export { default as TelegramStar } from "./TelegramStar/TelegramStar";

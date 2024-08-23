@@ -1,5 +1,5 @@
 export type SubmitButtonPropTypes = {
   title: string;
-  onPress: () => void;
+  onPress: () => void | Promise<void>;
   disabled?: boolean;
 };
