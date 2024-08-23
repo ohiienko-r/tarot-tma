@@ -33,7 +33,14 @@ const useMainButtonHandler = (
     } else {
       setHandler(() => handleRequestReadings);
     }
-  }, [handleRequestReadings, path, spreadPrice, showLowBalancePopup]);
+  }, [
+    balance,
+    path,
+    spreadPrice,
+    showLowBalancePopup,
+    handleRequestReadings,
+    handleNaviagteToQuestion,
+  ]);
 
   return handler;
 };

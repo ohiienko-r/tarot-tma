@@ -67,7 +67,11 @@ const useReadings = ({
     cardsNames,
     cardsKeys,
     i18n.language,
+    t,
     navigate,
+    showAd,
+    showInfoPopup,
+    updateBalance,
   ]);
 
   return requestReadings;
