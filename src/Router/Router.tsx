@@ -31,6 +31,8 @@ const AppRouter = () => {
     return viewport && bindViewportCSSVars(viewport);
   }, [viewport]);
 
+  miniApp.setHeaderColor("#110126");
+
   const routes = useRoutes();
 
   const router = createBrowserRouter([...routes]);
