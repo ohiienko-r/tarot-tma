@@ -19,4 +19,5 @@ export { default as BackgroundLayer } from "./BackgroundLayer/BackgroundLayer";
 export { default as RatingModal } from "./RatingModal/RatingModal";
 export { default as FeedbackForm } from "./FeedbackForm/FeedbackForm";
 export { default as MarkdownToHTML } from "./MarkdownToHTML/MarkdownToHTML";
+export { default as Preloader } from "./Preloader/Preloader";
 export * as Icons from "./Icons";

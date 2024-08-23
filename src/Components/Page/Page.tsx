@@ -4,9 +4,7 @@ import "./styles.scss";
 
 const Page: FC<PagePropTypes> = ({ children, className }) => {
   return (
-    <section className={["page", className && className].join(" ")}>
-      {children}
-    </section>
+    <section className={["page", className].join(" ")}>{children}</section>
   );
 };
 
