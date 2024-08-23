@@ -1,10 +1,9 @@
 import { useCallback } from "react";
-import { useUtils } from "@telegram-apps/sdk-react";
+import { utils } from "@/Telegram";
 import { useTranslation } from "react-i18next";
 import { shareMessage } from "./helpers";
 
 const useShareBotUrl = () => {
-  const utils = useUtils();
   const { i18n } = useTranslation();
 
   const shareBotUrl = useCallback(() => {
@@ -12,7 +11,7 @@ const useShareBotUrl = () => {
       "https://t.me/my_ai_tarot_bot/Tarot",
       shareMessage[i18n.language] ?? shareMessage.english
     );
-  }, [utils, i18n]);
+  }, [i18n]);
 
   return shareBotUrl;
 };

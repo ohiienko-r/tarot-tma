@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
-import QuestionButtonWithModal from "../QuestionButtonWithModal/QuestionButtonWithModal";
+import { QuestionButtonWithModal } from "@/Components";
 import "./styles.scss";
 
 const BalanceCaption: FC = () => {

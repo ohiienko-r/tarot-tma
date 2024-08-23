@@ -22,7 +22,7 @@ const ClaimButton: FC = () => {
     };
 
     handleButtonAvailability();
-  }, []);
+  });
 
   const handleClick = async () => {
     await updateBalance(3);

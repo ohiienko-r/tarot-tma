@@ -10,7 +10,7 @@ const useQuitBehaviour = (fromPath: Path) => {
   const { t } = useTranslation();
 
   return useCallback(() => {
-    haptic.notificationOccurred("warning");
+    haptic.impactOccurred("medium");
 
     if (fromPath != undefined) {
       popup

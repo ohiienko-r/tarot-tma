@@ -1,4 +1,4 @@
-import { FC, PropsWithChildren, useState, useEffect } from "react";
+import { FC, PropsWithChildren, useState, useEffect, useCallback } from "react";
 import { BalanceContext } from "./BalanceContext";
 import { cloudStorage } from "@/Telegram";
 
@@ -23,17 +23,20 @@ const BalanceProvider: FC<PropsWithChildren> = ({ children }) => {
     getBalance();
   }, []);
 
-  const updateBalance = async (updateValue: number) => {
-    if (currentBalance !== null) {
-      const newBalance = currentBalance + updateValue;
-      if (newBalance < 0) {
-        setCurrentBalance((prev) => prev);
-      } else {
-        setCurrentBalance(newBalance);
-        await cloudStorage.set("balance", JSON.stringify(newBalance));
+  const updateBalance = useCallback(
+    async (updateValue: number) => {
+      if (currentBalance !== null) {
+        const newBalance = currentBalance + updateValue;
+        if (newBalance < 0) {
+          setCurrentBalance((prev) => prev);
+        } else {
+          setCurrentBalance(newBalance);
+          await cloudStorage.set("balance", JSON.stringify(newBalance));
+        }
       }
-    }
-  };
+    },
+    [currentBalance]
+  );
 
   return (
     <BalanceContext.Provider value={{ balance: currentBalance, updateBalance }}>

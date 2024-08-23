@@ -14,7 +14,6 @@ const useLanguage = () => {
       const preferredLanguage = await cloudStorage.get("preferredLanguage");
 
       if (preferredLanguage === "") {
-        console.log(preferredLanguage);
         i18n.changeLanguage(userLanguage);
         await cloudStorage.set("preferredLanguage", userLanguage as string);
       } else {
