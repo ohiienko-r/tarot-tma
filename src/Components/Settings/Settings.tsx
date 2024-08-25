@@ -1,15 +1,14 @@
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSettingsButton } from "@/Hooks";
-import { cloudStorage, haptic, utils } from "@/Telegram";
-import { Icons } from "@/Components";
+import { haptic, utils } from "@/Telegram";
+import { Icons, ChangeLanguageModal } from "@/Components";
 import {
   IconButton,
   Modal,
   List,
   Button,
   Divider,
-  Headline,
 } from "@telegram-apps/telegram-ui";
 import { countriesFlags } from "./Settings.dto";
 import { SystemLanguage } from "@/types";
@@ -17,7 +16,8 @@ import "./styles.scss";
 
 const Settings: FC = () => {
   const [settingsVisible, setSettingsVisible] = useState<boolean>(false);
-  const [changeLanguageVisivle, setChangeLanguageVisible] = useState<boolean>();
+  const [changeLanguageVisible, setChangeLanguageVisible] =
+    useState<boolean>(false);
   const { t, i18n } = useTranslation();
 
   const handleSettingsOpen = () => {
@@ -40,13 +40,6 @@ const Settings: FC = () => {
     setChangeLanguageVisible(false);
   };
 
-  const handleChangeLanguage = async (language: SystemLanguage) => {
-    haptic.impactOccurred("medium");
-    i18n.changeLanguage(language);
-    setChangeLanguageVisible(false);
-    await cloudStorage.set("preferredLanguage", language);
-  };
-
   const handleOpenPrivacyPolicy = () => {
     haptic.impactOccurred("medium");
     utils.openLink(
@@ -58,6 +51,11 @@ const Settings: FC = () => {
   const handleContactUs = () => {
     haptic.impactOccurred("medium");
     utils.openTelegramLink("https://t.me/trlgst");
+  };
+
+  const handleReportAbug = () => {
+    haptic.impactOccurred("medium");
+    utils.openTelegramLink("https://t.me/nam_ro");
   };
 
   useSettingsButton(handleSettingsOpen);
@@ -98,50 +96,15 @@ const Settings: FC = () => {
           {t("contact us")}
         </Button>
         <Divider />
+        <Button mode="plain" stretched onClick={handleReportAbug}>
+          {t("report")}
+        </Button>
+        <Divider />
       </List>
-      <Modal
-        className="settings__language-modal"
-        open={changeLanguageVisivle}
-        dismissible={false}
-      >
-        <List className="settings__list">
-          <Headline className="settings__list--headline" weight="2">
-            {t("select language")}
-          </Headline>
-          <Button
-            mode="bezeled"
-            stretched
-            onClick={() => {
-              handleChangeLanguage("en");
-            }}
-          >
-            {`English 🇬🇧`}
-          </Button>
-          <Divider />
-          <Button
-            mode="bezeled"
-            stretched
-            onClick={() => {
-              handleChangeLanguage("uk");
-            }}
-          >
-            {`Українська 🇺🇦`}
-          </Button>
-          <Divider />
-          <Button
-            mode="bezeled"
-            stretched
-            onClick={() => {
-              handleChangeLanguage("ru");
-            }}
-          >
-            {`Русский 🇷🇺`}
-          </Button>
-          <Button mode="plain" stretched onClick={handleChangeLanguageClose}>
-            {t("cancel")}
-          </Button>
-        </List>
-      </Modal>
+      <ChangeLanguageModal
+        open={changeLanguageVisible}
+        onClose={handleChangeLanguageClose}
+      />
     </Modal>
   );
 };

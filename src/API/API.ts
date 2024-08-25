@@ -163,14 +163,11 @@ export const getUserBalance = async (uId: number) => {
 
 export const updateUserBalance = async (uId: number, value: number) => {
   try {
-    const response = await fetch(
-      "https://tarot-bot-18921c9756be.herokuapp.com/balance/update",
-      {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ uId: uId, value: value }),
-      }
-    );
+    const response = await fetch(import.meta.env.VITE_UPD_BALANCE_URL, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ uId: uId, value: value }),
+    });
 
     return await response.json();
   } catch (error) {
