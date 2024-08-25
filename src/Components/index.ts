@@ -20,4 +20,5 @@ export { default as RatingModal } from "./RatingModal/RatingModal";
 export { default as FeedbackForm } from "./FeedbackForm/FeedbackForm";
 export { default as MarkdownToHTML } from "./MarkdownToHTML/MarkdownToHTML";
 export { default as Preloader } from "./Preloader/Preloader";
+export { default as ChangeLanguageModal } from "./ChangeLanguageModal/ChangeLanguageModal";
 export * as Icons from "./Icons";

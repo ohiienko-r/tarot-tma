@@ -1,45 +1,69 @@
-import { FC, PropsWithChildren, useState, useEffect, useCallback } from "react";
+import {
+  FC,
+  PropsWithChildren,
+  useState,
+  useEffect,
+  useCallback,
+  useMemo,
+} from "react";
 import { BalanceContext } from "./BalanceContext";
-import { cloudStorage } from "@/Telegram";
+import { cloudStorage, initData } from "@/Telegram";
+import {
+  getUserBalance,
+  setInitialBalance,
+  updateUserBalance,
+  migrateBalance,
+} from "@/API/API";
 
-const BalanceProvider: FC<PropsWithChildren> = ({ children }) => {
-  const [currentBalance, setCurrentBalance] = useState<number | null>(null);
+export const BalanceProvider: FC<PropsWithChildren> = ({ children }) => {
+  const [balance, setBalance] = useState<number | null>(null);
+  const uId = initData?.user?.id;
+  console.log(uId);
 
   useEffect(() => {
-    const setInitialBalance = async () => {
-      await cloudStorage.set("balance", JSON.stringify(3));
-      setCurrentBalance(3);
-    };
-
     const getBalance = async () => {
+      const currentBalance = await getUserBalance(uId as number);
       const cloudBalance = await cloudStorage.get("balance");
-      if (cloudBalance === "" || cloudBalance === undefined) {
-        await setInitialBalance();
-      } else {
-        setCurrentBalance(JSON.parse(cloudBalance));
+
+      if (currentBalance === null && cloudBalance != "") {
+        await migrateBalance(uId as number, JSON.parse(cloudBalance));
+        cloudStorage.delete("balance");
+        setBalance(JSON.parse(cloudBalance));
+      } else if (currentBalance === null && cloudBalance == "") {
+        const initBalance = await setInitialBalance(uId as number);
+        setBalance(initBalance);
+      }
+
+      if (currentBalance) {
+        setBalance(currentBalance);
       }
     };
 
     getBalance();
-  }, []);
+  }, [uId]);
 
   const updateBalance = useCallback(
-    async (updateValue: number) => {
-      if (currentBalance !== null) {
-        const newBalance = currentBalance + updateValue;
+    async (value: number) => {
+      if (balance !== null) {
+        const newBalance = balance + value;
         if (newBalance < 0) {
-          setCurrentBalance((prev) => prev);
+          setBalance((prev) => prev);
         } else {
-          setCurrentBalance(newBalance);
-          await cloudStorage.set("balance", JSON.stringify(newBalance));
+          setBalance(newBalance);
+          const upd = await updateUserBalance(uId as number, value);
+          console.log(upd);
         }
       }
     },
-    [currentBalance]
+    [balance, uId]
   );
 
+  const balanceValueObj = useMemo(() => {
+    return { balance, updateBalance };
+  }, [balance, updateBalance]);
+
   return (
-    <BalanceContext.Provider value={{ balance: currentBalance, updateBalance }}>
+    <BalanceContext.Provider value={balanceValueObj}>
       {children}
     </BalanceContext.Provider>
   );

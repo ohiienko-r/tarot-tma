@@ -77,5 +77,6 @@
     "economy 38": "Save 38%",
     "warning": "Warning",
     "quit message": "Changes may be lost. Are you sure you want to quit?",
-    "quit anyway": "Quit anyway"
+    "quit anyway": "Quit anyway",
+    "report": "Report a bug"
 }
