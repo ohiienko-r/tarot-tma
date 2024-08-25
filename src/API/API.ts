@@ -140,3 +140,71 @@ export const sendSpreadToUser = async ({
     console.error("Failed to send spread to user:", error);
   }
 };
+
+export const getUserBalance = async (uId: number) => {
+  try {
+    const response = await fetch(import.meta.env.VITE_GET_BALANCE_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ uId }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch balance: ${response.statusText}`);
+    }
+
+    const balance = await response.json();
+    return balance;
+  } catch (error) {
+    console.error("Failed to get user's balance:", error);
+    return null;
+  }
+};
+
+export const updateUserBalance = async (uId: number, value: number) => {
+  try {
+    const response = await fetch(
+      "https://tarot-bot-18921c9756be.herokuapp.com/balance/update",
+      {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ uId: uId, value: value }),
+      }
+    );
+
+    return await response.json();
+  } catch (error) {
+    console.error("Failed to update user balance", error);
+  }
+};
+
+export const setInitialBalance = async (uId: number) => {
+  try {
+    const response = await fetch(import.meta.env.VITE_SET_BALANCE_URL, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ uId: uId }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to set initial balance: ${response.statusText}`);
+    }
+
+    const balance = await response.json();
+    return balance;
+  } catch (error) {
+    console.error("Failed to set user balance", error);
+  }
+};
+
+export const migrateBalance = async (uId: number, cloudBalance: number) => {
+  try {
+    await fetch(import.meta.env.VITE_MIGRATE_BALANCE_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ uId: uId, balance: cloudBalance }),
+    });
+  } catch (error) {
+    console.error("Failed to migrate balance", error);
+  }
+};
