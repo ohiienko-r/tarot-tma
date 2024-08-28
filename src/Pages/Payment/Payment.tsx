@@ -40,10 +40,10 @@ const Payment: FC = () => {
 
   const handleMagicCoinsPurchase = async (coinsQty: number, price: number) => {
     const invoiceLink = await getInvoiceLink(
-      coinsQty,
       t("magic coins"),
       t("invoice description"),
-      price
+      price,
+      coinsQty
     );
 
     if (invoiceLink) {
@@ -53,6 +53,26 @@ const Payment: FC = () => {
         updateBalance(coinsQty);
         showPopup(
           `${t("purchase success")} ${coinsQty} ${t("magic coins")} 🌕`,
+          t("congratulation")
+        );
+      } else if (status === "failed") {
+        showPopup(t("purchase fail"), t("error title"));
+      }
+    }
+  };
+
+  const handleDisableAdsPurchase = async () => {
+    const invoiceLink = await getInvoiceLink(
+      t("disabling ads"),
+      t("disabling ads"),
+      150
+    );
+
+    if (invoiceLink) {
+      const status = await invoice.open(invoiceLink, "url");
+      if (status === "paid") {
+        showPopup(
+          `${t("purchase success")} ${t("disabling ads")}`,
           t("congratulation")
         );
       } else if (status === "failed") {
@@ -150,6 +170,16 @@ const Payment: FC = () => {
             onPress={button.onPress}
           />
         ))}
+      </ul>
+      <Headline weight="2" className="payment__heading">
+        {t("disable ads")}
+      </Headline>
+      <ul className="payment__buttons-list">
+        <BuyButton
+          title={t("for 30 days")}
+          price={150}
+          onPress={handleDisableAdsPurchase}
+        />
       </ul>
       <div className="payment__home">
         <SubmitButton title={t("to home")} onPress={handleNavigateHome} />

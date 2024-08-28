@@ -14,11 +14,10 @@ const useAdsgram = ({ blockId, onReward, onError }: UseAdsgramProptypes) => {
       AdControllerRef.current
         .show()
         .then(() => {
-          console.log("Reward granted");
           onReward && onReward();
         })
         .catch((result: ShowPromiseResult) => {
-          console.error(`An error occured: ${result}`);
+          console.error(`An error occured: ${result.description}`);
           onError && onError(result);
         });
     } else {

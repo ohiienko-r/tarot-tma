@@ -78,5 +78,8 @@
     "warning": "Warning",
     "quit message": "Changes may be lost. Are you sure you want to quit?",
     "quit anyway": "Quit anyway",
-    "report": "Report a bug"
+    "report": "Report a bug",
+    "disable ads": "Disable ads",
+    "disabling ads": "Disabling Ads",
+    "for 30 days": "For 30 days"
 }

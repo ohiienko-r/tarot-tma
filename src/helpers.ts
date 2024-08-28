@@ -25,12 +25,14 @@ export const validateInitData = async (): Promise<boolean> => {
 };
 
 export const getInvoiceLink = async (
-  coinsQty: number,
   title: string,
   description: string,
-  amount: number
+  amount: number,
+  coinsQty?: number
 ): Promise<string | undefined> => {
   try {
+    const invoiceTitle = coinsQty ? `${coinsQty} ${title}` : title;
+
     const response = await fetch(
       "https://tarot-bot-18921c9756be.herokuapp.com/create_invoice",
       {
@@ -39,7 +41,7 @@ export const getInvoiceLink = async (
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          title: `${coinsQty} ${title}`,
+          title: invoiceTitle,
           description: description,
           amount: amount,
           label: title,
