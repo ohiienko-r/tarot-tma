@@ -17,3 +17,5 @@ export { default as useMyCard } from "./useMyCard/useMyCard";
 export { default as useBackButton } from "./useBackButton/useBackButton";
 export { default as useQuitBehaviour } from "./useQuitBehaviour/useQuitBehaviour";
 export { default as useSendSpread } from "./useSendSpread/useSendSpread";
+export { default as useCoinsPurchase } from "./useCoinsPurchase/useCoinsPurchase";
+export { default as useDisableAdsPurchase } from "./useDisableAdsPurchase/useDisableAdsPurchase";

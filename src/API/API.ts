@@ -205,3 +205,15 @@ export const migrateBalance = async (uId: number, cloudBalance: number) => {
     console.error("Failed to migrate balance", error);
   }
 };
+
+export const setAdsDisabledTill = async (uId: number) => {
+  try {
+    await fetch(import.meta.env.VITE_DISABLE_ADS_TILL_URL, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ uId: uId }),
+    });
+  } catch (error) {
+    console.error("Failed to set ads disabled till:", error);
+  }
+};
