@@ -22,4 +22,5 @@ export { default as MarkdownToHTML } from "./MarkdownToHTML/MarkdownToHTML";
 export { default as Preloader } from "./Preloader/Preloader";
 export { default as ChangeLanguageModal } from "./ChangeLanguageModal/ChangeLanguageModal";
 export { default as RateButtonWithModal } from "./RateButtonWithModal/RateButtonWithModal";
+export { default as PurchaseDisableAdsButton } from "./PurchaseDisableAdsButton/PurchaseDisableAdsButton";
 export * as Icons from "./Icons";

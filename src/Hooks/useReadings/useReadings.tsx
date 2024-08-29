@@ -19,7 +19,7 @@ const useReadings = ({
   const { updateBalance } = useBalance();
   const { t, i18n } = useTranslation();
   const { cardsKeys, cardsNames } = useRandomCards(cardsQty);
-  const showAd = useAds();
+  const showAdvertisment = useAds();
   const showInfoPopup = useInfoPopup();
   const navigate = useNavigate();
 
@@ -30,7 +30,7 @@ const useReadings = ({
         return;
       }
 
-      showAd();
+      showAdvertisment();
 
       backButton.hide();
 
@@ -68,7 +68,7 @@ const useReadings = ({
     i18n.language,
     t,
     navigate,
-    showAd,
+    showAdvertisment,
     showInfoPopup,
     updateBalance,
   ]);

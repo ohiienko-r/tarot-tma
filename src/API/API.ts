@@ -218,7 +218,9 @@ export const setAdsDisabledTill = async (uId: number) => {
   }
 };
 
-export const getAdsDisabledTill = async (uId: number) => {
+export const getAdsDisabledTill = async (
+  uId: number
+): Promise<Date | null | undefined> => {
   try {
     const response = await fetch(
       import.meta.env.VITE_GET_ADS_DISABLED_TILL_URL,

@@ -3,12 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { haptic } from "@/Telegram";
 import { analytics } from "@/Firebase";
 import { logEvent } from "firebase/analytics";
-import {
-  useInfoPopup,
-  useBackButton,
-  useCoinsPurchase,
-  useDisableAdsPurchase,
-} from "@/Hooks";
+import { useInfoPopup, useBackButton, useCoinsPurchase } from "@/Hooks";
 import { useTranslation } from "react-i18next";
 import { Headline } from "@telegram-apps/telegram-ui";
 import {
@@ -18,6 +13,7 @@ import {
   Page,
   SubmitButton,
   RateButtonWithModal,
+  PurchaseDisableAdsButton,
 } from "@/Components";
 import { ROUTES_NAMES } from "@/Router";
 import "./styles.scss";
@@ -25,7 +21,6 @@ import "./styles.scss";
 const Payment: FC = () => {
   const { t } = useTranslation();
   const purchaseCoins = useCoinsPurchase();
-  const purchaseDisableAds = useDisableAdsPurchase();
   const showPopup = useInfoPopup();
   const navigate = useNavigate();
   logEvent(analytics, "page_view", { page_title: "Payment" });
@@ -88,11 +83,7 @@ const Payment: FC = () => {
         {t("disable ads")}
       </Headline>
       <ul className="payment__buttons-list">
-        <BuyButton
-          title={t("for 30 days")}
-          price={150}
-          onPress={purchaseDisableAds}
-        />
+        <PurchaseDisableAdsButton />
       </ul>
       <div className="payment__home">
         <SubmitButton title={t("to home")} onPress={handleNavigateHome} />
