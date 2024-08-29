@@ -11,7 +11,7 @@ const PurchaseDisableAdsButton: FC = () => {
 
   const handleClick = async () => {
     if (await isAdsDisabled()) {
-      showPopup("You have already bought 'Відключення реклами'");
+      showPopup(t("ads already disabled"));
     } else {
       await purchaseDisableAds();
     }
