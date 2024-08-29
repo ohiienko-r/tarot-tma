@@ -18,7 +18,6 @@ import {
 export const BalanceProvider: FC<PropsWithChildren> = ({ children }) => {
   const [balance, setBalance] = useState<number | null>(null);
   const uId = initData?.user?.id;
-  console.log(uId);
 
   useEffect(() => {
     const getBalance = async () => {
@@ -50,8 +49,7 @@ export const BalanceProvider: FC<PropsWithChildren> = ({ children }) => {
           setBalance((prev) => prev);
         } else {
           setBalance(newBalance);
-          const upd = await updateUserBalance(uId as number, value);
-          console.log(upd);
+          await updateUserBalance(uId as number, value);
         }
       }
     },

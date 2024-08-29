@@ -1,10 +1,29 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { cloudStorage } from "@/Telegram";
 
 const useDailyActivity = () => {
   const [activityAvailable, setActivityAvailable] = useState<boolean>(false);
 
-  const getLastLogIn = async () => {
+  const compareDates = useCallback(
+    async (lastLogInDate: string, today: Date) => {
+      const lastLoginDate = new Date(lastLogInDate);
+
+      lastLoginDate.setHours(0, 0, 0, 0);
+      today.setHours(0, 0, 0, 0);
+
+      const isDifferentDay = today.getTime() > lastLoginDate.getTime();
+
+      if (isDifferentDay) {
+        setActivityAvailable(true);
+        await cloudStorage.set("last_login", today.toISOString());
+      } else {
+        setActivityAvailable(false);
+      }
+    },
+    []
+  );
+
+  const getLastLogIn = useCallback(async () => {
     const today = new Date();
     const lastLogDate = await cloudStorage.get("last_login");
 
@@ -13,23 +32,7 @@ const useDailyActivity = () => {
     } else {
       compareDates(lastLogDate, today);
     }
-  };
-
-  const compareDates = async (lastLogInDate: string, today: Date) => {
-    const lastLoginDate = new Date(lastLogInDate);
-
-    lastLoginDate.setHours(0, 0, 0, 0);
-    today.setHours(0, 0, 0, 0);
-
-    const isDifferentDay = today.getTime() > lastLoginDate.getTime();
-
-    if (isDifferentDay) {
-      setActivityAvailable(true);
-      await cloudStorage.set("last_login", today.toISOString());
-    } else {
-      setActivityAvailable(false);
-    }
-  };
+  }, [compareDates]);
 
   useEffect(() => {
     const fetchLastLogIn = async () => {
@@ -41,7 +44,7 @@ const useDailyActivity = () => {
     };
 
     fetchLastLogIn();
-  }, []);
+  }, [getLastLogIn]);
 
   return { activityAvailable };
 };

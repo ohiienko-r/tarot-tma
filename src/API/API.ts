@@ -205,3 +205,36 @@ export const migrateBalance = async (uId: number, cloudBalance: number) => {
     console.error("Failed to migrate balance", error);
   }
 };
+
+export const setAdsDisabledTill = async (uId: number) => {
+  try {
+    await fetch(import.meta.env.VITE_DISABLE_ADS_TILL_URL, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ uId: uId }),
+    });
+  } catch (error) {
+    console.error("Failed to set ads disabled till:", error);
+  }
+};
+
+export const getAdsDisabledTill = async (
+  uId: number
+): Promise<Date | null | undefined> => {
+  try {
+    const response = await fetch(
+      import.meta.env.VITE_GET_ADS_DISABLED_TILL_URL,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ uId: uId }),
+      }
+    );
+
+    const endDate = await response.json();
+
+    return endDate;
+  } catch (error) {
+    console.error("Failed to get ads disabled till:", error);
+  }
+};
