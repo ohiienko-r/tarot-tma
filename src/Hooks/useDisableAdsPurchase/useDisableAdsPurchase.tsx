@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { initData } from "@/Telegram";
 import useInfoPopup from "../useInfoPopup/useInfoPopup";
 import { getInvoiceLink } from "@/helpers";
+import { setAdsDisabledTill } from "@/API/API";
 
 const useDisableAdsPurchase = () => {
   const { t } = useTranslation();
@@ -22,9 +23,7 @@ const useDisableAdsPurchase = () => {
       if (status === "paid") {
         const uId = initData?.user?.id;
 
-        console.log(uId);
-
-        //   await setAdsDisabledTill(uId as number);
+        await setAdsDisabledTill(uId as number);
 
         showPopup(
           `${t("purchase success")} ${t("disabling ads")}`,

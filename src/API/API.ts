@@ -217,3 +217,22 @@ export const setAdsDisabledTill = async (uId: number) => {
     console.error("Failed to set ads disabled till:", error);
   }
 };
+
+export const getAdsDisabledTill = async (uId: number) => {
+  try {
+    const response = await fetch(
+      import.meta.env.VITE_GET_ADS_DISABLED_TILL_URL,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ uId: uId }),
+      }
+    );
+
+    const endDate = await response.json();
+
+    return endDate;
+  } catch (error) {
+    console.error("Failed to get ads disabled till:", error);
+  }
+};

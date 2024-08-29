@@ -2,9 +2,8 @@ import { useCallback } from "react";
 import { useBalance } from "@/Contexts";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { useAdsgram } from "@/AdsGram";
 import { backButton } from "@/Telegram";
-import { useRandomCards, useInfoPopup } from "@/Hooks";
+import { useRandomCards, useInfoPopup, useAds } from "@/Hooks";
 import { validateInitData } from "@/helpers";
 import { getReadings } from "@/API/API";
 import { ROUTES_NAMES } from "@/Router";
@@ -20,7 +19,7 @@ const useReadings = ({
   const { updateBalance } = useBalance();
   const { t, i18n } = useTranslation();
   const { cardsKeys, cardsNames } = useRandomCards(cardsQty);
-  const showAd = useAdsgram({ blockId: "586" });
+  const showAd = useAds();
   const showInfoPopup = useInfoPopup();
   const navigate = useNavigate();
 

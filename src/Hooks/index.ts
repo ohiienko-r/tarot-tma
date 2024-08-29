@@ -19,3 +19,4 @@ export { default as useQuitBehaviour } from "./useQuitBehaviour/useQuitBehaviour
 export { default as useSendSpread } from "./useSendSpread/useSendSpread";
 export { default as useCoinsPurchase } from "./useCoinsPurchase/useCoinsPurchase";
 export { default as useDisableAdsPurchase } from "./useDisableAdsPurchase/useDisableAdsPurchase";
+export { default as useAds } from "./useAds/useAds";
