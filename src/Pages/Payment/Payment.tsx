@@ -14,6 +14,7 @@ import {
   SubmitButton,
   RateButtonWithModal,
   PurchaseDisableAdsButton,
+  SupportUsButtonWithModal,
 } from "@/Components";
 import { ROUTES_NAMES } from "@/Router";
 import "./styles.scss";
@@ -84,6 +85,7 @@ const Payment: FC = () => {
       </Headline>
       <ul className="payment__buttons-list">
         <PurchaseDisableAdsButton />
+        <SupportUsButtonWithModal />
       </ul>
       <div className="payment__home">
         <SubmitButton title={t("to home")} onPress={handleNavigateHome} />
