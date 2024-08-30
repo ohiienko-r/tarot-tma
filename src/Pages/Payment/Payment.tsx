@@ -12,7 +12,6 @@ import {
   BuyButton,
   Page,
   SubmitButton,
-  RateButtonWithModal,
   PurchaseDisableAdsButton,
 } from "@/Components";
 import { ROUTES_NAMES } from "@/Router";
@@ -48,7 +47,6 @@ const Payment: FC = () => {
             showPopup(t("payment popup text"));
           }}
         />
-        <RateButtonWithModal />
         <ClaimButton />
       </ul>
       <Headline weight="2" className="payment__heading">
