@@ -2,8 +2,8 @@ import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSupportUs } from "@/Hooks";
 import { haptic } from "@/Telegram";
-import { Icons, SubmitButton } from "..";
-import { IconButton } from "@telegram-apps/telegram-ui";
+import { Icons } from "..";
+import { IconButton, Button } from "@telegram-apps/telegram-ui";
 import { SupportUsFormPropTypes } from "./types";
 import "./styles.scss";
 
@@ -28,6 +28,7 @@ const SupportUsForm: FC<SupportUsFormPropTypes> = ({ onComplete }) => {
   };
 
   const handleSendStars = async () => {
+    haptic.impactOccurred("medium");
     supportUs(starsCount, onComplete);
   };
 
@@ -52,7 +53,9 @@ const SupportUsForm: FC<SupportUsFormPropTypes> = ({ onComplete }) => {
       </div>
 
       <p className="support-form__caption">{t("you may support us")}</p>
-      <SubmitButton title={t("send")} onPress={handleSendStars} />
+      <Button size="l" onClick={handleSendStars} stretched>
+        {t("send")}
+      </Button>
     </div>
   );
 };
