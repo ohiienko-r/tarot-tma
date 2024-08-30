@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { haptic } from "@/Telegram";
-import { BuyButton, Icons } from "@/Components";
+import { BuyButton, Icons, SupportUsForm } from "@/Components";
 import { Modal, Headline, IconButton } from "@telegram-apps/telegram-ui";
 import "./styles.scss";
 
@@ -40,6 +40,7 @@ const SupportUsButtonWithModal: FC = () => {
         <Headline weight="2" className="rating-modal__heading">
           {t("support us")}
         </Headline>
+        <SupportUsForm onComplete={hanldeModalClose} />
       </Modal>
     </>
   );

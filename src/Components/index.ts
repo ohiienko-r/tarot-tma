@@ -24,4 +24,5 @@ export { default as ChangeLanguageModal } from "./ChangeLanguageModal/ChangeLang
 export { default as RateButtonWithModal } from "./RateButtonWithModal/RateButtonWithModal";
 export { default as PurchaseDisableAdsButton } from "./PurchaseDisableAdsButton/PurchaseDisableAdsButton";
 export { default as SupportUsButtonWithModal } from "./SupportUsButtonWithModal/SupportUsButtonWithModall";
+export { default as SupportUsForm } from "./SupportUsForm/SupportUsForm";
 export * as Icons from "./Icons";

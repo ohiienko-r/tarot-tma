@@ -32,6 +32,7 @@ const AppRouter = () => {
   }, [viewport]);
 
   miniApp.setHeaderColor("#110126");
+  miniApp.setBgColor("#110126");
 
   const routes = useRoutes();
 

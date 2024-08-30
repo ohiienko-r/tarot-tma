@@ -1,0 +1,29 @@
+.support-form {
+  box-sizing: border-box;
+  overflow: hidden;
+
+  &__counter {
+    box-sizing: border-box;
+    width: 80%;
+    margin: 0 auto;
+    padding: 2em 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__decrement-button {
+    transform: rotate(-180deg);
+  }
+
+  &__stars-counter {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 40px;
+  }
+
+  &__caption {
+    margin-bottom: 2em;
+  }
+}
