@@ -83,6 +83,11 @@ const Payment: FC = () => {
       </Headline>
       <ul className="payment__buttons-list">
         <PurchaseDisableAdsButton />
+      </ul>
+      <Headline weight="2" className="payment__heading">
+        {t("support us")}
+      </Headline>
+      <ul className="payment__buttons-list">
         <SupportUsButtonWithModal />
       </ul>
       <div className="payment__home">

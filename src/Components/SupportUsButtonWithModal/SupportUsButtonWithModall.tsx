@@ -20,8 +20,11 @@ const SupportUsButtonWithModal: FC = () => {
 
   return (
     <>
-      <BuyButton title={t("support us")} onPress={handleModalOpen} />
+      <BuyButton title={t("with telegram stars")} onPress={handleModalOpen}>
+        <Icons.TelegramStar />
+      </BuyButton>
       <Modal
+        className="support-us"
         dismissible={false}
         open={modalVisible}
         header={

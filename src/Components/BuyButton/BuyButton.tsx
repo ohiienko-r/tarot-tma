@@ -11,6 +11,7 @@ const BuyButton: FC<BuyButtonPropTypes> = ({
   onPress,
   disabled,
   className,
+  children,
 }) => {
   const [loadervisible, setLoadervisible] = useState(false);
 
@@ -28,7 +29,10 @@ const BuyButton: FC<BuyButtonPropTypes> = ({
       disabled={disabled}
     >
       <div className="buy-button__text">
-        <p>{title}</p>
+        <p className="buy-button__text--title">
+          {title}
+          {children}
+        </p>
         {caption && <p className="buy-button__text--caption">{caption}</p>}
       </div>
       {loadervisible ? (
