@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { useDailyActivity } from "@/Hooks";
 import { Modal, Headline, Text, Button } from "@telegram-apps/telegram-ui";
 import { ROUTES_NAMES } from "@/Router";
+import "./styles.scss";
 
 const DailyBonusModal: FC = () => {
   const [modalVisible, setModalVisible] = useState<boolean>(false);
@@ -33,16 +34,16 @@ const DailyBonusModal: FC = () => {
       open={modalVisible}
       dismissible={false}
       header={<Modal.Header />}
-      className="drawer-modal"
+      className="bonus-modal"
     >
-      <div>
-        <Headline plain={true} weight="1">
+      <div className="bonus-modal--container">
+        <Headline className="bonus-modal--heading" plain={true} weight="1">
           {t("daily bonus heading")}
         </Headline>
         <Text style={{ textAlign: "center" }}>{`${t(
           "dayli bonus greeting"
         )} \n ${t("here are your coins")}`}</Text>
-        <Button mode="gray" size="l" stretched onClick={handleModalClose}>
+        <Button size="l" stretched onClick={handleModalClose}>
           {t("claim")}
         </Button>
       </div>

@@ -47,12 +47,14 @@ const QuestionButtonWithModal: FC = () => {
         open={modalVisible}
         dismissible={false}
         header={<Modal.Header />}
-        className="drawer-modal"
+        className="question-button__modal"
       >
-        <div>
-          <Headline weight="2">{modalTextPtOne}</Headline>
+        <div className="question-button__modal--container">
+          <Headline weight="2" className="question-button__modal--heading">
+            {modalTextPtOne}
+          </Headline>
           <Text Component={"p"}>{modalTextPtTwo}</Text>
-          <Button mode="gray" size="l" stretched onClick={handleModalClose}>
+          <Button size="l" stretched onClick={handleModalClose}>
             {t("got it")}
           </Button>
         </div>

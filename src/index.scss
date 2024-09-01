@@ -41,22 +41,3 @@ button {
   background-color: #1a1a1a;
   cursor: pointer;
 }
-
-.drawer-modal {
-  box-sizing: border-box;
-  padding: 1em;
-  height: 60vh;
-  text-align: center;
-
-  div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 3em;
-  }
-
-  button {
-    background: linear-gradient(to right, #ea850f, #ffc700);
-    color: #1a1a1a;
-  }
-}
