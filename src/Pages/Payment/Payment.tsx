@@ -12,6 +12,7 @@ import {
   BuyButton,
   Page,
   SubmitButton,
+  RateButtonWithModal,
   PurchaseDisableAdsButton,
   SupportUsButtonWithModal,
 } from "@/Components";
@@ -49,6 +50,7 @@ const Payment: FC = () => {
           }}
         />
         <ClaimButton />
+        <RateButtonWithModal />
       </ul>
       <Headline weight="2" className="payment__heading">
         {t("buy")}

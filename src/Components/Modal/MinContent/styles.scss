@@ -1,13 +1,13 @@
-.bonus-modal {
+.modal__min-content {
   padding: 1em 1em 2em 1em;
+
+  &--heading {
+    text-align: center;
+  }
 
   &--container {
     display: flex;
     flex-direction: column;
     gap: 2em;
-  }
-
-  &--heading {
-    text-align: center;
   }
 }

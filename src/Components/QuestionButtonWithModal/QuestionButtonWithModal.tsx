@@ -2,14 +2,8 @@ import { FC, useState } from "react";
 import { haptic } from "@/Telegram";
 import { useBalance } from "@/Contexts";
 import { useTranslation } from "react-i18next";
-import { Icons } from "@/Components";
-import {
-  Modal,
-  Button,
-  IconButton,
-  Text,
-  Headline,
-} from "@telegram-apps/telegram-ui";
+import { Icons, Modal } from "@/Components";
+import { Button, IconButton, Text } from "@telegram-apps/telegram-ui";
 import "./styles.scss";
 
 const QuestionButtonWithModal: FC = () => {
@@ -27,11 +21,9 @@ const QuestionButtonWithModal: FC = () => {
     setModalvisible(false);
   };
 
-  const modalTextPtOne = `${t("balance description pt1")} ${balance} 🌕 ${t(
+  const title = `${t("balance description pt1")} ${balance} 🌕 ${t(
     "magic coins"
   )}.`;
-
-  const modalTextPtTwo = t("balance description pt2");
 
   return (
     <>
@@ -43,22 +35,16 @@ const QuestionButtonWithModal: FC = () => {
       >
         <Icons.QuestionMark />
       </IconButton>
-      <Modal
+      <Modal.MinContent
         open={modalVisible}
-        dismissible={false}
-        header={<Modal.Header />}
-        className="question-button__modal"
+        onClose={handleModalClose}
+        title={title}
       >
-        <div className="question-button__modal--container">
-          <Headline weight="2" className="question-button__modal--heading">
-            {modalTextPtOne}
-          </Headline>
-          <Text Component={"p"}>{modalTextPtTwo}</Text>
-          <Button size="l" stretched onClick={handleModalClose}>
-            {t("got it")}
-          </Button>
-        </div>
-      </Modal>
+        <Text Component={"p"}>{t("balance description pt2")}</Text>
+        <Button size="l" stretched onClick={handleModalClose}>
+          {t("got it")}
+        </Button>
+      </Modal.MinContent>
     </>
   );
 };

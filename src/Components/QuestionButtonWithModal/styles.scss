@@ -1,19 +1,5 @@
 .question-button {
   animation: wiggle 4s infinite;
-
-  &__modal {
-    padding: 1em 1em 2em 1em;
-
-    &--container {
-      display: flex;
-      flex-direction: column;
-      gap: 2em;
-    }
-
-    &--heading {
-      text-align: center;
-    }
-  }
 }
 
 @keyframes wiggle {

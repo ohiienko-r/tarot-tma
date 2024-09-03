@@ -1,9 +1,9 @@
-.rating-modal {
+.modal__full-screen {
   box-sizing: border-box;
-  padding: 0 1em;
+  padding: 1em;
   height: 100vh;
 
-  &__heading {
+  &--heading {
     text-align: center;
   }
 }
