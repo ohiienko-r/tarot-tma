@@ -1,13 +1,6 @@
 .settings {
-  box-sizing: border-box;
-  padding: 1em;
-  height: 100vh;
-
   &__list {
     list-style: none;
     overflow: hidden;
-    &--headline {
-      text-align: center;
-    }
   }
 }

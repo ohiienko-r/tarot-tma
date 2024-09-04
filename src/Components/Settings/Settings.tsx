@@ -2,14 +2,8 @@ import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSettingsButton } from "@/Hooks";
 import { haptic, utils } from "@/Telegram";
-import { Icons, ChangeLanguageModal } from "@/Components";
-import {
-  IconButton,
-  Modal,
-  List,
-  Button,
-  Divider,
-} from "@telegram-apps/telegram-ui";
+import { Icons, ChangeLanguageModal, Modal } from "@/Components";
+import { List, Button, Divider } from "@telegram-apps/telegram-ui";
 import { countriesFlags } from "./Settings.dto";
 import { SystemLanguage } from "@/types";
 import "./styles.scss";
@@ -61,20 +55,7 @@ const Settings: FC = () => {
   useSettingsButton(handleSettingsOpen);
 
   return (
-    <Modal
-      className="settings"
-      dismissible={false}
-      open={settingsVisible}
-      header={
-        <Modal.Header
-          after={
-            <IconButton mode="plain" size="m" onClick={handleSettingsClose}>
-              <Icons.Close />
-            </IconButton>
-          }
-        />
-      }
-    >
+    <Modal.FullScreen open={settingsVisible} onClose={handleSettingsClose}>
       <List className="settings__list">
         <Divider />
         <Button
@@ -105,7 +86,7 @@ const Settings: FC = () => {
         open={changeLanguageVisible}
         onClose={handleChangeLanguageClose}
       />
-    </Modal>
+    </Modal.FullScreen>
   );
 };
 

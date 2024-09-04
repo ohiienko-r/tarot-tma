@@ -25,4 +25,6 @@ export { default as RateButtonWithModal } from "./RateButtonWithModal/RateButton
 export { default as PurchaseDisableAdsButton } from "./PurchaseDisableAdsButton/PurchaseDisableAdsButton";
 export { default as SupportUsButtonWithModal } from "./SupportUsButtonWithModal/SupportUsButtonWithModall";
 export { default as SupportUsForm } from "./SupportUsForm/SupportUsForm";
+export { default as RegisterAtProductHuntButtonWithModal } from "./RegisterAtProductHuntButtonWithModal/RegisterAtProductHuntButtonWithModal";
 export * as Icons from "./Icons";
+export * as Modal from "./Modal";

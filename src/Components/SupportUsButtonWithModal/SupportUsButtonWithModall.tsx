@@ -1,9 +1,7 @@
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { haptic } from "@/Telegram";
-import { BuyButton, Icons, SupportUsForm } from "@/Components";
-import { Modal, Headline, IconButton } from "@telegram-apps/telegram-ui";
-import "./styles.scss";
+import { BuyButton, Icons, SupportUsForm, Modal } from "@/Components";
 
 const SupportUsButtonWithModal: FC = () => {
   const [modalVisible, setModalVisible] = useState<boolean>(false);
@@ -23,25 +21,13 @@ const SupportUsButtonWithModal: FC = () => {
       <BuyButton title={t("with telegram stars")} onPress={handleModalOpen}>
         <Icons.TelegramStar />
       </BuyButton>
-      <Modal
-        className="support-us"
-        dismissible={false}
+      <Modal.FullScreen
         open={modalVisible}
-        header={
-          <Modal.Header
-            after={
-              <IconButton mode="plain" size="m" onClick={hanldeModalClose}>
-                <Icons.Close />
-              </IconButton>
-            }
-          />
-        }
+        onClose={hanldeModalClose}
+        title={t("support us")}
       >
-        <Headline weight="2" className="rating-modal__heading">
-          {t("support us")}
-        </Headline>
         <SupportUsForm onComplete={hanldeModalClose} />
-      </Modal>
+      </Modal.FullScreen>
     </>
   );
 };

@@ -2,9 +2,10 @@ import { FC, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useDailyActivity } from "@/Hooks";
-import { Modal, Headline, Text, Button } from "@telegram-apps/telegram-ui";
+import { haptic } from "@/Telegram";
+import { Modal } from "..";
+import { Text, Button } from "@telegram-apps/telegram-ui";
 import { ROUTES_NAMES } from "@/Router";
-import "./styles.scss";
 
 const DailyBonusModal: FC = () => {
   const [modalVisible, setModalVisible] = useState<boolean>(false);
@@ -25,29 +26,24 @@ const DailyBonusModal: FC = () => {
   }, [activityAvailable]);
 
   const handleModalClose = async () => {
+    haptic.impactOccurred("medium");
     navigate(ROUTES_NAMES.PAYMENT);
     setModalVisible(false);
   };
 
   return (
-    <Modal
+    <Modal.MinContent
       open={modalVisible}
-      dismissible={false}
-      header={<Modal.Header />}
-      className="bonus-modal"
+      onClose={handleModalClose}
+      title={t("daily bonus heading")}
     >
-      <div className="bonus-modal--container">
-        <Headline className="bonus-modal--heading" plain={true} weight="1">
-          {t("daily bonus heading")}
-        </Headline>
-        <Text style={{ textAlign: "center" }}>{`${t(
-          "dayli bonus greeting"
-        )} \n ${t("here are your coins")}`}</Text>
-        <Button size="l" stretched onClick={handleModalClose}>
-          {t("claim")}
-        </Button>
-      </div>
-    </Modal>
+      <Text style={{ textAlign: "center" }}>{`${t(
+        "dayli bonus greeting"
+      )} \n ${t("here are your coins")}`}</Text>
+      <Button size="l" stretched onClick={handleModalClose}>
+        {t("claim")}
+      </Button>
+    </Modal.MinContent>
   );
 };
 

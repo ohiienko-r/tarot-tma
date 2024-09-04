@@ -1,13 +1,7 @@
 .language-modal {
-  box-sizing: border-box;
-  height: 100vh;
-  padding: 1em;
-
   &__list {
+    margin-top: 5%;
     list-style: none;
     overflow: hidden;
-    &--headline {
-      text-align: center;
-    }
   }
 }

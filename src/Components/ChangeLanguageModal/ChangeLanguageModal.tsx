@@ -1,13 +1,8 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { cloudStorage, haptic } from "@/Telegram";
-import {
-  Modal,
-  List,
-  Headline,
-  Button,
-  Divider,
-} from "@telegram-apps/telegram-ui";
+import { Modal } from "..";
+import { List, Button, Divider } from "@telegram-apps/telegram-ui";
 import { SystemLanguage } from "@/types";
 import { ChangeLanguageModalPropTypes } from "./types";
 import "./styles.scss";
@@ -26,11 +21,12 @@ const ChangeLanguageModal: FC<ChangeLanguageModalPropTypes> = ({
   };
 
   return (
-    <Modal className="language-modal" open={open} dismissible={false}>
+    <Modal.FullScreen
+      open={open}
+      onClose={onClose}
+      title={t("select language")}
+    >
       <List className="language-modal__list">
-        <Headline className="language-modal__list--headline" weight="2">
-          {t("select language")}
-        </Headline>
         <Button
           mode="bezeled"
           stretched
@@ -60,11 +56,16 @@ const ChangeLanguageModal: FC<ChangeLanguageModalPropTypes> = ({
         >
           {`Русский 🇷🇺`}
         </Button>
-        <Button mode="plain" stretched onClick={onClose}>
+        <Button
+          mode="plain"
+          stretched
+          onClick={onClose}
+          style={{ color: "var(--tg-theme-destructive-text-color)" }}
+        >
           {t("cancel")}
         </Button>
       </List>
-    </Modal>
+    </Modal.FullScreen>
   );
 };
 
