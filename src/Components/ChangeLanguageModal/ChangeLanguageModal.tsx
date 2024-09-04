@@ -56,7 +56,12 @@ const ChangeLanguageModal: FC<ChangeLanguageModalPropTypes> = ({
         >
           {`Русский 🇷🇺`}
         </Button>
-        <Button mode="plain" stretched onClick={onClose}>
+        <Button
+          mode="plain"
+          stretched
+          onClick={onClose}
+          style={{ color: "var(--tg-theme-destructive-text-color)" }}
+        >
           {t("cancel")}
         </Button>
       </List>

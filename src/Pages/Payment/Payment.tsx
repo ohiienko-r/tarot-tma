@@ -15,6 +15,7 @@ import {
   RateButtonWithModal,
   PurchaseDisableAdsButton,
   SupportUsButtonWithModal,
+  RegisterAtProductHuntButtonWithModal,
 } from "@/Components";
 import { ROUTES_NAMES } from "@/Router";
 import "./styles.scss";
@@ -51,6 +52,7 @@ const Payment: FC = () => {
         />
         <ClaimButton />
         <RateButtonWithModal />
+        <RegisterAtProductHuntButtonWithModal />
       </ul>
       <Headline weight="2" className="payment__heading">
         {t("buy")}
