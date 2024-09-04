@@ -1,4 +1,4 @@
 export type BalanceContextType = {
-  balance: number | null;
+  balance: number | undefined;
   updateBalance: (updateValue: number) => Promise<void>;
 };
