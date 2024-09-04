@@ -27,7 +27,6 @@ export const BalanceProvider: FC<PropsWithChildren> = ({ children }) => {
       }
 
       if (currentBalance != null) {
-        console.log(currentBalance);
         setBalance(currentBalance);
       }
     };

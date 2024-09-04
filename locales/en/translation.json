@@ -94,5 +94,17 @@
     "we need your help": "We need your help!",
     "help abstract": "We're getting ready to launch on Product Hunt - it's a platform where users from all over the world discover new and interesting products. It's really important for us to get support in the first few hours after launch so that as many people as possible learn about our app.",
     "how can you help": "How you can help:",
-    "step 1": "Sign up on Product Hunt: Follow the link below and create your account."
+    "step 1": "Sign up on Product Hunt: Follow the link below and create your account.",
+    "step 2": "Take a screenshot: After successful registration, take a screenshot of the page confirming the creation of the account.",
+    "step 3": "Find out your ID: Open our Telegram bot (https://t.me/my_ai_tarot_bot) and send the command: /my_id",
+    "step 4": "Send us the screenshot and ID: Go back to the app and click the 'Send' button, after which our Telegram support account will open. Attach the screenshot to the message, indicate your ID and send it to our support.",
+    "you will get coins": "For this, you will receive 10 🌕 to your account as soon as possible!",
+    "why is it necessary": "Why is this necessary:",
+    "point 1": "Your vote will help us draw attention to the project and tell thousands of potential users about it.",
+    "point 2": "This is a chance for us to make a name for ourselves on the world stage and make our app even better with your help.",
+    "whats next": "What's next:",
+    "whats next point": "As soon as we launch on Product Hunt, we will let you know. Then you can vote for us and leave a review. For this we will credit you with additional 🌕!",
+    "thank you for your support": "Thank you for your support!",
+    "open ph": "Visit Product Hunt",
+    "note": "Note: Each registration will be checked manually. 🌕 will be credited after confirmation."
 }

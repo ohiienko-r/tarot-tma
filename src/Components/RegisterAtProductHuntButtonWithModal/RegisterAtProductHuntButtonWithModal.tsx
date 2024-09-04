@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { haptic } from "@/Telegram";
+import { haptic, utils } from "@/Telegram";
 import { Modal, BuyButton } from "..";
 import { Text, Button, Headline, List } from "@telegram-apps/telegram-ui";
 import "./styles.scss";
@@ -18,25 +18,64 @@ const RegisterAtProductHuntButtonWithModal: FC = () => {
     setModalVisible(false);
   };
 
+  const handleOpenPh = () => {
+    haptic.impactOccurred("medium");
+    utils.openLink("https://www.producthunt.com/", { tryBrowser: true });
+  };
+
+  const handleOpenSupportChat = () => {
+    utils.openTelegramLink("https://t.me/trlgst");
+    handleModalClose();
+  };
+
   return (
     <>
       <BuyButton
-        title="3 for registration at Product Hunt"
+        title={`10 🌕 ${t("for registration at ph heading")}`}
         onPress={handleModalOpen}
       />
       <Modal.FullScreen open={modalVisible} onClose={handleModalClose}>
-        <Headline weight="2">{t("we need your help")}</Headline>
+        <Headline weight="2" Component={"h3"}>
+          {t("we need your help")}
+        </Headline>
         <Text Component={"p"}>{t("help abstract")}</Text>
-        <Headline weight="2">{t("how can you help")}</Headline>
+        <Headline weight="2" Component={"h3"}>
+          {t("how can you help")}
+        </Headline>
         <List Component={"ol"} className="register__ordered-list">
           <Text Component={"li"}>{t("step 1")}</Text>
           <Text Component={"li"}>{t("step 2")}</Text>
           <Text Component={"li"}>{t("step 3")}</Text>
           <Text Component={"li"}>{t("step 4")}</Text>
         </List>
-        <Button size="l" onClick={handleModalClose} stretched>
-          Submit your registration
-        </Button>
+        <Headline weight="3" Component={"h3"} style={{ marginBottom: "0.5em" }}>
+          {t("you will get coins")}
+        </Headline>
+        <Headline weight="2" Component={"h3"}>
+          {t("why is it necessary")}
+        </Headline>
+        <List Component={"ul"} className="register__unordered-list">
+          <Text Component={"li"}>{t("point 1")}</Text>
+          <Text Component={"li"}>{t("point 2")}</Text>
+        </List>
+        <Headline weight="2" Component={"h3"}>
+          {t("whats next")}
+        </Headline>
+        <List Component={"ul"} className="register__unordered-list">
+          <Text Component={"li"}>{t("whats next point")}</Text>
+        </List>
+        <Text Component={"p"}>{t("thank you for your support")}</Text>
+        <Text Component={"p"} style={{ margin: "0.5em 0 0.5em 0" }}>
+          <i>{t("note")}</i>
+        </Text>
+        <div className="register__buttons">
+          <Button mode="bezeled" size="l" onClick={handleOpenPh} stretched>
+            {t("open ph")}
+          </Button>
+          <Button size="l" onClick={handleOpenSupportChat} stretched>
+            {t("send")}
+          </Button>
+        </div>
       </Modal.FullScreen>
     </>
   );
