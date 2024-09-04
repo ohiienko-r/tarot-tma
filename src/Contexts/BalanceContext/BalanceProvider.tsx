@@ -1,11 +1,4 @@
-import {
-  FC,
-  PropsWithChildren,
-  useState,
-  useEffect,
-  useCallback,
-  useMemo,
-} from "react";
+import { FC, PropsWithChildren, useState, useEffect, useCallback } from "react";
 import { BalanceContext } from "./BalanceContext";
 import { cloudStorage, initData } from "@/Telegram";
 import {
@@ -16,7 +9,7 @@ import {
 } from "@/API/API";
 
 export const BalanceProvider: FC<PropsWithChildren> = ({ children }) => {
-  const [balance, setBalance] = useState<number | null>(null);
+  const [balance, setBalance] = useState<number | undefined>(undefined);
   const uId = initData?.user?.id;
 
   useEffect(() => {
@@ -33,7 +26,8 @@ export const BalanceProvider: FC<PropsWithChildren> = ({ children }) => {
         setBalance(initBalance);
       }
 
-      if (currentBalance) {
+      if (currentBalance != null) {
+        console.log(currentBalance);
         setBalance(currentBalance);
       }
     };
@@ -43,7 +37,7 @@ export const BalanceProvider: FC<PropsWithChildren> = ({ children }) => {
 
   const updateBalance = useCallback(
     async (value: number) => {
-      if (balance !== null) {
+      if (balance !== undefined) {
         const newBalance = balance + value;
         if (newBalance < 0) {
           setBalance((prev) => prev);
@@ -56,12 +50,8 @@ export const BalanceProvider: FC<PropsWithChildren> = ({ children }) => {
     [balance, uId]
   );
 
-  const balanceValueObj = useMemo(() => {
-    return { balance, updateBalance };
-  }, [balance, updateBalance]);
-
   return (
-    <BalanceContext.Provider value={balanceValueObj}>
+    <BalanceContext.Provider value={{ balance, updateBalance }}>
       {children}
     </BalanceContext.Provider>
   );

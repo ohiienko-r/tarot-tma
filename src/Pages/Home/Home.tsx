@@ -52,7 +52,7 @@ const Home: FC = () => {
         <Main />
         <DailyBonusModal />
         <Settings />
-        {!balance && <Preloader />}
+        {balance === undefined && <Preloader />}
       </Page>
     </BackgroundLayer>
   );

@@ -1,5 +1,4 @@
 import { FC } from "react";
-import { Spinner } from "@telegram-apps/telegram-ui";
 import { useBalance } from "@/Contexts";
 import "./styles.scss";
 
@@ -8,7 +7,7 @@ const Balance: FC = () => {
 
   return (
     <div className="balance__value">
-      {balance ?? <Spinner size="l" />}
+      {balance}
       <span>🌕</span>
     </div>
   );
