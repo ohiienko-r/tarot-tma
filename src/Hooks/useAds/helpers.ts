@@ -17,10 +17,8 @@ export const isAdsDisabled = async () => {
   dueDate.setHours(0, 0, 0, 0);
 
   if (today.getTime() < dueDate.getTime()) {
-    console.log("Ads are disabled");
     return true;
   } else {
-    console.log("Ads are enabled");
     return false;
   }
 };
