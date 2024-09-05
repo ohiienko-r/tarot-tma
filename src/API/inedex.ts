@@ -1,1 +1,1 @@
-export * from "./API";
+export * as Api from "./controllers";
