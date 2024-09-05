@@ -3,8 +3,7 @@ import { useInvoice } from "@telegram-apps/sdk-react";
 import { useTranslation } from "react-i18next";
 import { initData } from "@/Telegram";
 import useInfoPopup from "../useInfoPopup/useInfoPopup";
-import { getInvoiceLink } from "@/helpers";
-import { setAdsDisabledTill } from "@/API/API";
+import { Api } from "@/Api";
 
 const useDisableAdsPurchase = () => {
   const { t } = useTranslation();
@@ -12,7 +11,7 @@ const useDisableAdsPurchase = () => {
   const showPopup = useInfoPopup();
 
   const handleDisableAdsPurchase = useCallback(async () => {
-    const invoiceLink = await getInvoiceLink(
+    const invoiceLink = await Api.botController.getInvoiceLink(
       t("disabling ads"),
       t("disabling ads"),
       150
@@ -23,7 +22,7 @@ const useDisableAdsPurchase = () => {
       if (status === "paid") {
         const uId = initData?.user?.id;
 
-        await setAdsDisabledTill(uId as number);
+        await Api.adsController.setAdsDisabledTill(uId as number);
 
         showPopup(
           `${t("purchase success")} ${t("disabling ads")}`,

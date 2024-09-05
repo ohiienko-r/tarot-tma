@@ -24,3 +24,5 @@ export const [mainButton] = initMainButton();
 export const [settingsButton] = initSettingsButton();
 
 export const { initData } = retrieveLaunchParams();
+
+export const { initDataRaw } = retrieveLaunchParams();

@@ -1,9 +1,9 @@
-import { Card, Path } from "@/types";
+import { CardKey, Path } from "@/types";
 
 export type UseSendSpreadPropTypes = {
   fromPath: Path;
   title: string;
-  cardsKeys: Card[];
+  cardsKeys: CardKey[];
   prompt?: string;
   reading: string;
 };

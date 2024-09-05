@@ -3,7 +3,7 @@ import { useBalance } from "@/Contexts";
 import { useInvoice } from "@telegram-apps/sdk-react";
 import { useTranslation } from "react-i18next";
 import useInfoPopup from "../useInfoPopup/useInfoPopup";
-import { getInvoiceLink } from "@/helpers";
+import { Api } from "@/Api";
 
 const useCoinsPurchase = () => {
   const { updateBalance } = useBalance();
@@ -13,7 +13,7 @@ const useCoinsPurchase = () => {
 
   const handleMagicCoinsPurchase = useCallback(
     async (coinsQty: number, price: number) => {
-      const invoiceLink = await getInvoiceLink(
+      const invoiceLink = await Api.botController.getInvoiceLink(
         t("magic coins"),
         t("invoice description"),
         price,

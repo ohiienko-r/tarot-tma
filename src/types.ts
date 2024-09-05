@@ -30,3 +30,11 @@ export type FeedbackBody = {
   rating: number;
   feedback: string;
 };
+
+export type SendSpreadToUserBody = {
+  uId: number;
+  title: string;
+  prompt?: string;
+  cardsKeys: CardKey[];
+  reading: string;
+};

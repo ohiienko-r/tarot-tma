@@ -1,6 +1,6 @@
 import { useCallback, useEffect } from "react";
 import { retrieveLaunchParams } from "@telegram-apps/sdk-react";
-import { sendSpreadToUser } from "@/API/API";
+import { Api } from "@/Api";
 import { UseSendSpreadPropTypes } from "./types";
 
 const useSendSpread = ({
@@ -15,7 +15,7 @@ const useSendSpread = ({
   const sendSpread = useCallback(async () => {
     try {
       if (fromPath != undefined) {
-        await sendSpreadToUser({
+        await Api.botController.sendSpreadToUser({
           uId: initData?.user?.id as number,
           cardsKeys: cardsKeys,
           title: title,

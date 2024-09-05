@@ -4,8 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { backButton } from "@/Telegram";
 import { useRandomCards, useInfoPopup, useAds } from "@/Hooks";
-import { validateInitData } from "@/helpers";
-import { getReadings } from "@/API/API";
+import { Api } from "@/Api";
 import { ROUTES_NAMES } from "@/Router";
 import { SystemLanguage } from "@/types";
 import { UseReadingsPropTypes } from "./types";
@@ -25,7 +24,7 @@ const useReadings = ({
 
   const requestReadings = useCallback(async () => {
     try {
-      if (!(await validateInitData())) {
+      if (!(await Api.botController.validateInitData())) {
         showInfoPopup("Init data is invalid", t("error title"));
         return;
       }
@@ -34,7 +33,7 @@ const useReadings = ({
 
       backButton.hide();
 
-      const response = await getReadings(
+      const response = await Api.redingsController.getReadings(
         cardsNames,
         i18n.language as SystemLanguage,
         path,

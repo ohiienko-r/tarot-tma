@@ -1,12 +1,14 @@
-import { FC, PropsWithChildren, useState, useEffect, useCallback } from "react";
+import {
+  FC,
+  PropsWithChildren,
+  useState,
+  useEffect,
+  useCallback,
+  useMemo,
+} from "react";
 import { BalanceContext } from "./BalanceContext";
 import { cloudStorage, initData } from "@/Telegram";
-import {
-  getUserBalance,
-  setInitialBalance,
-  updateUserBalance,
-  migrateBalance,
-} from "@/API/API";
+import { Api } from "@/Api";
 
 export const BalanceProvider: FC<PropsWithChildren> = ({ children }) => {
   const [balance, setBalance] = useState<number | undefined>(undefined);
@@ -14,15 +16,22 @@ export const BalanceProvider: FC<PropsWithChildren> = ({ children }) => {
 
   useEffect(() => {
     const getBalance = async () => {
-      const currentBalance = await getUserBalance(uId as number);
+      const currentBalance = await Api.balanceController.getUserBalance(
+        uId as number
+      );
       const cloudBalance = await cloudStorage.get("balance");
 
       if (currentBalance === null && cloudBalance != "") {
-        await migrateBalance(uId as number, JSON.parse(cloudBalance));
+        await Api.balanceController.migrateBalance(
+          uId as number,
+          JSON.parse(cloudBalance)
+        );
         cloudStorage.delete("balance");
         setBalance(JSON.parse(cloudBalance));
       } else if (currentBalance === null && cloudBalance == "") {
-        const initBalance = await setInitialBalance(uId as number);
+        const initBalance = await Api.balanceController.setInitialBalance(
+          uId as number
+        );
         setBalance(initBalance);
       }
 
@@ -42,15 +51,20 @@ export const BalanceProvider: FC<PropsWithChildren> = ({ children }) => {
           setBalance((prev) => prev);
         } else {
           setBalance(newBalance);
-          await updateUserBalance(uId as number, value);
+          await Api.balanceController.updateUserBalance(uId as number, value);
         }
       }
     },
     [balance, uId]
   );
 
+  const providerValue = useMemo(
+    () => ({ balance, updateBalance }),
+    [balance, updateBalance]
+  );
+
   return (
-    <BalanceContext.Provider value={{ balance, updateBalance }}>
+    <BalanceContext.Provider value={providerValue}>
       {children}
     </BalanceContext.Provider>
   );

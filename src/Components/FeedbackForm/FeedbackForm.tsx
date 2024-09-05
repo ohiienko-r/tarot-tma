@@ -6,7 +6,7 @@ import { useBalance } from "@/Contexts";
 import { useInfoPopup } from "@/Hooks";
 import { Rating, Button } from "@telegram-apps/telegram-ui";
 import { validateInputs } from "../RatingModal/helpers";
-import { sendFeedback } from "@/API/API";
+import { Api } from "@/Api";
 import { FeedbackFormPropTypes } from "./types";
 import "./styles.scss";
 
@@ -43,7 +43,7 @@ const FeedbackForm: FC<FeedbackFormPropTypes> = ({ onClose }) => {
     setLoading(false);
     onClose();
     popup(t("thank you for your feedback"));
-    await sendFeedback(body);
+    await Api.botController.sendFeedback(body);
     setFeedbackText("");
   };
 
