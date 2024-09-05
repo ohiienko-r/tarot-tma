@@ -1,4 +1,4 @@
-export * from "./ads.controller";
-export * from "./balance.controller";
-export * from "./bot.controller";
-export * from "./readings.controller";
+export { default as adsController } from "./ads.controller";
+export { default as balanceController } from "./balance.controller";
+export { default as botController } from "./bot.controller";
+export { default as redingsController } from "./readings.controller";

@@ -128,4 +128,4 @@ const getReadings = async (
   }
 };
 
-export default getReadings;
+export default { getReadings };

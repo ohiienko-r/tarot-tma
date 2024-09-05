@@ -1,10 +1,10 @@
 import { initData } from "@/Telegram";
-import { getAdsDisabledTill } from "@/API/API";
+import { Api } from "@/Api";
 
 export const isAdsDisabled = async () => {
   const uId = initData?.user?.id;
   const today = new Date();
-  const tillDate = await getAdsDisabledTill(uId as number);
+  const tillDate = await Api.adsController.getAdsDisabledTill(uId as number);
 
   if (!tillDate) {
     console.log("No due date in DB");

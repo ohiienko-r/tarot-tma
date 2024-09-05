@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { useInvoice } from "@telegram-apps/sdk-react";
 import { useTranslation } from "react-i18next";
 import useInfoPopup from "../useInfoPopup/useInfoPopup";
-import { getInvoiceLink } from "@/helpers";
+import { Api } from "@/Api";
 
 const useSupportUs = () => {
   const { t } = useTranslation();
@@ -11,7 +11,7 @@ const useSupportUs = () => {
 
   const handleDonation = useCallback(
     async (amount: number, onComplete?: () => void) => {
-      const invoiceLink = await getInvoiceLink(
+      const invoiceLink = await Api.botController.getInvoiceLink(
         t("support the developers"),
         t("support the developers"),
         amount
