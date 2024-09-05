@@ -2,6 +2,8 @@ import { ROUTES_NAMES } from "@/Router";
 import { prompts } from "../api.dto";
 import { Card, SystemLanguage, Path } from "@/types";
 
+//Currently all these functions lead to a single endpoint but
+
 /**
  *
  * @param {Card[]} card - one of the Tarot cards names;
