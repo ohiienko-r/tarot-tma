@@ -7,7 +7,6 @@ export const isAdsDisabled = async () => {
   const tillDate = await Api.adsController.getAdsDisabledTill(uId as number);
 
   if (!tillDate) {
-    console.log("No due date in DB");
     return false;
   }
 
