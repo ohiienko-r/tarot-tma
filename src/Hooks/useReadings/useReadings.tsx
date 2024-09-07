@@ -22,54 +22,64 @@ const useReadings = ({
   const showInfoPopup = useInfoPopup();
   const navigate = useNavigate();
 
+  const isInitDataValid = useCallback(async () => {
+    const isValid = await Api.botController.validateInitData();
+    if (!isValid) {
+      showInfoPopup("Init data is invalid", t("error title"));
+      return false;
+    } else {
+      return true;
+    }
+  }, [t, showInfoPopup]);
+
+  const getReadings = useCallback(async () => {
+    return await Api.redingsController.getReadings(
+      cardsNames,
+      i18n.language as SystemLanguage,
+      path,
+      prompt
+    );
+  }, [cardsNames, i18n, path, prompt]);
+
+  const onReadingAvailable = useCallback(
+    async (reading: string) => {
+      await updateBalance(-spreadPrice);
+
+      navigate(ROUTES_NAMES.READINGS, {
+        state: {
+          title: t(path),
+          cardsKeys,
+          reading: reading,
+          fromPath: path,
+          prompt,
+        },
+      });
+    },
+    [cardsKeys, path, prompt, spreadPrice, t, navigate, updateBalance]
+  );
+
   const requestReadings = useCallback(async () => {
     try {
-      if (!(await Api.botController.validateInitData())) {
-        showInfoPopup("Init data is invalid", t("error title"));
-        return;
-      }
+      if (!(await isInitDataValid())) return;
 
       showAdvertisment();
 
       backButton.hide();
 
-      const response = await Api.redingsController.getReadings(
-        cardsNames,
-        i18n.language as SystemLanguage,
-        path,
-        prompt
-      );
+      const reading = await getReadings();
 
-      const locState = {
-        title: t(path),
-        cardsKeys: cardsKeys,
-        reading: response,
-        fromPath: path,
-        prompt: prompt,
-      };
-
-      await updateBalance(-spreadPrice);
-
-      navigate(ROUTES_NAMES.READINGS, {
-        state: locState,
-      });
+      await onReadingAvailable(reading as string);
     } catch (error) {
-      console.error(`Error occured: ${error}`);
+      console.error(`Error occurred: ${error}`);
       showInfoPopup(t("error message"), t("error title"));
-      return;
     }
   }, [
-    spreadPrice,
-    path,
-    prompt,
-    cardsNames,
-    cardsKeys,
-    i18n.language,
-    t,
-    navigate,
+    isInitDataValid,
     showAdvertisment,
+    getReadings,
+    onReadingAvailable,
     showInfoPopup,
-    updateBalance,
+    t,
   ]);
 
   return requestReadings;
