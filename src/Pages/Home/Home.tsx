@@ -13,7 +13,7 @@ import {
   DailyBonusModal,
   Settings,
   BackgroundLayer,
-  Preloader,
+  SplashScreen,
 } from "@/Components";
 import { analytics } from "@/Firebase";
 import { logEvent } from "firebase/analytics";
@@ -52,7 +52,7 @@ const Home: FC = () => {
         <Main />
         <DailyBonusModal />
         <Settings />
-        {balance === undefined && <Preloader />}
+        {balance === undefined && <SplashScreen />}
       </Page>
     </BackgroundLayer>
   );

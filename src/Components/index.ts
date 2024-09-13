@@ -26,5 +26,6 @@ export { default as PurchaseDisableAdsButton } from "./PurchaseDisableAdsButton/
 export { default as SupportUsButtonWithModal } from "./SupportUsButtonWithModal/SupportUsButtonWithModall";
 export { default as SupportUsForm } from "./SupportUsForm/SupportUsForm";
 export { default as RegisterAtProductHuntButtonWithModal } from "./RegisterAtProductHuntButtonWithModal/RegisterAtProductHuntButtonWithModal";
+export { default as SplashScreen } from "./SplashScreen/SplashScreen";
 export * as Icons from "./Icons";
 export * as Modal from "./Modal";
