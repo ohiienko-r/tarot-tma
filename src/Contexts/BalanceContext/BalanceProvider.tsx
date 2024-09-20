@@ -28,7 +28,7 @@ export const BalanceProvider: FC<PropsWithChildren> = ({ children }) => {
         );
         cloudStorage.delete("balance");
         setBalance(JSON.parse(cloudBalance));
-      } else if (currentBalance === null && cloudBalance == "") {
+      } else if (currentBalance === undefined && cloudBalance == "") {
         const initBalance = await Api.balanceController.setInitialBalance(
           uId as number
         );
