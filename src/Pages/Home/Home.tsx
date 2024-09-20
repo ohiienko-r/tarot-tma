@@ -1,6 +1,5 @@
 import { FC } from "react";
 import { useNavigate } from "react-router-dom";
-import { useBalance } from "@/Contexts";
 import { useTranslation } from "react-i18next";
 import {
   Header,
@@ -13,7 +12,6 @@ import {
   DailyBonusModal,
   Settings,
   BackgroundLayer,
-  SplashScreen,
 } from "@/Components";
 import { analytics } from "@/Firebase";
 import { logEvent } from "firebase/analytics";
@@ -24,7 +22,6 @@ import "./styles.scss";
 const Home: FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { balance } = useBalance();
 
   const handleNavigateToPayment = () => {
     navigate(ROUTES_NAMES.PAYMENT);
@@ -52,7 +49,6 @@ const Home: FC = () => {
         <Main />
         <DailyBonusModal />
         <Settings />
-        {balance === undefined && <SplashScreen />}
       </Page>
     </BackgroundLayer>
   );
