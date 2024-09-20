@@ -21,7 +21,7 @@ export const BalanceProvider: FC<PropsWithChildren> = ({ children }) => {
       );
       const cloudBalance = await cloudStorage.get("balance");
 
-      if (currentBalance === null && cloudBalance != "") {
+      if (currentBalance === undefined && cloudBalance != "") {
         await Api.balanceController.migrateBalance(
           uId as number,
           JSON.parse(cloudBalance)
@@ -35,7 +35,7 @@ export const BalanceProvider: FC<PropsWithChildren> = ({ children }) => {
         setBalance(initBalance);
       }
 
-      if (currentBalance != null) {
+      if (currentBalance != undefined) {
         setBalance(currentBalance);
       }
     };
