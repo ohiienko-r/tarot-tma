@@ -3,6 +3,7 @@ import {
   FeedbackBody,
   SendSpreadToUserBody,
   ValidationResponse,
+  UserData,
 } from "@/types";
 
 export default {
@@ -26,6 +27,24 @@ export default {
       const data: ValidationResponse = await response.json();
 
       return data.success;
+    } catch (error) {
+      throw new Error(`${error}`);
+    }
+  },
+  async setNewUser({ uId, firstName, userName, languageCode }: UserData) {
+    try {
+      await fetch("https://tarot-bot-18921c9756be.herokuapp.com/new-user", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          uId: uId,
+          firstName: firstName,
+          userName: userName,
+          languageCode: languageCode,
+        }),
+      });
     } catch (error) {
       throw new Error(`${error}`);
     }

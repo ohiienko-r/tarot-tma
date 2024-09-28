@@ -38,3 +38,10 @@ export type SendSpreadToUserBody = {
   cardsKeys: CardKey[];
   reading: string;
 };
+
+export type UserData = {
+  uId: number;
+  firstName: string;
+  userName: string;
+  languageCode: string;
+};
