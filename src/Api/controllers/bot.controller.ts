@@ -31,7 +31,13 @@ export default {
       throw new Error(`${error}`);
     }
   },
-  async setNewUser({ uId, firstName, userName, languageCode }: UserData) {
+  async setNewUser({
+    uId,
+    firstName,
+    userName,
+    languageCode,
+    referrerId,
+  }: UserData) {
     try {
       await fetch("https://tarot-bot-18921c9756be.herokuapp.com/new-user", {
         method: "POST",
@@ -43,6 +49,7 @@ export default {
           firstName: firstName,
           userName: userName,
           languageCode: languageCode,
+          referrerId: referrerId,
         }),
       });
     } catch (error) {
