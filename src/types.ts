@@ -44,4 +44,5 @@ export type UserData = {
   firstName: string;
   userName: string;
   languageCode: string;
+  referrerId?: number;
 };
