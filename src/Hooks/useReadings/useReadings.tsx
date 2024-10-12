@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { useBalance } from "@/Contexts";
+import { useUser } from "@/Contexts";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { backButton } from "@/Telegram";
@@ -15,7 +15,7 @@ const useReadings = ({
   prompt,
   spreadPrice,
 }: UseReadingsPropTypes) => {
-  const { updateBalance } = useBalance();
+  const { updateBalance } = useUser();
   const { t, i18n } = useTranslation();
   const { cardsKeys, cardsNames } = useRandomCards(cardsQty);
   const showAdvertisment = useAds();

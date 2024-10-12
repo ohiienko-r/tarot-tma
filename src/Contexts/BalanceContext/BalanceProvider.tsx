@@ -1,47 +1,42 @@
-import {
-  FC,
-  PropsWithChildren,
-  useState,
-  useEffect,
-  useCallback,
-  useMemo,
-} from "react";
+import { FC, PropsWithChildren, useState, useCallback, useMemo } from "react";
+import { useUser } from "../UserContext/useUser";
 import { BalanceContext } from "./BalanceContext";
-import { cloudStorage, initData } from "@/Telegram";
+import { initData } from "@/Telegram";
 import { Api } from "@/Api";
 
 export const BalanceProvider: FC<PropsWithChildren> = ({ children }) => {
-  const [balance, setBalance] = useState<number | undefined>(undefined);
+  const user = useUser();
+  const [balance, setBalance] = useState<number | undefined>(user.balance);
   const uId = initData?.user?.id;
 
-  useEffect(() => {
-    const getBalance = async () => {
-      const currentBalance = await Api.balanceController.getUserBalance(
-        uId as number
-      );
-      const cloudBalance = await cloudStorage.get("balance");
+  // useEffect(() => {
+  //   const getBalance = async () => {
+  //     const currentBalance = await Api.balanceController.getUserBalance(
+  //       uId as number
+  //     );
+  //     const cloudBalance = await cloudStorage.get("balance");
 
-      if (currentBalance === undefined && cloudBalance != "") {
-        await Api.balanceController.migrateBalance(
-          uId as number,
-          JSON.parse(cloudBalance)
-        );
-        cloudStorage.delete("balance");
-        setBalance(JSON.parse(cloudBalance));
-      } else if (currentBalance === undefined && cloudBalance == "") {
-        const initBalance = await Api.balanceController.setInitialBalance(
-          uId as number
-        );
-        setBalance(initBalance);
-      }
+  //     if (currentBalance === undefined && cloudBalance != "") {
+  //       await Api.balanceController.migrateBalance(
+  //         uId as number,
+  //         JSON.parse(cloudBalance)
+  //       );
+  //       cloudStorage.delete("balance");
+  //       setBalance(JSON.parse(cloudBalance));
+  //     } else if (currentBalance === undefined && cloudBalance == "") {
+  //       const initBalance = await Api.balanceController.setInitialBalance(
+  //         uId as number
+  //       );
+  //       setBalance(initBalance);
+  //     }
 
-      if (currentBalance != undefined) {
-        setBalance(currentBalance);
-      }
-    };
+  //     if (currentBalance != undefined) {
+  //       setBalance(currentBalance);
+  //     }
+  //   };
 
-    getBalance();
-  }, [uId]);
+  //   getBalance();
+  // }, [uId]);
 
   const updateBalance = useCallback(
     async (value: number) => {

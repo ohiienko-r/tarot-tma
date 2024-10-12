@@ -1,13 +1,13 @@
 import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { useBalance } from "@/Contexts";
+import { useUser } from "@/Contexts";
 import { popup } from "@/Telegram";
 import { ROUTES_NAMES } from "@/Router";
 
 const useLowBalancePopup = (spreadCost: number) => {
   const { t } = useTranslation();
-  const { balance } = useBalance();
+  const { balance } = useUser();
   const navigate = useNavigate();
 
   const popupTitle = t("not enough");

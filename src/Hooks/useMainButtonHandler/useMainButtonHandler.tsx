@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useBalance } from "@/Contexts";
+import { useUser } from "@/Contexts";
 import {
   useLowBalancePopup,
   useReadings,
@@ -15,7 +15,7 @@ const useMainButtonHandler = (
   prompt?: string
 ) => {
   const [handler, setHandler] = useState<() => void | Promise<void>>(() => {});
-  const { balance } = useBalance();
+  const { balance } = useUser();
   const showLowBalancePopup = useLowBalancePopup(spreadPrice);
   const handleRequestReadings = useReadings({
     cardsQty: cardsQty,

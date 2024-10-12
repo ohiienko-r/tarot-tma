@@ -1,10 +1,10 @@
 import { FC } from "react";
-import { useBalance } from "@/Contexts";
+import { useUser } from "@/Contexts";
 import { useTranslation } from "react-i18next";
 import "./styles.scss";
 
 const SpreadBalancePad: FC = () => {
-  const { balance } = useBalance();
+  const { balance } = useUser();
   const { t } = useTranslation();
 
   return (
