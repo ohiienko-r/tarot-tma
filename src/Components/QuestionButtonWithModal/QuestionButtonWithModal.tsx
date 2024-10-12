@@ -1,24 +1,24 @@
 import { FC, useState } from "react";
 import { haptic } from "@/Telegram";
-import { useBalance } from "@/Contexts";
+import { useUser } from "@/Contexts";
 import { useTranslation } from "react-i18next";
 import { Icons, Modal } from "@/Components";
 import { Button, IconButton, Text } from "@telegram-apps/telegram-ui";
 import "./styles.scss";
 
 const QuestionButtonWithModal: FC = () => {
-  const [modalVisible, setModalvisible] = useState<boolean>(false);
-  const { balance } = useBalance();
+  const [modalVisible, setModalVisible] = useState<boolean>(false);
+  const { balance } = useUser();
   const { t } = useTranslation();
 
   const handleModalOpen = () => {
     haptic.impactOccurred("medium");
-    setModalvisible(true);
+    setModalVisible(true);
   };
 
   const handleModalClose = () => {
     haptic.impactOccurred("medium");
-    setModalvisible(false);
+    setModalVisible(false);
   };
 
   const title = `${t("balance description pt1")} ${balance} 🌕 ${t(

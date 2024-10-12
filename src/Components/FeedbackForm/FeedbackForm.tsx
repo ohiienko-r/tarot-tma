@@ -2,7 +2,7 @@ import { FC, useState, FormEvent } from "react";
 import { useTranslation } from "react-i18next";
 import { retrieveLaunchParams } from "@telegram-apps/sdk-react";
 import { cloudStorage, haptic } from "@/Telegram";
-import { useBalance } from "@/Contexts";
+import { useUser } from "@/Contexts";
 import { useInfoPopup } from "@/Hooks";
 import { Rating, Button } from "@telegram-apps/telegram-ui";
 import { validateInputs } from "../RatingModal/helpers";
@@ -15,7 +15,7 @@ const FeedbackForm: FC<FeedbackFormPropTypes> = ({ onClose }) => {
   const [feedbackText, setFeedbackText] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const { initData } = retrieveLaunchParams();
-  const { updateBalance } = useBalance();
+  const { updateBalance } = useUser();
   const popup = useInfoPopup();
   const { t } = useTranslation();
 

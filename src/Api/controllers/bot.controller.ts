@@ -39,21 +39,58 @@ export default {
     referrerId,
   }: UserData) {
     try {
-      await fetch("https://tarot-bot-18921c9756be.herokuapp.com/new-user", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          uId: uId,
-          firstName: firstName,
-          userName: userName,
-          languageCode: languageCode,
-          referrerId: referrerId,
-        }),
-      });
+      const response = await fetch(
+        "https://tarot-bot-18921c9756be.herokuapp.com/new-user",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            uId: uId,
+            firstName: firstName,
+            userName: userName,
+            languageCode: languageCode,
+            referrerId: referrerId,
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        console.error(`Failed to set new user`);
+      }
+
+      const user = await response.json();
+      return user;
     } catch (error) {
       throw new Error(`${error}`);
+    }
+  },
+  async getUserData(uId: number) {
+    try {
+      const response = await fetch(
+        "https://tarot-bot-18921c9756be.herokuapp.com/get-user",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            uId: uId,
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        console.error("Failed to get user data");
+      }
+
+      const user = await response.json();
+      return user;
+    } catch (error) {
+      throw new Error(
+        `Failed to retreive user data for the provided uId: ${error}`
+      );
     }
   },
   /**

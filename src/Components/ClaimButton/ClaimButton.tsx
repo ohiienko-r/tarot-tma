@@ -1,5 +1,5 @@
 import { FC, useState, useEffect } from "react";
-import { useBalance } from "@/Contexts";
+import { useUser } from "@/Contexts";
 import { useTranslation } from "react-i18next";
 import { cloudStorage } from "@/Telegram";
 import { BuyButton } from "@/Components";
@@ -7,7 +7,7 @@ import "./styles.scss";
 
 const ClaimButton: FC = () => {
   const [disabled, setDisabled] = useState(true);
-  const { updateBalance } = useBalance();
+  const { updateBalance } = useUser();
   const { t } = useTranslation();
 
   useEffect(() => {

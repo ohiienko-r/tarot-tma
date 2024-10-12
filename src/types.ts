@@ -46,3 +46,13 @@ export type UserData = {
   languageCode: string;
   referrerId?: number;
 };
+
+export type User = {
+  balance: number;
+  uId: number;
+  firstName: string | null;
+  userName: string | null;
+  languageCode: SystemLanguage | null;
+  remind: boolean;
+  referred: number | null;
+};

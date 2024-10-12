@@ -1,10 +1,10 @@
 import { FC } from "react";
-import { useBalance } from "@/Contexts";
+import { useUser } from "@/Contexts";
 import { Spinner } from "@telegram-apps/telegram-ui";
 import "./styles.scss";
 
 const Balance: FC = () => {
-  const { balance } = useBalance();
+  const { balance } = useUser();
 
   return (
     <div className="balance__value">

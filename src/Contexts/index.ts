@@ -1,2 +1,2 @@
-export { default as BalanceProvider } from "./BalanceContext/BalanceProvider";
-export * from "./BalanceContext/useBalance";
+export { default as UserProvider } from "./UserContext/UserProvider";
+export * from "./UserContext/useUser";

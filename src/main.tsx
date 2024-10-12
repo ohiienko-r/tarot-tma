@@ -1,4 +1,4 @@
-import { BalanceProvider } from "./Contexts/index.ts";
+import { UserProvider } from "./Contexts/index.ts";
 import ReactDOM from "react-dom/client";
 import {
   SDKProvider,
@@ -21,9 +21,9 @@ closingBehaviour.enableConfirmation();
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <AppRoot>
     <SDKProvider>
-      <BalanceProvider>
+      <UserProvider>
         <App />
-      </BalanceProvider>
+      </UserProvider>
     </SDKProvider>
   </AppRoot>
 );
