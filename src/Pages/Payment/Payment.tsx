@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { haptic } from "@/Telegram";
 import { analytics } from "@/Firebase";
 import { logEvent } from "firebase/analytics";
-import { useInfoPopup, useBackButton, useCoinsPurchase } from "@/Hooks";
+import { useBackButton, useCoinsPurchase, useShareApp } from "@/Hooks";
 import { useTranslation } from "react-i18next";
 import { Headline } from "@telegram-apps/telegram-ui";
 import {
@@ -15,7 +15,6 @@ import {
   RateButtonWithModal,
   PurchaseDisableAdsButton,
   SupportUsButtonWithModal,
-  RegisterAtProductHuntButtonWithModal,
 } from "@/Components";
 import { ROUTES_NAMES } from "@/Router";
 import "./styles.scss";
@@ -23,8 +22,8 @@ import "./styles.scss";
 const Payment: FC = () => {
   const { t } = useTranslation();
   const purchaseCoins = useCoinsPurchase();
-  const showPopup = useInfoPopup();
   const navigate = useNavigate();
+  const shareApp = useShareApp();
   logEvent(analytics, "page_view", { page_title: "Payment" });
 
   const handleNavigateHome = () => {
@@ -46,13 +45,10 @@ const Payment: FC = () => {
       <ul className="payment__buttons-list">
         <BuyButton
           title={`3 🌕 ${t("for inviting a friend")}`}
-          onPress={() => {
-            showPopup(t("payment popup text"));
-          }}
+          onPress={shareApp}
         />
         <ClaimButton />
         <RateButtonWithModal />
-        <RegisterAtProductHuntButtonWithModal />
       </ul>
       <Headline weight="2" className="payment__heading">
         {t("buy")}
