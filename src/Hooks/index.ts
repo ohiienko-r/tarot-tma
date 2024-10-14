@@ -4,7 +4,7 @@ export { default as useDailyBonus } from "./useDailyBonus/useDailyBonus";
 export { default as useMainButton } from "./useMainButton/useMainButton";
 export { default as useRandomCards } from "./useRandomCards/useRandomCards";
 export { default as useLowBalancePopup } from "./useLowBalancePopup/useLowBalancePopup";
-export { default as useShareBotUrl } from "./useShareBotUrl/useShareBotUrl";
+export { default as useShareApp } from "./useShareApp/useShareApp";
 export { default as useMainButtonHandler } from "./useMainButtonHandler/useMainButtonHandler";
 export { default as useSaveSpreadState } from "./useSaveSpreadState/useSaveSpreadState";
 export { default as useNavigation } from "./useNavigation/useNavigation";
