@@ -38,12 +38,10 @@ const BuyButton: FC<BuyButtonPropTypes> = ({
       {loadervisible ? (
         <Icons.Loader />
       ) : price ? (
-        <>
-          <p className="buy-button__price">
-            <Icons.TelegramStar />
-            {price}
-          </p>
-        </>
+        <p className="buy-button__price">
+          <Icons.TelegramStar />
+          {price}
+        </p>
       ) : (
         <Icons.Chevron stroke="#FFFFFF" />
       )}

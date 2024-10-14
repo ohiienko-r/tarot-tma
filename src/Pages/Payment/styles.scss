@@ -25,6 +25,21 @@
     gap: 0.5em;
   }
 
+  &__buttons-inline-list {
+    padding: 0.5em 1em;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__vertical-buy-button {
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 30%;
+    font-size: 14px;
+    gap: 0.5em;
+  }
+
   &__buton-title {
     width: 100svw;
     text-align: start;

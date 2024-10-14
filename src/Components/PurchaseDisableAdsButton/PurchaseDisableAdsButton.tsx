@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useInfoPopup, useDisableAdsPurchase } from "@/Hooks";
 import { BuyButton } from "@/Components";
 import { isAdsDisabled } from "@/Hooks/useAds/helpers";
+import "./styles.scss";
 
 const PurchaseDisableAdsButton: FC = () => {
   const { t } = useTranslation();
@@ -18,7 +19,12 @@ const PurchaseDisableAdsButton: FC = () => {
   };
 
   return (
-    <BuyButton title={t("for 30 days")} price={150} onPress={handleClick} />
+    <BuyButton
+      title={`${t("disable ads")} ${t("for 30 days")}`}
+      price={150}
+      onPress={handleClick}
+      className="disable-ads-button"
+    />
   );
 };
 

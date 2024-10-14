@@ -23,6 +23,16 @@
     font-size: 40px;
   }
 
+  &__quick-sum-list {
+    box-sizing: border-box;
+    padding: 1em 0;
+    display: flex;
+    justify-content: space-evenly;
+    &--button {
+      width: 20%;
+    }
+  }
+
   &__caption {
     margin-bottom: 2em;
     line-height: 20px;

@@ -40,7 +40,41 @@ const Payment: FC = () => {
         <p>{t("magic coins")}</p>
       </div>
       <Headline weight="2" className="payment__heading">
-        {t("get for free")}
+        {`${t("buy")} 🫰`}
+      </Headline>
+      <ul className="payment__buttons-inline-list">
+        <BuyButton
+          title={`5 🌕 ${t("magic coins")} `}
+          price={100}
+          onPress={async () => {
+            await purchaseCoins(5, 100);
+          }}
+          className="payment__vertical-buy-button"
+        />
+        <BuyButton
+          title={`20 🌕 ${t("magic coins")} `}
+          price={350}
+          caption={t("economy 13")}
+          onPress={async () => {
+            await purchaseCoins(20, 350);
+          }}
+          className="payment__vertical-buy-button"
+        />
+        <BuyButton
+          title={`80 🌕 ${t("magic coins")} `}
+          price={1000}
+          caption={t("economy 38")}
+          onPress={async () => {
+            await purchaseCoins(80, 1000);
+          }}
+          className="payment__vertical-buy-button"
+        />
+      </ul>
+      <ul className="payment__buttons-list">
+        <PurchaseDisableAdsButton />
+      </ul>
+      <Headline weight="2" className="payment__heading">
+        {`${t("get for free")} 🎁`}
       </Headline>
       <ul className="payment__buttons-list">
         <BuyButton
@@ -51,41 +85,7 @@ const Payment: FC = () => {
         <RateButtonWithModal />
       </ul>
       <Headline weight="2" className="payment__heading">
-        {t("buy")}
-      </Headline>
-      <ul className="payment__buttons-list">
-        <BuyButton
-          title={`5 🌕 ${t("magic coins")} `}
-          price={100}
-          onPress={async () => {
-            await purchaseCoins(5, 100);
-          }}
-        />
-        <BuyButton
-          title={`20 🌕 ${t("magic coins")} `}
-          price={350}
-          caption={t("economy 13")}
-          onPress={async () => {
-            await purchaseCoins(20, 350);
-          }}
-        />
-        <BuyButton
-          title={`80 🌕 ${t("magic coins")} `}
-          price={1000}
-          caption={t("economy 38")}
-          onPress={async () => {
-            await purchaseCoins(80, 1000);
-          }}
-        />
-      </ul>
-      <Headline weight="2" className="payment__heading">
-        {t("disable ads")}
-      </Headline>
-      <ul className="payment__buttons-list">
-        <PurchaseDisableAdsButton />
-      </ul>
-      <Headline weight="2" className="payment__heading">
-        {t("support us")}
+        {`${t("support us")} ❤️`}
       </Headline>
       <ul className="payment__buttons-list">
         <SupportUsButtonWithModal />

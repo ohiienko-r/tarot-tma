@@ -27,6 +27,10 @@ const SupportUsForm: FC<SupportUsFormPropTypes> = ({ onComplete }) => {
     }
   };
 
+  const handleSetSum = (sum: number) => {
+    setStarsCount(sum);
+  };
+
   const handleSendStars = async () => {
     haptic.impactOccurred("medium");
     supportUs(starsCount, onComplete);
@@ -51,7 +55,32 @@ const SupportUsForm: FC<SupportUsFormPropTypes> = ({ onComplete }) => {
           <Icons.Chevron width="30" height="30" />
         </IconButton>
       </div>
-
+      <ul className="support-form__quick-sum-list">
+        <Button
+          mode="bezeled"
+          size="s"
+          className="support-form__quick-sum-list--button"
+          onClick={() => handleSetSum(10)}
+        >
+          10
+        </Button>
+        <Button
+          mode="bezeled"
+          size="s"
+          className="support-form__quick-sum-list--button"
+          onClick={() => handleSetSum(50)}
+        >
+          50
+        </Button>
+        <Button
+          mode="bezeled"
+          size="s"
+          className="support-form__quick-sum-list--button"
+          onClick={() => handleSetSum(100)}
+        >
+          100
+        </Button>
+      </ul>
       <p className="support-form__caption">{t("you may support us")}</p>
       <Button size="l" onClick={handleSendStars} stretched>
         {t("send")}
