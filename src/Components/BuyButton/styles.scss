@@ -20,7 +20,12 @@
       gap: 4px;
     }
     &--caption {
+      box-sizing: border-box;
+      width: 100%;
+      padding: 6px 10px;
+      border-radius: 0 0 8px 8px;
       font-size: 10px;
+      background-color: #ec1ee5;
     }
   }
 

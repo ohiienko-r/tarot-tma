@@ -18,6 +18,7 @@ import {
 } from "@/Components";
 import { ROUTES_NAMES } from "@/Router";
 import "./styles.scss";
+import VerticalBuyButton from "@/Components/VerticalBuyButton/VerticalBuyButton";
 
 const Payment: FC = () => {
   const { t } = useTranslation();
@@ -43,31 +44,28 @@ const Payment: FC = () => {
         {`${t("buy")} 🫰`}
       </Headline>
       <ul className="payment__buttons-inline-list">
-        <BuyButton
-          title={`5 🌕 ${t("magic coins")} `}
+        <VerticalBuyButton
+          title={`5🌕`}
           price={100}
           onPress={async () => {
             await purchaseCoins(5, 100);
           }}
-          className="payment__vertical-buy-button"
         />
-        <BuyButton
-          title={`20 🌕 ${t("magic coins")} `}
+        <VerticalBuyButton
+          title={`20🌕`}
           price={350}
           caption={t("economy 13")}
           onPress={async () => {
             await purchaseCoins(20, 350);
           }}
-          className="payment__vertical-buy-button"
         />
-        <BuyButton
-          title={`80 🌕 ${t("magic coins")} `}
+        <VerticalBuyButton
+          title={`80🌕`}
           price={1000}
           caption={t("economy 38")}
           onPress={async () => {
             await purchaseCoins(80, 1000);
           }}
-          className="payment__vertical-buy-button"
         />
       </ul>
       <ul className="payment__buttons-list">

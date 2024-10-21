@@ -30,10 +30,9 @@ const BuyButton: FC<BuyButtonPropTypes> = ({
     >
       <div className="buy-button__text">
         <p className="buy-button__text--title">
-          {title}
+          <p>{title}</p>
           {children}
         </p>
-        {caption && <p className="buy-button__text--caption">{caption}</p>}
       </div>
       {loadervisible ? (
         <Icons.Loader />
@@ -45,6 +44,7 @@ const BuyButton: FC<BuyButtonPropTypes> = ({
       ) : (
         <Icons.Chevron stroke="#FFFFFF" />
       )}
+      {caption && <p className="buy-button__text--caption">{caption}</p>}
     </button>
   );
 };

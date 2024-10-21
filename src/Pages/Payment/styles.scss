@@ -37,7 +37,17 @@
     align-items: center;
     max-width: 30%;
     font-size: 14px;
-    gap: 0.5em;
+    gap: 1em;
+    padding: 10px 0 0 0;
+
+    div {
+      p {
+        p {
+          font-weight: 700;
+          font-size: 2em;
+        }
+      }
+    }
   }
 
   &__buton-title {
