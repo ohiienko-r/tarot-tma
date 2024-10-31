@@ -38,12 +38,12 @@ const VerticalBuyButton: FC<VerticalBuyButtonPropTypes> = ({
               <Icons.TelegramStar />
               {price}
             </p>
-            <p
+            <del
               className="vb-button__caption"
               style={!caption ? { visibility: "hidden" } : {}}
             >
               {caption}
-            </p>
+            </del>
           </div>
         </>
       )}

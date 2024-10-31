@@ -41,30 +41,31 @@ const Payment: FC = () => {
         <p>{t("magic coins")}</p>
       </div>
       <Headline weight="2" className="payment__heading">
-        {`${t("buy")} 🫰`}
+        {t("discount month")}
       </Headline>
       <ul className="payment__buttons-inline-list">
         <VerticalBuyButton
           title={`5🌕`}
-          price={100}
+          price={50}
+          caption="⭐100"
           onPress={async () => {
-            await purchaseCoins(5, 100);
+            await purchaseCoins(5, 50);
           }}
         />
         <VerticalBuyButton
           title={`20🌕`}
-          price={350}
-          caption={t("economy 13")}
+          price={175}
+          caption="⭐400"
           onPress={async () => {
-            await purchaseCoins(20, 350);
+            await purchaseCoins(20, 175);
           }}
         />
         <VerticalBuyButton
           title={`80🌕`}
-          price={1000}
-          caption={t("economy 38")}
+          price={600}
+          caption="⭐1350"
           onPress={async () => {
-            await purchaseCoins(80, 1000);
+            await purchaseCoins(80, 600);
           }}
         />
       </ul>
