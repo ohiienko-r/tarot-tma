@@ -1,6 +1,5 @@
 import { useEffect } from "react";
-import { retrieveLaunchParams } from "@telegram-apps/sdk-react";
-import { cloudStorage } from "@/Telegram";
+import { retrieveLaunchParams, cloudStorage } from "@telegram-apps/sdk-react";
 import { useTranslation } from "react-i18next";
 
 const useLanguage = () => {
@@ -11,11 +10,11 @@ const useLanguage = () => {
 
   useEffect(() => {
     const changeLanguage = async () => {
-      const preferredLanguage = await cloudStorage.get("preferredLanguage");
+      const preferredLanguage = await cloudStorage.getItem("preferredLanguage");
 
       if (preferredLanguage === "") {
         i18n.changeLanguage(userLanguage);
-        await cloudStorage.set("preferredLanguage", userLanguage as string);
+        await cloudStorage.setItem("preferredLanguage", userLanguage as string);
       } else {
         i18n.changeLanguage(preferredLanguage);
       }

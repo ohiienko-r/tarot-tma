@@ -1,6 +1,6 @@
 import { FC, useState, useEffect } from "react";
 import { BuyButton, RatingModal } from "@/Components";
-import { haptic, cloudStorage } from "@/Telegram";
+import { hapticFeedback, cloudStorage } from "@telegram-apps/sdk-react";
 import { useTranslation } from "react-i18next";
 
 const RateButtonWithModal: FC = () => {
@@ -10,7 +10,7 @@ const RateButtonWithModal: FC = () => {
 
   useEffect(() => {
     const handleButtonVisible = async () => {
-      const rated = await cloudStorage.get("rated");
+      const rated = await cloudStorage.getItem("rated");
 
       if (rated == "") {
         setButtonVisible(true);
@@ -27,7 +27,7 @@ const RateButtonWithModal: FC = () => {
   };
 
   const handleModalClose = () => {
-    haptic.impactOccurred("medium");
+    hapticFeedback.impactOccurred("medium");
     setModalVisible(false);
   };
 

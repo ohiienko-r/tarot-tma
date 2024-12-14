@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { cloudStorage } from "@/Telegram";
+import { cloudStorage } from "@telegram-apps/sdk-react";
 import { useDailyActivity } from "@/Hooks";
 
 const useMyCard = () => {
@@ -8,7 +8,7 @@ const useMyCard = () => {
   useEffect(() => {
     const handleCardOfTheDayStateRemoval = async () => {
       if (activityAvailable) {
-        await cloudStorage.delete("myCard");
+        await cloudStorage.deleteItem("myCard");
       }
     };
 

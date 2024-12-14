@@ -1,11 +1,11 @@
 import { useEffect } from "react";
-import { initData } from "@/Telegram";
+import { initData } from "@telegram-apps/sdk-react";
 import { Api } from "@/Api";
 
 const useNewUser = () => {
   useEffect(() => {
     const setNewUser = async () => {
-      const user = initData?.user;
+      const user = initData.user();
 
       const refId = initData?.startParam ? +initData.startParam : undefined;
 

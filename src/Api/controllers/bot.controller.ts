@@ -1,4 +1,4 @@
-import { initDataRaw } from "@/Telegram";
+import { initDataRaw } from "@telegram-apps/sdk-react";
 import {
   FeedbackBody,
   SendSpreadToUserBody,
@@ -18,8 +18,7 @@ export default {
         {
           method: "POST",
           headers: {
-            "Content-Type": "application/json",
-            Authorization: `tma ${initDataRaw}`,
+            Authorization: `tma ${initDataRaw()}`,
           },
         }
       );

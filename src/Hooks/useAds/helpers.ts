@@ -1,8 +1,8 @@
-import { initData } from "@/Telegram";
+import { initData } from "@telegram-apps/sdk-react";
 import { Api } from "@/Api";
 
 export const isAdsDisabled = async () => {
-  const uId = initData?.user?.id;
+  const uId = initData.user()?.id;
   const today = new Date();
   const tillDate = await Api.adsController.getAdsDisabledTill(uId as number);
 

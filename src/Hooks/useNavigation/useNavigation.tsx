@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { cloudStorage } from "@/Telegram";
+import { cloudStorage } from "@telegram-apps/sdk-react";
 import { ROUTES_NAMES } from "@/Router";
 import { LinkState } from "./types";
 import cardOfTheDay from "@/assets/one_card.png";
@@ -16,7 +16,7 @@ const useNavigation = () => {
 
   useEffect(() => {
     const handleCardOfTheDayRoute = async () => {
-      const routeState = await cloudStorage.get("myCard");
+      const routeState = await cloudStorage.getItem("myCard");
 
       if (routeState !== "") {
         const state = JSON.parse(routeState);

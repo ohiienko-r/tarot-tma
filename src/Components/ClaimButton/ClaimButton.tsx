@@ -1,7 +1,7 @@
 import { FC, useState, useEffect } from "react";
 import { useUser } from "@/Contexts";
 import { useTranslation } from "react-i18next";
-import { cloudStorage } from "@/Telegram";
+import { cloudStorage } from "@telegram-apps/sdk-react";
 import { BuyButton } from "@/Components";
 import "./styles.scss";
 
@@ -12,7 +12,7 @@ const ClaimButton: FC = () => {
 
   useEffect(() => {
     const handleButtonAvailability = async () => {
-      const isBonusClaimed = await cloudStorage.get("bonusClaimed");
+      const isBonusClaimed = await cloudStorage.getItem("bonusClaimed");
 
       if (JSON.parse(isBonusClaimed)) {
         setDisabled(true);
@@ -26,7 +26,7 @@ const ClaimButton: FC = () => {
 
   const handleClick = async () => {
     await updateBalance(3);
-    await cloudStorage.set("bonusClaimed", JSON.stringify(true));
+    await cloudStorage.setItem("bonusClaimed", JSON.stringify(true));
     setDisabled(true);
   };
 

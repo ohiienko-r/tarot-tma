@@ -7,14 +7,14 @@ import {
   useMemo,
 } from "react";
 import { UserContext } from "./UserContext";
-import { initData } from "@/Telegram";
+import { initData } from "@telegram-apps/sdk-react";
 import { Api } from "@/Api";
 import { User } from "@/types";
 
 const UserProvider: FC<PropsWithChildren> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [balance, setBalance] = useState<number | undefined>(undefined);
-  const currentUser = initData?.user;
+  const currentUser = initData.user();
   const refId = initData?.startParam ? +initData.startParam : undefined;
 
   useEffect(() => {

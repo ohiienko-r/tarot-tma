@@ -1,12 +1,11 @@
 import { useCallback } from "react";
-import { useInvoice } from "@telegram-apps/sdk-react";
+import { invoice } from "@telegram-apps/sdk-react";
 import { useTranslation } from "react-i18next";
 import useInfoPopup from "../useInfoPopup/useInfoPopup";
 import { Api } from "@/Api";
 
 const useSupportUs = () => {
   const { t } = useTranslation();
-  const invoice = useInvoice();
   const showPopup = useInfoPopup();
 
   const handleDonation = useCallback(

@@ -1,6 +1,10 @@
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { haptic, utils } from "@/Telegram";
+import {
+  hapticFeedback,
+  openLink,
+  openTelegramLink,
+} from "@telegram-apps/sdk-react";
 import { Modal, BuyButton } from "..";
 import { Text, Button, Headline, List } from "@telegram-apps/telegram-ui";
 import "./styles.scss";
@@ -14,17 +18,17 @@ const RegisterAtProductHuntButtonWithModal: FC = () => {
   };
 
   const handleModalClose = () => {
-    haptic.impactOccurred("medium");
+    hapticFeedback.impactOccurred("medium");
     setModalVisible(false);
   };
 
   const handleOpenPh = () => {
-    haptic.impactOccurred("medium");
-    utils.openLink("https://www.producthunt.com/", { tryBrowser: true });
+    hapticFeedback.impactOccurred("medium");
+    openLink("https://www.producthunt.com/");
   };
 
   const handleOpenSupportChat = () => {
-    utils.openTelegramLink("https://t.me/trlgst");
+    openTelegramLink("https://t.me/trlgst");
     handleModalClose();
   };
 

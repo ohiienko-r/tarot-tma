@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { useUser } from "@/Contexts";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { backButton } from "@/Telegram";
+import { backButton } from "@telegram-apps/sdk-react";
 import { useRandomCards, useInfoPopup, useAds } from "@/Hooks";
 import { Api } from "@/Api";
 import { ROUTES_NAMES } from "@/Router";

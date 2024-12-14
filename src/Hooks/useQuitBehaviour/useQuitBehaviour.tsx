@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { popup, haptic } from "@/Telegram";
+import { hapticFeedback, popup } from "@telegram-apps/sdk-react";
 import { ROUTES_NAMES } from "@/Router";
 import { Path } from "@/types";
 
@@ -10,7 +10,7 @@ const useQuitBehaviour = (fromPath: Path) => {
   const { t } = useTranslation();
 
   return useCallback(() => {
-    haptic.impactOccurred("medium");
+    hapticFeedback.impactOccurred("medium");
 
     if (fromPath != undefined) {
       popup
@@ -24,7 +24,7 @@ const useQuitBehaviour = (fromPath: Path) => {
         })
         .then((buttonId) => {
           if (buttonId === "quit") {
-            haptic.impactOccurred("medium");
+            hapticFeedback.impactOccurred("medium");
             navigate(ROUTES_NAMES.HOME);
           }
         });

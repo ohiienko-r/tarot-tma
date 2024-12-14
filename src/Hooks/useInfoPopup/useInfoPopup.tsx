@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { popup } from "@/Telegram";
+import { popup } from "@telegram-apps/sdk-react";
 
 const useInfoPopup = () => {
   const showPopup = useCallback((message: string, title?: string) => {

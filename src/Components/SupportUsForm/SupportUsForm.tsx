@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSupportUs } from "@/Hooks";
-import { haptic } from "@/Telegram";
+import { hapticFeedback } from "@telegram-apps/sdk-react";
 import { Icons } from "..";
 import { IconButton, Button } from "@telegram-apps/telegram-ui";
 import { SupportUsFormPropTypes } from "./types";
@@ -13,16 +13,16 @@ const SupportUsForm: FC<SupportUsFormPropTypes> = ({ onComplete }) => {
   const { t } = useTranslation();
 
   const handleIncrementStarsCount = () => {
-    haptic.impactOccurred("medium");
+    hapticFeedback.impactOccurred("medium");
     setStarsCount((prev) => prev + 1);
   };
 
   const handleDecrementStarscount = () => {
     if (starsCount === 1) {
-      haptic.notificationOccurred("error");
+      hapticFeedback.notificationOccurred("error");
       setStarsCount((prev) => prev);
     } else {
-      haptic.impactOccurred("medium");
+      hapticFeedback.impactOccurred("medium");
       setStarsCount((prev) => prev - 1);
     }
   };
@@ -32,7 +32,7 @@ const SupportUsForm: FC<SupportUsFormPropTypes> = ({ onComplete }) => {
   };
 
   const handleSendStars = async () => {
-    haptic.impactOccurred("medium");
+    hapticFeedback.impactOccurred("medium");
     supportUs(starsCount, onComplete);
   };
 

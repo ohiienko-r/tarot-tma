@@ -1,10 +1,10 @@
 import { useEffect } from "react";
-import { settingsButton } from "@/Telegram";
+import { settingsButton } from "@telegram-apps/sdk-react";
 
 const useSettingsButton = (onClick: () => void) => {
   useEffect(() => {
-    settingsButton.on("click", onClick);
-    return () => settingsButton.off("click", onClick);
+    settingsButton.onClick(onClick);
+    return () => settingsButton.offClick(onClick);
   }, [onClick]);
 
   useEffect(() => {

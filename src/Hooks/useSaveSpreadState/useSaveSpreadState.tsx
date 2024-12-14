@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { cloudStorage } from "@/Telegram";
+import { cloudStorage } from "@telegram-apps/sdk-react";
 import { CardKey, Path } from "@/types";
 import { ROUTES_NAMES } from "@/Router";
 
@@ -17,7 +17,7 @@ const useSaveSpreadState = (
           cardsKeys: cardsKeys,
           reading: reading,
         };
-        await cloudStorage.set(
+        await cloudStorage.setItem(
           "myCard",
           JSON.stringify(myCardOfTheDaySpreadState)
         );

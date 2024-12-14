@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { haptic, mainButton } from "@/Telegram";
+import { mainButton, hapticFeedback } from "@telegram-apps/sdk-react";
 
 const useMainButton = (
   title: string,
@@ -9,39 +9,44 @@ const useMainButton = (
   const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    mainButton.setText(title);
-    mainButton.show();
+    if (mainButton.mount.isAvailable()) {
+      mainButton.mount();
+      mainButton.setParams({ isVisible: true });
+    }
+
     return () => {
-      mainButton.hide();
+      mainButton.setParams({ isVisible: false });
+      mainButton.unmount();
     };
+  }, []);
+
+  useEffect(() => {
+    mainButton.setParams({ text: title });
   }, [title]);
 
   useEffect(() => {
     const handler = async () => {
-      haptic.impactOccurred("medium");
-      mainButton.disable();
-      mainButton.showLoader();
+      hapticFeedback.impactOccurred("medium");
+      mainButton.setParams({ isEnabled: false });
+      mainButton.setParams({ isLoaderVisible: true });
       setLoading(true);
       await onClick();
       setLoading(false);
-      mainButton.hideLoader();
-      mainButton.enable();
+      mainButton.setParams({ isLoaderVisible: false, isEnabled: true });
     };
 
-    mainButton.on("click", handler);
+    mainButton.onClick(handler);
 
     return () => {
-      mainButton.off("click", handler);
+      mainButton.offClick(handler);
     };
   }, [onClick]);
 
   useEffect(() => {
     if (disabled) {
-      mainButton.disable();
-      mainButton.setBgColor("#808080");
+      mainButton.setParams({ isEnabled: false, backgroundColor: "#808080" });
     } else {
-      mainButton.enable();
-      mainButton.setBgColor("#EA850F");
+      mainButton.setParams({ isEnabled: true, backgroundColor: "#EA850F" });
     }
   }, [disabled]);
 

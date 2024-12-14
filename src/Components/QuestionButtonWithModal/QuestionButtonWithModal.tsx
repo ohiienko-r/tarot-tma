@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { haptic } from "@/Telegram";
+import { hapticFeedback } from "@telegram-apps/sdk-react";
 import { useUser } from "@/Contexts";
 import { useTranslation } from "react-i18next";
 import { Icons, Modal } from "@/Components";
@@ -12,12 +12,12 @@ const QuestionButtonWithModal: FC = () => {
   const { t } = useTranslation();
 
   const handleModalOpen = () => {
-    haptic.impactOccurred("medium");
+    hapticFeedback.impactOccurred("medium");
     setModalVisible(true);
   };
 
   const handleModalClose = () => {
-    haptic.impactOccurred("medium");
+    hapticFeedback.impactOccurred("medium");
     setModalVisible(false);
   };
 

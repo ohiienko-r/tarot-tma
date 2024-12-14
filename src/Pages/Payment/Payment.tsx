@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { useNavigate } from "react-router-dom";
-import { haptic } from "@/Telegram";
+import { hapticFeedback } from "@telegram-apps/sdk-react";
 import { analytics } from "@/Firebase";
 import { logEvent } from "firebase/analytics";
 import { useBackButton, useCoinsPurchase, useShareApp } from "@/Hooks";
@@ -28,7 +28,7 @@ const Payment: FC = () => {
   logEvent(analytics, "page_view", { page_title: "Payment" });
 
   const handleNavigateHome = () => {
-    haptic.impactOccurred("medium");
+    hapticFeedback.impactOccurred("medium");
     navigate(ROUTES_NAMES.HOME);
   };
 

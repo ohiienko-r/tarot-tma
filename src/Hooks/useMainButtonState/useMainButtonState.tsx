@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { cloudStorage } from "@/Telegram";
+import { cloudStorage } from "@telegram-apps/sdk-react";
 import { ROUTES_NAMES } from "@/Router";
 import { Path } from "@/types";
 
@@ -8,7 +8,7 @@ const useMainButtonState = (path: Path, prompt?: string) => {
 
   useEffect(() => {
     const handleMainButtonDisabled = async () => {
-      const myCard = await cloudStorage.get("myCard");
+      const myCard = await cloudStorage.getItem("myCard");
       if (path === ROUTES_NAMES.CARD_OF_THE_DAY && myCard !== "") {
         setDisabled(true);
       } else if (prompt?.length === 0) {
