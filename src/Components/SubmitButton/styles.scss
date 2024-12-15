@@ -3,10 +3,11 @@
   padding: 10px 30px;
   border: 3px solid #131722;
   border-radius: 8px;
-  background: linear-gradient(to right, #ea850f, #ffc700);
+  background: linear-gradient(90deg, #ea850f 0%, #ffc700 100%);
   color: #000;
   font-size: 14px;
   font-weight: 700;
+  box-shadow: 0 7px 2px 0 rgba(0, 0, 0, 0.5);
   &:disabled {
     background: #808080;
     cursor: default;

@@ -1,7 +1,11 @@
 import { FC } from "react";
 import { Card } from "@/Components";
-import { CardsGroupPropTypes } from "./types";
+import { CardKey } from "@/types";
 import "./styles.scss";
+
+type CardsGroupPropTypes = {
+  cardsKeys: CardKey[];
+};
 
 const CardsGroup: FC<CardsGroupPropTypes> = ({ cardsKeys }) => {
   return (

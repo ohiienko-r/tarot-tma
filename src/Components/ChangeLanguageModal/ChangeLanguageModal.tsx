@@ -4,8 +4,12 @@ import { hapticFeedback, cloudStorage } from "@telegram-apps/sdk-react";
 import { Modal } from "..";
 import { List, Button, Divider } from "@telegram-apps/telegram-ui";
 import { SystemLanguage } from "@/types";
-import { ChangeLanguageModalPropTypes } from "./types";
 import "./styles.scss";
+
+type ChangeLanguageModalPropTypes = {
+  open: boolean;
+  onClose: () => void;
+};
 
 const ChangeLanguageModal: FC<ChangeLanguageModalPropTypes> = ({
   open,

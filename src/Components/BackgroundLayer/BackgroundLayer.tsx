@@ -1,6 +1,11 @@
-import { FC } from "react";
-import { BackgroundLayerPropTypes } from "./types";
+import { FC, ReactNode } from "react";
 import "./styles.scss";
+
+type BackgroundLayerPropTypes = {
+  children: ReactNode;
+  image: string;
+  position?: { x: number; y: number };
+};
 
 const BackgroundLayer: FC<BackgroundLayerPropTypes> = ({
   children,

@@ -1,8 +1,15 @@
-import { FC, useState } from "react";
+import { FC, useState, ReactNode } from "react";
 import { hapticFeedback } from "@telegram-apps/sdk-react";
 import { Icons } from "@/Components";
-import { BuyButtonPropTypes } from "./types";
+import { SubmitButtonPropTypes } from "../SubmitButton/types";
 import "./styles.scss";
+
+type BuyButtonPropTypes = SubmitButtonPropTypes & {
+  caption?: string;
+  price?: number;
+  className?: string;
+  children?: ReactNode;
+};
 
 const BuyButton: FC<BuyButtonPropTypes> = ({
   title,

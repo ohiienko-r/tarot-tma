@@ -1,7 +1,12 @@
 import { FC } from "react";
 import { hapticFeedback } from "@telegram-apps/sdk-react";
-import { SubmitButtonPropTypes } from "./types";
 import "./styles.scss";
+
+export type SubmitButtonPropTypes = {
+  title: string;
+  onPress: () => void | Promise<void>;
+  disabled?: boolean;
+};
 
 const Submitbutton: FC<SubmitButtonPropTypes> = ({
   title,

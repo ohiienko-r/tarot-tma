@@ -7,7 +7,6 @@ export { default as useLowBalancePopup } from "./useLowBalancePopup/useLowBalanc
 export { default as useShareApp } from "./useShareApp/useShareApp";
 export { default as useMainButtonHandler } from "./useMainButtonHandler/useMainButtonHandler";
 export { default as useSaveSpreadState } from "./useSaveSpreadState/useSaveSpreadState";
-export { default as useNavigation } from "./useNavigation/useNavigation";
 export { default as useInfoPopup } from "./useInfoPopup/useInfoPopup";
 export { default as useSettingsButton } from "./useSettingsButton/useSettingsButton";
 export { default as useReadings } from "./useReadings/useReadings";

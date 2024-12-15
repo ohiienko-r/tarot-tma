@@ -8,7 +8,7 @@
     "/question_input": "Ask the cards a question",
     "/about": "Learn more about tarot?",
     "magic coins": "Magic coins",
-    "buy": "Buy",
+    "buy": "Buy coins",
     "balance description pt1": "You have",
     "balance description pt2": "You can earn 3 coins for each day you use the app.",
     "how it works header": "How the AI Tarot Works?",
@@ -107,5 +107,6 @@
     "thank you for your support": "Thank you for your support!",
     "open ph": "Visit Product Hunt",
     "note": "Note: Each registration will be checked manually. 🌕 will be credited after confirmation.",
-    "discount month": "Discount month -50%"
+    "discount month": "Discount month -50%",
+    "eva": "Eva"
 }

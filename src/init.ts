@@ -5,12 +5,14 @@ import {
   initData,
   settingsButton,
   closingBehavior,
-  swipeBehavior,
+  viewport,
   init as initSDK,
 } from "@telegram-apps/sdk-react";
 
 export function init(): void {
   initSDK();
+
+  initData.restore();
 
   if (!backButton.isSupported() || !miniApp.isSupported()) {
     throw new Error("ERR_NOT_SUPPORTED");
@@ -21,14 +23,27 @@ export function init(): void {
     closingBehavior.enableConfirmation();
   }
 
-  if (swipeBehavior.mount.isAvailable()) {
-    swipeBehavior.mount();
-    swipeBehavior.disableVertical();
+  if (viewport.mount.isAvailable()) {
+    viewport.mount();
+    viewport.expand();
   }
 
-  backButton.mount();
-  miniApp.mount();
-  themeParams.mount();
-  settingsButton.mount();
-  initData.restore();
+  if (themeParams.mount.isAvailable()) {
+    themeParams.mount();
+  }
+
+  if (miniApp.mount.isAvailable()) {
+    miniApp.mount();
+    miniApp.setHeaderColor("#110126");
+    miniApp.setBackgroundColor("#110126");
+    miniApp.setBottomBarColor("#110126");
+  }
+
+  if (backButton.mount.isAvailable()) {
+    backButton.mount();
+  }
+
+  if (settingsButton.mount.isAvailable()) {
+    settingsButton.mount();
+  }
 }

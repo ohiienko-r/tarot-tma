@@ -11,7 +11,7 @@ const useMainButton = (
   useEffect(() => {
     if (mainButton.mount.isAvailable()) {
       mainButton.mount();
-      mainButton.setParams({ isVisible: true });
+      mainButton.setParams({ isVisible: true, hasShineEffect: true });
     }
 
     return () => {
@@ -27,12 +27,19 @@ const useMainButton = (
   useEffect(() => {
     const handler = async () => {
       hapticFeedback.impactOccurred("medium");
-      mainButton.setParams({ isEnabled: false });
-      mainButton.setParams({ isLoaderVisible: true });
+      mainButton.setParams({
+        isEnabled: false,
+        isLoaderVisible: true,
+        hasShineEffect: false,
+      });
       setLoading(true);
       await onClick();
       setLoading(false);
-      mainButton.setParams({ isLoaderVisible: false, isEnabled: true });
+      mainButton.setParams({
+        isLoaderVisible: false,
+        isEnabled: true,
+        hasShineEffect: true,
+      });
     };
 
     mainButton.onClick(handler);
@@ -44,9 +51,17 @@ const useMainButton = (
 
   useEffect(() => {
     if (disabled) {
-      mainButton.setParams({ isEnabled: false, backgroundColor: "#808080" });
+      mainButton.setParams({
+        isEnabled: false,
+        backgroundColor: "#808080",
+        hasShineEffect: false,
+      });
     } else {
-      mainButton.setParams({ isEnabled: true, backgroundColor: "#EA850F" });
+      mainButton.setParams({
+        isEnabled: true,
+        backgroundColor: "#EA850F",
+        hasShineEffect: true,
+      });
     }
   }, [disabled]);
 

@@ -10,8 +10,11 @@ import { useInfoPopup } from "@/Hooks";
 import { Rating, Button } from "@telegram-apps/telegram-ui";
 import { validateInputs } from "../RatingModal/helpers";
 import { Api } from "@/Api";
-import { FeedbackFormPropTypes } from "./types";
 import "./styles.scss";
+
+export type FeedbackFormPropTypes = {
+  onClose: () => void;
+};
 
 const FeedbackForm: FC<FeedbackFormPropTypes> = ({ onClose }) => {
   const [rating, setRating] = useState<number>(0);
