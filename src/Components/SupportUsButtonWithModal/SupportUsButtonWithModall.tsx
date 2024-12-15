@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { haptic } from "@/Telegram";
+import { hapticFeedback } from "@telegram-apps/sdk-react";
 import { BuyButton, Icons, SupportUsForm, Modal } from "@/Components";
 
 const SupportUsButtonWithModal: FC = () => {
@@ -12,7 +12,7 @@ const SupportUsButtonWithModal: FC = () => {
   };
 
   const hanldeModalClose = () => {
-    haptic.impactOccurred("medium");
+    hapticFeedback.impactOccurred("medium");
     setModalVisible(false);
   };
 

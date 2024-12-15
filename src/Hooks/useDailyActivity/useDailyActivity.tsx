@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { cloudStorage } from "@/Telegram";
+import { cloudStorage } from "@telegram-apps/sdk-react";
 
 const useDailyActivity = () => {
   const [activityAvailable, setActivityAvailable] = useState<boolean>(false);
@@ -15,7 +15,7 @@ const useDailyActivity = () => {
 
       if (isDifferentDay) {
         setActivityAvailable(true);
-        await cloudStorage.set("last_login", today.toISOString());
+        await cloudStorage.setItem("last_login", today.toISOString());
       } else {
         setActivityAvailable(false);
       }
@@ -25,10 +25,10 @@ const useDailyActivity = () => {
 
   const getLastLogIn = useCallback(async () => {
     const today = new Date();
-    const lastLogDate = await cloudStorage.get("last_login");
+    const lastLogDate = await cloudStorage.getItem("last_login");
 
     if (!lastLogDate) {
-      await cloudStorage.set("last_login", today.toISOString());
+      await cloudStorage.setItem("last_login", today.toISOString());
     } else {
       compareDates(lastLogDate, today);
     }

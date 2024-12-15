@@ -2,7 +2,7 @@ import { FC, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useDailyActivity } from "@/Hooks";
-import { haptic } from "@/Telegram";
+import { hapticFeedback } from "@telegram-apps/sdk-react";
 import { Modal } from "..";
 import { Text, Button } from "@telegram-apps/telegram-ui";
 import { ROUTES_NAMES } from "@/Router";
@@ -26,7 +26,7 @@ const DailyBonusModal: FC = () => {
   }, [activityAvailable]);
 
   const handleModalClose = async () => {
-    haptic.impactOccurred("medium");
+    hapticFeedback.impactOccurred("medium");
     navigate(ROUTES_NAMES.PAYMENT);
     setModalVisible(false);
   };

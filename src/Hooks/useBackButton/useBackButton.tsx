@@ -1,12 +1,12 @@
 import { useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { backButton, haptic } from "@/Telegram";
+import { backButton, hapticFeedback } from "@telegram-apps/sdk-react";
 
 const useBackButton = (customCallback?: () => void) => {
   const navigate = useNavigate();
 
   const handleGoBack = useCallback(() => {
-    haptic.impactOccurred("medium");
+    hapticFeedback.impactOccurred("medium");
     navigate(-1);
   }, [navigate]);
 
@@ -19,15 +19,15 @@ const useBackButton = (customCallback?: () => void) => {
 
   useEffect(() => {
     if (customCallback) {
-      backButton.on("click", customCallback);
+      backButton.onClick(customCallback);
     } else {
-      backButton.on("click", handleGoBack);
+      backButton.onClick(handleGoBack);
     }
     return () => {
       if (customCallback) {
-        backButton.off("click", customCallback);
+        backButton.offClick(customCallback);
       } else {
-        backButton.off("click", handleGoBack);
+        backButton.offClick(handleGoBack);
       }
     };
   }, [handleGoBack, customCallback]);

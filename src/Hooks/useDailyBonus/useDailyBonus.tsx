@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { cloudStorage } from "@/Telegram";
+import { cloudStorage } from "@telegram-apps/sdk-react";
 import { useDailyActivity } from "@/Hooks";
 
 const useDailyBonus = () => {
@@ -7,15 +7,15 @@ const useDailyBonus = () => {
 
   useEffect(() => {
     const bonusClaimed = async () => {
-      const bonusClaimed = await cloudStorage.get("bonusClaimed");
+      const bonusClaimed = await cloudStorage.getItem("bonusClaimed");
 
       if (bonusClaimed == "") {
-        await cloudStorage.set("bonusClaimed", JSON.stringify(true));
+        await cloudStorage.setItem("bonusClaimed", JSON.stringify(true));
         return;
       }
 
       if (activityAvailable) {
-        await cloudStorage.set("bonusClaimed", JSON.stringify(false));
+        await cloudStorage.setItem("bonusClaimed", JSON.stringify(false));
       }
     };
 

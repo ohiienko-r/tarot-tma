@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useUser } from "@/Contexts";
-import { popup } from "@/Telegram";
+import { popup } from "@telegram-apps/sdk-react";
 import { ROUTES_NAMES } from "@/Router";
 
 const useLowBalancePopup = (spreadCost: number) => {

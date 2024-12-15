@@ -1,9 +1,13 @@
 import { FC, useState, useEffect } from "react";
-import { CardPropTypes } from "./types";
 import { CardKey } from "@/types";
 import cardReverse from "@/assets/card_reverse.webp";
 import formattedImages from "@/helpers";
 import "./styles.scss";
+
+type CardPropTypes = {
+  cardKey: CardKey;
+  big: boolean;
+};
 
 const Card: FC<CardPropTypes> = ({ cardKey, big }) => {
   const [cardSrc, setCardSrc] = useState<string>("");

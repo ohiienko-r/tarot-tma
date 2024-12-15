@@ -1,11 +1,15 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
-import { cloudStorage, haptic } from "@/Telegram";
+import { hapticFeedback, cloudStorage } from "@telegram-apps/sdk-react";
 import { Modal } from "..";
 import { List, Button, Divider } from "@telegram-apps/telegram-ui";
 import { SystemLanguage } from "@/types";
-import { ChangeLanguageModalPropTypes } from "./types";
 import "./styles.scss";
+
+type ChangeLanguageModalPropTypes = {
+  open: boolean;
+  onClose: () => void;
+};
 
 const ChangeLanguageModal: FC<ChangeLanguageModalPropTypes> = ({
   open,
@@ -14,10 +18,10 @@ const ChangeLanguageModal: FC<ChangeLanguageModalPropTypes> = ({
   const { t, i18n } = useTranslation();
 
   const handleChangeLanguage = async (language: SystemLanguage) => {
-    haptic.impactOccurred("medium");
+    hapticFeedback.impactOccurred("medium");
     i18n.changeLanguage(language);
     onClose();
-    await cloudStorage.set("preferredLanguage", language);
+    await cloudStorage.setItem("preferredLanguage", language);
   };
 
   return (

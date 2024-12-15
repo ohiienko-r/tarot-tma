@@ -1,7 +1,11 @@
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSettingsButton } from "@/Hooks";
-import { haptic, utils } from "@/Telegram";
+import {
+  hapticFeedback,
+  openLink,
+  openTelegramLink,
+} from "@telegram-apps/sdk-react";
 import { Icons, ChangeLanguageModal, Modal } from "@/Components";
 import { List, Button, Divider } from "@telegram-apps/telegram-ui";
 import { countriesFlags } from "./Settings.dto";
@@ -15,41 +19,41 @@ const Settings: FC = () => {
   const { t, i18n } = useTranslation();
 
   const handleSettingsOpen = () => {
-    haptic.impactOccurred("medium");
+    hapticFeedback.impactOccurred("medium");
     setSettingsVisible(true);
   };
 
   const handleSettingsClose = () => {
-    haptic.impactOccurred("medium");
+    hapticFeedback.impactOccurred("medium");
     setSettingsVisible(false);
   };
 
   const handleChangeLanguageOpen = () => {
-    haptic.impactOccurred("medium");
+    hapticFeedback.impactOccurred("medium");
     setChangeLanguageVisible(true);
   };
 
   const handleChangeLanguageClose = () => {
-    haptic.impactOccurred("medium");
+    hapticFeedback.impactOccurred("medium");
     setChangeLanguageVisible(false);
   };
 
   const handleOpenPrivacyPolicy = () => {
-    haptic.impactOccurred("medium");
-    utils.openLink(
+    hapticFeedback.impactOccurred("medium");
+    openLink(
       "https://www.freeprivacypolicy.com/live/94738508-a6fc-4fa1-9d84-7eaf1e08bd3e",
       { tryInstantView: true }
     );
   };
 
   const handleContactUs = () => {
-    haptic.impactOccurred("medium");
-    utils.openTelegramLink("https://t.me/trlgst");
+    hapticFeedback.impactOccurred("medium");
+    openTelegramLink("https://t.me/trlgst");
   };
 
   const handleReportAbug = () => {
-    haptic.impactOccurred("medium");
-    utils.openTelegramLink("https://t.me/nam_ro");
+    hapticFeedback.impactOccurred("medium");
+    openTelegramLink("https://t.me/nam_ro");
   };
 
   useSettingsButton(handleSettingsOpen);

@@ -1,14 +1,20 @@
 import { FC, useState, FormEvent } from "react";
 import { useTranslation } from "react-i18next";
-import { retrieveLaunchParams } from "@telegram-apps/sdk-react";
-import { cloudStorage, haptic } from "@/Telegram";
+import {
+  cloudStorage,
+  hapticFeedback,
+  retrieveLaunchParams,
+  popup,
+} from "@telegram-apps/sdk-react";
 import { useUser } from "@/Contexts";
-import { useInfoPopup } from "@/Hooks";
 import { Rating, Button } from "@telegram-apps/telegram-ui";
 import { validateInputs } from "../RatingModal/helpers";
 import { Api } from "@/Api";
-import { FeedbackFormPropTypes } from "./types";
 import "./styles.scss";
+
+export type FeedbackFormPropTypes = {
+  onClose: () => void;
+};
 
 const FeedbackForm: FC<FeedbackFormPropTypes> = ({ onClose }) => {
   const [rating, setRating] = useState<number>(0);
@@ -16,11 +22,10 @@ const FeedbackForm: FC<FeedbackFormPropTypes> = ({ onClose }) => {
   const [loading, setLoading] = useState<boolean>(false);
   const { initData } = retrieveLaunchParams();
   const { updateBalance } = useUser();
-  const popup = useInfoPopup();
   const { t } = useTranslation();
 
   const handleRatingChange = (value: number) => {
-    haptic.selectionChanged();
+    hapticFeedback.selectionChanged();
     setRating(value);
   };
 
@@ -30,7 +35,7 @@ const FeedbackForm: FC<FeedbackFormPropTypes> = ({ onClose }) => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    haptic.impactOccurred("medium");
+    hapticFeedback.impactOccurred("medium");
     setLoading(true);
     const body = {
       uId: initData?.user?.id,
@@ -39,10 +44,10 @@ const FeedbackForm: FC<FeedbackFormPropTypes> = ({ onClose }) => {
       feedback: feedbackText,
     };
     await updateBalance(3);
-    await cloudStorage.set("rated", "true");
+    await cloudStorage.setItem("rated", "true");
     setLoading(false);
     onClose();
-    popup(t("thank you for your feedback"));
+    popup.open({ message: t("thank you for your feedback") });
     await Api.botController.sendFeedback(body);
     setFeedbackText("");
   };

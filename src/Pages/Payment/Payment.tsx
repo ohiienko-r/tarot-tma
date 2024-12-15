@@ -1,9 +1,10 @@
 import { FC } from "react";
 import { useNavigate } from "react-router-dom";
-import { haptic } from "@/Telegram";
+import { hapticFeedback, shareURL } from "@telegram-apps/sdk-react";
 import { analytics } from "@/Firebase";
 import { logEvent } from "firebase/analytics";
-import { useBackButton, useCoinsPurchase, useShareApp } from "@/Hooks";
+import { useUser } from "@/Contexts";
+import { useBackButton, useCoinsPurchase } from "@/Hooks";
 import { useTranslation } from "react-i18next";
 import { Headline } from "@telegram-apps/telegram-ui";
 import {
@@ -20,15 +21,22 @@ import { ROUTES_NAMES } from "@/Router";
 import "./styles.scss";
 import VerticalBuyButton from "@/Components/VerticalBuyButton/VerticalBuyButton";
 
+const shareMessage: { [key: string]: string } = {
+  en: `🔮Welcome to the World of Tarot Answers🔮 \n\nAsk any question and get a clear answer in a minute. Open the door to the world of predictions`,
+  ru: `🔮Приглашаю тебя в Мир ответов Таро🔮 \n\nЗадай любой вопрос и получи ясный ответ за минуту. Открой дверь в мир предсказаний`,
+  uk: `🔮Запрошую тебе в Світ відповідей Таро🔮\n\nЗадай будь-яке питання та отримай чітку відповідь за хвилину. Відкрий двері у світ передбачень`,
+} as const;
+
 const Payment: FC = () => {
-  const { t } = useTranslation();
+  const { user } = useUser();
+  const { t, i18n } = useTranslation();
   const purchaseCoins = useCoinsPurchase();
   const navigate = useNavigate();
-  const shareApp = useShareApp();
+
   logEvent(analytics, "page_view", { page_title: "Payment" });
 
   const handleNavigateHome = () => {
-    haptic.impactOccurred("medium");
+    hapticFeedback.impactOccurred("medium");
     navigate(ROUTES_NAMES.HOME);
   };
 
@@ -78,7 +86,12 @@ const Payment: FC = () => {
       <ul className="payment__buttons-list">
         <BuyButton
           title={`3 🌕 ${t("for inviting a friend")}`}
-          onPress={shareApp}
+          onPress={() =>
+            shareURL(
+              `https://t.me/my_ai_tarot_bot/?startapp=${user?.uId}`,
+              shareMessage[i18n.language] ?? shareMessage.english
+            )
+          }
         />
         <ClaimButton />
         <RateButtonWithModal />

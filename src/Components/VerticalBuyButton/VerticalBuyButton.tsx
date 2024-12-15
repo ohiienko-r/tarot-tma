@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 import { Icons } from "..";
-import { haptic } from "@/Telegram";
-import { SubmitButtonPropTypes } from "../SubmitButton/types";
+import { hapticFeedback } from "@telegram-apps/sdk-react";
+import { SubmitButtonPropTypes } from "../SubmitButton/SubmitButton";
 import "./styles.scss";
 
 type VerticalBuyButtonPropTypes = SubmitButtonPropTypes & {
@@ -18,7 +18,7 @@ const VerticalBuyButton: FC<VerticalBuyButtonPropTypes> = ({
   const [loadervisible, setLoadervisible] = useState(false);
 
   const handleClick = async () => {
-    haptic.impactOccurred("medium");
+    hapticFeedback.impactOccurred("medium");
     setLoadervisible(true);
     await onPress();
     setLoadervisible(false);

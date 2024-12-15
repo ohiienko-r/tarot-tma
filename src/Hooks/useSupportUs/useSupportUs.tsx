@@ -1,13 +1,10 @@
 import { useCallback } from "react";
-import { useInvoice } from "@telegram-apps/sdk-react";
+import { invoice, popup } from "@telegram-apps/sdk-react";
 import { useTranslation } from "react-i18next";
-import useInfoPopup from "../useInfoPopup/useInfoPopup";
 import { Api } from "@/Api";
 
 const useSupportUs = () => {
   const { t } = useTranslation();
-  const invoice = useInvoice();
-  const showPopup = useInfoPopup();
 
   const handleDonation = useCallback(
     async (amount: number, onComplete?: () => void) => {
@@ -21,15 +18,15 @@ const useSupportUs = () => {
         const status = await invoice.open(invoiceLink, "url");
 
         if (status === "paid") {
-          showPopup(t("we appreciate"), t("thank you"));
+          popup.open({ message: t("we appreciate"), title: t("thank you") });
         } else if (status === "failed") {
-          showPopup(t("purchase fail"), t("error title"));
+          popup.open({ message: t("purchase fail"), title: t("error title") });
         }
       }
 
       onComplete && onComplete();
     },
-    [invoice, t, showPopup]
+    [t]
   );
 
   return handleDonation;

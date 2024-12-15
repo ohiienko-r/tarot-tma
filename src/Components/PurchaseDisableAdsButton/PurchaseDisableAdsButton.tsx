@@ -1,18 +1,18 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
-import { useInfoPopup, useDisableAdsPurchase } from "@/Hooks";
+import { popup } from "@telegram-apps/sdk-react";
+import { useDisableAdsPurchase } from "@/Hooks";
 import { BuyButton } from "@/Components";
 import { isAdsDisabled } from "@/Hooks/useAds/helpers";
 import "./styles.scss";
 
 const PurchaseDisableAdsButton: FC = () => {
   const { t } = useTranslation();
-  const showPopup = useInfoPopup();
   const purchaseDisableAds = useDisableAdsPurchase();
 
   const handleClick = async () => {
     if (await isAdsDisabled()) {
-      showPopup(t("ads already disabled"));
+      popup.open({ message: t("ads already disabled") });
     } else {
       await purchaseDisableAds();
     }

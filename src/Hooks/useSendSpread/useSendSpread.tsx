@@ -1,7 +1,15 @@
 import { useCallback, useEffect } from "react";
 import { retrieveLaunchParams } from "@telegram-apps/sdk-react";
 import { Api } from "@/Api";
-import { UseSendSpreadPropTypes } from "./types";
+import { Path, CardKey } from "@/types";
+
+type UseSendSpreadPropTypes = {
+  fromPath: Path;
+  title: string;
+  cardsKeys: CardKey[];
+  prompt?: string;
+  reading: string;
+};
 
 const useSendSpread = ({
   fromPath,

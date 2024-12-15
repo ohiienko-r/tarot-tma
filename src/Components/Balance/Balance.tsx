@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { useUser } from "@/Contexts";
+import { Icons } from "..";
 import { Spinner } from "@telegram-apps/telegram-ui";
 import "./styles.scss";
 
@@ -7,9 +8,9 @@ const Balance: FC = () => {
   const { balance } = useUser();
 
   return (
-    <div className="balance__value">
+    <div className="balance">
       {balance ?? <Spinner size="s" />}
-      <span>🌕</span>
+      <Icons.Moon />
     </div>
   );
 };

@@ -1,8 +1,15 @@
-import { FC, useState } from "react";
-import { haptic } from "@/Telegram";
+import { FC, useState, ReactNode } from "react";
+import { hapticFeedback } from "@telegram-apps/sdk-react";
 import { Icons } from "@/Components";
-import { BuyButtonPropTypes } from "./types";
+import { SubmitButtonPropTypes } from "../SubmitButton/SubmitButton";
 import "./styles.scss";
+
+type BuyButtonPropTypes = SubmitButtonPropTypes & {
+  caption?: string;
+  price?: number;
+  className?: string;
+  children?: ReactNode;
+};
 
 const BuyButton: FC<BuyButtonPropTypes> = ({
   title,
@@ -16,7 +23,7 @@ const BuyButton: FC<BuyButtonPropTypes> = ({
   const [loadervisible, setLoadervisible] = useState(false);
 
   const handleClick = async () => {
-    haptic.impactOccurred("medium");
+    hapticFeedback.impactOccurred("medium");
     setLoadervisible(true);
     await onPress();
     setLoadervisible(false);
