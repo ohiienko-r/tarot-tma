@@ -1,7 +1,7 @@
 import { FC, useState, ReactNode } from "react";
 import { hapticFeedback } from "@telegram-apps/sdk-react";
 import { Icons } from "@/Components";
-import { SubmitButtonPropTypes } from "../SubmitButton/types";
+import { SubmitButtonPropTypes } from "../SubmitButton/SubmitButton";
 import "./styles.scss";
 
 type BuyButtonPropTypes = SubmitButtonPropTypes & {
