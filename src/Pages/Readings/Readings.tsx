@@ -3,10 +3,10 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { popup, hapticFeedback } from "@telegram-apps/sdk-react";
 import { useBackButton, useSendSpread } from "@/Hooks";
+import { Button } from "@telegram-apps/telegram-ui";
 import { analytics } from "@/Firebase";
 import { logEvent } from "firebase/analytics";
-import { SubmitButton, CardsGroup, Page, MarkdownToHTML } from "@/Components";
-import { Headline } from "@telegram-apps/telegram-ui";
+import { CardsGroup, Page, MarkdownToHTML } from "@/Components";
 import { ROUTES_NAMES } from "@/Router";
 import "./styles.scss";
 
@@ -52,13 +52,18 @@ const Readings: FC = () => {
 
   return (
     <Page>
-      <Headline weight="1" className="readings__heading">
-        {state.title}
-      </Headline>
+      <h2 className="readings__heading">{t("reading")}</h2>
       <CardsGroup cardsKeys={state.cardsKeys} />
       <MarkdownToHTML markdownText={state.reading} />
       <div className="readings__new-spread">
-        <SubmitButton title={t("new spread")} onPress={handleNavigateHome} />
+        <Button
+          size="l"
+          stretched
+          onClick={handleNavigateHome}
+          style={{ backgroundColor: "#EA850F" }}
+        >
+          {t("new spread")}
+        </Button>
       </div>
     </Page>
   );

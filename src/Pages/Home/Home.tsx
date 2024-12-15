@@ -42,7 +42,7 @@ const Home: FC = () => {
             <Balance />
           </div>
           <SubmitButton
-            title={t("buy")}
+            title={t("buy coins")}
             onPress={() => navigate(ROUTES_NAMES.PAYMENT)}
           />
         </div>

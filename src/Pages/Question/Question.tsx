@@ -1,12 +1,12 @@
 import { FC, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { hapticFeedback } from "@telegram-apps/sdk-react";
+import { hapticFeedback, viewport } from "@telegram-apps/sdk-react";
 import { useMainButtonHandler, useMainButton, useBackButton } from "@/Hooks";
 import { analytics } from "@/Firebase";
 import { logEvent } from "firebase/analytics";
 import { Page, Preloader } from "@/Components";
-import { Headline, Button } from "@telegram-apps/telegram-ui";
+import { Button } from "@telegram-apps/telegram-ui";
 import { Path } from "@/types";
 import "./styles.scss";
 
@@ -14,18 +14,21 @@ const Question: FC = () => {
   const [prompt, setPrompt] = useState("");
   const { pathname, state } = useLocation();
   const { t } = useTranslation();
+  const insetTop = viewport.safeAreaInsetTop();
   const handler = useMainButtonHandler(
     state.spreadPrice,
     state.cardsQty,
     pathname as Path,
     prompt
   );
-  const loading = useMainButton(
-    `${t("get spread")} ${state.spreadPrice} 🌕`,
-    handler,
-    prompt.length === 0
-  );
+
+  const loading = useMainButton({
+    title: `${t("get spread")} ${state.spreadPrice} 🌕`,
+    onClick: handler,
+    disabled: prompt.length === 0,
+  });
   useBackButton();
+
   logEvent(analytics, "page_view", { page_title: "Question to the cards" });
 
   const defaultQuestionHadler = (index: number) => {
@@ -53,10 +56,10 @@ const Question: FC = () => {
 
   return (
     <Page>
-      <Headline weight="1" className="question__heading">
-        {t(pathname)}
-      </Headline>
-      <div className="question__input-container">
+      <div
+        className="question__input-container"
+        style={{ marginTop: insetTop }}
+      >
         <label htmlFor="question-input">{t("input label")}</label>
         <input
           id="question-input"

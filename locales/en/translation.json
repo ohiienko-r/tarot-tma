@@ -8,7 +8,8 @@
     "/question_input": "Ask the cards a question",
     "/about": "Learn more about tarot?",
     "magic coins": "Magic coins",
-    "buy": "Buy coins",
+    "buy coins": "Buy coins",
+    "buy": "Buy",
     "balance description pt1": "You have",
     "balance description pt2": "You can earn 3 coins for each day you use the app.",
     "how it works header": "How the AI Tarot Works?",
@@ -39,7 +40,7 @@
     "share": "Share",
     "input label": "Your question to the cards:",
     "input placeholder": "Type your question here",
-    "get for free": "Get for free",
+    "get for free": "For free",
     "for watching add": "for watching an add",
     "for": "for",
     "got it": "Got it!",
@@ -108,5 +109,7 @@
     "open ph": "Visit Product Hunt",
     "note": "Note: Each registration will be checked manually. 🌕 will be credited after confirmation.",
     "discount month": "Discount month -50%",
-    "eva": "Eva"
+    "eva": "Eva",
+    "reading": "Reading",
+    "shop": "Shop"
 }

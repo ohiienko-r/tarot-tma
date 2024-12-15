@@ -3,6 +3,12 @@
   flex-direction: column;
   justify-content: space-between;
 
+  &__page-name {
+    text-align: center;
+    padding: 1em;
+    color: #fff;
+  }
+
   &__balance {
     box-sizing: border-box;
     padding: 2em 1em;
@@ -15,7 +21,62 @@
 
   &__heading {
     padding: 0 1em;
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 100%;
     color: #fff;
+  }
+
+  &__cta-button {
+    box-sizing: border-box;
+    padding: 10px 0px 0 0;
+    height: 110px;
+    max-width: 95px;
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    background-image: linear-gradient(180deg, #5760ad 0%, #8f37b5 100%);
+    color: #fff;
+
+    &-title {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-weight: 700;
+      font-size: 40px;
+      color: #fff;
+    }
+
+    &-price {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-weight: 500;
+      font-size: 16px;
+      color: #fff;
+    }
+
+    &-discount {
+      box-sizing: border-box;
+      border-radius: 0 0 10px 10px;
+      padding: 6px 10px;
+      height: 20px;
+      width: 100%;
+      text-align: center;
+      background: #ec1ee5;
+      font-weight: 600;
+      font-size: 8px;
+      line-height: 80%;
+      color: #fff;
+    }
+  }
+
+  &__purchase-button {
   }
 
   &__buttons-list {
@@ -28,26 +89,7 @@
   &__buttons-inline-list {
     padding: 0.5em 1em;
     display: flex;
-    justify-content: space-between;
-  }
-
-  &__vertical-buy-button {
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 30%;
-    font-size: 14px;
-    gap: 1em;
-    padding: 10px 0 0 0;
-
-    div {
-      p {
-        p {
-          font-weight: 700;
-          font-size: 2em;
-        }
-      }
-    }
+    justify-content: space-evenly;
   }
 
   &__buton-title {
@@ -58,10 +100,14 @@
   &__home {
     margin-top: auto;
     padding: 1em 1em 2em 1em;
-    button {
-      color: white;
-      font-weight: 500;
-      padding: 1em 0;
-    }
+  }
+}
+
+@keyframes rotateBorder {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }
