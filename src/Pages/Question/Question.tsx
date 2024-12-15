@@ -2,12 +2,7 @@ import { FC, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { hapticFeedback } from "@telegram-apps/sdk-react";
-import {
-  useMainButtonHandler,
-  useMainButton,
-  useMainButtonState,
-  useBackButton,
-} from "@/Hooks";
+import { useMainButtonHandler, useMainButton, useBackButton } from "@/Hooks";
 import { analytics } from "@/Firebase";
 import { logEvent } from "firebase/analytics";
 import { Page, Preloader } from "@/Components";
@@ -25,11 +20,10 @@ const Question: FC = () => {
     pathname as Path,
     prompt
   );
-  const disabled = useMainButtonState(pathname as Path, prompt);
   const loading = useMainButton(
     `${t("get spread")} ${state.spreadPrice} 🌕`,
     handler,
-    disabled
+    prompt.length === 0
   );
   useBackButton();
   logEvent(analytics, "page_view", { page_title: "Question to the cards" });

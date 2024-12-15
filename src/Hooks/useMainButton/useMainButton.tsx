@@ -4,7 +4,7 @@ import { mainButton, hapticFeedback } from "@telegram-apps/sdk-react";
 const useMainButton = (
   title: string,
   onClick: () => Promise<void> | void,
-  disabled: boolean
+  disabled?: boolean
 ) => {
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -36,8 +36,8 @@ const useMainButton = (
       await onClick();
       setLoading(false);
       mainButton.setParams({
-        isLoaderVisible: false,
         isEnabled: true,
+        isLoaderVisible: false,
         hasShineEffect: true,
       });
     };

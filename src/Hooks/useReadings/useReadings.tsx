@@ -2,8 +2,8 @@ import { useCallback } from "react";
 import { useUser } from "@/Contexts";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { backButton } from "@telegram-apps/sdk-react";
-import { useRandomCards, useInfoPopup, useAds } from "@/Hooks";
+import { backButton, popup } from "@telegram-apps/sdk-react";
+import { useRandomCards, useAds } from "@/Hooks";
 import { Api } from "@/Api";
 import { ROUTES_NAMES } from "@/Router";
 import { SystemLanguage } from "@/types";
@@ -19,18 +19,17 @@ const useReadings = ({
   const { t, i18n } = useTranslation();
   const { cardsKeys, cardsNames } = useRandomCards(cardsQty);
   const showAdvertisment = useAds();
-  const showInfoPopup = useInfoPopup();
   const navigate = useNavigate();
 
   const isInitDataValid = useCallback(async () => {
     const isValid = await Api.botController.validateInitData();
     if (!isValid) {
-      showInfoPopup("Init data is invalid", t("error title"));
+      popup.open({ message: "Init data is invalid", title: t("error title") });
       return false;
     } else {
       return true;
     }
-  }, [t, showInfoPopup]);
+  }, [t]);
 
   const getReadings = useCallback(async () => {
     return await Api.redingsController.getReadings(
@@ -71,16 +70,9 @@ const useReadings = ({
       await onReadingAvailable(reading as string);
     } catch (error) {
       console.error(`Error occurred: ${error}`);
-      showInfoPopup(t("error message"), t("error title"));
+      popup.open({ message: t("error message"), title: t("error title") });
     }
-  }, [
-    isInitDataValid,
-    showAdvertisment,
-    getReadings,
-    onReadingAvailable,
-    showInfoPopup,
-    t,
-  ]);
+  }, [isInitDataValid, showAdvertisment, getReadings, onReadingAvailable, t]);
 
   return requestReadings;
 };

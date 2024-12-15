@@ -13,6 +13,7 @@ const ClaimButton: FC = () => {
   useEffect(() => {
     const handleButtonAvailability = async () => {
       const isBonusClaimed = await cloudStorage.getItem("bonusClaimed");
+      console.log(isBonusClaimed);
 
       if (JSON.parse(isBonusClaimed)) {
         setDisabled(true);

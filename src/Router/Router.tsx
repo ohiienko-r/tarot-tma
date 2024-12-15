@@ -1,11 +1,10 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { useLanguage, useDailyBonus, useMyCard } from "@/Hooks";
+import { useLanguage, useDailyBonus } from "@/Hooks";
 import useRoutes from "./useRoutes";
 
 const AppRouter = () => {
   useLanguage();
   useDailyBonus();
-  useMyCard();
 
   const routes = useRoutes();
 

@@ -1,14 +1,12 @@
 import { useCallback } from "react";
 import { useUser } from "@/Contexts";
-import { invoice } from "@telegram-apps/sdk-react";
+import { invoice, popup } from "@telegram-apps/sdk-react";
 import { useTranslation } from "react-i18next";
-import useInfoPopup from "../useInfoPopup/useInfoPopup";
 import { Api } from "@/Api";
 
 const useCoinsPurchase = () => {
   const { updateBalance } = useUser();
   const { t } = useTranslation();
-  const showPopup = useInfoPopup();
 
   const handleMagicCoinsPurchase = useCallback(
     async (coinsQty: number, price: number) => {
@@ -24,16 +22,18 @@ const useCoinsPurchase = () => {
 
         if (status === "paid") {
           updateBalance(coinsQty);
-          showPopup(
-            `${t("purchase success")} ${coinsQty} ${t("magic coins")} 🌕`,
-            t("congratulation")
-          );
+          popup.open({
+            message: `${t("purchase success")} ${coinsQty} ${t(
+              "magic coins"
+            )} 🌕`,
+            title: t("congratulation"),
+          });
         } else if (status === "failed") {
-          showPopup(t("purchase fail"), t("error title"));
+          popup.open({ message: t("purchase fail"), title: t("error title") });
         }
       }
     },
-    [invoice, t, showPopup, updateBalance]
+    [t, updateBalance]
   );
 
   return handleMagicCoinsPurchase;

@@ -4,9 +4,9 @@ import {
   cloudStorage,
   hapticFeedback,
   retrieveLaunchParams,
+  popup,
 } from "@telegram-apps/sdk-react";
 import { useUser } from "@/Contexts";
-import { useInfoPopup } from "@/Hooks";
 import { Rating, Button } from "@telegram-apps/telegram-ui";
 import { validateInputs } from "../RatingModal/helpers";
 import { Api } from "@/Api";
@@ -22,7 +22,6 @@ const FeedbackForm: FC<FeedbackFormPropTypes> = ({ onClose }) => {
   const [loading, setLoading] = useState<boolean>(false);
   const { initData } = retrieveLaunchParams();
   const { updateBalance } = useUser();
-  const popup = useInfoPopup();
   const { t } = useTranslation();
 
   const handleRatingChange = (value: number) => {
@@ -48,7 +47,7 @@ const FeedbackForm: FC<FeedbackFormPropTypes> = ({ onClose }) => {
     await cloudStorage.setItem("rated", "true");
     setLoading(false);
     onClose();
-    popup(t("thank you for your feedback"));
+    popup.open({ message: t("thank you for your feedback") });
     await Api.botController.sendFeedback(body);
     setFeedbackText("");
   };

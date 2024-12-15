@@ -1,10 +1,5 @@
 import { FC } from "react";
-import {
-  useMainButton,
-  useMainButtonHandler,
-  useMainButtonState,
-  useBackButton,
-} from "@/Hooks";
+import { useMainButton, useMainButtonHandler, useBackButton } from "@/Hooks";
 import { useTranslation } from "react-i18next";
 import {
   Page,
@@ -29,11 +24,9 @@ const Spread: FC<SpreadPropTypes> = ({
   const { t } = useTranslation();
   const { pathname } = useLocation();
   const handler = useMainButtonHandler(spreadPrice, cardsQty, pathname as Path);
-  const disabled = useMainButtonState(pathname as Path);
   const loading = useMainButton(
     `${t("get spread")} ${spreadPrice} 🌕`,
-    handler,
-    disabled
+    handler
   );
   useBackButton();
 
