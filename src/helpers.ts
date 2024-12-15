@@ -1,19 +1,13 @@
 import { CardKey, ImageModule } from "./types";
 
-export const SPREADS = {
-  CARD_OF_THE_DAY: {
-    PRICE: 2,
-    CARDS_QTY: 1,
-  },
-  YES_NO: {
-    PRICE: 3,
-    CARDS_QTY: 1,
-  },
-  QUESTION_TO_THE_CARDS: {
-    PRICE: 5,
-    CARDS_QTY: 3,
-  },
-} as const;
+export const unsupportedFullScreenPlatforms = [
+  "macos",
+  "tdesktop",
+  "unigram",
+  "unknown",
+  "web",
+  "weba",
+];
 
 const images = import.meta.glob<ImageModule>(
   "./Cards/img/*.{png,jpg,jpeg,webp}",
