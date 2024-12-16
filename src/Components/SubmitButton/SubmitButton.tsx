@@ -3,7 +3,7 @@ import { hapticFeedback } from "@telegram-apps/sdk-react";
 import "./styles.scss";
 
 export type SubmitButtonPropTypes = {
-  title: string;
+  title?: string;
   onPress: () => void | Promise<void>;
   disabled?: boolean;
 };

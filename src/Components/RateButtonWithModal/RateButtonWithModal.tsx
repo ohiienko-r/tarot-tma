@@ -1,5 +1,5 @@
 import { FC, useState, useEffect } from "react";
-import { BuyButton, RatingModal } from "@/Components";
+import { BuyButton, RatingModal, Icons } from "@/Components";
 import { hapticFeedback, cloudStorage } from "@telegram-apps/sdk-react";
 import { useTranslation } from "react-i18next";
 
@@ -35,10 +35,20 @@ const RateButtonWithModal: FC = () => {
     <>
       {buttonVisible && (
         <>
-          <BuyButton
-            title={`3 🌕 ${t("for rating us")}`}
-            onPress={handleModalOpen}
-          />
+          <BuyButton onPress={handleModalOpen}>
+            <div
+              style={{
+                fontWeight: 700,
+                fontSize: "25px",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "2px",
+              }}
+            >
+              3<Icons.Moon size={12} />
+            </div>
+            <p>{t("for rating us")}</p>
+          </BuyButton>
           <RatingModal open={modalVisible} onClose={handleModalClose} />
         </>
       )}

@@ -9,12 +9,20 @@
   background-size: cover;
 
   &__characters {
+    box-sizing: border-box;
+    bottom: 0;
     position: absolute;
     width: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     z-index: -1;
+    background-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.3),
+      rgba(255, 255, 255, 0.05),
+      rgba(0, 0, 0, 0.3)
+    );
 
     &-item {
       cursor: pointer;

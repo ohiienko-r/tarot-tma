@@ -15,7 +15,8 @@ const Page: FC<PagePropTypes> = ({ children, className }) => {
     <section
       className={["page", className].join(" ")}
       style={{
-        padding: `${insetTop}px 0 ${insetBottom}px 0`,
+        paddingTop: insetTop,
+        paddingBottom: insetBottom,
       }}
     >
       {children}

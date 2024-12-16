@@ -4,7 +4,6 @@ import { useBackButton } from "@/Hooks";
 import { Page } from "@/Components";
 import { analytics } from "@/Firebase";
 import { logEvent } from "firebase/analytics";
-import { Headline, Text } from "@telegram-apps/telegram-ui";
 import "./style.scss";
 
 const About: FC = () => {
@@ -14,18 +13,18 @@ const About: FC = () => {
 
   return (
     <Page className="about">
-      <Headline weight="1">{t("how it works header")}</Headline>
-      <Text Component={"p"}>{t("paragraph 1")}</Text>
-      <Headline weight="1">{t("ai and tarot header")}</Headline>
-      <Text Component={"p"}>{t("paragraph 2 pt1")}</Text>
+      <h2>{t("how it works header")}</h2>
+      <p>{t("paragraph 1")}</p>
+      <h2>{t("ai and tarot header")}</h2>
+      <p>{t("paragraph 2 pt1")}</p>
       <ol className="about__list">
         <li>{t("li 1")}</li>
         <li>{t("li 2")}</li>
         <li>{t("li 3")}</li>
       </ol>
-      <Text Component={"p"}>{t("paragraph 2 pt")}</Text>
+      <p>{t("paragraph 2 pt")}</p>
       <br />
-      <Text Component={"p"}>{t("li heading:")}</Text>
+      <p>{t("li heading:")}</p>
       <ol className="about__list">
         <li>{t("li 4")}</li>
         <li>{t("li 5")}</li>
@@ -33,7 +32,7 @@ const About: FC = () => {
         <li>{t("li 7")}</li>
         <li>{t("li 8")}</li>
       </ol>
-      <Text Component={"p"}>{t("paragraph 3")}</Text>
+      <p>{t("paragraph 3")}</p>
     </Page>
   );
 };
