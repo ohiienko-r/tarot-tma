@@ -27,7 +27,8 @@ for (const path in images) {
 
 export default formattedImages;
 
-export const shuffle = (array: string[]) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const shuffle = (array: any[]) => {
   let currentIndex = array.length;
 
   while (currentIndex != 0) {

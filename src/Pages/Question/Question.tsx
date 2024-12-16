@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useMemo, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { hapticFeedback, viewport } from "@telegram-apps/sdk-react";
@@ -7,6 +7,7 @@ import { analytics } from "@/Firebase";
 import { logEvent } from "firebase/analytics";
 import { Page, Preloader } from "@/Components";
 import { Button } from "@telegram-apps/telegram-ui";
+import { shuffle } from "@/helpers";
 import { Path } from "@/types";
 import "./styles.scss";
 
@@ -27,32 +28,63 @@ const Question: FC = () => {
     onClick: handler,
     disabled: prompt.length === 0,
   });
+
   useBackButton();
 
   logEvent(analytics, "page_view", { page_title: "Question to the cards" });
 
-  const defaultQuestionHadler = (index: number) => {
+  const handleDefaultQuestion = (index: number) => {
     hapticFeedback.impactOccurred("medium");
-    setPrompt(t(`default question ${index}`));
+    setPrompt(randomQuestions[index].question);
   };
 
   const defaultQuestions = [
     {
       id: 0,
       question: t("default question 1"),
-      onClick: () => defaultQuestionHadler(1),
     },
     {
       id: 1,
       question: t("default question 2"),
-      onClick: () => defaultQuestionHadler(2),
     },
     {
       id: 2,
       question: t("default question 3"),
-      onClick: () => defaultQuestionHadler(3),
+    },
+    {
+      id: 3,
+      question: t("default question 4"),
+    },
+    {
+      id: 4,
+      question: t("default question 5"),
+    },
+    {
+      id: 5,
+      question: t("default question 6"),
+    },
+    {
+      id: 6,
+      question: t("default question 7"),
+    },
+    {
+      id: 7,
+      question: t("default question 8"),
+    },
+    {
+      id: 8,
+      question: t("default question 9"),
+    },
+    {
+      id: 9,
+      question: t("default question 10"),
     },
   ];
+
+  const randomQuestions = useMemo(
+    () => shuffle(defaultQuestions).splice(0, 3),
+    []
+  );
 
   return (
     <Page>
@@ -71,12 +103,12 @@ const Question: FC = () => {
         />
       </div>
       <ul className="question__questions-list">
-        {defaultQuestions.map((question) => (
+        {randomQuestions.map((question, index) => (
           <Button
             key={question.id}
             size="s"
             mode="outline"
-            onClick={question.onClick}
+            onClick={() => handleDefaultQuestion(index)}
             style={{ color: "#FFFFFF" }}
           >
             {question.question}

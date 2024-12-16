@@ -81,7 +81,9 @@
     justify-self: stretch;
   }
 
-  &__purchase-button {
+  &__daily-bonus-button {
+    animation: pulse 1s infinite cubic-bezier(0.25, 0, 0, 1);
+    box-shadow: 0 0 0 0 white;
   }
 
   &__buttons-list {
@@ -113,11 +115,8 @@
   }
 }
 
-@keyframes rotateBorder {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
+@keyframes pulse {
+  to {
+    box-shadow: 0 0 0 6px rgba(255, 255, 255, 0);
   }
 }
