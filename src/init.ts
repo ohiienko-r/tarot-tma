@@ -5,6 +5,7 @@ import {
   initData,
   settingsButton,
   closingBehavior,
+  swipeBehavior,
   viewport,
   init as initSDK,
 } from "@telegram-apps/sdk-react";
@@ -21,6 +22,11 @@ export function init(): void {
   if (closingBehavior.mount.isAvailable()) {
     closingBehavior.mount();
     closingBehavior.enableConfirmation();
+  }
+
+  if (swipeBehavior.mount.isAvailable()) {
+    swipeBehavior.mount();
+    swipeBehavior.disableVertical();
   }
 
   if (viewport.mount.isAvailable()) {

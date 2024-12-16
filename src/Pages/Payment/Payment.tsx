@@ -1,6 +1,11 @@
-import { FC, useState } from "react";
+import { FC, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { hapticFeedback, shareURL, popup } from "@telegram-apps/sdk-react";
+import {
+  hapticFeedback,
+  shareURL,
+  popup,
+  cloudStorage,
+} from "@telegram-apps/sdk-react";
 import { analytics } from "@/Firebase";
 import { logEvent } from "firebase/analytics";
 import { useUser } from "@/Contexts";
@@ -14,7 +19,6 @@ import { useTranslation } from "react-i18next";
 import { Button } from "@telegram-apps/telegram-ui";
 import {
   Balance,
-  ClaimButton,
   BuyButton,
   Page,
   RateButtonWithModal,
@@ -32,12 +36,44 @@ const shareMessage: { [key: string]: string } = {
 } as const;
 
 const Payment: FC = () => {
+  const [claimBonusDisabled, setClaimBonusDisabled] = useState(true);
+  const [rateButtonVisible, setRateButtonVisible] = useState(false);
   const [loaderVisible, setLoaderVisible] = useState(false);
-  const { user } = useUser();
+  const { user, updateBalance } = useUser();
   const { t, i18n } = useTranslation();
   const purchaseCoins = useCoinsPurchase();
   const navigate = useNavigate();
   const purchaseDisableAds = useDisableAdsPurchase();
+
+  useEffect(() => {
+    const handleRateButtonVisible = async () => {
+      const rated = await cloudStorage.getItem("rated");
+
+      if (rated == "") {
+        setRateButtonVisible(true);
+      } else {
+        setRateButtonVisible(false);
+      }
+    };
+
+    handleRateButtonVisible();
+  }, []);
+
+  useEffect(() => {
+    const handleClaimDailyBonusButtonAvailable = async () => {
+      const isBonusClaimed = await cloudStorage.getItem("bonusClaimed");
+
+      setClaimBonusDisabled(JSON.parse(isBonusClaimed));
+    };
+
+    handleClaimDailyBonusButtonAvailable();
+  });
+
+  const handleClaimDailyBouns = async () => {
+    await updateBalance(3);
+    await cloudStorage.setItem("bonusClaimed", JSON.stringify(true));
+    setClaimBonusDisabled(true);
+  };
 
   const handlePurchaseDisableAds = async () => {
     if (await isAdsDisabled()) {
@@ -148,8 +184,27 @@ const Payment: FC = () => {
           </div>
           <p>{t("for inviting a friend")}</p>
         </BuyButton>
-        <ClaimButton />
-        <RateButtonWithModal />
+        <BuyButton
+          onPress={handleClaimDailyBouns}
+          disabled={claimBonusDisabled}
+          className="payment__daily-bonus-button "
+        >
+          <div
+            style={{
+              fontWeight: 700,
+              fontSize: "25px",
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "2px",
+            }}
+          >
+            3<Icons.Moon size={12} />
+          </div>
+          <p>{t("claim daily bonus")}</p>
+        </BuyButton>
+        {rateButtonVisible && (
+          <RateButtonWithModal onSubmit={() => setRateButtonVisible(false)} />
+        )}
       </ul>
       <ul className="payment__buttons-list">
         <h2 className="payment__heading">{t("support us")}</h2>
