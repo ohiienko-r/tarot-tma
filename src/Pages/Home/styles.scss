@@ -4,19 +4,61 @@
   flex-direction: column;
   justify-content: flex-end;
   z-index: 1;
+  background-image: url("../../assets/background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  &__characters {
+    box-sizing: border-box;
+    bottom: 0;
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    z-index: -1;
+    background-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.3),
+      rgba(255, 255, 255, 0.05),
+      rgba(0, 0, 0, 0.3)
+    );
+
+    &-item {
+      cursor: pointer;
+    }
+  }
 
   &__head {
     box-sizing: border-box;
-    padding: 0.5em 1em;
+    padding: 1em;
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
 
-    &__tarologist-name {
+    &-tarologist-name {
       font-weight: 600;
       font-size: 56px;
       line-height: 100%;
       color: #fff;
+    }
+
+    &-indicators-list {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5em;
+
+      &-item {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background-color: gray;
+
+        &--active {
+          background-color: #ffffff;
+        }
+      }
     }
 
     &__balance-section {
@@ -41,7 +83,7 @@
 
   &__navigation {
     box-sizing: border-box;
-    padding: 1em;
+    padding: 1em 1em 0 1em;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -120,7 +162,6 @@
 .char {
   position: absolute;
   z-index: 0;
-  top: 1em;
   left: 50%;
   transform: translateX(-50%);
 }

@@ -2,7 +2,7 @@ import { FC, useState, useEffect } from "react";
 import { useUser } from "@/Contexts";
 import { useTranslation } from "react-i18next";
 import { cloudStorage } from "@telegram-apps/sdk-react";
-import { BuyButton } from "@/Components";
+import { BuyButton, Icons } from "@/Components";
 import "./styles.scss";
 
 const ClaimButton: FC = () => {
@@ -33,11 +33,23 @@ const ClaimButton: FC = () => {
 
   return (
     <BuyButton
-      title={t("claim daily bonus")}
       onPress={handleClick}
       disabled={disabled}
       className="claim-button"
-    />
+    >
+      <div
+        style={{
+          fontWeight: 700,
+          fontSize: "25px",
+          display: "inline-flex",
+          alignItems: "center",
+          gap: "2px",
+        }}
+      >
+        3<Icons.Moon size={12} />
+      </div>
+      <p>{t("claim daily bonus")}</p>
+    </BuyButton>
   );
 };
 

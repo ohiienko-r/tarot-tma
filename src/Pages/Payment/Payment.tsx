@@ -1,25 +1,29 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { hapticFeedback, shareURL } from "@telegram-apps/sdk-react";
+import { hapticFeedback, shareURL, popup } from "@telegram-apps/sdk-react";
 import { analytics } from "@/Firebase";
 import { logEvent } from "firebase/analytics";
 import { useUser } from "@/Contexts";
-import { useBackButton, useCoinsPurchase } from "@/Hooks";
+import {
+  useBackButton,
+  useCoinsPurchase,
+  useDisableAdsPurchase,
+} from "@/Hooks";
+import { isAdsDisabled } from "@/Hooks/useAds/helpers";
 import { useTranslation } from "react-i18next";
-import { Headline } from "@telegram-apps/telegram-ui";
+import { Button } from "@telegram-apps/telegram-ui";
 import {
   Balance,
   ClaimButton,
   BuyButton,
   Page,
-  SubmitButton,
   RateButtonWithModal,
-  PurchaseDisableAdsButton,
   SupportUsButtonWithModal,
+  Icons,
+  Preloader,
 } from "@/Components";
 import { ROUTES_NAMES } from "@/Router";
 import "./styles.scss";
-import VerticalBuyButton from "@/Components/VerticalBuyButton/VerticalBuyButton";
 
 const shareMessage: { [key: string]: string } = {
   en: `🔮Welcome to the World of Tarot Answers🔮 \n\nAsk any question and get a clear answer in a minute. Open the door to the world of predictions`,
@@ -28,10 +32,20 @@ const shareMessage: { [key: string]: string } = {
 } as const;
 
 const Payment: FC = () => {
+  const [loaderVisible, setLoaderVisible] = useState(false);
   const { user } = useUser();
   const { t, i18n } = useTranslation();
   const purchaseCoins = useCoinsPurchase();
   const navigate = useNavigate();
+  const purchaseDisableAds = useDisableAdsPurchase();
+
+  const handlePurchaseDisableAds = async () => {
+    if (await isAdsDisabled()) {
+      popup.open({ message: t("ads already disabled") });
+    } else {
+      await purchaseDisableAds();
+    }
+  };
 
   logEvent(analytics, "page_view", { page_title: "Payment" });
 
@@ -42,68 +56,114 @@ const Payment: FC = () => {
 
   useBackButton(handleNavigateHome);
 
+  const handleMagicCoinsPurchase = async (qty: number, price: number) => {
+    hapticFeedback.impactOccurred("medium");
+    setLoaderVisible(true);
+    await purchaseCoins(qty, price);
+    setLoaderVisible(false);
+  };
+
   return (
     <Page className="payment">
+      {loaderVisible && <Preloader />}
+      <h2 className="payment__page-name">{t("shop")}</h2>
       <div className="payment__balance">
         <Balance />
-        <p>{t("magic coins")}</p>
       </div>
-      <Headline weight="2" className="payment__heading">
-        {t("discount month")}
-      </Headline>
+      <h2 className="payment__heading" style={{ padding: "0 1em" }}>
+        {t("buy")}
+      </h2>
       <ul className="payment__buttons-inline-list">
-        <VerticalBuyButton
-          title={`5🌕`}
-          price={50}
-          caption="⭐100"
-          onPress={async () => {
-            await purchaseCoins(5, 50);
-          }}
-        />
-        <VerticalBuyButton
-          title={`20🌕`}
-          price={175}
-          caption="⭐400"
-          onPress={async () => {
-            await purchaseCoins(20, 175);
-          }}
-        />
-        <VerticalBuyButton
-          title={`80🌕`}
-          price={600}
-          caption="⭐1350"
-          onPress={async () => {
-            await purchaseCoins(80, 600);
-          }}
-        />
-      </ul>
-      <ul className="payment__buttons-list">
-        <PurchaseDisableAdsButton />
-      </ul>
-      <Headline weight="2" className="payment__heading">
-        {`${t("get for free")} 🎁`}
-      </Headline>
-      <ul className="payment__buttons-list">
+        <button
+          className="payment__cta-button"
+          onClick={() => handleMagicCoinsPurchase(5, 100)}
+        >
+          <div className="payment__cta-button-title">
+            5 <Icons.Moon />
+          </div>
+          <div className="payment__cta-button-price">
+            <Icons.TelegramStar />
+            100
+          </div>
+          <div
+            className="payment__cta-button-discount"
+            style={{ visibility: "hidden" }}
+          ></div>
+        </button>
+        <button
+          className="payment__cta-button"
+          style={{ justifySelf: "center" }}
+          onClick={() => handleMagicCoinsPurchase(20, 350)}
+        >
+          <div className="payment__cta-button-title">
+            20 <Icons.Moon />
+          </div>
+          <div className="payment__cta-button-price">
+            <Icons.TelegramStar />
+            350
+          </div>
+          <div className="payment__cta-button-discount"> {t("economy 13")}</div>
+        </button>
+        <button
+          className="payment__cta-button"
+          style={{ justifySelf: "end" }}
+          onClick={() => handleMagicCoinsPurchase(80, 1200)}
+        >
+          <div className="payment__cta-button-title">
+            80 <Icons.Moon />
+          </div>
+          <div className="payment__cta-button-price">
+            <Icons.TelegramStar />
+            1200
+          </div>
+          <div className="payment__cta-button-discount"> {t("economy 38")}</div>
+        </button>
         <BuyButton
-          title={`3 🌕 ${t("for inviting a friend")}`}
+          title={t("disable ads")}
+          price={150}
+          onPress={handlePurchaseDisableAds}
+          className="payment__disable-ads"
+        />
+      </ul>
+      <ul className="payment__buttons-list">
+        <h2 className="payment__heading">{t("get for free")}</h2>
+        <BuyButton
           onPress={() =>
             shareURL(
               `https://t.me/my_ai_tarot_bot/?startapp=${user?.uId}`,
               shareMessage[i18n.language] ?? shareMessage.english
             )
           }
-        />
+        >
+          <div
+            style={{
+              fontWeight: 700,
+              fontSize: "25px",
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "2px",
+            }}
+          >
+            3<Icons.Moon size={12} />
+          </div>
+          <p>{t("for inviting a friend")}</p>
+        </BuyButton>
         <ClaimButton />
         <RateButtonWithModal />
       </ul>
-      <Headline weight="2" className="payment__heading">
-        {`${t("support us")} ❤️`}
-      </Headline>
       <ul className="payment__buttons-list">
+        <h2 className="payment__heading">{t("support us")}</h2>
         <SupportUsButtonWithModal />
       </ul>
       <div className="payment__home">
-        <SubmitButton title={t("to home")} onPress={handleNavigateHome} />
+        <Button
+          size="l"
+          stretched
+          onClick={handleNavigateHome}
+          style={{ backgroundColor: "#EA850F" }}
+        >
+          {t("to home")}
+        </Button>
       </div>
     </Page>
   );

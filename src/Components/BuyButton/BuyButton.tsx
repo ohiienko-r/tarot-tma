@@ -5,15 +5,13 @@ import { SubmitButtonPropTypes } from "../SubmitButton/SubmitButton";
 import "./styles.scss";
 
 type BuyButtonPropTypes = SubmitButtonPropTypes & {
-  caption?: string;
-  price?: number;
+  price?: number | string;
   className?: string;
   children?: ReactNode;
 };
 
 const BuyButton: FC<BuyButtonPropTypes> = ({
   title,
-  caption,
   price,
   onPress,
   disabled,
@@ -35,23 +33,16 @@ const BuyButton: FC<BuyButtonPropTypes> = ({
       onClick={handleClick}
       disabled={disabled}
     >
-      <div className="buy-button__text">
-        <p className="buy-button__text--title">
-          <p>{title}</p>
-          {children}
-        </p>
+      <div className="buy-button__title">
+        {title && <p>{title}</p>}
+        {children}
       </div>
-      {loadervisible ? (
-        <Icons.Loader />
-      ) : price ? (
-        <p className="buy-button__price">
-          <Icons.TelegramStar />
-          {price}
-        </p>
-      ) : (
-        <Icons.Chevron stroke="#FFFFFF" />
+      {loadervisible && <Icons.Loader />}
+      {!loadervisible && price && (
+        <div className="buy-button__price">
+          <Icons.TelegramStar /> {price}
+        </div>
       )}
-      {caption && <p className="buy-button__text--caption">{caption}</p>}
     </button>
   );
 };

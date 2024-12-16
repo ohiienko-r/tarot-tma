@@ -1,18 +1,11 @@
 import { FC } from "react";
 import { useMainButton, useMainButtonHandler, useBackButton } from "@/Hooks";
 import { useTranslation } from "react-i18next";
-import {
-  Page,
-  SpreadBalancePad,
-  BackgroundLayer,
-  Preloader,
-} from "@/Components";
-import { Headline, Text } from "@telegram-apps/telegram-ui";
+import { Page, SpreadBalancePad, Preloader } from "@/Components";
 import { useLocation } from "react-router-dom";
 import { SpreadPropTypes } from "./types";
 import { Path } from "@/types";
 import { ROUTES_NAMES } from "@/Router";
-import backgroundImage from "@/assets/spread_background.jpg";
 import "./styles.scss";
 
 const Spread: FC<SpreadPropTypes> = ({
@@ -24,25 +17,21 @@ const Spread: FC<SpreadPropTypes> = ({
   const { t } = useTranslation();
   const { pathname } = useLocation();
   const handler = useMainButtonHandler(spreadPrice, cardsQty, pathname as Path);
-  const loading = useMainButton(
-    `${t("get spread")} ${spreadPrice} 🌕`,
-    handler
-  );
+  const loading = useMainButton({
+    title: `${t("get spread")} ${spreadPrice} 🌕`,
+    onClick: handler,
+  });
   useBackButton();
 
   return (
-    <BackgroundLayer image={backgroundImage}>
-      <Page className="spread">
-        <Headline weight="1" className="spread__heading">
-          {title}
-        </Headline>
-        <SpreadBalancePad />
-        <Text Component={"p"} className="spread__caption">
-          {spreadDescription}
-        </Text>
-      </Page>
+    <>
       {pathname != ROUTES_NAMES.QUESTION && loading && <Preloader />}
-    </BackgroundLayer>
+      <Page className="spread">
+        <h2 className="spread__heading">{title}</h2>
+        <SpreadBalancePad />
+        <p className="spread__caption">{spreadDescription}</p>
+      </Page>
+    </>
   );
 };
 

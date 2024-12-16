@@ -7,97 +7,103 @@ import {
   Page,
   DailyBonusModal,
   Settings,
-  BackgroundLayer,
   Icons,
 } from "@/Components";
-import { hapticFeedback } from "@telegram-apps/sdk-react";
+import { hapticFeedback, viewport } from "@telegram-apps/sdk-react";
 import { analytics } from "@/Firebase";
 import { logEvent } from "firebase/analytics";
 import { ROUTES_NAMES } from "@/Router";
-import backgroundImage from "@/assets/background.jpg";
 import character from "@/assets/eva.png";
 import "./styles.scss";
 
 const Home: FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const insetTop = viewport.safeAreaInsetTop();
 
   logEvent(analytics, "page_view", { page_title: "Home" });
 
   return (
-    <BackgroundLayer image={backgroundImage} position={{ x: 0, y: -100 }}>
-      <img src={character} className="char" alt="Eva" />
-      <Page className="home">
-        <div className="home__head">
-          <h2 className="home__head__tarologist-name">{t("eva")}</h2>
-          <div className="home__head__balance-section">
-            <div className="home__head__balance-section__pad">
-              <Balance />
-            </div>
-            <SubmitButton
-              title={t("buy")}
-              onPress={() => navigate(ROUTES_NAMES.PAYMENT)}
-            />
-          </div>
-        </div>
-        <nav className="home__navigation">
-          <ul className="home__navigation-list">
-            <Link
-              to={ROUTES_NAMES.CARD_OF_THE_DAY}
-              onClick={() => hapticFeedback.impactOccurred("medium")}
-              className="home__navigation-list-item home__navigation-list-item--first"
-            >
-              <div className="home__navigation-list-item__caption">
-                <CardIcon />
-                <p>{t(ROUTES_NAMES.CARD_OF_THE_DAY)}</p>
-              </div>
-              <p className="home__navigation-list-item__price">
-                2
-                <Icons.Moon size={16} />
-              </p>
-            </Link>
-            <Link
-              to={ROUTES_NAMES.YES_NO}
-              onClick={() => hapticFeedback.impactOccurred("medium")}
-              className="home__navigation-list-item home__navigation-list-item--second"
-            >
-              <div className="home__navigation-list-item__caption">
-                <CardIcon />
-                <p>{t(ROUTES_NAMES.YES_NO)}</p>
-              </div>
-              <p className="home__navigation-list-item__price">
-                3
-                <Icons.Moon size={16} />
-              </p>
-            </Link>
-            <Link
-              to={ROUTES_NAMES.QUESTION}
-              onClick={() => hapticFeedback.impactOccurred("medium")}
-              className="home__navigation-list-item home__navigation-list-item--third"
-            >
-              <div className="home__navigation-list-item__caption">
-                <CardIcon />
-                <p>{t(ROUTES_NAMES.QUESTION)}</p>
-              </div>
-              <p className="home__navigation-list-item__price">
-                5
-                <Icons.Moon size={16} />
-              </p>
-            </Link>
+    <Page className="home">
+      <ul className="home__characters" style={{ top: insetTop }}>
+        <img src={character} alt="Eva" className="home__characters-item" />
+      </ul>
+      <div className="home__head">
+        <div>
+          <h2 className="home__head-tarologist-name">{t("eva")}</h2>
+          <ul className="home__head-indicators-list">
+            <li className="home__head-indicators-list-item"></li>
+            <li className="home__head-indicators-list-item home__head-indicators-list-item--active"></li>
+            <li className="home__head-indicators-list-item"></li>
           </ul>
+        </div>
+        <div className="home__head__balance-section">
+          <div className="home__head__balance-section__pad">
+            <Balance />
+          </div>
+          <SubmitButton
+            title={t("buy coins")}
+            onPress={() => navigate(ROUTES_NAMES.PAYMENT)}
+          />
+        </div>
+      </div>
+      <nav className="home__navigation">
+        <ul className="home__navigation-list">
           <Link
-            to={ROUTES_NAMES.ABOUT}
+            to={ROUTES_NAMES.CARD_OF_THE_DAY}
             onClick={() => hapticFeedback.impactOccurred("medium")}
-            className="home__faq"
+            className="home__navigation-list-item home__navigation-list-item--first"
           >
-            {t(ROUTES_NAMES.ABOUT)}
-            <Icons.QuestionMark fill="rgba(255, 199, 0, 50%)" />
+            <div className="home__navigation-list-item__caption">
+              <CardIcon />
+              <p>{t(ROUTES_NAMES.CARD_OF_THE_DAY)}</p>
+            </div>
+            <p className="home__navigation-list-item__price">
+              2
+              <Icons.Moon size={16} />
+            </p>
           </Link>
-        </nav>
-        <DailyBonusModal />
-        <Settings />
-      </Page>
-    </BackgroundLayer>
+          <Link
+            to={ROUTES_NAMES.YES_NO}
+            onClick={() => hapticFeedback.impactOccurred("medium")}
+            className="home__navigation-list-item home__navigation-list-item--second"
+          >
+            <div className="home__navigation-list-item__caption">
+              <CardIcon />
+              <p>{t(ROUTES_NAMES.YES_NO)}</p>
+            </div>
+            <p className="home__navigation-list-item__price">
+              3
+              <Icons.Moon size={16} />
+            </p>
+          </Link>
+          <Link
+            to={ROUTES_NAMES.QUESTION}
+            onClick={() => hapticFeedback.impactOccurred("medium")}
+            className="home__navigation-list-item home__navigation-list-item--third"
+          >
+            <div className="home__navigation-list-item__caption">
+              <CardIcon />
+              <p>{t(ROUTES_NAMES.QUESTION)}</p>
+            </div>
+            <p className="home__navigation-list-item__price">
+              5
+              <Icons.Moon size={16} />
+            </p>
+          </Link>
+        </ul>
+        <Link
+          to={ROUTES_NAMES.ABOUT}
+          onClick={() => hapticFeedback.impactOccurred("medium")}
+          className="home__faq"
+        >
+          {t(ROUTES_NAMES.ABOUT)}
+          <Icons.QuestionMark fill="rgba(255, 199, 0, 50%)" />
+        </Link>
+      </nav>
+      <DailyBonusModal />
+      <Settings />
+    </Page>
   );
 };
 

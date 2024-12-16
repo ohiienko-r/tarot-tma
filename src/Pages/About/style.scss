@@ -1,5 +1,13 @@
 .about {
-  padding: 1em;
+  padding: 0 1em;
+
+  h2 {
+    margin-top: 3em;
+  }
+
+  p {
+    margin-top: 1em;
+  }
 
   &__list {
     max-width: 80%;

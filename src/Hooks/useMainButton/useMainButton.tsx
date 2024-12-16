@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import { mainButton, hapticFeedback } from "@telegram-apps/sdk-react";
 
-const useMainButton = (
-  title: string,
-  onClick: () => Promise<void> | void,
-  disabled?: boolean
-) => {
+type MainButtonPropTypes = {
+  title: string;
+  onClick: () => Promise<void> | void;
+  disabled?: boolean;
+};
+
+const useMainButton = ({ title, onClick, disabled }: MainButtonPropTypes) => {
   const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
