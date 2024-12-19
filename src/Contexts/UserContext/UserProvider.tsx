@@ -8,6 +8,7 @@ import {
 } from "react";
 import { UserContext } from "./UserContext";
 import { initData } from "@telegram-apps/sdk-react";
+import { supabase } from "@/supabase";
 import { Api } from "@/Api";
 import { User } from "@/types";
 
@@ -19,9 +20,27 @@ const UserProvider: FC<PropsWithChildren> = ({ children }) => {
 
   useEffect(() => {
     const getUser = async () => {
+      const isInitDataValid = await Api.botController.validateInitData();
+
+      if (!isInitDataValid) {
+        throw new Error("Init data is invalid!");
+      }
+
       const existingUser = await Api.botController.getUserData(
         currentUser?.id as number
       );
+
+      const { data, error } = await supabase
+        .from("users")
+        .select("*")
+        .eq("id", currentUser?.id)
+        .maybeSingle();
+
+      if (error) {
+        console.error(error);
+      }
+
+      console.log(data);
 
       if (existingUser === null || existingUser === undefined) {
         const newUser = await Api.botController.setNewUser({
