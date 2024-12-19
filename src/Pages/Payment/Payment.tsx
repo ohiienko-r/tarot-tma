@@ -6,8 +6,6 @@ import {
   popup,
   cloudStorage,
 } from "@telegram-apps/sdk-react";
-import { analytics } from "@/Firebase";
-import { logEvent } from "firebase/analytics";
 import { useUser } from "@/Contexts";
 import {
   useBackButton,
@@ -82,8 +80,6 @@ const Payment: FC = () => {
       await purchaseDisableAds();
     }
   };
-
-  logEvent(analytics, "page_view", { page_title: "Payment" });
 
   const handleNavigateHome = () => {
     hapticFeedback.impactOccurred("medium");
@@ -166,7 +162,7 @@ const Payment: FC = () => {
         <BuyButton
           onPress={() =>
             shareURL(
-              `https://t.me/my_ai_tarot_bot/?startapp=${user?.uId}`,
+              `https://t.me/my_ai_tarot_bot/?startapp=${user?.id}`,
               shareMessage[i18n.language] ?? shareMessage.english
             )
           }

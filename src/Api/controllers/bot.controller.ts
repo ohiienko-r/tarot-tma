@@ -1,10 +1,20 @@
 import { initData } from "@telegram-apps/sdk-react";
-import {
-  FeedbackBody,
-  SendSpreadToUserBody,
-  ValidationResponse,
-  UserData,
-} from "@/types";
+import { CardKey } from "@/types";
+
+type FeedbackBody = {
+  uId: number | undefined;
+  name: string | undefined;
+  rating: number;
+  feedback: string;
+};
+
+export type SendSpreadToUserBody = {
+  uId: number;
+  title: string;
+  prompt?: string;
+  cardsKeys: CardKey[];
+  reading: string;
+};
 
 export default {
   /**
@@ -23,73 +33,14 @@ export default {
         }
       );
 
-      const data: ValidationResponse = await response.json();
+      const data: {
+        success: boolean;
+        message?: string;
+      } = await response.json();
 
       return data.success;
     } catch (error) {
       throw new Error(`${error}`);
-    }
-  },
-  async setNewUser({
-    uId,
-    firstName,
-    userName,
-    languageCode,
-    referrerId,
-  }: UserData) {
-    try {
-      const response = await fetch(
-        "https://tarot-bot-18921c9756be.herokuapp.com/new-user",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            uId: uId,
-            firstName: firstName,
-            userName: userName,
-            languageCode: languageCode,
-            referrerId: referrerId,
-          }),
-        }
-      );
-
-      if (!response.ok) {
-        console.error(`Failed to set new user`);
-      }
-
-      const user = await response.json();
-      return user;
-    } catch (error) {
-      throw new Error(`${error}`);
-    }
-  },
-  async getUserData(uId: number) {
-    try {
-      const response = await fetch(
-        "https://tarot-bot-18921c9756be.herokuapp.com/get-user",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            uId: uId,
-          }),
-        }
-      );
-
-      if (!response.ok) {
-        console.error("Failed to get user data");
-      }
-
-      const user = await response.json();
-      return user;
-    } catch (error) {
-      throw new Error(
-        `Failed to retreive user data for the provided uId: ${error}`
-      );
     }
   },
   /**
@@ -134,7 +85,7 @@ export default {
   },
   /**
    * Sends a user's feedback to Bot api server where it's sent to a DB and to admin's personal chat with Bot;
-   * @param {FeedbackBody} body - object that contains user's Tg id, first name, rating of app from 1 to 5 and feedback string;
+   * @param body - object that contains user's Tg id, first name, rating of app from 1 to 5 and feedback string;
    */
   async sendFeedback(body: FeedbackBody) {
     try {

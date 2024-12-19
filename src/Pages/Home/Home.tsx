@@ -10,8 +10,6 @@ import {
   Icons,
 } from "@/Components";
 import { hapticFeedback, viewport } from "@telegram-apps/sdk-react";
-import { analytics } from "@/Firebase";
-import { logEvent } from "firebase/analytics";
 import { ROUTES_NAMES } from "@/Router";
 import character from "@/assets/eva.png";
 import "./styles.scss";
@@ -20,8 +18,6 @@ const Home: FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const insetTop = viewport.safeAreaInsetTop();
-
-  logEvent(analytics, "page_view", { page_title: "Home" });
 
   return (
     <Page className="home">
