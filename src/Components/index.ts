@@ -14,7 +14,6 @@ export { default as Preloader } from "./Preloader/Preloader";
 export { default as ChangeLanguageModal } from "./ChangeLanguageModal/ChangeLanguageModal";
 export { default as RateButtonWithModal } from "./RateButtonWithModal/RateButtonWithModal";
 export { default as SupportUsButtonWithModal } from "./SupportUsButtonWithModal/SupportUsButtonWithModall";
-export { default as SupportUsForm } from "./SupportUsForm/SupportUsForm";
 export { default as SplashScreen } from "./SplashScreen/SplashScreen";
 export * as Icons from "./Icons";
 export * as Modal from "./Modal";

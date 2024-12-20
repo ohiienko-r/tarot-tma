@@ -8,19 +8,23 @@ import {
   DailyBonusModal,
   Settings,
   Icons,
+  SplashScreen,
 } from "@/Components";
 import { hapticFeedback, viewport } from "@telegram-apps/sdk-react";
+import { useUser } from "@/Contexts";
 import { ROUTES_NAMES } from "@/Router";
 import character from "@/assets/eva.png";
 import "./styles.scss";
 
 const Home: FC = () => {
+  const { user } = useUser();
   const { t } = useTranslation();
   const navigate = useNavigate();
   const insetTop = viewport.safeAreaInsetTop();
 
   return (
     <Page className="home">
+      {!user && <SplashScreen />}
       <ul className="home__characters" style={{ top: insetTop }}>
         <img src={character} alt="Eva" className="home__characters-item" />
       </ul>

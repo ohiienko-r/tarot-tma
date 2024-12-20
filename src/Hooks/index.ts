@@ -13,4 +13,3 @@ export { default as useSendSpread } from "./useSendSpread/useSendSpread";
 export { default as useCoinsPurchase } from "./useCoinsPurchase/useCoinsPurchase";
 export { default as useDisableAdsPurchase } from "./useDisableAdsPurchase/useDisableAdsPurchase";
 export { default as useAds } from "./useAds/useAds";
-export { default as useSupportUs } from "./useSupportUs/useSupportUs";
