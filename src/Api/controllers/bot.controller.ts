@@ -1,4 +1,4 @@
-import { initData } from "@telegram-apps/sdk-react";
+import { initDataRaw } from "@telegram-apps/sdk-react";
 import { CardKey } from "@/types";
 
 type FeedbackBody = {
@@ -28,7 +28,7 @@ export default {
         {
           method: "POST",
           headers: {
-            Authorization: `tma ${initData.raw()}`,
+            Authorization: `tma ${initDataRaw()}`,
           },
         }
       );
