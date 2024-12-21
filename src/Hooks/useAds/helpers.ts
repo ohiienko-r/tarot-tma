@@ -24,8 +24,6 @@ export const isAdsDisabled = async () => {
     return false;
   }
 
-  console.log(data);
-
   const dueDate = new Date(data.ads_disabled_till);
 
   today.setHours(0, 0, 0, 0);

@@ -6,8 +6,14 @@ import { backButton, popup } from "@telegram-apps/sdk-react";
 import { useRandomCards, useAds } from "@/Hooks";
 import { Api } from "@/Api";
 import { ROUTES_NAMES } from "@/Router";
-import { SystemLanguage } from "@/types";
-import { UseReadingsPropTypes } from "./types";
+import { SystemLanguage, Path } from "@/types";
+
+type UseReadingsPropTypes = {
+  cardsQty: number;
+  path: Path;
+  prompt?: string;
+  spreadPrice: number;
+};
 
 const useReadings = ({
   cardsQty,
@@ -21,29 +27,41 @@ const useReadings = ({
   const showAdvertisment = useAds();
   const navigate = useNavigate();
 
-  const isInitDataValid = useCallback(async () => {
-    const isValid = await Api.botController.validateInitData();
-    if (!isValid) {
-      popup.open({ message: "Init data is invalid", title: t("error title") });
-      return false;
-    } else {
-      return true;
-    }
-  }, [t]);
+  const requestReadings = useCallback(async () => {
+    try {
+      //Validate init data
+      if (!(await Api.botController.validateInitData())) {
+        popup.open({
+          message: "Init data is invalid",
+          title: t("error title"),
+        });
+        return;
+      }
 
-  const getReadings = useCallback(async () => {
-    return await Api.redingsController.getReadings(
-      cardsNames,
-      i18n.language as SystemLanguage,
-      path,
-      prompt
-    );
-  }, [cardsNames, i18n, path, prompt]);
+      //Handle ads
+      showAdvertisment();
 
-  const onReadingAvailable = useCallback(
-    async (reading: string) => {
+      backButton.hide();
+
+      //Retreive respective readings
+      const reading = await Api.redingsController.getReadings(
+        cardsNames,
+        i18n.language as SystemLanguage,
+        path,
+        prompt
+      );
+
+      if (!reading) {
+        popup.open({
+          message:
+            "Oops! Something happened to our tarologist. Please contact support.",
+        });
+        return;
+      }
+
       await updateBalance(-spreadPrice);
 
+      //Navigate to readings page with respective readings available
       navigate(ROUTES_NAMES.READINGS, {
         state: {
           title: t(path),
@@ -53,26 +71,21 @@ const useReadings = ({
           prompt,
         },
       });
-    },
-    [cardsKeys, path, prompt, spreadPrice, t, navigate, updateBalance]
-  );
-
-  const requestReadings = useCallback(async () => {
-    try {
-      if (!(await isInitDataValid())) return;
-
-      showAdvertisment();
-
-      backButton.hide();
-
-      const reading = await getReadings();
-
-      await onReadingAvailable(reading as string);
     } catch (error) {
       console.error(`Error occurred: ${error}`);
-      popup.open({ message: t("error message"), title: t("error title") });
     }
-  }, [isInitDataValid, showAdvertisment, getReadings, onReadingAvailable, t]);
+  }, [
+    cardsNames,
+    cardsKeys,
+    i18n,
+    spreadPrice,
+    path,
+    prompt,
+    updateBalance,
+    showAdvertisment,
+    navigate,
+    t,
+  ]);
 
   return requestReadings;
 };
