@@ -23,6 +23,7 @@ export default {
    */
   async validateInitData(): Promise<boolean> {
     try {
+      console.log(initDataRaw());
       const response = await fetch(
         import.meta.env.VITE_INIT_DATA_VALIDATION_URL,
         {
