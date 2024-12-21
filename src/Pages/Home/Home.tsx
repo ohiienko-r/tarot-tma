@@ -1,26 +1,62 @@
-import { FC } from "react";
+import { FC, useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import {
   Balance,
   SubmitButton,
   Page,
-  DailyBonusModal,
+  Modal,
   Settings,
   Icons,
   SplashScreen,
 } from "@/Components";
-import { hapticFeedback, viewport } from "@telegram-apps/sdk-react";
+import { hapticFeedback, viewport, popup } from "@telegram-apps/sdk-react";
+import { Button } from "@telegram-apps/telegram-ui";
 import { useUser } from "@/Contexts";
 import { ROUTES_NAMES } from "@/Router";
+import { supabase } from "@/supabase";
 import character from "@/assets/eva.png";
 import "./styles.scss";
 
 const Home: FC = () => {
+  const [modalVisible, setModalVisible] = useState<boolean>(false);
   const { user } = useUser();
   const { t } = useTranslation();
   const navigate = useNavigate();
   const insetTop = viewport.safeAreaInsetTop();
+
+  useEffect(() => {
+    const checkBonusAvailability = async () => {
+      if (user) {
+        const { data, error } = await supabase
+          .from("users")
+          .select("daily_bonus")
+          .eq("id", user.id)
+          .maybeSingle<{ daily_bonus: boolean }>();
+
+        if (error) {
+          popup.open({
+            message:
+              "Failed to retreive daily bonus status. Please contact support.",
+            title: "Error!",
+          });
+          throw new Error(JSON.stringify(error));
+        }
+
+        if (data) {
+          setModalVisible(data?.daily_bonus);
+        }
+      }
+    };
+
+    checkBonusAvailability();
+  });
+
+  const handleModalClose = async () => {
+    hapticFeedback.impactOccurred("medium");
+    navigate(ROUTES_NAMES.PAYMENT);
+    setModalVisible(false);
+  };
 
   return (
     <Page className="home">
@@ -101,7 +137,18 @@ const Home: FC = () => {
           <Icons.QuestionMark fill="rgba(255, 199, 0, 50%)" />
         </Link>
       </nav>
-      <DailyBonusModal />
+      <Modal.MinContent
+        open={modalVisible}
+        onClose={handleModalClose}
+        title={t("daily bonus heading")}
+      >
+        <p style={{ textAlign: "center" }}>{`${t(
+          "dayli bonus greeting"
+        )} \n ${t("here are your coins")}`}</p>
+        <Button size="l" stretched onClick={handleModalClose}>
+          {t("claim")}
+        </Button>
+      </Modal.MinContent>
       <Settings />
     </Page>
   );

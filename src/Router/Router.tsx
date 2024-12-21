@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 import { viewport, retrieveLaunchParams } from "@telegram-apps/sdk-react";
 import { useTranslation } from "react-i18next";
-import { useLanguage, useDailyBonus } from "@/Hooks";
+import { useLanguage } from "@/Hooks";
 import { Home, Spread, Question, About, Readings, Payment } from "@/Pages";
 import { unsupportedFullScreenPlatforms } from "@/helpers";
 import { ROUTES_NAMES } from "./routes-names";
@@ -15,7 +15,6 @@ const AppRouter = () => {
   const { t } = useTranslation();
   const lp = retrieveLaunchParams();
   useLanguage();
-  useDailyBonus();
 
   useEffect(() => {
     const enterFullScreen = async () => {

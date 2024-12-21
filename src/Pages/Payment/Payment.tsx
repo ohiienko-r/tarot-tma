@@ -24,6 +24,7 @@ import {
   Icons,
   Preloader,
 } from "@/Components";
+import { supabase } from "@/supabase";
 import { ROUTES_NAMES } from "@/Router";
 import "./styles.scss";
 
@@ -34,7 +35,7 @@ const shareMessage: { [key: string]: string } = {
 } as const;
 
 const Payment: FC = () => {
-  const [claimBonusDisabled, setClaimBonusDisabled] = useState(true);
+  const [claimButtonAvailable, setClaimButtonAvailable] = useState(false);
   const [rateButtonVisible, setRateButtonVisible] = useState(false);
   const [loaderVisible, setLoaderVisible] = useState(false);
   const { user, updateBalance } = useUser();
@@ -58,19 +59,46 @@ const Payment: FC = () => {
   }, []);
 
   useEffect(() => {
-    const handleClaimDailyBonusButtonAvailable = async () => {
-      const isBonusClaimed = await cloudStorage.getItem("bonusClaimed");
+    const checkBonusAvailability = async () => {
+      if (user) {
+        const { data, error } = await supabase
+          .from("users")
+          .select("daily_bonus")
+          .eq("id", user.id)
+          .maybeSingle<{ daily_bonus: boolean }>();
 
-      setClaimBonusDisabled(JSON.parse(isBonusClaimed));
+        if (error) {
+          popup.open({
+            message:
+              "Failed to retreive daily bonus status. Please contact support.",
+            title: "Error!",
+          });
+          throw new Error(JSON.stringify(error));
+        }
+
+        if (data) {
+          setClaimButtonAvailable(data?.daily_bonus);
+        }
+      }
     };
 
-    handleClaimDailyBonusButtonAvailable();
+    checkBonusAvailability();
   });
 
   const handleClaimDailyBouns = async () => {
     await updateBalance(3);
-    await cloudStorage.setItem("bonusClaimed", JSON.stringify(true));
-    setClaimBonusDisabled(true);
+    const { error } = await supabase
+      .from("users")
+      .update({ daily_bonus: false })
+      .eq("id", user?.id);
+    if (error) {
+      popup.open({
+        message: "Failed to update daily bonus status. Please contact support.",
+        title: "Error!",
+      });
+      throw new Error(JSON.stringify(error));
+    }
+    setClaimButtonAvailable(false);
   };
 
   const handlePurchaseDisableAds = async () => {
@@ -182,7 +210,7 @@ const Payment: FC = () => {
         </BuyButton>
         <BuyButton
           onPress={handleClaimDailyBouns}
-          disabled={claimBonusDisabled}
+          disabled={!claimButtonAvailable}
           className="payment__daily-bonus-button "
         >
           <div

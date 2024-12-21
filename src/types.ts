@@ -30,4 +30,5 @@ export type User = {
   ads_disabled_till: Date | null;
   daily_reminder: boolean;
   ref_id: number | null;
+  daily_bonus: boolean;
 };
