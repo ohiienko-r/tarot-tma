@@ -1,17 +1,14 @@
-import { FC, useState, useEffect } from "react";
+import { FC, useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   hapticFeedback,
   shareURL,
   popup,
   cloudStorage,
+  invoice,
 } from "@telegram-apps/sdk-react";
 import { useUser } from "@/Contexts";
-import {
-  useBackButton,
-  useCoinsPurchase,
-  useDisableAdsPurchase,
-} from "@/Hooks";
+import { useBackButton, useDisableAdsPurchase } from "@/Hooks";
 import { isAdsDisabled } from "@/Hooks/useAds/helpers";
 import { useTranslation } from "react-i18next";
 import { Button } from "@telegram-apps/telegram-ui";
@@ -24,6 +21,7 @@ import {
   Icons,
   Preloader,
 } from "@/Components";
+import { Api } from "@/Api";
 import { supabase } from "@/supabase";
 import { ROUTES_NAMES } from "@/Router";
 import "./styles.scss";
@@ -40,7 +38,6 @@ const Payment: FC = () => {
   const [loaderVisible, setLoaderVisible] = useState(false);
   const { user, updateBalance } = useUser();
   const { t, i18n } = useTranslation();
-  const purchaseCoins = useCoinsPurchase();
   const navigate = useNavigate();
   const purchaseDisableAds = useDisableAdsPurchase();
 
@@ -116,12 +113,36 @@ const Payment: FC = () => {
 
   useBackButton(handleNavigateHome);
 
-  const handleMagicCoinsPurchase = async (qty: number, price: number) => {
-    hapticFeedback.impactOccurred("medium");
-    setLoaderVisible(true);
-    await purchaseCoins(qty, price);
-    setLoaderVisible(false);
-  };
+  const handleMagicCoinsPurchase = useCallback(
+    async (qty: number, price: number) => {
+      hapticFeedback.impactOccurred("medium");
+
+      setLoaderVisible(true);
+
+      const invoiceLink = await Api.botController.getInvoiceLink(
+        t("magic coins"),
+        t("invoice description"),
+        price,
+        qty
+      );
+
+      if (invoiceLink) {
+        const status = await invoice.open(invoiceLink, "url");
+
+        if (status === "paid") {
+          updateBalance(qty);
+          popup.open({
+            message: `${t("purchase success")} ${qty} ${t("magic coins")} 🌕`,
+            title: t("congratulation"),
+          });
+        } else if (status === "failed") {
+          popup.open({ message: t("purchase fail"), title: t("error title") });
+        }
+      }
+      setLoaderVisible(false);
+    },
+    [t, updateBalance]
+  );
 
   return (
     <Page className="payment">
