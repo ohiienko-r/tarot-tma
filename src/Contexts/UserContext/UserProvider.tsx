@@ -26,10 +26,15 @@ const UserProvider: FC<PropsWithChildren> = ({ children }) => {
   useEffect(() => {
     const getUser = async () => {
       //Validate current user's init data to make sure app is launched from TG environment
-      const isInitDataValid = await Api.botController.validateInitData();
+      const { valid, error: validationError } =
+        await Api.botController.isInitDataValild();
+
+      if (validationError) {
+        console.error("Failed to validate init data");
+      }
 
       //If it's not valid show a popup with error and on button click close the mini app
-      if (!isInitDataValid) {
+      if (!valid) {
         console.error("Init data is invalid!");
         popup
           .open({
@@ -42,6 +47,7 @@ const UserProvider: FC<PropsWithChildren> = ({ children }) => {
               miniApp.close();
             }
           });
+        return;
       }
 
       //Get current user data from DB based on tg id which is a primary identifier in DB

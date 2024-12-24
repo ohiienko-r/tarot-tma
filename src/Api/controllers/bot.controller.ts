@@ -1,13 +1,6 @@
 import { initDataRaw } from "@telegram-apps/sdk-react";
 import { CardKey } from "@/types";
 
-type FeedbackBody = {
-  uId: number | undefined;
-  name: string | undefined;
-  rating: number;
-  feedback: string;
-};
-
 export type SendSpreadToUserBody = {
   uId: number;
   title: string;
@@ -21,26 +14,25 @@ export default {
    * Validates user's Telegram init data to verify that user is the exact person;
    * @returns true if user's Telegram init data is valid, false if not;
    */
-  async validateInitData(): Promise<boolean> {
+  async isInitDataValild(): Promise<{
+    valid: boolean;
+    error: string | null;
+  }> {
     try {
       const response = await fetch(
         import.meta.env.VITE_INIT_DATA_VALIDATION_URL,
         {
-          method: "POST",
           headers: {
             Authorization: `tma ${initDataRaw()}`,
           },
         }
       );
+      const { isValid } = await response.json();
 
-      const data: {
-        success: boolean;
-        message?: string;
-      } = await response.json();
-
-      return data.success;
+      return { valid: isValid, error: null };
     } catch (error) {
-      throw new Error(`${error}`);
+      console.error(error);
+      return { valid: false, error: JSON.stringify(error) };
     }
   },
   /**
@@ -84,23 +76,6 @@ export default {
     }
   },
   /**
-   * Sends a user's feedback to Bot api server where it's sent to a DB and to admin's personal chat with Bot;
-   * @param body - object that contains user's Tg id, first name, rating of app from 1 to 5 and feedback string;
-   */
-  async sendFeedback(body: FeedbackBody) {
-    try {
-      await fetch(import.meta.env.VITE_SEND_FEEDBACK_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(body),
-      });
-    } catch (error) {
-      console.error("Failed to send feedback to server:", error);
-    }
-  },
-  /**
    *  Sends a user's whole spread reading and cards keys to Bot API server where it's sent into a private chat with bot to a
    * respective user accirding to uId;
    * @param {SendSpreadToUserBody} body - object that contains user's Tg id, array of cards object keys, spread title,
@@ -129,4 +104,5 @@ export default {
       console.error("Failed to send spread to user:", error);
     }
   },
+  async sendRefNotification(ref_id: number, current_user_name: string) {},
 };
