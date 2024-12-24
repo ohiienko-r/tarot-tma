@@ -104,5 +104,14 @@ export default {
       console.error("Failed to send spread to user:", error);
     }
   },
-  async sendRefNotification(ref_id: number, current_user_name: string) {},
+  async sendRefNotification(ref_id: number, current_user_name: string) {
+    try {
+      await fetch("https://tarot-bot-18921c9756be.herokuapp.com/notify-ref", {
+        method: "POST",
+        body: JSON.stringify({ ref_id, current_user_name }),
+      });
+    } catch (error) {
+      console.error("Failed to send ref notification", error);
+    }
+  },
 };

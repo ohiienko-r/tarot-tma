@@ -113,7 +113,49 @@ const UserProvider: FC<PropsWithChildren> = ({ children }) => {
         }
 
         setUser(data);
-        setBalance(data.balance);
+
+        let userBalance;
+
+        //If referrer id is not null check if the referrer exists
+        if (refId !== null) {
+          const { data: refData, error } = await supabase
+            .from("users")
+            .select("*")
+            .eq("id", refId)
+            .maybeSingle<User>();
+
+          if (error) {
+            console.error(
+              "Failed to retreive referrer data:",
+              JSON.stringify(error)
+            );
+            setBalance(data.balance);
+            return;
+          }
+
+          //If referrer exists update both balances: referal and referrer
+          if (refData !== null) {
+            const { error: refUpdateError } = await supabase
+              .from("users")
+              .update({ balance: refData.balance + 3 });
+
+            if (refUpdateError) {
+              console.error("Failed to update referrer balance");
+            }
+
+            userBalance = data.balance + 3;
+
+            //Notify referrer about new referal
+            await Api.botController.sendRefNotification(
+              refId,
+              data?.user_name ?? data?.first_name ?? JSON.stringify(data?.id)
+            );
+          }
+        } else {
+          userBalance = data.balance;
+        }
+
+        setBalance(userBalance);
       } else {
         setUser(existingUser);
         setBalance(existingUser.balance);

@@ -30,7 +30,7 @@ const useReadings = ({
   const requestReadings = useCallback(async () => {
     try {
       //Validate init data
-      if (!(await Api.botController.validateInitData())) {
+      if (!(await Api.botController.isInitDataValild())) {
         popup.open({
           message: "Init data is invalid",
           title: t("error title"),
