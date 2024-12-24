@@ -4,8 +4,6 @@ import { useTranslation } from "react-i18next";
 import { popup, hapticFeedback } from "@telegram-apps/sdk-react";
 import { useBackButton, useSendSpread } from "@/Hooks";
 import { Button } from "@telegram-apps/telegram-ui";
-import { analytics } from "@/Firebase";
-import { logEvent } from "firebase/analytics";
 import { CardsGroup, Page, MarkdownToHTML } from "@/Components";
 import { ROUTES_NAMES } from "@/Router";
 import "./styles.scss";
@@ -21,11 +19,6 @@ const Readings: FC = () => {
     prompt: state.prompt,
     cardsKeys: state.cardsKeys,
     reading: state.reading,
-  });
-
-  logEvent(analytics, "page_view", {
-    page_title: "Reading",
-    page_path: `Spread reading from ${state.fromPath}`,
   });
 
   const handleNavigateHome = useCallback(() => {

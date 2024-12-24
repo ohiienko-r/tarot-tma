@@ -1,11 +1,6 @@
 import { cards } from "./Cards/cards.dto";
 import { ROUTES_NAMES } from "./Router";
 
-export type ValidationResponse = {
-  success: boolean;
-  message?: string;
-};
-
 export type SystemLanguage = "en" | "uk" | "ru";
 
 export type CardKey = keyof (typeof cards)[SystemLanguage];
@@ -24,35 +19,16 @@ export type ImageModule = {
   default: string;
 };
 
-export type FeedbackBody = {
-  uId: number | undefined;
-  name: string | undefined;
-  rating: number;
-  feedback: string;
-};
-
-export type SendSpreadToUserBody = {
-  uId: number;
-  title: string;
-  prompt?: string;
-  cardsKeys: CardKey[];
-  reading: string;
-};
-
-export type UserData = {
-  uId: number;
-  firstName: string;
-  userName: string;
-  languageCode: string;
-  referrerId?: number;
-};
-
 export type User = {
+  id: number;
+  user_name: string | null;
+  first_name: string | null;
   balance: number;
-  uId: number;
-  firstName: string | null;
-  userName: string | null;
-  languageCode: SystemLanguage | null;
-  remind: boolean;
-  referred: number | null;
+  language_code: string | null;
+  created_at: string | null;
+  last_login: string | null;
+  ads_disabled_till: Date | null;
+  daily_reminder: boolean;
+  ref_id: number | null;
+  daily_bonus: boolean;
 };

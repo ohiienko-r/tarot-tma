@@ -1,19 +1,14 @@
-import { FC, useState, useEffect } from "react";
+import { FC, useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   hapticFeedback,
   shareURL,
   popup,
   cloudStorage,
+  invoice,
 } from "@telegram-apps/sdk-react";
-import { analytics } from "@/Firebase";
-import { logEvent } from "firebase/analytics";
 import { useUser } from "@/Contexts";
-import {
-  useBackButton,
-  useCoinsPurchase,
-  useDisableAdsPurchase,
-} from "@/Hooks";
+import { useBackButton, useDisableAdsPurchase } from "@/Hooks";
 import { isAdsDisabled } from "@/Hooks/useAds/helpers";
 import { useTranslation } from "react-i18next";
 import { Button } from "@telegram-apps/telegram-ui";
@@ -26,6 +21,8 @@ import {
   Icons,
   Preloader,
 } from "@/Components";
+import { Api } from "@/Api";
+import { supabase } from "@/supabase";
 import { ROUTES_NAMES } from "@/Router";
 import "./styles.scss";
 
@@ -36,12 +33,11 @@ const shareMessage: { [key: string]: string } = {
 } as const;
 
 const Payment: FC = () => {
-  const [claimBonusDisabled, setClaimBonusDisabled] = useState(true);
+  const [claimButtonAvailable, setClaimButtonAvailable] = useState(false);
   const [rateButtonVisible, setRateButtonVisible] = useState(false);
   const [loaderVisible, setLoaderVisible] = useState(false);
   const { user, updateBalance } = useUser();
   const { t, i18n } = useTranslation();
-  const purchaseCoins = useCoinsPurchase();
   const navigate = useNavigate();
   const purchaseDisableAds = useDisableAdsPurchase();
 
@@ -60,19 +56,46 @@ const Payment: FC = () => {
   }, []);
 
   useEffect(() => {
-    const handleClaimDailyBonusButtonAvailable = async () => {
-      const isBonusClaimed = await cloudStorage.getItem("bonusClaimed");
+    const checkBonusAvailability = async () => {
+      if (user) {
+        const { data, error } = await supabase
+          .from("users")
+          .select("daily_bonus")
+          .eq("id", user.id)
+          .maybeSingle<{ daily_bonus: boolean }>();
 
-      setClaimBonusDisabled(JSON.parse(isBonusClaimed));
+        if (error) {
+          popup.open({
+            message:
+              "Failed to retreive daily bonus status. Please contact support.",
+            title: "Error!",
+          });
+          throw new Error(JSON.stringify(error));
+        }
+
+        if (data) {
+          setClaimButtonAvailable(data?.daily_bonus);
+        }
+      }
     };
 
-    handleClaimDailyBonusButtonAvailable();
+    checkBonusAvailability();
   });
 
   const handleClaimDailyBouns = async () => {
     await updateBalance(3);
-    await cloudStorage.setItem("bonusClaimed", JSON.stringify(true));
-    setClaimBonusDisabled(true);
+    const { error } = await supabase
+      .from("users")
+      .update({ daily_bonus: false })
+      .eq("id", user?.id);
+    if (error) {
+      popup.open({
+        message: "Failed to update daily bonus status. Please contact support.",
+        title: "Error!",
+      });
+      throw new Error(JSON.stringify(error));
+    }
+    setClaimButtonAvailable(false);
   };
 
   const handlePurchaseDisableAds = async () => {
@@ -83,8 +106,6 @@ const Payment: FC = () => {
     }
   };
 
-  logEvent(analytics, "page_view", { page_title: "Payment" });
-
   const handleNavigateHome = () => {
     hapticFeedback.impactOccurred("medium");
     navigate(ROUTES_NAMES.HOME);
@@ -92,12 +113,36 @@ const Payment: FC = () => {
 
   useBackButton(handleNavigateHome);
 
-  const handleMagicCoinsPurchase = async (qty: number, price: number) => {
-    hapticFeedback.impactOccurred("medium");
-    setLoaderVisible(true);
-    await purchaseCoins(qty, price);
-    setLoaderVisible(false);
-  };
+  const handleMagicCoinsPurchase = useCallback(
+    async (qty: number, price: number) => {
+      hapticFeedback.impactOccurred("medium");
+
+      setLoaderVisible(true);
+
+      const invoiceLink = await Api.botController.getInvoiceLink(
+        t("magic coins"),
+        t("invoice description"),
+        price,
+        qty
+      );
+
+      if (invoiceLink) {
+        const status = await invoice.open(invoiceLink, "url");
+
+        if (status === "paid") {
+          updateBalance(qty);
+          popup.open({
+            message: `${t("purchase success")} ${qty} ${t("magic coins")} 🌕`,
+            title: t("congratulation"),
+          });
+        } else if (status === "failed") {
+          popup.open({ message: t("purchase fail"), title: t("error title") });
+        }
+      }
+      setLoaderVisible(false);
+    },
+    [t, updateBalance]
+  );
 
   return (
     <Page className="payment">
@@ -166,7 +211,7 @@ const Payment: FC = () => {
         <BuyButton
           onPress={() =>
             shareURL(
-              `https://t.me/my_ai_tarot_bot/?startapp=${user?.uId}`,
+              `https://t.me/my_ai_tarot_bot/?startapp=${user?.id}`,
               shareMessage[i18n.language] ?? shareMessage.english
             )
           }
@@ -186,7 +231,7 @@ const Payment: FC = () => {
         </BuyButton>
         <BuyButton
           onPress={handleClaimDailyBouns}
-          disabled={claimBonusDisabled}
+          disabled={!claimButtonAvailable}
           className="payment__daily-bonus-button "
         >
           <div

@@ -3,8 +3,6 @@ import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { hapticFeedback, viewport } from "@telegram-apps/sdk-react";
 import { useMainButtonHandler, useMainButton, useBackButton } from "@/Hooks";
-import { analytics } from "@/Firebase";
-import { logEvent } from "firebase/analytics";
 import { Page, Preloader } from "@/Components";
 import { Button } from "@telegram-apps/telegram-ui";
 import { shuffle } from "@/helpers";
@@ -30,8 +28,6 @@ const Question: FC = () => {
   });
 
   useBackButton();
-
-  logEvent(analytics, "page_view", { page_title: "Question to the cards" });
 
   const handleDefaultQuestion = (index: number) => {
     hapticFeedback.impactOccurred("medium");

@@ -1,95 +1,38 @@
 import { initDataRaw } from "@telegram-apps/sdk-react";
-import {
-  FeedbackBody,
-  SendSpreadToUserBody,
-  ValidationResponse,
-  UserData,
-} from "@/types";
+import { CardKey } from "@/types";
+
+export type SendSpreadToUserBody = {
+  uId: number;
+  title: string;
+  prompt?: string;
+  cardsKeys: CardKey[];
+  reading: string;
+};
 
 export default {
   /**
    * Validates user's Telegram init data to verify that user is the exact person;
    * @returns true if user's Telegram init data is valid, false if not;
    */
-  async validateInitData(): Promise<boolean> {
+  async isInitDataValild(): Promise<{
+    valid: boolean;
+    error: string | null;
+  }> {
     try {
       const response = await fetch(
         import.meta.env.VITE_INIT_DATA_VALIDATION_URL,
         {
-          method: "POST",
           headers: {
             Authorization: `tma ${initDataRaw()}`,
           },
         }
       );
+      const { isValid } = await response.json();
 
-      const data: ValidationResponse = await response.json();
-
-      return data.success;
+      return { valid: isValid, error: null };
     } catch (error) {
-      throw new Error(`${error}`);
-    }
-  },
-  async setNewUser({
-    uId,
-    firstName,
-    userName,
-    languageCode,
-    referrerId,
-  }: UserData) {
-    try {
-      const response = await fetch(
-        "https://tarot-bot-18921c9756be.herokuapp.com/new-user",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            uId: uId,
-            firstName: firstName,
-            userName: userName,
-            languageCode: languageCode,
-            referrerId: referrerId,
-          }),
-        }
-      );
-
-      if (!response.ok) {
-        console.error(`Failed to set new user`);
-      }
-
-      const user = await response.json();
-      return user;
-    } catch (error) {
-      throw new Error(`${error}`);
-    }
-  },
-  async getUserData(uId: number) {
-    try {
-      const response = await fetch(
-        "https://tarot-bot-18921c9756be.herokuapp.com/get-user",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            uId: uId,
-          }),
-        }
-      );
-
-      if (!response.ok) {
-        console.error("Failed to get user data");
-      }
-
-      const user = await response.json();
-      return user;
-    } catch (error) {
-      throw new Error(
-        `Failed to retreive user data for the provided uId: ${error}`
-      );
+      console.error(error);
+      return { valid: false, error: JSON.stringify(error) };
     }
   },
   /**
@@ -133,23 +76,6 @@ export default {
     }
   },
   /**
-   * Sends a user's feedback to Bot api server where it's sent to a DB and to admin's personal chat with Bot;
-   * @param {FeedbackBody} body - object that contains user's Tg id, first name, rating of app from 1 to 5 and feedback string;
-   */
-  async sendFeedback(body: FeedbackBody) {
-    try {
-      await fetch(import.meta.env.VITE_SEND_FEEDBACK_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(body),
-      });
-    } catch (error) {
-      console.error("Failed to send feedback to server:", error);
-    }
-  },
-  /**
    *  Sends a user's whole spread reading and cards keys to Bot API server where it's sent into a private chat with bot to a
    * respective user accirding to uId;
    * @param {SendSpreadToUserBody} body - object that contains user's Tg id, array of cards object keys, spread title,
@@ -176,6 +102,16 @@ export default {
       });
     } catch (error) {
       console.error("Failed to send spread to user:", error);
+    }
+  },
+  async sendRefNotification(ref_id: number, current_user_name: string) {
+    try {
+      await fetch("https://tarot-bot-18921c9756be.herokuapp.com/notify-ref", {
+        method: "POST",
+        body: JSON.stringify({ ref_id, current_user_name }),
+      });
+    } catch (error) {
+      console.error("Failed to send ref notification", error);
     }
   },
 };

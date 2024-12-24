@@ -1,15 +1,10 @@
-import { FC, useState, ChangeEvent, FormEvent } from "react";
+import { FC, useState, FormEvent } from "react";
 import { useUser } from "@/Contexts";
 import { BuyButton, Modal, Icons } from "@/Components";
-import {
-  hapticFeedback,
-  cloudStorage,
-  initData,
-  popup,
-} from "@telegram-apps/sdk-react";
+import { hapticFeedback, cloudStorage, popup } from "@telegram-apps/sdk-react";
 import { Rating, Button } from "@telegram-apps/telegram-ui";
 import { useTranslation } from "react-i18next";
-import { Api } from "@/Api";
+import { supabase } from "@/supabase";
 import "./styles.scss";
 
 type RateButtonWithModalPropTypes = {
@@ -24,7 +19,7 @@ const RateButtonWithModal: FC<RateButtonWithModalPropTypes> = ({
   const [feedbackText, setFeedbackText] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const { t } = useTranslation();
-  const { updateBalance } = useUser();
+  const { user, updateBalance } = useUser();
 
   const handleModalOpen = () => {
     setModalVisible(true);
@@ -40,27 +35,43 @@ const RateButtonWithModal: FC<RateButtonWithModalPropTypes> = ({
     setRating(value);
   };
 
-  const handleFeedbackTextChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setFeedbackText(e.currentTarget.value);
-  };
-
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+
     hapticFeedback.impactOccurred("medium");
+
     setLoading(true);
-    const body = {
-      uId: initData?.user()?.id,
-      name: initData?.user()?.firstName,
+
+    const { error } = await supabase.from("feedbacks").insert({
+      user_id: user?.id,
+      first_name: user?.first_name ?? null,
       rating: rating,
       feedback: feedbackText,
-    };
-    await updateBalance(3);
+    });
+
+    if (error) {
+      console.error("Failed to submit feedback to DB");
+
+      popup.open({
+        message: "Failed to submit feedback. Please contact support",
+        title: "Error!",
+      });
+
+      return;
+    }
+
     onSubmit();
+
     await cloudStorage.setItem("rated", "true");
+
     setLoading(false);
+
+    await updateBalance(3);
+
     handleModalClose();
+
     popup.open({ message: t("thank you for your feedback") });
-    await Api.botController.sendFeedback(body);
+
     setFeedbackText("");
   };
 
@@ -100,7 +111,7 @@ const RateButtonWithModal: FC<RateButtonWithModalPropTypes> = ({
               maxLength={300}
               className="feedback-form__textarea"
               value={feedbackText}
-              onChange={handleFeedbackTextChange}
+              onChange={(e) => setFeedbackText(e.currentTarget.value)}
               onFocus={(e) =>
                 (e.currentTarget.style.borderColor =
                   "var(--tg-theme-link-color)")

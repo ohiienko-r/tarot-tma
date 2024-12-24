@@ -2,14 +2,11 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { useBackButton } from "@/Hooks";
 import { Page } from "@/Components";
-import { analytics } from "@/Firebase";
-import { logEvent } from "firebase/analytics";
 import "./style.scss";
 
 const About: FC = () => {
   const { t } = useTranslation();
   useBackButton();
-  logEvent(analytics, "page_view", { page_title: "About" });
 
   return (
     <Page className="about">
