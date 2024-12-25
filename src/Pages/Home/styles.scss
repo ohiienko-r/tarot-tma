@@ -4,9 +4,6 @@
   flex-direction: column;
   justify-content: flex-end;
   z-index: 1;
-  background-image: url("../../assets/background.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
 
   &__characters {
     box-sizing: border-box;
@@ -18,12 +15,10 @@
     justify-content: center;
     align-items: flex-start;
     z-index: -1;
-    background-image: linear-gradient(
-      to right,
-      rgba(0, 0, 0, 0.3),
-      rgba(255, 255, 255, 0.05),
-      rgba(0, 0, 0, 0.3)
-    );
+    background-image: url("../../assets/tarologists_bg.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: top;
 
     &-item {
       cursor: pointer;

@@ -40,9 +40,9 @@ export function init(): void {
 
   if (miniApp.mount.isAvailable()) {
     miniApp.mount();
-    miniApp.setHeaderColor("#110126");
-    miniApp.setBackgroundColor("#110126");
-    miniApp.setBottomBarColor("#110126");
+    miniApp.setHeaderColor("#0F062A");
+    miniApp.setBackgroundColor("#0F062A");
+    miniApp.setBottomBarColor("#0F062A");
   }
 
   if (backButton.mount.isAvailable()) {
