@@ -17,15 +17,80 @@ import { supabase } from "@/supabase";
 import { Api } from "@/Api";
 import { User } from "@/types";
 
+type NewUser = {
+  id: number;
+  user_name: string | null;
+  first_name: string | null;
+  balance: number;
+  language_code: string;
+  created_at: string;
+  last_login: string;
+  ads_disabled_till: null;
+  daily_reminder: boolean;
+  ref_id: string | null | undefined;
+};
+
 const UserProvider: FC<PropsWithChildren> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [balance, setBalance] = useState<number | undefined>(undefined);
   const currentUser = initData.user();
   const refId = initData?.startParam() ? initData.startParam() : null;
 
+  const processRef = useCallback(
+    async (newUserData: NewUser) => {
+      //If referrer id is not null check if the referrer exists
+      if (refId) {
+        const { data: refData, error } = await supabase
+          .from("users")
+          .select("*")
+          .eq("id", refId)
+          .maybeSingle<User>();
+
+        if (error) {
+          console.error(
+            "Failed to retreive referrer data:",
+            JSON.stringify(error)
+          );
+          return;
+        }
+
+        //If referrer exists update both balances: referal and referrer
+        if (refData !== null) {
+          setBalance(newUserData.balance + 3);
+
+          const { error: refUpdateError } = await supabase
+            .from("users")
+            .update({ balance: refData.balance + 3 })
+            .eq("id", refId);
+
+          if (refUpdateError) {
+            console.error("Failed to update referrer balance");
+          }
+
+          const { error: userUpdateError } = await supabase
+            .from("users")
+            .update({ balance: newUserData.balance + 3 })
+            .eq("id", newUserData.id);
+
+          if (userUpdateError) {
+            console.error("Failed to update current user balance");
+          }
+
+          //Notify referrer about new referal
+          await Api.botController.sendRefNotification(
+            +refId,
+            newUserData?.user_name ??
+              newUserData?.first_name ??
+              JSON.stringify(newUserData?.id)
+          );
+        }
+      }
+    },
+    [refId]
+  );
+
   useEffect(() => {
     const getUser = async () => {
-      console.log(refId);
       //Validate current user's init data to make sure app is launched from TG environment
       const { valid, error: validationError } =
         await Api.botController.isInitDataValild();
@@ -114,59 +179,9 @@ const UserProvider: FC<PropsWithChildren> = ({ children }) => {
         }
 
         setUser(data);
+        setBalance(data.balance);
 
-        let userBalance;
-
-        //If referrer id is not null check if the referrer exists
-        if (refId) {
-          const { data: refData, error } = await supabase
-            .from("users")
-            .select("*")
-            .eq("id", refId)
-            .maybeSingle<User>();
-
-          if (error) {
-            console.error(
-              "Failed to retreive referrer data:",
-              JSON.stringify(error)
-            );
-            setBalance(data.balance);
-            return;
-          }
-
-          //If referrer exists update both balances: referal and referrer
-          if (refData !== null) {
-            const { error: refUpdateError } = await supabase
-              .from("users")
-              .update({ balance: refData.balance + 3 })
-              .eq("id", refId);
-
-            if (refUpdateError) {
-              console.error("Failed to update referrer balance");
-            }
-
-            userBalance = data.balance + 3;
-
-            const { error: userUpdateError } = await supabase
-              .from("users")
-              .update({ balance: data.balance + 3 })
-              .eq("id", data.id);
-
-            if (userUpdateError) {
-              console.error("Failed to update current user balance");
-            }
-
-            //Notify referrer about new referal
-            await Api.botController.sendRefNotification(
-              +refId,
-              data?.user_name ?? data?.first_name ?? JSON.stringify(data?.id)
-            );
-          }
-        } else {
-          userBalance = data.balance;
-        }
-
-        setBalance(userBalance);
+        await processRef(newUser);
       } else {
         setUser(existingUser);
         setBalance(existingUser.balance);
@@ -174,7 +189,7 @@ const UserProvider: FC<PropsWithChildren> = ({ children }) => {
     };
 
     getUser();
-  }, [currentUser, refId]);
+  }, [currentUser, refId, processRef]);
 
   /**
    * Separate function for updating user balance.
