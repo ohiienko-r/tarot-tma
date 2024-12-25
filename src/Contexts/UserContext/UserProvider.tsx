@@ -21,10 +21,11 @@ const UserProvider: FC<PropsWithChildren> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [balance, setBalance] = useState<number | undefined>(undefined);
   const currentUser = initData.user();
-  const refId = initData?.startParam ? +initData.startParam : null;
+  const refId = initData?.startParam() ? initData.startParam() : null;
 
   useEffect(() => {
     const getUser = async () => {
+      console.log(refId);
       //Validate current user's init data to make sure app is launched from TG environment
       const { valid, error: validationError } =
         await Api.botController.isInitDataValild();
@@ -117,7 +118,7 @@ const UserProvider: FC<PropsWithChildren> = ({ children }) => {
         let userBalance;
 
         //If referrer id is not null check if the referrer exists
-        if (refId !== null) {
+        if (refId) {
           const { data: refData, error } = await supabase
             .from("users")
             .select("*")
@@ -147,7 +148,7 @@ const UserProvider: FC<PropsWithChildren> = ({ children }) => {
 
             //Notify referrer about new referal
             await Api.botController.sendRefNotification(
-              refId,
+              +refId,
               data?.user_name ?? data?.first_name ?? JSON.stringify(data?.id)
             );
           }
