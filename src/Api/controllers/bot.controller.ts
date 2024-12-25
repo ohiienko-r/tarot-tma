@@ -108,7 +108,11 @@ export default {
     try {
       await fetch("https://tarot-bot-18921c9756be.herokuapp.com/notify-ref", {
         method: "POST",
-        body: JSON.stringify({ ref_id, current_user_name }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ref_id: ref_id,
+          current_user_name: current_user_name,
+        }),
       });
     } catch (error) {
       console.error("Failed to send ref notification", error);
