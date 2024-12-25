@@ -138,13 +138,23 @@ const UserProvider: FC<PropsWithChildren> = ({ children }) => {
           if (refData !== null) {
             const { error: refUpdateError } = await supabase
               .from("users")
-              .update({ balance: refData.balance + 3 });
+              .update({ balance: refData.balance + 3 })
+              .eq("id", refId);
 
             if (refUpdateError) {
               console.error("Failed to update referrer balance");
             }
 
             userBalance = data.balance + 3;
+
+            const { error: userUpdateError } = await supabase
+              .from("users")
+              .update({ balance: data.balance + 3 })
+              .eq("id", data.id);
+
+            if (userUpdateError) {
+              console.error("Failed to update current user balance");
+            }
 
             //Notify referrer about new referal
             await Api.botController.sendRefNotification(
