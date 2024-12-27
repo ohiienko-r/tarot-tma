@@ -1,0 +1,13 @@
+.settings {
+  padding: 1em;
+  &__heading {
+    text-align: center;
+    padding: 1em;
+    color: #fff;
+  }
+  &__language {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}

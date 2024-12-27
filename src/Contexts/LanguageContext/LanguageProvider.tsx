@@ -33,6 +33,7 @@ const LanguageProvider: FC<PropsWithChildren> = ({ children }) => {
           await cloudStorage.setItem("preferredLanguage", "en");
         }
       } else {
+        setLanguage(preferredLanguage as SystemLanguage);
         i18n.changeLanguage(preferredLanguage);
       }
     };
