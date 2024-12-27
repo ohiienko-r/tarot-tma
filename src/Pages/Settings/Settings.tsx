@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useBackButton } from "@/Hooks";
 import { Page } from "@/Components";
@@ -8,17 +8,17 @@ import {
   openTelegramLink,
   openLink,
 } from "@telegram-apps/sdk-react";
-import { SystemLanguage } from "@/types";
 
-const countriesFlags: { [key in SystemLanguage]: string } = {
-  en: "🇬🇧",
-  uk: "🇺🇦",
-  ru: "🇷🇺",
-};
+// const countriesFlags: { [key in SystemLanguage]: string } = {
+//   en: "🇬🇧",
+//   uk: "🇺🇦",
+//   ru: "🇷🇺",
+// };
 
 const Settings: FC = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   useBackButton();
+
   const handleOpenPrivacyPolicy = () => {
     hapticFeedback.impactOccurred("medium");
     openLink(

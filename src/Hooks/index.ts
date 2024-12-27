@@ -1,4 +1,3 @@
-export { default as useLanguage } from "./useLanguage/useLanguage";
 export { default as useMainButton } from "./useMainButton/useMainButton";
 export { default as useRandomCards } from "./useRandomCards/useRandomCards";
 export { default as useMainButtonHandler } from "./useMainButtonHandler/useMainButtonHandler";
