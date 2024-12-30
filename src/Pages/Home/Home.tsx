@@ -6,10 +6,10 @@ import {
   SubmitButton,
   Page,
   Modal,
-  Settings,
   Icons,
   SplashScreen,
 } from "@/Components";
+import { useSettingsButton } from "@/Hooks";
 import { hapticFeedback, viewport, popup } from "@telegram-apps/sdk-react";
 import { Button } from "@telegram-apps/telegram-ui";
 import { useUser } from "@/Contexts";
@@ -57,6 +57,13 @@ const Home: FC = () => {
     navigate(ROUTES_NAMES.PAYMENT);
     setModalVisible(false);
   };
+
+  const handleNavigateToSettings = () => {
+    hapticFeedback.impactOccurred("medium");
+    navigate(ROUTES_NAMES.SETTINGS);
+  };
+
+  useSettingsButton(handleNavigateToSettings);
 
   return (
     <Page className="home">
@@ -149,7 +156,6 @@ const Home: FC = () => {
           {t("claim")}
         </Button>
       </Modal.MinContent>
-      <Settings />
     </Page>
   );
 };

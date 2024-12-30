@@ -6,11 +6,9 @@ export { default as SpreadBalancePad } from "./SpreadBalancePad/SpreadBalancePad
 export { default as Card } from "./Card/Card";
 export { default as CardsGroup } from "./CardsGroup/CardsGroup";
 export { default as BuyButton } from "./BuyButton/BuyButton";
-export { default as Settings } from "./Settings/Settings";
 export { default as BackgroundLayer } from "./BackgroundLayer/BackgroundLayer";
 export { default as MarkdownToHTML } from "./MarkdownToHTML/MarkdownToHTML";
 export { default as Preloader } from "./Preloader/Preloader";
-export { default as ChangeLanguageModal } from "./ChangeLanguageModal/ChangeLanguageModal";
 export { default as RateButtonWithModal } from "./RateButtonWithModal/RateButtonWithModal";
 export { default as SupportUsButtonWithModal } from "./SupportUsButtonWithModal/SupportUsButtonWithModall";
 export { default as SplashScreen } from "./SplashScreen/SplashScreen";

@@ -16,6 +16,7 @@ import { UserContext } from "./UserContext";
 import { supabase } from "@/supabase";
 import { Api } from "@/Api";
 import { User } from "@/types";
+import { RealtimeChannel } from "@supabase/supabase-js";
 
 type NewUser = {
   id: number;
@@ -190,6 +191,35 @@ const UserProvider: FC<PropsWithChildren> = ({ children }) => {
 
     getUser();
   }, [currentUser, refId, processRef]);
+
+  useEffect(() => {
+    let subscription: RealtimeChannel;
+    if (user) {
+      const channel = supabase
+        .channel("room1")
+        .on(
+          "postgres_changes",
+          {
+            event: "UPDATE",
+            schema: "public",
+            table: "users",
+            filter: `id=eq.${user.id}`,
+          },
+          (payload) => {
+            setUser(payload.new as User);
+            setBalance(payload.new.balance);
+          }
+        )
+        .subscribe();
+
+      subscription = channel;
+    }
+    return () => {
+      if (subscription) {
+        supabase.removeChannel(subscription);
+      }
+    };
+  }, [user]);
 
   /**
    * Separate function for updating user balance.

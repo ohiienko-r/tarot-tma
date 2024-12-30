@@ -1,0 +1,48 @@
+.settings {
+  padding: 1em;
+  &__heading {
+    text-align: center;
+    padding: 1em;
+    color: #fff;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+  }
+
+  &__notifications {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &--sub-caption {
+      font-size: 11px;
+      max-width: 185px;
+    }
+  }
+
+  &__language {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &--buttons-container {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 24px;
+    }
+
+    &--change-button {
+      display: flex;
+      align-items: center;
+      padding: 4px;
+      margin: 0;
+      background: transparent;
+      border: 1px solid #ffffff;
+      outline: none;
+    }
+  }
+}

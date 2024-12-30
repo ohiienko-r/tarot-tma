@@ -6,15 +6,21 @@ import {
 } from "react-router-dom";
 import { viewport, retrieveLaunchParams } from "@telegram-apps/sdk-react";
 import { useTranslation } from "react-i18next";
-import { useLanguage } from "@/Hooks";
-import { Home, Spread, Question, About, Readings, Payment } from "@/Pages";
+import {
+  Home,
+  Spread,
+  Question,
+  About,
+  Readings,
+  Payment,
+  Settings,
+} from "@/Pages";
 import { unsupportedFullScreenPlatforms } from "@/helpers";
 import { ROUTES_NAMES } from "./routes-names";
 
 const AppRouter = () => {
   const { t } = useTranslation();
   const lp = retrieveLaunchParams();
-  useLanguage();
 
   useEffect(() => {
     const enterFullScreen = async () => {
@@ -78,6 +84,7 @@ const AppRouter = () => {
       element: <About />,
     },
     { path: ROUTES_NAMES.READINGS, element: <Readings /> },
+    { path: ROUTES_NAMES.SETTINGS, element: <Settings /> },
     { path: "*", element: <Navigate to={ROUTES_NAMES.HOME} /> },
   ]);
 
