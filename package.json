@@ -16,6 +16,7 @@
     "@types/node": "^20.14.2",
     "@vitejs/plugin-basic-ssl": "^1.1.0",
     "i18next": "^23.11.5",
+    "posthog-js": "^1.203.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-i18next": "^14.1.2",
