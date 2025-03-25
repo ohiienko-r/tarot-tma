@@ -3,7 +3,7 @@ import { useUser } from "@/Contexts";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { backButton, popup } from "@telegram-apps/sdk-react";
-import { useRandomCards, useAds } from "@/Hooks";
+import { useRandomCards } from "@/Hooks";
 import { Api } from "@/Api";
 import { ROUTES_NAMES } from "@/Router";
 import { SystemLanguage, Path } from "@/types";
@@ -24,7 +24,6 @@ const useReadings = ({
   const { updateBalance } = useUser();
   const { t, i18n } = useTranslation();
   const { cardsKeys, cardsNames } = useRandomCards(cardsQty);
-  const showAdvertisment = useAds();
   const navigate = useNavigate();
 
   const requestReadings = useCallback(async () => {
@@ -37,9 +36,6 @@ const useReadings = ({
         });
         return;
       }
-
-      //Handle ads
-      showAdvertisment();
 
       backButton.hide();
 
@@ -82,7 +78,6 @@ const useReadings = ({
     path,
     prompt,
     updateBalance,
-    showAdvertisment,
     navigate,
     t,
   ]);
