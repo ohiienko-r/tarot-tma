@@ -1,3 +1,5 @@
+##Currently under reconstruction. All servers are down.
+
 # Tarot Telegram Mini App
 
 Welcome to the AI Powered Tarot App! This application leverages artificial intelligence to provide insightful tarot card readings, 
