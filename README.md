@@ -1,4 +1,4 @@
-##Currently under reconstruction. All servers are down.
+## Currently under reconstruction. All servers are down.
 
 # Tarot Telegram Mini App
 
