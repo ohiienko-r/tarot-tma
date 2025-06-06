@@ -1,9 +1,9 @@
-## Currently under reconstruction. All servers are down.
+## Currently under reconstruction
 
 # Tarot Telegram Mini App
 
-Welcome to the AI Powered Tarot App! This application leverages artificial intelligence to provide insightful tarot card readings, 
-combining the ancient art of tarot with modern machine learning techniques. Whether you're seeking guidance, looking to explore tarot, 
+Welcome to the AI Powered Tarot App! This application leverages artificial intelligence to provide insightful tarot card readings,
+combining the ancient art of tarot with modern machine learning techniques. Whether you're seeking guidance, looking to explore tarot,
 or simply curious, this app offers a unique and engaging experience.
 
 ## Features

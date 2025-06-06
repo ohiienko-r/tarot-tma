@@ -53,7 +53,7 @@ export default {
       const invoiceTitle = coinsQty ? `${coinsQty} ${title}` : title;
 
       const response = await fetch(
-        "https://tarot-bot-a2920463d6a1.herokuapp.com/create_invoice",
+        "https://tarot-bot-df49893e8ff3.herokuapp.com/create_invoice",
         {
           method: "POST",
           headers: {
@@ -106,7 +106,7 @@ export default {
   },
   async sendRefNotification(ref_id: number, current_user_name: string) {
     try {
-      await fetch("https://tarot-bot-a2920463d6a1.herokuapp.com/notify-ref", {
+      await fetch("https://tarot-bot-df49893e8ff3.herokuapp.com/notify-ref", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
